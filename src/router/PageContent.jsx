@@ -1,6 +1,6 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 
 import { Navbar } from "../views"
+import { RouterViews } from "./routes/RouterViews"
 
 
 export const PageContent = () => {
@@ -8,6 +8,7 @@ export const PageContent = () => {
     <>
         <div id="page-content-wrapper">
             <Navbar />
+            <RouterViews />
         </div>
     </>
   )

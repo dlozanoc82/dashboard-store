@@ -1,20 +1,19 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
-
-
+import { Router, Route, Routes } from "react-router-dom"
+import { Customers, Home, Products, Quotation, Reports, Sales, Shopping, Sidebar } from "../../views"
 
 export const RouterViews = () => {
   return (
-    <Router>
-            <Routes>
-                <Route path="/" exact ={true} Component={l} />
-                <Route path="/compras" exact ={true} Component={} />
-                <Route path="/clientes" exact ={true} Component={} />
-                <Route path="/productos" exact ={true} Component={} />
-                <Route path="/ventas" exact ={true} Component={} />
-                <Route path="/cotizacion" exact ={true} Component={} />
-                <Route path="/reportes" exact ={true} Component={} />
-                <Route path="*" Component={Page404} />
-            </Routes>
-        </Router>
+    
+    <Routes>
+        <Route path="/" exact ={true} Component={Home} />
+        <Route path="/compras" exact ={true} Component={Shopping} />
+        <Route path="/clientes" exact ={true} Component={Customers} />
+        <Route path="/productos" exact ={true} Component={Products} />
+        <Route path="/ventas" exact ={true} Component={Sales} />
+        <Route path="/cotizacion" exact ={true} Component={Quotation} />
+        <Route path="/reportes" exact ={true} Component={Reports} />
+        <Route path="*" Component={Home} />
+    </Routes>
+
   )
 }

@@ -6,43 +6,43 @@ const listOptions = [
     {
         id: 1,
         title: "Panel", 
-        url: '#',
+        url: '/',
         icon: faHouse
     },
     {
         id: 2,
         title: "Compras", 
-        url: '#',
+        url: '/compras',
         icon: faShoppingCart
     },
     {
         id: 3,
         title: "Clientes", 
-        url: '#',
+        url: '/clientes',
         icon: faUser
     },
     {
         id: 4,
         title: "Productos", 
-        url: '#',
+        url: '/productos',
         icon: faBasketShopping
     },
     {
         id: 5,
         title: "Ventas", 
-        url: '#',
+        url: '/ventas',
         icon: faTags
     },
     {
         id: 6,
         title: "Cotización", 
-        url: '#',
+        url: '/cotizacion',
         icon: faCashRegister
     },
     {
         id: 7,
         title: "Reportes", 
-        url: '#',
+        url: '/reportes',
         icon: faFileLines
     }
 
