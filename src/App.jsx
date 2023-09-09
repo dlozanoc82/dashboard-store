@@ -1,9 +1,13 @@
+import { Layout } from "./Layout/Layout"
+import { DashboardProvider } from "./context/DashboardProvider"
 
 function App() {
 
     return (
         <>
-            <div>HOLA</div>
+            <DashboardProvider>
+                <Layout />
+            </DashboardProvider>
         </>
     )
 }
