@@ -1,7 +1,10 @@
 import { TableList } from "../../components/TableList/TableList"
+import { PaginationProvider } from "../../context/PaginationProvider"
 
 export const Shopping = () => {
   return (
-    <TableList />
+    <PaginationProvider >
+        <TableList />
+    </PaginationProvider>
   )
 }
