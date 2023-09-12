@@ -54,12 +54,33 @@ export const SidebarOptions = () => {
     <>
 
         <div className="list-group list-group-flush my-3">
+
             {listOptions.map( (option) => <ListOption key={option.id} {...option} />)}
+
+
 
             <a href="#" className="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
                 <i className="fas fa-power-off me-2"></i>Logout
             </a>
-        </div>        
+
+            <div className="accordion" id="accordionExample">
+
+            <div className="accordion-item">
+                <h2 className="accordion-header" id="headingTwo">
+                <button className="accordion-button collapsed bg-transparent second-text fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Accordion Item #2
+                </button>
+                </h2>
+                <div id="collapseTwo" className="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                <ul className="accordion-body accordion__body">
+                   <li>Option 1</li> 
+                </ul>
+                </div>
+            </div>
+
+            </div>
+
+        </div>
     </>
   )
 }

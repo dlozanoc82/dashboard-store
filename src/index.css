@@ -5,6 +5,10 @@
     --second-bg-color: #c1efde;
 }
 
+li {
+    list-style: none;
+}
+
 .primary-text {
     color: var(--main-text-color);
 }
@@ -75,6 +79,19 @@
     color: var(--main-text-color);
     font-weight: bold;
     border: none;
+}
+
+.accordion__body {
+    padding: 0;
+    margin: 1rem;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+}
+
+.accordion-button:not(.collapsed) {
+    color: #009d63;
 }
 
 @media (min-width: 768px) {
