@@ -1,9 +1,7 @@
 import { BrowserRouter } from "react-router-dom";
 import useDashborad from "../hooks/useDashborad";
 import { PageContent } from "../router/PageContent"
-import { Sidebar } from "../views"
-
-
+import { Sidebar } from "../components/Sidebar/Sidebar";
 
 export const Layout = () => {
 

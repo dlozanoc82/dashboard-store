@@ -8,10 +8,9 @@ export const TableList = () => {
 
   return (
 
-    <div className="container-fluid px-4">
-
+    <>
+    
         <div className="row my-5">
-            <h3 className="fs-4 mb-3">Recent Orders</h3>
             <div className="col">
                 <table className="table bg-white rounded shadow-sm  table-hover">
                     <TableHead />
@@ -41,7 +40,7 @@ export const TableList = () => {
             </div>
         </div>
 
-    </div>
+    </>
 
   )
 }

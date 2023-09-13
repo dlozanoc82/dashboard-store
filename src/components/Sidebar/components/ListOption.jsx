@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import useDashborad from "../../hooks/useDashborad"
+import useDashborad from "../../../hooks/useDashborad"
 import { Link } from "react-router-dom";
 
 export const ListOption = ({id, title, url, icon}) => {

@@ -1,7 +1,6 @@
 
-import { Navbar } from "../views"
+import { Navbar } from "../components/Header/Navbar"
 import { RouterViews } from "./routes/RouterViews"
-
 
 export const PageContent = () => {
   return (

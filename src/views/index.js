@@ -1,5 +1,3 @@
-export * from './Sidebar/Sidebar';
-export * from './bar/Navbar'
 export * from './clientes/Customers'
 export * from './compras/Shopping'
 export * from './cotizacion/Quotation'

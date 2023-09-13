@@ -1,4 +1,5 @@
-import { SideBarHeader, SidebarOptions } from "../../components"
+import { SideBarHeader, SidebarOptions } from "./components"
+
 
 export const Sidebar = () => {
   return (

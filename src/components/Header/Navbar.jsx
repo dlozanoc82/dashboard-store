@@ -1,4 +1,6 @@
-import { MenuToggle } from "../../components"
+import { MenuToggle } from "./components/MenuToggle"
+
+
 
 export const Navbar = () => {
   return (
