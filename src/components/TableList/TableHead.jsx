@@ -9,6 +9,7 @@ export const TableHead = () => {
             <th scope="col">email</th>
             <th scope="col">gender</th>
             <th scope="col">ip_address</th>
+            <th>Actions</th>
         </tr>
     </thead>
   )

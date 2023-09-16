@@ -5,8 +5,22 @@
     --second-bg-color: #c1efde;
 }
 
+a {
+    text-decoration: none;
+    margin: 0;
+}
+
 li {
     list-style: none;
+}
+
+ul {
+    padding: 0;
+    margin-bottom: 0;
+}
+
+.btn-padding {
+    padding: 1px 6px;
 }
 
 .primary-text {
@@ -94,6 +108,130 @@ li {
     color: #009d63;
 }
 
+.form-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.detail__input {
+    height: 45px;
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding-left: 15px;
+    font-size: 16px;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease-in-out;
+}
+
+.detail__input:focus {
+    border-color: #009d63;
+}
+
+.button {
+    height: 45px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.table__scroll {
+    overflow: hidden;
+    overflow-x: auto;
+}
+
+@media (min-width: 768px) {
+    .pagination {
+        justify-content: space-between;
+    }
+}
+
+.header__submenu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+    .header__submenu {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+.submenu__list {
+    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+@media (min-width: 768px) {
+    .submenu__list {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 2rem;
+        margin-right: 1rem;
+        margin-bottom: 0;
+    }
+}
+
+
+.submenu__link {
+    color: #fff;
+    float: right;
+    text-align: center;
+    font-size: 13px;
+    width: 200px;
+    border-radius: 2px;
+    padding: 6px 12px;
+    transition: 0.3s ease-in-out;
+}
+
+@media (min-width: 768px) {
+    .submenu__link {
+        max-width: 150px;
+        margin-left: 10px;
+    }
+}
+
+.btn__actions {
+    display: inline-flex;
+    gap: 5px;
+}
+
+.formulario {
+    padding: 1rem;
+}
+
+.form__title {
+    font-size: 16px;
+    height: 30px;
+    text-align: center;
+    border-bottom: 1px solid black;
+}
+
+.form__header {
+    margin-top: 2rem;
+    margin-left: 10px;
+}
+
+.form__subtitle {
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
 @media (min-width: 768px) {
     #sidebar-wrapper {
         margin-left: 0;
@@ -107,4 +245,5 @@ li {
     #wrapper.toggled #sidebar-wrapper {
         margin-left: -15rem;
     }
+
 }

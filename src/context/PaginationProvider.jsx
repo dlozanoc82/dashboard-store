@@ -13,6 +13,7 @@ const PaginationProvider = ({children}) => {
     const records = data.slice(firstIndex, lastIndex);
     const npage = Math.ceil(data.length / recordsPerPage);
     const numbers = [...Array(npage+1).keys()].slice(1);
+    const ndata = data.length;
 
     
     const prePage = () => {
@@ -40,6 +41,9 @@ const PaginationProvider = ({children}) => {
                 prePage,
                 changePage,
                 nextPage,
+                lastIndex,
+                firstIndex,
+                ndata
             }}
         >
             {children}
