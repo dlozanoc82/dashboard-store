@@ -4,6 +4,7 @@ import { PaginationProvider } from "../../context/PaginationProvider"
 import { SubMenu } from "../../components/SubMenu/SubMenu"
 import { AddShop } from "./components/AddShop"
 import { SearchShop } from "./components/SearchShop"
+import { ClientsPrivider } from "../../context/ClientsPrivider"
 
 export const Shopping = () => {
 
@@ -11,21 +12,23 @@ export const Shopping = () => {
     console.log({url});
 
   return (
-    <PaginationProvider >
-        <div className="container-fluid px-4 mt-5">
+    <ClientsPrivider>
+        <PaginationProvider >
+            <div className="container-fluid px-4 mt-5">
 
-            <div className="header__submenu">
-                <h3 className="fs-4">Recent Orders</h3>
-                <SubMenu url={url}/>
+                <div className="header__submenu">
+                    <h3 className="fs-4">Recent Orders</h3>
+                    <SubMenu url={url}/>
+                </div>
+
+                <Routes>
+                    <Route exact ={true} index element={<TableList />} />
+                    <Route exact ={true} path="/agregar" element={<AddShop />} />
+                    <Route exact ={true} path="/consultar" element={<SearchShop />} />
+                </Routes>
+                
             </div>
-
-            <Routes>
-                <Route exact ={true} index element={<TableList />} />
-                <Route exact ={true} path="/agregar" element={<AddShop />} />
-                <Route exact ={true} path="/consultar" element={<SearchShop />} />
-            </Routes>
-            
-        </div>
-    </PaginationProvider>
+        </PaginationProvider>
+    </ClientsPrivider>
   )
 }

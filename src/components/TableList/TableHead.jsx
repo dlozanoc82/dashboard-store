@@ -3,12 +3,14 @@ export const TableHead = () => {
   return (
     <thead>
         <tr>
-            <th scope="col" width="50">#</th>
-            <th scope="col">first_name</th>
-            <th scope="col">last_name</th>
-            <th scope="col">email</th>
-            <th scope="col">gender</th>
-            <th scope="col">ip_address</th>
+            <th scope="col" width="50">Documento</th>
+            <th scope="col">Nombres</th>
+            <th scope="col">Apellidos</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Celular</th>
+            <th scope="col">Direccion</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Fecha Registro</th>
             <th>Actions</th>
         </tr>
     </thead>

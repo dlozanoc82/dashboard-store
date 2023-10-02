@@ -3,15 +3,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 export const TableItem = ({info}) => {
-    const {id, first_name, last_name, email,  gender, ip_address} = info;
+    const {apellidos, celular, correo, direccion, documento, estado, fecha_reg, nombres} = info;
     return (
         <tr>
-            <th>{id}</th>
-            <td>{first_name}</td>
-            <td>{last_name}</td>
-            <td>{email}</td>
-            <td>{gender}</td>
-            <td>{ip_address}</td>
+            <th>{documento}</th>
+            <td>{nombres}</td>
+            <td>{apellidos}</td>
+            <td>{correo}</td>
+            <td>{celular}</td>
+            <td>{direccion}</td>
+            <td>{estado}</td>
+            <td>{fecha_reg}</td>
             <td>
                 <div className="btn__actions">
                     <button className="btn btn-secondary btn-padding">
