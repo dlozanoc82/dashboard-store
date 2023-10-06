@@ -7,7 +7,7 @@ export const RouterViews = () => {
     <Routes>
         <Route path="/" exact ={true} Component={Home} />
         <Route path="/compras/*" exact ={true} Component={Shopping} />
-        <Route path="/clientes" exact ={true} Component={Customers} />
+        <Route path="/clientes/*" exact ={true} Component={Customers} />
         <Route path="/productos" exact ={true} Component={Products} />
         <Route path="/ventas" exact ={true} Component={Sales} />
         <Route path="/cotizacion" exact ={true} Component={Quotation} />
