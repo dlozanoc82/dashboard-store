@@ -1,8 +1,7 @@
-import { Cards } from "../../components/CardsPanel/Cards"
-
+import { CardsContainer } from "../../components/CardsPanel/CardsContainer"
 
 export const Home = () => {
   return (
-    <Cards />
+    <CardsContainer />
   )
 }
