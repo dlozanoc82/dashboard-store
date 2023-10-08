@@ -15,7 +15,7 @@ export const AddClient = () => {
             
             <div>
                 <div className="form__header">
-                    <h3 className="form__subtitle" >Informacion de la compra</h3>
+                    <h3 className="form__subtitle" >DATOS DEL CLIENTE</h3>
                 </div>
 
                 <div>
@@ -23,38 +23,33 @@ export const AddClient = () => {
                         <div className="row p-2 mb-3">
 
                         <div className="col-md-4 mb-md-4">
-                            <label className="form-label">Proveedor *</label>
-                            <select className="form-select" value={selectedValue} onChange={handleChange}>
-                                <option value="">Seleccione una opción</option>
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                            </select>
-                        </div>
-
-                        <div className="col-md-4 mb-md-4">
-                            <label className="form-label">Nombre del Producto *</label>
+                            <label className="form-label">Nombres *</label>
                             <input type="text" className="form-control" required />
                         </div>
 
                         <div className="col-md-4 mb-md-4">
-                            <label className="form-label">Stock o Existencias *</label>
+                            <label className="form-label">Apellidos *</label>
                             <input type="text" className="form-control" required />
                         </div>
 
                         <div className="col-md-4 mb-md-4">
-                            <label className="form-label">Precio de la Compra *</label>
+                            <label className="form-label">Correo Electronico *</label>
+                            <input type="email" className="form-control" required />
+                        </div>
+
+                        <div className="col-md-4 mb-md-4">
+                            <label className="form-label">Número de Documento *</label>
                             <input type="number" className="form-control" required />
                         </div>
 
                         <div className="col-md-4 mb-md-4">
-                            <label className="form-label">Precio Unitario *</label>
+                            <label className="form-label">Celular *</label>
                             <input type="number" className="form-control" required />
                         </div>
 
                         <div className="col-md-4 mb-md-4">
-                            <label className="form-label">Precio de Venta *</label>
-                            <input type="number" className="form-control" required />
+                            <label className="form-label">Dirección *</label>
+                            <input type="text" className="form-control" required />
                         </div>
 
                         </div>

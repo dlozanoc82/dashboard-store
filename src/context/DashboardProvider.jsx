@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 
 const DashboardContext = createContext();
@@ -12,6 +12,10 @@ const DashboardProvider = ({children}) => {
     //Active Option
     const [activeOption, setActiveOption] = useState('Panel');
     const handleActiveOption = (option) => setActiveOption(option);
+
+    // useEffect(() => {
+
+    // },[])
 
     return (
         <DashboardContext.Provider

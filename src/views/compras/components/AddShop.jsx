@@ -23,7 +23,7 @@ export const AddShop = () => {
                         <div className="row p-2 mb-3">
 
                         <div className="col-md-4 mb-md-4">
-                            <label className="form-label">Proveedor *</label>
+                            <label className="form-label">Categotia *</label>
                             <select className="form-select" value={selectedValue} onChange={handleChange}>
                                 <option value="">Seleccione una opción</option>
                                 <option value="opcion1">Opción 1</option>
@@ -33,17 +33,27 @@ export const AddShop = () => {
                         </div>
 
                         <div className="col-md-4 mb-md-4">
-                            <label className="form-label">Nombre del Producto *</label>
-                            <input type="text" className="form-control" required />
+                            <label className="form-label">Subcategoria *</label>
+                            <select className="form-select" value={selectedValue} onChange={handleChange}>
+                                <option value="">Seleccione una opción</option>
+                                <option value="opcion1">Opción 1</option>
+                                <option value="opcion2">Opción 2</option>
+                                <option value="opcion3">Opción 3</option>
+                            </select>
                         </div>
 
                         <div className="col-md-4 mb-md-4">
-                            <label className="form-label">Stock o Existencias *</label>
-                            <input type="text" className="form-control" required />
+                            <label className="form-label">Producto *</label>
+                            <select className="form-select" value={selectedValue} onChange={handleChange}>
+                                <option value="">Seleccione una opción</option>
+                                <option value="opcion1">Opción 1</option>
+                                <option value="opcion2">Opción 2</option>
+                                <option value="opcion3">Opción 3</option>
+                            </select>
                         </div>
 
                         <div className="col-md-4 mb-md-4">
-                            <label className="form-label">Precio de la Compra *</label>
+                            <label className="form-label">Cantidad *</label>
                             <input type="number" className="form-control" required />
                         </div>
 
@@ -53,8 +63,18 @@ export const AddShop = () => {
                         </div>
 
                         <div className="col-md-4 mb-md-4">
+                            <label className="form-label">Precio de la Compra *</label>
+                            <input type="number" className="form-control" required />
+                        </div>
+
+                        <div className="col-md-4 mb-md-4">
                             <label className="form-label">Precio de Venta *</label>
                             <input type="number" className="form-control" required />
+                        </div>
+
+                        <div className="col-md-4 mb-md-4">
+                            <label className="form-label">Stock</label>
+                            <input type="text" disabled className="form-control" required />
                         </div>
 
                         </div>
