@@ -1,5 +1,7 @@
 import {  Route, Routes } from "react-router-dom"
-import { Customers, Garantia, Home, Kardex, Products, Quotation, Sales, Separado, Shopping } from "../../views"
+import {  Garantia, Home, Kardex, Quotation, Sales, Separado, Shopping } from "../../views"
+import CustomerView from "../../views/clientes/CustomerView"
+import ProductsView from "../../views/productos/ProductsView"
 
 export const RouterViews = () => {
   return (
@@ -7,8 +9,8 @@ export const RouterViews = () => {
     <Routes>
         <Route path="/" exact ={true} Component={Home} />
         <Route path="/compras/*" exact ={true} Component={Shopping} />
-        <Route path="/clientes/*" exact ={true} Component={Customers} />
-        <Route path="/productos/*" exact ={true} Component={Products} />
+        <Route path="/clientes/*" exact ={true} Component={CustomerView} />
+        <Route path="/productos/*" exact ={true} Component={ProductsView} />
         <Route path="/ventas" exact ={true} Component={Sales} />
         <Route path="/cotizacion" exact ={true} Component={Quotation} />
         <Route path="/garantia" exact ={true} Component={Garantia} />

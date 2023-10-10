@@ -12,23 +12,21 @@ export const Shopping = () => {
     console.log({url});
 
   return (
-    <ClientsPrivider>
-        <PaginationProvider >
-            <div className="container-fluid px-4 mt-5">
+    <PaginationProvider >
+        <div className="container-fluid px-4 mt-5">
 
-                <div className="header__submenu">
-                    <h3 className="fs-4">Modulo de Compras</h3>
-                    <SubMenu url={url}/>
-                </div>
-
-                <Routes>
-                    <Route exact ={true} index element={<TableList />} />
-                    <Route exact ={true} path="/agregar" element={<AddShop />} />
-                    <Route exact ={true} path="/consultar" element={<SearchShop />} />
-                </Routes>
-                
+            <div className="header__submenu">
+                <h3 className="fs-4">Modulo de Compras</h3>
+                <SubMenu url={url}/>
             </div>
-        </PaginationProvider>
-    </ClientsPrivider>
+
+            <Routes>
+                <Route exact ={true} index element={<TableList />} />
+                <Route exact ={true} path="/agregar" element={<AddShop />} />
+                <Route exact ={true} path="/consultar" element={<SearchShop />} />
+            </Routes>
+            
+        </div>
+    </PaginationProvider>
   )
 }

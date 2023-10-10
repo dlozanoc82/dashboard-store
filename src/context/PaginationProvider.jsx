@@ -1,12 +1,8 @@
 import { createContext, useState } from "react";
-import useClients from "../hooks/useClients";
-
 
 const PaginationContext = createContext();
 
-const PaginationProvider = ({children}) => {
-
-    const {clients:data} = useClients();
+const PaginationProvider = ({children, data}) => {
 
     const [currentPage, setCurrentPage] = useState(1);
     const recordsPerPage = 10;
