@@ -34,9 +34,9 @@ export const listOptions = [
     },
     {
         id: 6,
-        title: "Cotización", 
-        url: '/cotizacion',
-        icon: faCashRegister
+        title: "Separado", 
+        url: '/separado',
+        icon: faHandHoldingDollar
     },
     {
         id: 7,
@@ -46,9 +46,9 @@ export const listOptions = [
     },
     {
         id: 8,
-        title: "Separado", 
-        url: '/separado',
-        icon: faHandHoldingDollar
+        title: "Cotización", 
+        url: '/cotizacion',
+        icon: faCashRegister
     },
     {
         id: 9,

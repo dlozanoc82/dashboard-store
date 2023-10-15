@@ -33,7 +33,7 @@ export const Navbar = () => {
                 </ul>
             </div>
         </nav>
-        <h3 className="px-4">¡Bienvenido al moudulo de {titleUrl} !</h3>
+        <h3 className="px-4">¡Bienvenido al modulo de {titleUrl} !</h3>
     </>        
   )
 }
