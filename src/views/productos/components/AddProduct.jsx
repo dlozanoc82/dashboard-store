@@ -23,7 +23,7 @@ export const AddProduct = () => {
         setNombreProducto(event.target.value); // Actualiza el estado cuando se selecciona un nuevo valor
     };
 
-    const handleSubmit = async e => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         //Crear el producto en la API

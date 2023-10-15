@@ -1,18 +1,21 @@
 import { Route, Routes, useResolvedPath } from "react-router-dom"
-import { TableList } from "../../components/TableList/TableList"
-import { PaginationProvider } from "../../context/PaginationProvider"
-import { SubMenu } from "../../components/SubMenu/SubMenu"
-import { AddShop } from "./components/AddShop"
-import { SearchShop } from "./components/SearchShop"
-import { ClientsPrivider } from "../../context/ClientsPrivider"
+import { TableList } from "../../../components/TableList/TableList"
+import { PaginationProvider } from "../../../context/PaginationProvider"
+import { SubMenu } from "../../../components/SubMenu/SubMenu"
+import { AddShop } from "./AddShop"
+import { SearchShop } from "./SearchShop"
+import useCompras from "../../../hooks/useCompras"
 
 export const Shopping = () => {
+
+
+    const {compras} = useCompras();
 
     const url = useResolvedPath("").pathname;
     console.log({url});
 
   return (
-    <PaginationProvider >
+    <PaginationProvider data={compras} >
         <div className="container-fluid px-4 mt-5">
 
             <div className="header__submenu">

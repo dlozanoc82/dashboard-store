@@ -1,5 +1,5 @@
 export * from './clientes/components/Customers'
-export * from './compras/Shopping'
+export * from './compras/ShoppingView'
 export * from './cotizacion/Quotation'
 export * from './reportes/Kardex'
 export * from './ventas/Sales'

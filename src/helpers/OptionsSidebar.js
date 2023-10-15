@@ -1,5 +1,5 @@
-import { faFileLines, faUser } from "@fortawesome/free-regular-svg-icons"
-import { faBasketShopping, faCashRegister, faCheckToSlot, faHouse, faShoppingCart, faStore, faTags } from "@fortawesome/free-solid-svg-icons"
+import { faClipboard, faFileLines, faUser } from "@fortawesome/free-regular-svg-icons"
+import { faBasketShopping, faCartPlus, faCashRegister, faCheckToSlot, faFileClipboard, faHandHoldingDollar, faHouse, faScrewdriverWrench, faShoppingCart, faStore, faTags } from "@fortawesome/free-solid-svg-icons"
 
 export const listOptions = [
     {
@@ -24,7 +24,7 @@ export const listOptions = [
         id: 4,
         title: "Productos", 
         url: '/productos',
-        icon: faBasketShopping
+        icon: faCartPlus
     },
     {
         id: 5,
@@ -42,18 +42,18 @@ export const listOptions = [
         id: 7,
         title: "Garantia", 
         url: '/garantia',
-        icon: faCheckToSlot
+        icon: faScrewdriverWrench
     },
     {
         id: 8,
         title: "Separado", 
         url: '/separado',
-        icon: faStore
+        icon: faHandHoldingDollar
     },
     {
         id: 9,
         title: "Kardex", 
         url: '/kardex',
-        icon: faFileLines
+        icon: faFileClipboard
     }
 ]

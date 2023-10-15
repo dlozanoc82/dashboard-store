@@ -1,14 +1,16 @@
 import {  Route, Routes } from "react-router-dom"
-import {  Garantia, Home, Kardex, Quotation, Sales, Separado, Shopping } from "../../views"
+import {  Garantia, Home, Kardex, Quotation, Sales, Separado } from "../../views"
 import CustomerView from "../../views/clientes/CustomerView"
 import ProductsView from "../../views/productos/ProductsView"
+import ShoppingView from "../../views/compras/ShoppingView"
+
 
 export const RouterViews = () => {
   return (
     
     <Routes>
         <Route path="/" exact ={true} Component={Home} />
-        <Route path="/compras/*" exact ={true} Component={Shopping} />
+        <Route path="/compras/*" exact ={true} Component={ShoppingView} />
         <Route path="/clientes/*" exact ={true} Component={CustomerView} />
         <Route path="/productos/*" exact ={true} Component={ProductsView} />
         <Route path="/ventas" exact ={true} Component={Sales} />
