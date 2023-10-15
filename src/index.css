@@ -1,8 +1,13 @@
 :root {
-    --main-bg-color: #009d63;
-    --main-text-color: #009d63;
+    --main-bg-color: #63009D;
+    --main-text-color: #63009D;
     --second-text-color: #bbbec5;
     --second-bg-color: #c1efde;
+}
+
+.logo-empresa{
+    width:  90px;
+    height: 90px;
 }
 
 a {
@@ -45,12 +50,12 @@ ul {
 
 #wrapper {
     overflow-x: hidden;
-    background-image: linear-gradient(to right,
-            #baf3d7,
-            #c2f5de,
-            #cbf7e4,
-            #d4f8ea,
-            #ddfaef);
+    background-image: linear-gradient(to bottom,
+    #FFCFCF,
+    #FFD6D6,
+    #FFD6D6,
+    #FFDDDD,
+    #FFDDDD);
 }
 
 #sidebar-wrapper {
@@ -246,4 +251,71 @@ ul {
         margin-left: -15rem;
     }
 
+}
+
+/* CARDS */
+.main-part {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 50px;
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2rem;
+    place-items: center;
+    justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .main-part {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.title__card {
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.cpanel {
+    width: 80%;
+    height: 150px;
+    background-color: var(--main-bg-color);
+    transition: all .2s ease-in-out;
+}
+
+.icon-part {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70%;
+}
+
+.icon {
+    font-size: 40px;
+    color: white;
+}
+
+
+.card-content-part {
+    background-color: transparent;
+    border-bottom: 1px solid black;
+    padding: 5px 0px;
+}
+
+.cpanel:hover {
+    background-color: white;
+}
+
+.cpanel:hover .title__card {
+    color: var(--main-bg-color);
+}
+
+.cpanel:hover .icon {
+    color: var(--main-bg-color);
+}
+
+p {
+    margin: 0;
 }

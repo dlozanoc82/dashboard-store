@@ -1,5 +1,5 @@
-import { faClipboard, faFileLines, faUser } from "@fortawesome/free-regular-svg-icons"
-import { faBasketShopping, faCartPlus, faCashRegister, faCheckToSlot, faFileClipboard, faHandHoldingDollar, faHouse, faScrewdriverWrench, faShoppingCart, faStore, faTags } from "@fortawesome/free-solid-svg-icons"
+import { faUser } from "@fortawesome/free-regular-svg-icons"
+import { faCartPlus, faCashRegister, faFileClipboard, faHandHoldingDollar, faHouse, faScrewdriverWrench, faShoppingCart, faTags } from "@fortawesome/free-solid-svg-icons"
 
 export const listOptions = [
     {

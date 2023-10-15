@@ -1,4 +1,3 @@
-import './cards.css';
 import { listOptions } from '../../helpers/OptionsSidebar';
 import { Card } from './Card';
 

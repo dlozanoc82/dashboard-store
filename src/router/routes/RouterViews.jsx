@@ -4,7 +4,6 @@ import CustomerView from "../../views/clientes/CustomerView"
 import ProductsView from "../../views/productos/ProductsView"
 import ShoppingView from "../../views/compras/ShoppingView"
 
-
 export const RouterViews = () => {
   return (
     

@@ -1,9 +1,12 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 
 
 const DashboardContext = createContext();
 
 const DashboardProvider = ({children}) => {
+
+    const [titleUrl, setTitleUrl] = useState('');
+    const [iconNav, setIconNav] = useState();
 
     //SideBar
     const [toggleSidebar, setToggleSidebar] = useState(false);
@@ -11,7 +14,11 @@ const DashboardProvider = ({children}) => {
     
     //Active Option
     const [activeOption, setActiveOption] = useState('Panel');
-    const handleActiveOption = (option) => setActiveOption(option);
+    const handleActiveOption = (title, icon) => {
+        setActiveOption(title);
+        setTitleUrl(title);
+        setIconNav(icon);
+    };
 
     // useEffect(() => {
 
@@ -23,7 +30,9 @@ const DashboardProvider = ({children}) => {
                 activeOption,
                 toggleSidebar,
                 handleToggle, 
-                handleActiveOption
+                handleActiveOption,
+                titleUrl, 
+                iconNav
             }}
         >
             {children}
