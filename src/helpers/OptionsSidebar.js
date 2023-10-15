@@ -34,8 +34,8 @@ export const listOptions = [
     },
     {
         id: 6,
-        title: "Separado", 
-        url: '/separado',
+        title: "Apartados", 
+        url: '/apartados',
         icon: faHandHoldingDollar
     },
     {

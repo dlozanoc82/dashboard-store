@@ -1,5 +1,5 @@
 import {  Route, Routes } from "react-router-dom"
-import {  Garantia, Home, Kardex, QuotationView, SalesView, Separado } from "../../views"
+import {  ApartadoView, Garantia, Home, Kardex, QuotationView, SalesView } from "../../views"
 import CustomerView from "../../views/clientes/CustomerView"
 import ProductsView from "../../views/productos/ProductsView"
 import ShoppingView from "../../views/compras/ShoppingView"
@@ -15,7 +15,7 @@ export const RouterViews = () => {
         <Route path="/ventas/*" exact ={true} Component={SalesView} />
         <Route path="/cotizacion/*" exact ={true} Component={QuotationView} />
         <Route path="/garantia" exact ={true} Component={Garantia} />
-        <Route path="/separado" exact ={true} Component={Separado} />
+        <Route path="/apartados/*" exact ={true} Component={ApartadoView} />
         <Route path="/kardex" exact ={true} Component={Kardex} />
         <Route path="*" Component={Home} />
     </Routes>
