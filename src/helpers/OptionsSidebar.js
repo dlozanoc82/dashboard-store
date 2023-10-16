@@ -1,5 +1,5 @@
 import { faUser } from "@fortawesome/free-regular-svg-icons"
-import { faCartPlus, faCashRegister, faFileClipboard, faHandHoldingDollar, faHouse, faScrewdriverWrench, faShoppingCart, faTags } from "@fortawesome/free-solid-svg-icons"
+import { faCartPlus, faCashRegister, faCity, faFileClipboard, faHandHoldingDollar, faHouse, faScrewdriverWrench, faShoppingCart, faTags } from "@fortawesome/free-solid-svg-icons"
 
 export const listOptions = [
     {
@@ -55,5 +55,11 @@ export const listOptions = [
         title: "Kardex", 
         url: '/kardex',
         icon: faFileClipboard
+    },
+    {
+        id: 10,
+        title: "Informacion de la Empresa", 
+        url: '/info-empresa',
+        icon: faCity
     }
 ]
