@@ -7,6 +7,7 @@ const DashboardProvider = ({children}) => {
 
     const [titleUrl, setTitleUrl] = useState('');
     const [iconNav, setIconNav] = useState();
+    const [tableHeaders, setTableHeaders] = useState([]);
 
     //SideBar
     const [toggleSidebar, setToggleSidebar] = useState(false);
@@ -32,7 +33,9 @@ const DashboardProvider = ({children}) => {
                 handleToggle, 
                 handleActiveOption,
                 titleUrl, 
-                iconNav
+                iconNav,
+                tableHeaders,
+                setTableHeaders
             }}
         >
             {children}

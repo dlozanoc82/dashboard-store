@@ -4,11 +4,20 @@ import { SubMenu } from './SubMenu';
 import SearchQuotation from './SearchQuotation';
 import { PaginationProvider } from '../../../context/PaginationProvider';
 import { TableList } from '../../../components/TableList/TableList';
+import useDashborad from '../../../hooks/useDashborad';
+import { obtenerTitulosPorRuta } from '../../../helpers/OptionsSidebar';
+import { useEffect } from 'react';
 
 const Quotation = () => {
 
     const {cotizaciones} = useCotizaciones();
+    const {setTableHeaders} = useDashborad();
     const url = useResolvedPath("").pathname;
+
+    useEffect(() => {
+        const tableHeaders = obtenerTitulosPorRuta(url);
+        setTableHeaders(tableHeaders);
+    }, [])
 
   return (
     <PaginationProvider data={cotizaciones}>

@@ -63,3 +63,26 @@ export const listOptions = [
         icon: faCity
     }
 ]
+
+
+const columnasPorRuta = {
+    "/compras": ["#", "Fecha de Compra", "Categoria", "SubCategoria", "Nombre del Producto", "Cantidad", "Proovedor", "Precio de la Compra", "Precio Unitario", "Precio de Venta", "Total", "Acciones"],
+    "/clientes": ["#", "Fecha de Registro", "Nombre Completo", "Apellido Completo", "Numero de Documento", "Correo", "Telefono", "Estado", "Acciones"],
+    "/productos": ["ColumnaA", "ColumnaB", "ColumnaC"],
+    "/ventas": ["#", "Cliente", "No. Documento", "Categoria", "SubCategoria", "Producto", "Cantidad", "Precio Unitario", "Tipo de Pago", "Total", "Ganancias"],
+    "/apartados": ["#", "Fecha del Apartado", "Cliente", "No. Documento", "Cantridad", "Precio Unitario", "Tipo de Pago", "Fecha de Abono", "Total", "Restante", "Opciones"],
+    "/garantia": ["ColumnaA", "ColumnaB", "ColumnaC"],
+    "/cotizacion": ["#", "Fecha", "No. Documento", "Nombre del Cliente", "Apellidos del Cliente", "Correo", "Productos", "Cantidad", "Precio Unitario", "Total"],
+    "/kardex": ["ColumnaA", "ColumnaB", "ColumnaC"],
+};
+
+export function obtenerTitulosPorRuta(ruta) {
+    if (columnasPorRuta.hasOwnProperty(ruta)) {
+      return columnasPorRuta[ruta];
+    } else {
+      return []; // Devuelve un arreglo vacío si la ruta no está en el objeto
+    }
+}
+
+
+  

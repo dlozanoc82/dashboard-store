@@ -1,9 +1,9 @@
 import { Route, Routes, useResolvedPath } from "react-router-dom";
-import { TableList } from "../../../components/TableList/TableList";
 import { AddProduct } from "./AddProduct";
 import { PaginationProvider } from "../../../context/PaginationProvider";
 import { SubMenu } from "./SubMenu";
 import useProducts from "../../../hooks/useProducts";
+import ProductsList from "./ProductsList";
 
 export const Products = () => {
 
@@ -22,7 +22,7 @@ export const Products = () => {
             </div>
 
             <Routes>
-                <Route exact ={true} index element={<TableList />} />
+                <Route exact ={true} index element={<ProductsList />} />
                 <Route exact ={true} path="/agregar" element={<AddProduct />} />
             </Routes>
             

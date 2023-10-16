@@ -6,12 +6,21 @@ import AddSale from "./AddSale";
 import { SubMenu } from "./SubMenu";
 import SearchSale from "./SearchSale";
 import ProductosMasVendidos from "./ProductosMasVendidos";
+import { obtenerTitulosPorRuta } from "../../../helpers/OptionsSidebar";
+import useDashborad from "../../../hooks/useDashborad";
+import { useEffect } from "react";
 
 
 const Sales = () => {
 
     const {ventas} = useVentas();
+    const {setTableHeaders} = useDashborad();
     const url = useResolvedPath("").pathname;
+
+    useEffect(() => {
+        const tableHeaders = obtenerTitulosPorRuta(url);
+        setTableHeaders(tableHeaders);
+    }, [])
 
   return (
     <PaginationProvider data={ventas}>

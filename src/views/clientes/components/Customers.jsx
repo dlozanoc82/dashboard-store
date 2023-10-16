@@ -4,14 +4,24 @@ import { SubMenu } from "./SubMenu";
 import { TableList } from "../../../components/TableList/TableList";
 import { AddClient } from "./AddClient";
 import useClients from "../../../hooks/useClients";
+import useDashborad from "../../../hooks/useDashborad";
+import { useEffect } from "react";
+import { obtenerTitulosPorRuta } from "../../../helpers/OptionsSidebar";
 
 
 export const Customers = () => {
 
 
     const {clients} = useClients();
+    const {setTableHeaders} = useDashborad();
+
     const url = useResolvedPath("").pathname;
     console.log({url});
+
+    useEffect(() => {
+        const tableHeaders = obtenerTitulosPorRuta(url);
+        setTableHeaders(tableHeaders);
+    }, [])
 
     return (
         <PaginationProvider data={clients}>

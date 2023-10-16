@@ -1,18 +1,26 @@
-import { Route, Routes, useResolvedPath } from "react-router-dom"
+import { Route, Routes, useBeforeUnload, useResolvedPath } from "react-router-dom"
 import { TableList } from "../../../components/TableList/TableList"
 import { PaginationProvider } from "../../../context/PaginationProvider"
 import { SubMenu } from "../../../components/SubMenu/SubMenu"
 import { AddShop } from "./AddShop"
 import { SearchShop } from "./SearchShop"
 import useCompras from "../../../hooks/useCompras"
+import { obtenerTitulosPorRuta } from "../../../helpers/OptionsSidebar"
+import useDashborad from "../../../hooks/useDashborad"
+import { useEffect } from "react"
 
 export const Shopping = () => {
 
-
     const {compras} = useCompras();
+    const {setTableHeaders} = useDashborad();
 
     const url = useResolvedPath("").pathname;
     console.log({url});
+
+    useEffect(() => {
+        const tableHeaders = obtenerTitulosPorRuta(url);
+        setTableHeaders(tableHeaders);
+    }, [])
 
   return (
     <PaginationProvider data={compras} >
