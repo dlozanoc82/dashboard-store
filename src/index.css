@@ -321,7 +321,7 @@ p {
 }
 
 
-/* VIEW PRODUCTOS */
+/* VIEW VENTAS */
 .product_container{
     display: grid;
     border: 1px solid black;
@@ -371,3 +371,75 @@ p {
     }
 }
 
+/* VIEW LIST PRODUCTS */
+.product_list-container{
+    display: grid;
+    gap: 5px;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+@media(min-width: 768px) {
+    .product_list-container {
+        grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
+        gap: 1rem;
+        grid-template-areas: "imagen title title title title"
+                             "imagen desc cantidad state boton"
+                             "imagen stock garantia dgarantia boton";
+    }
+}
+
+.product_name{
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+}
+
+.product_list-img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product_list-desc{
+    min-height: 100px;
+}
+
+@media(min-width: 768px) {
+    .product_list-info{
+        grid-area: title;
+    }
+
+    .product_list-img{
+        grid-area: imagen;
+    }
+
+    .product_list-desc{
+        grid-area: desc;
+    }
+    
+    .product_list-amount{
+        grid-area: cantidad;
+    }
+
+    .product_list-state{
+        grid-area: state;
+    }
+
+    .product_list-stock{
+        grid-area: stock;
+    }
+
+    .product_list-garantia{
+        grid-area: garantia;
+    }
+
+    .product_list-dgarantia{
+        grid-area: dgarantia;
+    }
+
+    .boton-container{
+        place-self: center;
+        grid-area: boton;
+    }
+}
