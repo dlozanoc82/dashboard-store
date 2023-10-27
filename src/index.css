@@ -1,8 +1,9 @@
 :root {
-    --main-bg-color: #63009D;
-    --main-text-color: #63009D;
+    --main-bg-color: #d84149;
+    --main-text-color: #e63f66;
+    --main-bg-color-hover:#f5e8e8;
     --second-text-color: #bbbec5;
-    --second-bg-color: #c1efde;
+    --second-bg-color: #dcfff2;
 }
 
 .logo-empresa{
@@ -51,11 +52,11 @@ ul {
 #wrapper {
     overflow-x: hidden;
     background-image: linear-gradient(to bottom,
-    #FFCFCF,
-    #FFD6D6,
-    #FFD6D6,
-    #FFDDDD,
-    #FFDDDD);
+    #fbb09e,
+    #fbb09e,
+    #fbb09e,
+    #fbb09e,
+    #fbb09e);
 }
 
 #sidebar-wrapper {
@@ -283,6 +284,7 @@ ul {
     height: 150px;
     background-color: var(--main-bg-color);
     transition: all .2s ease-in-out;
+    border-radius: 12px;
 }
 
 .icon-part {
@@ -305,7 +307,7 @@ ul {
 }
 
 .cpanel:hover {
-    background-color: white;
+    background-color: var(--main-bg-color-hover);
 }
 
 .cpanel:hover .title__card {

@@ -1,12 +1,27 @@
 import { useState } from "react";
+import useCompras from "../../../hooks/useCompras";
 
 export const AddShop = () => {
 
-    const [selectedValue, setSelectedValue] = useState(''); // Estado para mantener el valor seleccionado
+    const {categorias, setIdSubcategoria, subcategorias} = useCompras();
 
-  const handleChange = (event) => {
-    setSelectedValue(event.target.value); // Actualiza el estado cuando se selecciona un nuevo valor
-  };
+    const [selectCategory, setSelectCategory] = useState(''); // Estado para mantener el valor seleccionado
+    const [selectSubCategory, setSelectSubCategory] = useState(''); // Estado para mantener el valor seleccionado
+    const [nombreProducto, setNombreProducto] = useState('');
+
+    const handleChangeCategory = (event) => {
+        setSelectCategory(event.target.value);
+        setIdSubcategoria(event.target.value); // Actualiza el estado cuando se selecciona un nuevo valor
+    };
+
+    const handleChangeSubCategory = (event) => {
+        setSelectSubCategory(event.target.value); // Actualiza el estado cuando se selecciona un nuevo valor
+    };
+
+    const handleChangeNombre = (event) => {
+        setNombreProducto(event.target.value); // Actualiza el estado cuando se selecciona un nuevo valor
+    };
+
 
   return (
     <>
@@ -24,17 +39,27 @@ export const AddShop = () => {
 
                         <div className="col-md-4 mb-md-4">
                             <label className="form-label">Categotia *</label>
-                            <select className="form-select" value={selectedValue} onChange={handleChange}>
+                            <select className="form-select" value={selectCategory} onChange={handleChangeCategory}>
                                 <option value="">Seleccione una opción</option>
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
+                                {categorias.map((categoria) => 
+                                    <option key={categoria.cod_cat} value={categoria.cod_cat}>{categoria.nom_cat}</option>)
+                                }
                             </select>
                         </div>
 
                         <div className="col-md-4 mb-md-4">
                             <label className="form-label">Subcategoria *</label>
-                            <select className="form-select" value={selectedValue} onChange={handleChange}>
+                            <select className="form-select" value={selectSubCategory} onChange={handleChangeSubCategory}>
+                                <option value="">Seleccione una opción</option>
+                                {subcategorias.map((subcategoria) => 
+                                    <option key={subcategoria.cod_sub} value={subcategoria.cod_sub}>{subcategoria.nom_sub}</option>)
+                                }
+                            </select>
+                        </div>
+
+                        <div className="col-md-4 mb-md-4">
+                            <label className="form-label">Producto *</label>
+                            <select className="form-select" value={nombreProducto} onChange={handleChangeNombre}>
                                 <option value="">Seleccione una opción</option>
                                 <option value="opcion1">Opción 1</option>
                                 <option value="opcion2">Opción 2</option>
@@ -43,8 +68,8 @@ export const AddShop = () => {
                         </div>
 
                         <div className="col-md-4 mb-md-4">
-                            <label className="form-label">Producto *</label>
-                            <select className="form-select" value={selectedValue} onChange={handleChange}>
+                            <label className="form-label">Proveedor *</label>
+                            <select className="form-select" value={nombreProducto} onChange={handleChangeNombre}>
                                 <option value="">Seleccione una opción</option>
                                 <option value="opcion1">Opción 1</option>
                                 <option value="opcion2">Opción 2</option>

@@ -1,12 +1,87 @@
+import axios from "axios";
 import { useState } from "react";
+import Swal from "sweetalert2";
+import useClients from "../../../hooks/useClients";
 
 export const AddClient = () => {
 
-    const [selectedValue, setSelectedValue] = useState(''); // Estado para mantener el valor seleccionado
+  const { createClients } = useClients();
 
-  const handleChange = (event) => {
-    setSelectedValue(event.target.value); // Actualiza el estado cuando se selecciona un nuevo valor
-  };
+  const [nombres, setNombres] = useState('');
+  const [apellidos, setApellidos] = useState('');
+  const [email, setEmail] = useState('');
+  const [documento, setDocumento] = useState('');
+  const [celular, setCelular] = useState('');
+  const [direccion, setDireccion] = useState(''); 
+
+  const handleNombres = (event) => {
+    setNombres(event.target.value);
+  }
+
+  const handleApellidos = (event) => {
+    setApellidos(event.target.value);
+  }
+
+  const handleEmail = (event) => {
+    setEmail(event.target.value);
+  }
+
+  const handleDocumento = (event) => {
+    setDocumento(event.target.value);
+  }
+
+  const handleCelular = (event) => {
+    setCelular(event.target.value);
+  }
+  
+  const handleDireccion = (event) => {
+    setDireccion(event.target.value);
+  }
+
+  const clearInputs = () => {
+    setNombres('');
+    setApellidos('');
+    setDocumento('');
+    setEmail('');
+    setDireccion('');
+    setCelular('');
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const contrasena = documento;
+    const correo = email;
+    createClients(documento,nombres,apellidos,celular,direccion,correo,contrasena);
+    clearInputs();
+
+    // //Crear el producto en la API
+    // try {
+    //     const contrasena = documento;
+    //     const correo = email;
+    //     console.log({documento,nombres,apellidos,celular,direccion,correo,contrasena});
+    //     const respuesta = await axios.post('http://localhost/invensoft/clientes', {documento,nombres,apellidos,celular,direccion,correo,contrasena});
+        
+    //     Swal.fire({
+    //       icon: 'success',
+    //       title: respuesta.data.result.msj,
+    //       showConfirmButton: false,
+    //       timer: 2000
+    //     })
+
+    //     clearInputs();
+
+    //     console.log(respuesta);
+    // } catch (error) {
+    //     console.log(error);
+    //     Swal.fire({
+    //       icon: 'error',
+    //       title: 'Oops...',
+    //       text: '¡Algo salió mal!',
+    //     })
+    // }
+    
+}
 
   return (
     <>
@@ -19,43 +94,43 @@ export const AddClient = () => {
                 </div>
 
                 <div>
-                    <form className="mt-3">
+                    <form onSubmit={handleSubmit} className="mt-3">
                         <div className="row p-2 mb-3">
 
                         <div className="col-md-4 mb-md-4">
                             <label className="form-label">Nombres *</label>
-                            <input type="text" className="form-control" required />
+                            <input type="text" className="form-control" value={nombres} onChange={handleNombres} required />
                         </div>
 
                         <div className="col-md-4 mb-md-4">
                             <label className="form-label">Apellidos *</label>
-                            <input type="text" className="form-control" required />
+                            <input type="text" className="form-control" value={apellidos} onChange={handleApellidos} required />
                         </div>
 
                         <div className="col-md-4 mb-md-4">
                             <label className="form-label">Correo Electronico *</label>
-                            <input type="email" className="form-control" required />
+                            <input type="email" className="form-control" value={email} onChange={handleEmail} required />
                         </div>
 
                         <div className="col-md-4 mb-md-4">
                             <label className="form-label">Número de Documento *</label>
-                            <input type="number" className="form-control" required />
+                            <input type="number" className="form-control" value={documento} onChange={handleDocumento} required />
                         </div>
 
                         <div className="col-md-4 mb-md-4">
                             <label className="form-label">Celular *</label>
-                            <input type="number" className="form-control" required />
+                            <input type="number" className="form-control" value={celular} onChange={handleCelular} required />
                         </div>
 
                         <div className="col-md-4 mb-md-4">
                             <label className="form-label">Dirección *</label>
-                            <input type="text" className="form-control" required />
+                            <input type="text" className="form-control" value={direccion} onChange={handleDireccion} required />
                         </div>
 
                         </div>
 
                         <div className="col-12 d-flex justify-content-center gap-3">
-                            <button className="btn btn-secondary" type="submit">Limpiar</button>
+                            <button className="btn btn-secondary" type="button" onClick={() => clearInputs()}>Limpiar</button>
                             <button className="btn btn-primary" type="submit">Agregar</button>
                         </div>
                     </form>

@@ -10,7 +10,7 @@ export const Card = ({option}) => {
     const {id, title, url, icon} = option;
 
     return (
-        <Link onClick={() => handleActiveOption(title)} to={url} className="cpanel shadow-sm rounded">
+        <Link onClick={() => handleActiveOption(title)} to={url} className="cpanel shadow-sm">
             <div className="card-content-part">
                 <p className='title__card'>{title}</p>
             </div>

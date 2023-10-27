@@ -4,6 +4,7 @@ const PaginationContext = createContext();
 
 const PaginationProvider = ({children, data}) => {
 
+    //CODIGO PARA LA PAGINACION
     const [currentPage, setCurrentPage] = useState(1);
     const recordsPerPage = 10;
     const lastIndex = currentPage * recordsPerPage;
@@ -13,7 +14,6 @@ const PaginationProvider = ({children, data}) => {
     const numbers = [...Array(npage+1).keys()].slice(1);
     const ndata = data.length;
 
-    
     const prePage = () => {
         if (currentPage != 1) {
             setCurrentPage(currentPage-1)

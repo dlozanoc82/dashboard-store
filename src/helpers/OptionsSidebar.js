@@ -76,6 +76,8 @@ const columnasPorRuta = {
     "/kardex": ["ColumnaA", "ColumnaB", "ColumnaC"],
 };
 
+
+
 export function obtenerTitulosPorRuta(ruta) {
     if (columnasPorRuta.hasOwnProperty(ruta)) {
       return columnasPorRuta[ruta];

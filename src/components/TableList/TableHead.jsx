@@ -21,7 +21,7 @@ export const TableHead = () => {
             </>
             :
             <>
-              {tableHeaders.map((header) => <th scope="col">{header}</th>)}
+              {tableHeaders.map((header) => <th key={header} scope="col">{header}</th>)}
             </>
           }
         </tr>
