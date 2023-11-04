@@ -5,7 +5,7 @@ import { Pagination } from "../Pagination/Pagination";
 
 export const TableList = () => {
 
-    const {records} =usePagination();
+  const {records} =usePagination();
 
   return (
 

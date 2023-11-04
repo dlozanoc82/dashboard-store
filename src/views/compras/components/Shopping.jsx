@@ -15,7 +15,6 @@ export const Shopping = () => {
     const {setTableHeaders} = useDashborad();
 
     const url = useResolvedPath("").pathname;
-    console.log({url});
 
     useEffect(() => {
         const tableHeaders = obtenerTitulosPorRuta(url);

@@ -6,8 +6,6 @@ const ComprasContext = createContext();
 
 const ComprasProvider = ({children}) => {
 
- 
-
   const [compras, setCompras] = useState([]);
   const [categorias, setCategorias] = useState([]);  //Guarda las categorias
   const [subcategorias, setSubCategorias] = useState([]); // Guarda las subcategorias
@@ -15,6 +13,17 @@ const ComprasProvider = ({children}) => {
   const [idProductsSubcategory, setIdProductsSubcategory] = useState(); // Resive el Cambio del ID de la subcategoria
   const [productsBySubCategory, setProductsBySubCategory] = useState([]); // Guarda los productos por subcategoria
   const [proovedores, setProovedores] = useState([]);
+
+  const getCompras = async () => {        
+    try {
+        const url = "http://localhost/invensoft/compras";
+        const { data } = await axios(url);
+        console.log(data);
+        setCompras(data);
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 
   // FUNCIONES PARA OBTENER CATEGORIAS, SUBCATEGORIAS, PRODUCTOS Y PROVEEDORES
@@ -76,6 +85,8 @@ const ComprasProvider = ({children}) => {
             timer: 2000
         })
 
+        getCompras();
+
     } catch (error) {
         console.log(error);
         Swal.fire({
@@ -84,11 +95,15 @@ const ComprasProvider = ({children}) => {
             text: '¡Algo salió mal!',
         })
     }
-}
+  }
 
 
 
   //SE ENCARGA DE EJECUTAR LAS FUNCIONES CADA VEZ QUE DETECTA UN CAMBIO
+  useEffect(() => {
+    getCompras();
+  }, [])
+
   useEffect(() => {
       getCategorias();
   }, [])
