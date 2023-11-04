@@ -16,8 +16,6 @@ const TableItemCompras = ({info}) => {
         <td>{nom_prov}</td>
         <td>{valor_total}</td>
         <td>{valor_unit_prov}</td>
-        <td></td>
-        <td></td>
         <td>
         <div className="btn__actions">
             <button onClick={() => handleClick(documento)} className="btn btn-secondary btn-padding">

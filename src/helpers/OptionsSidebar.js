@@ -66,7 +66,7 @@ export const listOptions = [
 
 
 const columnasPorRuta = {
-    "/compras": ["#", "Fecha de Compra", "Categoria", "SubCategoria", "Nombre del Producto", "Cantidad", "Proovedor", "Precio de la Compra", "Precio Unitario", "Precio de Venta", "Total", "Acciones"],
+    "/compras": ["#", "Fecha de Compra", "Categoria", "SubCategoria", "Nombre del Producto", "Cantidad", "Proovedor", "Precio de la Compra", "Precio Unitario", "Acciones"],
     "/clientes": ["#", "Fecha de Registro", "Nombre Completo", "Apellido Completo", "Numero de Documento", "Correo", "Telefono", "Estado", "Acciones"],
     "/productos": ["ColumnaA", "ColumnaB", "ColumnaC"],
     "/ventas": ["#", "Cliente", "No. Documento", "Categoria", "SubCategoria", "Producto", "Cantidad", "Precio Unitario", "Tipo de Pago", "Total", "Ganancias"],
