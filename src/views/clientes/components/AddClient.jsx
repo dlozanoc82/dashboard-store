@@ -54,34 +54,8 @@ export const AddClient = () => {
     const correo = email;
     createClients(documento,nombres,apellidos,celular,direccion,correo,contrasena);
     clearInputs();
-
-    // //Crear el producto en la API
-    // try {
-    //     const contrasena = documento;
-    //     const correo = email;
-    //     console.log({documento,nombres,apellidos,celular,direccion,correo,contrasena});
-    //     const respuesta = await axios.post('http://localhost/invensoft/clientes', {documento,nombres,apellidos,celular,direccion,correo,contrasena});
-        
-    //     Swal.fire({
-    //       icon: 'success',
-    //       title: respuesta.data.result.msj,
-    //       showConfirmButton: false,
-    //       timer: 2000
-    //     })
-
-    //     clearInputs();
-
-    //     console.log(respuesta);
-    // } catch (error) {
-    //     console.log(error);
-    //     Swal.fire({
-    //       icon: 'error',
-    //       title: 'Oops...',
-    //       text: '¡Algo salió mal!',
-    //     })
-    // }
     
-}
+  }
 
   return (
     <>

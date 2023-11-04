@@ -22,7 +22,6 @@ const ClientsPrivider = ({children}) => {
     const createClients = async (documento,nombres,apellidos,celular,direccion,correo,contrasena) => {
         //Crear el producto en la API
         try {
-            const client = {documento,nombres,apellidos,celular,direccion,correo,contrasena};
             const respuesta = await axios.post('http://localhost/invensoft/clientes', {documento,nombres,apellidos,celular,direccion,correo,contrasena});
             
             Swal.fire({
@@ -32,7 +31,7 @@ const ClientsPrivider = ({children}) => {
                 timer: 2000
             })
 
-            setClients([client, ...clients]);
+            getClients();
         } catch (error) {
             console.log(error);
             Swal.fire({
