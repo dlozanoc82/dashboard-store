@@ -1,13 +1,13 @@
 import { Route, Routes, useBeforeUnload, useResolvedPath } from "react-router-dom"
 import { TableList } from "../../../components/TableList/TableList"
 import { PaginationProvider } from "../../../context/PaginationProvider"
-import { SubMenu } from "../../../components/SubMenu/SubMenu"
-import { AddShop } from "./AddShop"
 import { SearchShop } from "./SearchShop"
 import useCompras from "../../../hooks/useCompras"
 import { obtenerTitulosPorRuta } from "../../../helpers/OptionsSidebar"
 import useDashborad from "../../../hooks/useDashborad"
 import { useEffect } from "react"
+import FormShop from "./FormShop"
+import { SubMenu } from "./SubMenu"
 
 export const Shopping = () => {
 
@@ -32,7 +32,8 @@ export const Shopping = () => {
 
             <Routes>
                 <Route exact ={true} index element={<TableList />} />
-                <Route exact ={true} path="/agregar" element={<AddShop />} />
+                <Route exact ={true} path="/agregar" element={<FormShop />} />
+                <Route exact ={true} path="/editar/:id" element={<FormShop />} />
                 <Route exact ={true} path="/consultar" element={<SearchShop />} />
             </Routes>
             

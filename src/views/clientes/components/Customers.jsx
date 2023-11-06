@@ -2,11 +2,11 @@ import { Route, Routes, useResolvedPath } from "react-router-dom";
 import { PaginationProvider } from "../../../context/PaginationProvider";
 import { SubMenu } from "./SubMenu";
 import { TableList } from "../../../components/TableList/TableList";
-import { AddClient } from "./AddClient";
 import useClients from "../../../hooks/useClients";
 import useDashborad from "../../../hooks/useDashborad";
 import { useEffect } from "react";
 import { obtenerTitulosPorRuta } from "../../../helpers/OptionsSidebar";
+import FormClient from "./FormClient";
 
 
 export const Customers = () => {
@@ -33,9 +33,8 @@ export const Customers = () => {
 
                 <Routes>
                     <Route exact ={true} index element={<TableList />} />
-                    <Route exact ={true} path="/agregar" element={<AddClient />} />
-                        {/*
-                    <Route exact ={true} path="/consultar" element={<SearchShop />} /> */}
+                    <Route exact ={true} path="/agregar" element={<FormClient />} />
+                    <Route exact ={true} path="/editar/:id" element={<FormClient />} />
                 </Routes>
 
             </div>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import useCompras from "../../../hooks/useCompras";
 
-export const AddShop = () => {
+export const UpdateShop = ({compra}) => {
 
     const { 
         categorias,
@@ -10,16 +10,16 @@ export const AddShop = () => {
         subcategorias, 
         setIdSubcategoria, 
         setIdProductsSubcategory,
-        createCompras
-    } = useCompras();
-
-    const [selectCategory, setSelectCategory] = useState(''); // Estado para mantener el valor seleccionado
-    const [selectSubCategory, setSelectSubCategory] = useState(''); // Estado para mantener el valor seleccionado
-    const [nombreProducto, setNombreProducto] = useState('');
-    const [nombreProveedor, setNombreProveedor] = useState('');
-    const [cantidad, setCantidad] = useState('');
-    const [precioUnitario, setPrecioUnitario] = useState('');
-    const [precioCompra, setPrecioCompra] = useState('');
+        upadateCompra,
+    } = useCompras();    
+    
+    const [selectCategory, setSelectCategory] = useState(compra.cod_cat); // Estado para mantener el valor seleccionado
+    const [selectSubCategory, setSelectSubCategory] = useState(compra.cod_sub); // Estado para mantener el valor seleccionado
+    const [nombreProducto, setNombreProducto] = useState(compra.cod_pro);
+    const [nombreProveedor, setNombreProveedor] = useState(compra.cod_prov);
+    const [cantidad, setCantidad] = useState(compra.cantidad_compra);
+    const [precioUnitario, setPrecioUnitario] = useState(compra.valor_unit_prov);
+    const [precioCompra, setPrecioCompra] = useState(compra.valor_total);
 
     const handleChangeCategory = (event) => {
         setSelectCategory(event.target.value);
@@ -62,7 +62,7 @@ export const AddShop = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        createCompras(selectSubCategory, nombreProducto, nombreProveedor, cantidad, precioUnitario, precioCompra);
+        upadateCompra( compra.cod_compra, nombreProducto, nombreProveedor, cantidad, precioUnitario, precioCompra);
         clearInputs();
     }
 
@@ -70,7 +70,7 @@ export const AddShop = () => {
   return (
     <>
         <div className="formulario bg-white rounded shadow-sm">
-            <h2 className="form__title">Agregar Compra</h2>
+            <h2 className="form__title">Editar Compra</h2>
             
             <div>
                 <div className="form__header">
@@ -145,7 +145,7 @@ export const AddShop = () => {
 
                         <div className="col-12 d-flex justify-content-center gap-3">
                             <button className="btn btn-secondary" type="button">Limpiar</button>
-                            <button className="btn btn-primary" type="submit">Agregar</button>
+                            <button className="btn btn-primary" type="submit">Editar Compra</button>
                         </div>
                     </form>
                 </div>

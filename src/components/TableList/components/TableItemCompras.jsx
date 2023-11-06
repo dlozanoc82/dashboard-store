@@ -2,21 +2,12 @@ import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react'
 import useCompras from '../../../hooks/useCompras';
+import { Link } from 'react-router-dom';
 
 const TableItemCompras = ({info}) => {
   
-  const {setCompraUpdate, handleDeleteCompra} = useCompras();
-  const {cod_compra, fecha_compra, nom_cat, nom_sub, nombre, cantidad_compra, nom_prov, valor_total, valor_unit_prov} = info;
-
-  const handleUpdateCompra = () => {
-    setCompraUpdate([
-        cod_compra,
-        cantidad_compra,
-        valor_unit_prov,
-        valor_total
-    ])
-  }
-
+  const {setCompra, handleDeleteCompra} = useCompras();
+  const {cod_compra, fecha_compra, nom_cat, nom_sub, nombre, cantidad_compra, nom_prov, valor_total, valor_unit_prov, cod_cat, cod_sub, cod_pro, cod_prov} = info;
 
 
   return (
@@ -32,9 +23,9 @@ const TableItemCompras = ({info}) => {
         <td>{valor_unit_prov}</td>
         <td>
         <div className="btn__actions">
-            <button onClick={() => handleUpdateCompra()} className="btn btn-secondary btn-padding">
+            <Link onClick={() => setCompra({cod_compra, cod_cat, cod_sub, cod_pro, cod_prov, cantidad_compra, valor_unit_prov, valor_total} )} to={`/compras/editar/${cod_compra}`} className="btn btn-secondary btn-padding">
                 <FontAwesomeIcon icon={faPencil} />
-            </button>
+            </Link>
             <button className="btn btn-danger btn-padding">
                 <FontAwesomeIcon onClick={() => handleDeleteCompra(cod_compra)} icon={faTrash} />
             </button>

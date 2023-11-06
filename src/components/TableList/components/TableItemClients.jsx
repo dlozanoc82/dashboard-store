@@ -2,11 +2,12 @@
 import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useClients from "../../../hooks/useClients";
+import { Link } from "react-router-dom";
 
 const TableItemClients = ({info}) => {
-    const {apellidos, celular, correo, documento, estado, fecha_reg, nombres, id, cod_usu} = info;
+    const {apellidos, celular, correo, documento, estado, fecha_reg, nombres, id, cod_usu, direccion} = info;
 
-    const {handleDeleteCliente} = useClients();
+    const {handleDeleteCliente, setCliente} = useClients();
 
   return (
     <>
@@ -20,9 +21,9 @@ const TableItemClients = ({info}) => {
         <td>{estado}</td>
         <td>
         <div className="btn__actions">
-            <button className="btn btn-secondary btn-padding">
+            <Link onClick={() => setCliente({cod_usu, nombres, apellidos, correo, documento, celular, direccion})} to={`/clientes/editar/${cod_usu}`} className="btn btn-secondary btn-padding">
                 <FontAwesomeIcon icon={faPencil} />
-            </button>
+            </Link>
             <button onClick={() => handleDeleteCliente(cod_usu)} className="btn btn-danger btn-padding">
                 <FontAwesomeIcon icon={faTrash} />
             </button>

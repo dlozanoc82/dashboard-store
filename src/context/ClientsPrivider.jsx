@@ -7,13 +7,21 @@ const ClientsContext = createContext();
 const ClientsPrivider = ({children}) => {       
 
     const [clients, setClients] = useState([]);
+    const [cliente, setCliente] = useState({})
 
+    useEffect(() => {
+        getClients();
+    }, [])
+
+    
+    //CRUD CLIENTES
     const getClients = async () => {        
         try {
             const url = "http://localhost/invensoft/clientes?fecha_ini=2023-08-20&fecha_fin=2023-11-06";
             const { data } = await axios(url);
             console.log(data);
             setClients(data);
+            setCliente({});
         } catch (error) {
             console.log(error);
         }
@@ -26,7 +34,7 @@ const ClientsPrivider = ({children}) => {
             
             Swal.fire({
                 icon: 'success',
-                title: 'Informcaion Almacenada Correctamente',
+                title: 'Informción Almacenada Correctamente',
                 showConfirmButton: false,
                 timer: 2000
             })
@@ -42,13 +50,37 @@ const ClientsPrivider = ({children}) => {
         }
     }
 
-    const handleDeleteCliente = async (cod_cli) => {
+    const updateClients = async (cod_usu, documento,nombres,apellidos,celular,direccion,correo,contrasena) => {
+        //Crear el producto en la API
         try {
-            const respuesta = await axios.delete('http://localhost/invensoft/clientes', {cod_cli});
+            const respuesta = await axios.put(`http://localhost/invensoft/clientes?cod_usu=${cod_usu}`, {documento,nombres,apellidos,celular,direccion,correo,contrasena});
             
             Swal.fire({
                 icon: 'success',
-                title: respuesta.data.result.msj,
+                title: 'Informción Actualizada Correctamente',
+                showConfirmButton: false,
+                timer: 2000
+            })
+
+            getClients();
+            setCliente({});
+        } catch (error) {
+            console.log(error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '¡Algo salió mal!',
+            })
+        }
+    }
+
+    const handleDeleteCliente = async (cod_usu) => {
+        try {
+            const respuesta = await axios.delete(`http://localhost/invensoft/clientes?cod_usu=${cod_usu}`);
+            
+            Swal.fire({
+                icon: 'success',
+                title: 'Resgistro Eliminado Correctamente',
                 showConfirmButton: false,
                 timer: 2000
             })
@@ -63,17 +95,16 @@ const ClientsPrivider = ({children}) => {
             })
         }
     }
-
-    useEffect(() => {
-        getClients();
-    }, [])
 
     return (
         <ClientsContext.Provider
             value={{
                 clients,
+                cliente,
                 createClients,
-                handleDeleteCliente
+                updateClients,
+                handleDeleteCliente,
+                setCliente
             }}
         >
             {children}
