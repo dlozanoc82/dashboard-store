@@ -10,7 +10,7 @@ const ClientsPrivider = ({children}) => {
 
     const getClients = async () => {        
         try {
-            const url = "http://localhost/invensoft/clientes?fecha_ini=2023-08-20&fecha_fin=2023-10-10";
+            const url = "http://localhost/invensoft/clientes?fecha_ini=2023-08-20&fecha_fin=2023-11-06";
             const { data } = await axios(url);
             console.log(data);
             setClients(data);
@@ -23,6 +23,28 @@ const ClientsPrivider = ({children}) => {
         //Crear el producto en la API
         try {
             const respuesta = await axios.post('http://localhost/invensoft/clientes', {documento,nombres,apellidos,celular,direccion,correo,contrasena});
+            
+            Swal.fire({
+                icon: 'success',
+                title: 'Informcaion Almacenada Correctamente',
+                showConfirmButton: false,
+                timer: 2000
+            })
+
+            getClients();
+        } catch (error) {
+            console.log(error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '¡Algo salió mal!',
+            })
+        }
+    }
+
+    const handleDeleteCliente = async (cod_cli) => {
+        try {
+            const respuesta = await axios.delete('http://localhost/invensoft/clientes', {cod_cli});
             
             Swal.fire({
                 icon: 'success',
@@ -50,7 +72,8 @@ const ClientsPrivider = ({children}) => {
         <ClientsContext.Provider
             value={{
                 clients,
-                createClients
+                createClients,
+                handleDeleteCliente
             }}
         >
             {children}

@@ -12,7 +12,8 @@ const ComprasProvider = ({children}) => {
   const [idSubCategoria, setIdSubcategoria] = useState(); // Resive el cambio del ID de la categoria
   const [idProductsSubcategory, setIdProductsSubcategory] = useState(); // Resive el Cambio del ID de la subcategoria
   const [productsBySubCategory, setProductsBySubCategory] = useState([]); // Guarda los productos por subcategoria
-  const [proovedores, setProovedores] = useState([]);
+  const [proovedores, setProovedores] = useState([]); // Obtiene los proveedores
+  const [compraUpdate, setCompraUpdate] = useState([]);
 
   const getCompras = async () => {        
     try {
@@ -23,7 +24,7 @@ const ComprasProvider = ({children}) => {
     } catch (error) {
         console.log(error);
     }
-};
+  };
 
 
   // FUNCIONES PARA OBTENER CATEGORIAS, SUBCATEGORIAS, PRODUCTOS Y PROVEEDORES
@@ -97,6 +98,29 @@ const ComprasProvider = ({children}) => {
     }
   }
 
+  const handleDeleteCompra = async (cod_compra) => {
+    try {
+        console.log({cod_compra});
+        const respuesta = await axios.delete('http://localhost/invensoft/compras', {cod_compra});
+        
+        Swal.fire({
+            icon: 'success',
+            title: respuesta.data.result.msj,
+            showConfirmButton: false,
+            timer: 2000
+        })
+
+        getCompras();
+
+    } catch (error) {
+        console.log(error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: '¡Algo salió mal!',
+        })
+    }
+  }
 
 
   //SE ENCARGA DE EJECUTAR LAS FUNCIONES CADA VEZ QUE DETECTA UN CAMBIO
@@ -120,7 +144,6 @@ const ComprasProvider = ({children}) => {
     getProductsBySubCategory(idProductsSubcategory);
   }, [idProductsSubcategory])
 
-
   return (
     <ComprasContext.Provider
         value={{
@@ -129,9 +152,12 @@ const ComprasProvider = ({children}) => {
             subcategorias,
             productsBySubCategory,
             proovedores,
+            compraUpdate,
+            setCompraUpdate,
             setIdProductsSubcategory,
             setIdSubcategoria,
-            createCompras
+            createCompras,
+            handleDeleteCompra
         }}
     >
         {children}
