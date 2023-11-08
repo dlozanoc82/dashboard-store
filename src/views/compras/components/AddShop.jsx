@@ -10,7 +10,9 @@ export const AddShop = () => {
         subcategorias, 
         setIdSubcategoria, 
         setIdProductsSubcategory,
-        createCompras
+        createCompras,
+        setIdProducto,
+        productosInStock
     } = useCompras();
 
     const [selectCategory, setSelectCategory] = useState(''); // Estado para mantener el valor seleccionado
@@ -32,7 +34,8 @@ export const AddShop = () => {
     };
 
     const handleChangeNombre = (event) => {
-        setNombreProducto(event.target.value); // Actualiza el estado cuando se selecciona un nuevo valor
+        setNombreProducto(event.target.value);
+        setIdProducto(event.target.value); // Actualiza el estado cuando se selecciona un nuevo valor
     };
 
     const handleChangeProveedor = (event) => {
@@ -138,7 +141,7 @@ export const AddShop = () => {
 
                         <div className="col-md-4 mb-md-4">
                             <label className="form-label">Stock</label>
-                            <input type="text" disabled className="form-control" required />
+                            <input type="text" value={productosInStock} disabled className="form-control" required />
                         </div>
 
                         </div>

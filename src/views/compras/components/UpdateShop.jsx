@@ -11,6 +11,8 @@ export const UpdateShop = ({compra}) => {
         setIdSubcategoria, 
         setIdProductsSubcategory,
         upadateCompra,
+        setIdProducto,
+        productosInStock
     } = useCompras();    
     
     const [selectCategory, setSelectCategory] = useState(compra.cod_cat); // Estado para mantener el valor seleccionado
@@ -32,7 +34,8 @@ export const UpdateShop = ({compra}) => {
     };
 
     const handleChangeNombre = (event) => {
-        setNombreProducto(event.target.value); // Actualiza el estado cuando se selecciona un nuevo valor
+        setNombreProducto(event.target.value);
+        setIdProducto(event.target.value); // Actualiza el estado cuando se selecciona un nuevo valor
     };
 
     const handleChangeProveedor = (event) => {
@@ -138,7 +141,7 @@ export const UpdateShop = ({compra}) => {
 
                         <div className="col-md-4 mb-md-4">
                             <label className="form-label">Stock</label>
-                            <input type="text" disabled className="form-control" required />
+                            <input type="text" value={productosInStock} disabled className="form-control" required />
                         </div>
 
                         </div>

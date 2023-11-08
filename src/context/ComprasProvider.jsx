@@ -15,6 +15,9 @@ const ComprasProvider = ({children}) => {
   const [idProductsSubcategory, setIdProductsSubcategory] = useState(); // Resive el Cambio del ID de la subcategoria
   const [productsBySubCategory, setProductsBySubCategory] = useState([]); // Guarda los productos por subcategoria
   const [proovedores, setProovedores] = useState([]); // Obtiene los proveedores
+  
+  const [idProducto, setIdProducto] = useState();
+  const [productosInStock, setProductosInStock] = useState('');
 
     //SE ENCARGA DE EJECUTAR LAS FUNCIONES CADA VEZ QUE DETECTA UN CAMBIO
 
@@ -38,11 +41,16 @@ const ComprasProvider = ({children}) => {
       getProductsBySubCategory(idProductsSubcategory);
     }, [idProductsSubcategory])
 
+    useEffect(() => {
+        getStock(idProducto);
+    }, [idProducto])
+    
+
 
     // CRUD VISTA COMPRAS 
     const getCompras = async () => {        
         try {
-            const url = "http://localhost/invensoft/compras";
+            const url = "http://localhost/invensoft/compras?compras";
             const { data } = await axios(url);
             console.log(data);
             setCompras(data);
@@ -148,6 +156,7 @@ const ComprasProvider = ({children}) => {
     };
 
     const getProductsBySubCategory = async (id = 1) => {        
+        console.log(id);
         try {
             const url = `http://localhost/invensoft/compras?subcategoria=${id}`;
             const { data } = await axios(url);
@@ -168,6 +177,19 @@ const ComprasProvider = ({children}) => {
             console.log(error);
         }
     }
+
+    const getStock = async (id = 1) => {
+        try {
+            const url = `http://localhost/invensoft/compras?producto=${id}`;
+            const { data } = await axios(url);
+            console.log(data);
+            console.log(data[0].stock);
+            setProductosInStock(data[0].stock);
+        } catch (error) {
+            setProductosInStock(0);
+            console.log(error);
+        }
+    }
  
 
     return (
@@ -184,7 +206,9 @@ const ComprasProvider = ({children}) => {
                 handleDeleteCompra,
                 compra,
                 setCompra,
-                upadateCompra
+                upadateCompra,
+                setIdProducto,
+                productosInStock
             }}
         >
             {children}
