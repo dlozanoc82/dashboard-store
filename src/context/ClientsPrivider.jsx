@@ -17,7 +17,7 @@ const ClientsPrivider = ({children}) => {
     //CRUD CLIENTES
     const getClients = async () => {        
         try {
-            const url = "http://localhost/invensoft/clientes?fecha_ini=2023-08-20&fecha_fin=2023-11-06";
+            const url = "http://localhost/invensoft/clientes?fecha_ini=2023-08-20&fecha_fin=2023-12-31";
             const { data } = await axios(url);
             console.log(data);
             setClients(data);
