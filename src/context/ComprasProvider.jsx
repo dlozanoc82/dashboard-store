@@ -7,6 +7,7 @@ const ComprasContext = createContext();
 const ComprasProvider = ({children}) => {
 
   const [compras, setCompras] = useState([]);
+  const [comprasByDates, setComprasByDates] = useState([])
   const [compra, setCompra] = useState({});
 
   const [categorias, setCategorias] = useState([]);  //Guarda las categorias
@@ -54,6 +55,18 @@ const ComprasProvider = ({children}) => {
             const { data } = await axios(url);
             console.log(data);
             setCompras(data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const getComprasByDates = async (fechaInicial, fechaFinal) => {        
+        try {
+            const url = `http://localhost/invensoft/compras?fecha_ini=${fechaInicial}&fecha_fin=${fechaFinal}`;
+            const { data } = await axios(url);
+            console.log('compras por fecha')
+            console.log(data);
+            setComprasByDates(data);
         } catch (error) {
             console.log(error);
         }
@@ -208,7 +221,10 @@ const ComprasProvider = ({children}) => {
                 setCompra,
                 upadateCompra,
                 setIdProducto,
-                productosInStock
+                productosInStock,
+                getComprasByDates,
+                comprasByDates,
+                setComprasByDates
             }}
         >
             {children}

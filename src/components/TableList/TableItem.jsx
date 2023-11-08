@@ -10,6 +10,7 @@ export const TableItem = ({info}) => {
         <tr>
             {url === '/clientes' ? <TableItemClients info={info} /> : <></> }
             {url === '/compras' ? <TableItemCompras info={info} /> : <></> }
+            {url === '/compras/consultar' ? <TableItemCompras info={info} /> : <></> }
         </tr>
     )
 }
