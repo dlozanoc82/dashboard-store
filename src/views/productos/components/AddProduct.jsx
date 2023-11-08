@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useProducts from "../../../hooks/useProducts";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export const AddProduct = () => {
 
@@ -23,6 +24,12 @@ export const AddProduct = () => {
         setNombreProducto(event.target.value); // Actualiza el estado cuando se selecciona un nuevo valor
     };
 
+    const clearInputs = () => {
+        setSelectCategory('');
+        setSelectSubCategory('');
+        setNombreProducto('');
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -31,9 +38,21 @@ export const AddProduct = () => {
             const subcategoria = selectSubCategory;
             const nom_pro = nombreProducto;
             const respuesta = await axios.post('http://localhost/invensoft/productos', {subcategoria, nom_pro});
+            Swal.fire({
+                icon: 'success',
+                title: 'Producto creado correctamente',
+                showConfirmButton: false,
+                timer: 2000
+            })
             console.log(respuesta);
+            clearInputs();
         } catch (error) {
             console.log(error.response);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '¡Algo salió mal!',
+            })
         }
         
     }
