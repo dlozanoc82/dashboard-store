@@ -42,7 +42,7 @@ const UpdateClient = ({cliente}) => {
       setDocumento('');
       setEmail('');
       setDireccion('');
-      setCelular('');
+      setCelular(''); 
     }
   
     const handleSubmit = async (e) => {

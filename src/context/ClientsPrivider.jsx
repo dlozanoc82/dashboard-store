@@ -34,7 +34,7 @@ const ClientsPrivider = ({children}) => {
             
             Swal.fire({
                 icon: 'success',
-                title: 'Informción Almacenada Correctamente',
+                title: 'Información Almacenada Correctamente',
                 showConfirmButton: false,
                 timer: 2000
             })
@@ -57,7 +57,7 @@ const ClientsPrivider = ({children}) => {
             
             Swal.fire({
                 icon: 'success',
-                title: 'Informción Actualizada Correctamente',
+                title: 'Información Actualizada Correctamente',
                 showConfirmButton: false,
                 timer: 2000
             })
@@ -75,15 +75,28 @@ const ClientsPrivider = ({children}) => {
     }
 
     const handleDeleteCliente = async (cod_usu) => {
+        let confirmado = await Swal.fire({
+            title: "¿Esta seguro de eliminar este usuario?",
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: "Si",
+            denyButtonText: `No`
+          });
+
         try {
+            
+              if(confirmado.isConfirmed){
             const respuesta = await axios.delete(`http://localhost/invensoft/clientes?cod_usu=${cod_usu}`);
             
             Swal.fire({
                 icon: 'success',
-                title: 'Resgistro Eliminado Correctamente',
+                title: 'Registro Eliminado Correctamente',
                 showConfirmButton: false,
                 timer: 2000
             })
+        }else{
+            Swal.fire("Operación detenida", "", "info");
+        }
 
             getClients();
         } catch (error) {

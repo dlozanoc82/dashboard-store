@@ -41,7 +41,7 @@ const AddApartado = () => {
                   <div className="row p-2 mb-3">
 
                   <div className="col-md-4 mb-md-4">
-                      <label className="form-label">Categotia *</label>
+                      <label className="form-label">Categoria *</label>
                       <select className="form-select" value={selectedValue} onChange={handleChange}>
                           <option value="">Seleccione una opción</option>
                           <option value="opcion1">Opción 1</option>

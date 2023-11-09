@@ -121,19 +121,31 @@ const ComprasProvider = ({children}) => {
     }
 
     const handleDeleteCompra = async (cod_compra) => {
+        let confirmado = await Swal.fire({
+            title: "¿Esta seguro de eliminar esta compra?",
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: "Si",
+            denyButtonText: `No`
+          });
+
         try {
-            console.log({cod_compra});
-            const respuesta = await axios.delete(`http://localhost/invensoft/compras?cod_compra=${cod_compra}`);
             
-            Swal.fire({
-                icon: 'success',
-                title: 'Registro Eliminado Correctamente',
-                showConfirmButton: false,
-                timer: 2000
-            })
+              if(confirmado.isConfirmed){
+                console.log({cod_compra});
+                const respuesta = await axios.delete(`http://localhost/invensoft/compras?cod_compra=${cod_compra}`);
+                
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Registro Eliminado Correctamente',
+                    showConfirmButton: false,
+                    timer: 2000
+                })  
+        }else{
+            Swal.fire("Operación detenida", "", "info");
+        }
 
             getCompras();
-
         } catch (error) {
             console.log(error);
             Swal.fire({

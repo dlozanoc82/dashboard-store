@@ -21,7 +21,7 @@ export const AddShop = () => {
     const [nombreProveedor, setNombreProveedor] = useState('');
     const [cantidad, setCantidad] = useState('');
     const [precioUnitario, setPrecioUnitario] = useState('');
-    const [precioCompra, setPrecioCompra] = useState('');
+    const [precioCompra, setPrecioCompra] = useState(''); 
 
     const handleChangeCategory = (event) => {
         setSelectCategory(event.target.value);
@@ -55,12 +55,14 @@ export const AddShop = () => {
     }
 
     const clearInputs = () => {
+        setSelectCategory('');
         setSelectSubCategory('');
         setNombreProducto('');
         setNombreProveedor('');
         setCantidad('');
         setPrecioUnitario('');
         setPrecioCompra('');
+        
     }
 
     const handleSubmit = async (e) => {
@@ -85,7 +87,7 @@ export const AddShop = () => {
                         <div className="row p-2 mb-3">
 
                         <div className="col-md-4 mb-md-4">
-                            <label className="form-label">Categotia *</label>
+                            <label className="form-label">Categoria *</label>
                             <select className="form-select" value={selectCategory} onChange={handleChangeCategory}>
                                 <option value="">Seleccione una opción</option>
                                 {categorias.map((categoria) => 
@@ -147,7 +149,7 @@ export const AddShop = () => {
                         </div>
 
                         <div className="col-12 d-flex justify-content-center gap-3">
-                            <button className="btn btn-secondary" type="button">Limpiar</button>
+                            <button className="btn btn-secondary" type="button" onClick={() => clearInputs()}>Limpiar</button>
                             <button className="btn btn-primary" type="submit">Agregar</button>
                         </div>
                     </form>
