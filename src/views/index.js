@@ -6,3 +6,10 @@ export * from './ventas/SalesView'
 export * from './home/Home'
 export * from './garantia/Garantia'
 export * from './apartados/ApartadoView'
+
+document.addEventListener("userway:render_completed", function(event) {
+	var userway = document.querySelector('div.uai');
+    if (userway) {
+        userway.classList.add('custom-icon-class');
+    }
+});

@@ -10,12 +10,12 @@ export const SubMenu = ({url}) => {
   return (
     <ul className="submenu__list">
         <li className="submenu__item">
-            <Link onClick={() => setCliente({})} className="submenu__link btn-success" to={`${url}`}>
+            <Link onClick={() => setCliente({})} className="submenu__link btn-danger" to={`${url}`}>
                 Listar Clientes
             </Link>
         </li>
         <li>
-            <Link onClick={() => setCliente({})} className="submenu__link btn-success" to={`${url}/agregar`}>
+            <Link onClick={() => setCliente({})} className="submenu__link btn-danger" to={`${url}/agregar`}>
                 Añadir Cliente
             </Link>
         </li>

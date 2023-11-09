@@ -6,6 +6,10 @@
     --second-bg-color: #dcfff2;
 }
 
+.custom-icon-class {
+    right: 60px!important;
+  }
+
 .logo-empresa{
     width:  90px;
     height: 90px;

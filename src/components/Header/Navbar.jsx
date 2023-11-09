@@ -22,12 +22,11 @@ export const Navbar = () => {
                     <li className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i className="fas fa-user me-2"></i>John Doe
+                            <i className="fas fa-user me-2"></i>Mireya Carvajal
                         </a>
                         <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a className="dropdown-item" href="#">Profile</a></li>
-                            <li><a className="dropdown-item" href="#">Settings</a></li>
-                            <li><a className="dropdown-item" href="#">Logout</a></li>
+                            <li><a className="dropdown-item" href="#">Mi cuenta</a></li>
+                            <li><a className="dropdown-item" href="#">Cerrar Sesión</a></li>
                         </ul>
                     </li>
                 </ul>

@@ -7,17 +7,17 @@ export const SubMenu = ({url}) => {
   return (
     <ul className="submenu__list">
         <li className="submenu__item">
-            <Link onClick={() => setCompra({})} className="submenu__link btn-success" to={`${url}`}>
+            <Link onClick={() => setCompra({})} className="submenu__link btn-danger" to={`${url}`}>
                 Listar Compras
             </Link>
         </li>
         <li>
-            <Link onClick={() => setCompra({})} className="submenu__link btn-success" to={`${url}/agregar`}>
+            <Link onClick={() => setCompra({})} className="submenu__link btn-danger" to={`${url}/agregar`}>
                 Añadir Compras
             </Link>
         </li>
         <li>
-            <Link onClick={() => setCompra({})} className="submenu__link btn-success" to={`${url}/consultar`}>
+            <Link onClick={() => setCompra({})} className="submenu__link btn-danger" to={`${url}/consultar`}>
                 Consultar Compras
             </Link>
         </li>

@@ -12,7 +12,7 @@ const ComprasProvider = ({children}) => {
 
   const [categorias, setCategorias] = useState([]);  //Guarda las categorias
   const [subcategorias, setSubCategorias] = useState([]); // Guarda las subcategorias
-  const [idSubCategoria, setIdSubcategoria] = useState(); // Resive el cambio del ID de la categoria
+  const [idSubCategoria, setIdSubcategoria] = useState(); // Recibe el cambio del ID de la categoria
   const [idProductsSubcategory, setIdProductsSubcategory] = useState(); // Resive el Cambio del ID de la subcategoria
   const [productsBySubCategory, setProductsBySubCategory] = useState([]); // Guarda los productos por subcategoria
   const [proovedores, setProovedores] = useState([]); // Obtiene los proveedores
@@ -91,7 +91,7 @@ const ComprasProvider = ({children}) => {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: '¡Algo salió mal!',
+                text: '¡Algo salió mal!'+error,
             })
         }
     }
@@ -195,9 +195,14 @@ const ComprasProvider = ({children}) => {
         try {
             const url = `http://localhost/invensoft/compras?producto=${id}`;
             const { data } = await axios(url);
+
+            if(data && data[0] && data[0].stock){
             console.log(data);
             console.log(data[0].stock);
             setProductosInStock(data[0].stock);
+            }else{
+                setProductosInStock(0);
+            }
         } catch (error) {
             setProductosInStock(0);
             console.log(error);
