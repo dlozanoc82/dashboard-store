@@ -3,16 +3,18 @@ import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useClients from "../../../hooks/useClients";
 import { Link } from "react-router-dom";
+import { formatDateAndTime } from "../../../helpers/GeneralFunctions";
 
 const TableItemClients = ({info}) => {
     const {apellidos, celular, correo, documento, estado, fecha_reg, nombres, id, cod_usu, direccion} = info;
 
     const {handleDeleteCliente, setCliente} = useClients();
 
+    
   return (
     <>
         <td>{id}</td>
-        <td>{fecha_reg}</td>
+        <td>{formatDateAndTime(fecha_reg)}</td>
         <td>{nombres}</td>
         <td>{apellidos}</td>
         <th>{documento}</th>

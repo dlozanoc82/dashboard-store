@@ -52,7 +52,9 @@ const UpdateClient = ({cliente}) => {
       const correo = email;
       updateClients(cliente.cod_usu,documento,nombres,apellidos,celular,direccion,correo,contrasena);
       clearInputs();
-      
+      setTimeout(() => {
+        navigate('/clientes');
+      }, 2000);
     }
 
   return (

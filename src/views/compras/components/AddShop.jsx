@@ -1,7 +1,10 @@
 import { useState } from "react";
 import useCompras from "../../../hooks/useCompras";
+import { useNavigate } from "react-router-dom";
 
 export const AddShop = () => {
+
+    const navigate = useNavigate();
 
     const { 
         categorias,
@@ -69,6 +72,9 @@ export const AddShop = () => {
         e.preventDefault();
         createCompras(selectSubCategory, nombreProducto, nombreProveedor, cantidad, precioUnitario, precioCompra);
         clearInputs();
+        setTimeout(() => {
+            navigate('/compras');
+        }, 2000);
     }
 
 

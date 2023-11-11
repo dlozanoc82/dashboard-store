@@ -69,6 +69,9 @@ export const UpdateShop = ({compra}) => {
         e.preventDefault();
         upadateCompra( compra.cod_compra, nombreProducto, nombreProveedor, cantidad, precioUnitario, precioCompra);
         clearInputs();
+        setTimeout(() => {
+            navigate('/compras');
+        }, 2000);
     }
 
 

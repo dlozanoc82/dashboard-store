@@ -1,10 +1,12 @@
 import { useState } from "react";
 import useClients from "../../../hooks/useClients";
+import { useNavigate } from "react-router-dom";
 
 
 export const AddClient = () => {
 
   const { createClients } = useClients();
+  const navigate = useNavigate();
 
   const [nombres, setNombres] = useState('');
   const [apellidos, setApellidos] = useState('');
@@ -53,6 +55,9 @@ export const AddClient = () => {
     const correo = email;
     createClients(documento,nombres,apellidos,celular,direccion,correo,contrasena);
     clearInputs();
+    setTimeout(() => {
+      navigate('/clientes');
+    }, 2000);
     
   }
 
