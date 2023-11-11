@@ -50,10 +50,12 @@ const ClientsPrivider = ({children}) => {
         }
     }
 
-    const updateClients = async (cod_usu, documento,nombres,apellidos,celular,direccion,correo,contrasena) => {
+    const updateClients = async (cod_usu, documento,nombres,apellidos,celular,direccion,correo,contrasena,status) => {
         //Crear el producto en la API
         try {
-            const respuesta = await axios.put(`http://localhost/invensoft/clientes?cod_usu=${cod_usu}`, {documento,nombres,apellidos,celular,direccion,correo,contrasena});
+            const estado = status === 'INACTIVO' ? 0 : 1;
+            console.log({estado, status});
+            const respuesta = await axios.put(`http://localhost/invensoft/clientes?cod_usu=${cod_usu}`, {documento,nombres,apellidos,celular,direccion,correo,contrasena,estado});
             
             Swal.fire({
                 icon: 'success',

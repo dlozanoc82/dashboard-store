@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import useClients from '../../../hooks/useClients';
+import { useNavigate } from 'react-router-dom';
 
 const UpdateClient = ({cliente}) => {
 
     const {updateClients} = useClients();
+    const navigate = useNavigate();
 
     const [nombres, setNombres] = useState(cliente.nombres);
     const [apellidos, setApellidos] = useState(cliente.apellidos);
@@ -56,7 +58,7 @@ const UpdateClient = ({cliente}) => {
   
       const contrasena = documento;
       const correo = email;
-      updateClients(cliente.cod_usu,documento,nombres,apellidos,celular,direccion,correo,contrasena);
+      updateClients(cliente.cod_usu,documento,nombres,apellidos,celular,direccion,correo,contrasena,estado);
       clearInputs();
       setTimeout(() => {
         navigate('/clientes');

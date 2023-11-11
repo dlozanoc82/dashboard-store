@@ -6,6 +6,10 @@
     --second-bg-color: #dcfff2;
 }
 
+a{
+    cursor: pointer;
+}
+
 .custom-icon-class {
     right: 60px!important;
   }
