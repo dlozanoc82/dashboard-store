@@ -10,6 +10,7 @@ const UpdateClient = ({cliente}) => {
     const [email, setEmail] = useState(cliente.correo);
     const [documento, setDocumento] = useState(cliente.documento);
     const [celular, setCelular] = useState(cliente.celular);
+    const [estado, setEstado] = useState(cliente.estado)
     const [direccion, setDireccion] = useState(cliente.direccion); 
   
     const handleNombres = (event) => {
@@ -35,6 +36,10 @@ const UpdateClient = ({cliente}) => {
     const handleDireccion = (event) => {
       setDireccion(event.target.value);
     }
+
+    const handleChangeEstado = (event) => {
+      setEstado(event.target.value);
+    }
   
     const clearInputs = () => {
       setNombres('');
@@ -42,7 +47,8 @@ const UpdateClient = ({cliente}) => {
       setDocumento('');
       setEmail('');
       setDireccion('');
-      setCelular(''); 
+      setCelular('');
+      setEstado('');
     }
   
     const handleSubmit = async (e) => {
@@ -98,6 +104,14 @@ const UpdateClient = ({cliente}) => {
                 <div className="col-md-4 mb-md-4">
                     <label className="form-label">Dirección *</label>
                     <input type="text" className="form-control" value={direccion} onChange={handleDireccion} required />
+                </div>
+
+                <div className="col-md-4 mb-md-4">
+                    <label className="form-label">Categoria *</label>
+                    <select className="form-select" value={estado} onChange={handleChangeEstado}>
+                        <option value="ACTIVO">ACTIVO</option>
+                        <option value="INACTIVO">INACTIVO</option>
+                    </select>
                 </div>
 
                 </div>
