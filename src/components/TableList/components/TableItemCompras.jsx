@@ -5,15 +5,15 @@ import useCompras from '../../../hooks/useCompras';
 import { Link } from 'react-router-dom';
 import { formatDateAndTime, formatearCantidad } from '../../../helpers/GeneralFunctions';
 
-const TableItemCompras = ({info, numero}) => {
+const TableItemCompras = ({info}) => {
   
   const {setCompra, handleDeleteCompra} = useCompras();
-  const {cod_compra, fecha_compra, nom_cat, nom_sub, nombre, cantidad_compra, nom_prov, valor_total, valor_unit_prov, cod_cat, cod_sub, cod_pro, cod_prov} = info;
+  const {id, cod_compra, fecha_compra, nom_cat, nom_sub, nombre, cantidad_compra, nom_prov, valor_total, valor_unit_prov, cod_cat, cod_sub, cod_pro, cod_prov} = info;
 
 
   return (
     <>
-        <td>{numero}</td>
+        <td>{id}</td>
         <td>{formatDateAndTime(fecha_compra)}</td>
         <td>{nom_cat}</td>
         <td>{nom_sub}</td>
