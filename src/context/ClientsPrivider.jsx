@@ -7,7 +7,8 @@ const ClientsContext = createContext();
 const ClientsPrivider = ({children}) => {       
 
     const [clients, setClients] = useState([]);
-    const [cliente, setCliente] = useState({})
+    const [cliente, setCliente] = useState({});
+    const [clientesByDates, setClientesByDates] = useState([])
 
     useEffect(() => {
         getClients();
@@ -21,6 +22,18 @@ const ClientsPrivider = ({children}) => {
             const { data } = await axios(url);
             console.log(data);
             setClients(data);
+            setCliente({});
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const getClientsByDates = async (fechaInicial, fechaFinal) => {        
+        try {
+            const url = `http://localhost/invensoft/clientes?fecha_ini=${fechaInicial}&fecha_fin=${fechaFinal}`;
+            const { data } = await axios(url);
+            console.log(data);
+            setClientesByDates(data);
             setCliente({});
         } catch (error) {
             console.log(error);
@@ -119,7 +132,10 @@ const ClientsPrivider = ({children}) => {
                 createClients,
                 updateClients,
                 handleDeleteCliente,
-                setCliente
+                setCliente,
+                clientesByDates,
+                getClientsByDates,
+                setClientesByDates
             }}
         >
             {children}

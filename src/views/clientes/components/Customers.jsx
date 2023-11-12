@@ -7,6 +7,7 @@ import useDashborad from "../../../hooks/useDashborad";
 import { useEffect } from "react";
 import { obtenerTitulosPorRuta } from "../../../helpers/OptionsSidebar";
 import FormClient from "./FormClient";
+import SearchClient from "./SearchClient";
 
 
 export const Customers = () => {
@@ -35,6 +36,7 @@ export const Customers = () => {
                     <Route exact ={true} index element={<TableList />} />
                     <Route exact ={true} path="/agregar" element={<FormClient />} />
                     <Route exact ={true} path="/editar/:id" element={<FormClient />} />
+                    <Route exact ={true} path="/consultar" element={<SearchClient />} />
                 </Routes>
 
             </div>
