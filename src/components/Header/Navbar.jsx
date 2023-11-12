@@ -1,9 +1,16 @@
+import { Link } from "react-router-dom";
 import useDashborad from "../../hooks/useDashborad";
-import { MenuToggle } from "./components/MenuToggle"
+import { MenuToggle } from "./components/MenuToggle";
+import { faUser } from "@fortawesome/free-regular-svg-icons";
 
 export const Navbar = () => {
+
+  const title = 'Mi Cuenta';
+  const icon = faUser;
   
-  const {titleUrl} = useDashborad();
+  const {titleUrl, handleActiveOption} = useDashborad();
+
+ 
 
   return (
     <>
@@ -25,7 +32,7 @@ export const Navbar = () => {
                             <i className="fas fa-user me-2"></i>Mireya Carvajal
                         </a>
                         <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a className="dropdown-item" href="#">Mi cuenta</a></li>
+                            <li><Link onClick={() => handleActiveOption(title, icon)}  to={'/mi-cuenta'} className="dropdown-item" href="#">Mi cuenta</Link></li>
                             <li><a className="dropdown-item" href="#">Cerrar Sesión</a></li>
                         </ul>
                     </li>

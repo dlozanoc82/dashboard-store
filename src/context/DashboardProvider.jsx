@@ -35,7 +35,8 @@ const DashboardProvider = ({children}) => {
                 titleUrl, 
                 iconNav,
                 tableHeaders,
-                setTableHeaders
+                setTableHeaders,
+                setIconNav
             }}
         >
             {children}

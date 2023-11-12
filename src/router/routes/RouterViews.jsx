@@ -4,6 +4,7 @@ import CustomerView from "../../views/clientes/CustomerView"
 import ProductsView from "../../views/productos/ProductsView"
 import ShoppingView from "../../views/compras/ShoppingView"
 import InfoEmpresaView from "../../views/empresa/InfoEmpresaView"
+import Admin from "../../views/administrador/Admin"
 
 export const RouterViews = () => {
   return (
@@ -19,6 +20,7 @@ export const RouterViews = () => {
         <Route path="/apartados/*" exact ={true} Component={ApartadoView} />
         <Route path="/kardex" exact ={true} Component={Kardex} />
         <Route path="/info-empresa" exact ={true} Component={InfoEmpresaView} />
+        <Route path="/mi-cuenta" exact ={true} Component={Admin} />
         <Route path="*" Component={Home} />
     </Routes>
 
