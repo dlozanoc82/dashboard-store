@@ -1,11 +1,16 @@
 import { Link } from "react-router-dom"
 import useCotizaciones from "../../../hooks/useCotizaciones";
+import { useLocation  } from "react-router-dom";
 
 
 export const SubMenu = ({url}) => {
 
     const {setCotizacionesByDates, inputSearch,
         setInputSearch} = useCotizaciones();
+
+    const location = useLocation();
+    console.log(location.pathname);
+    const isSearchDisabled = location.pathname !== "/cotizacion";
 
     const handleResetVariables = () => {
         setCotizacionesByDates([]);
@@ -24,7 +29,7 @@ export const SubMenu = ({url}) => {
             </Link>
         </li>
         <li className="submenu__item">
-            <input className="search_input" type="number" value={inputSearch} onChange={(e) => setInputSearch(e.target.value)} placeholder="BUSCAR POR DOCUMENTO" />
+            <input hidden={isSearchDisabled} className="search_input" type="number" value={inputSearch} onChange={(e) => setInputSearch(e.target.value)} placeholder="BUSCAR POR DOCUMENTO" />
         </li>
     </ul>
   )

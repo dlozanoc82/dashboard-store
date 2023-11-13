@@ -1,10 +1,15 @@
 import { Link } from "react-router-dom"
 import useCompras from "../../../hooks/useCompras";
+import { useLocation  } from "react-router-dom";
 
 
 
 export const SubMenu = ({url}) => {
     const {setCompra, setComprasByDates, inputSearch, setInputSearch} = useCompras();
+
+    const location = useLocation();
+    console.log(location.pathname);
+    const isSearchDisabled = location.pathname !== "/compras";
 
     const handleResetVariables = () => {
         setCompra({});
@@ -29,7 +34,7 @@ export const SubMenu = ({url}) => {
             </Link>
         </li>
         <li className="submenu__item">
-            <input className="search_input" type="text" value={inputSearch} onChange={(e) => setInputSearch(e.target.value)} placeholder="BUSCAR POR NOMBRE DE PRODUCTO" />
+            <input hidden={isSearchDisabled} className="search_input" type="text" value={inputSearch} onChange={(e) => setInputSearch(e.target.value)} placeholder="BUSCAR POR NOMBRE DE PRODUCTO" />
         </li>
     </ul>
   )
