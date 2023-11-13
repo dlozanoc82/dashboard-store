@@ -10,6 +10,11 @@ export const SubMenu = ({url}) => {
             </Link>
         </li>
         <li>
+            <Link className="submenu__link btn-danger" to={`${url}/modificar`}>
+                Modificar Productos
+            </Link>
+        </li>
+        <li>
             <Link className="submenu__link btn-danger" to={`${url}/agregar`}>
                 Añadir Producto
             </Link>

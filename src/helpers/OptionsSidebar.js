@@ -55,12 +55,6 @@ export const listOptions = [
         title: "Kardex", 
         url: '/kardex',
         icon: faFileClipboard
-    },
-    {
-        id: 10,
-        title: "Informacion de la Empresa", 
-        url: '/info-empresa',
-        icon: faCity
     }
 ]
 
@@ -68,7 +62,7 @@ export const listOptions = [
 const columnasPorRuta = {
     "/compras": ["#", "Fecha de Compra", "Categoria", "SubCategoria", "Nombre del Producto", "Cantidad", "Proveedor", "Precio de la Compra", "Precio Unitario", "Acciones"],
     "/clientes": ["#", "Fecha de Registro", "Nombre Completo", "Apellido Completo", "Numero de Documento", "Correo", "Telefono", "Estado", "Acciones"],
-    "/productos": ["ColumnaA", "ColumnaB", "ColumnaC"],
+    "/productos": ["Codigo","Imagen", "Categoria", "Subcategoria", "Producto", "Descripcion", "Estado", "Garantia", "Duracion Garantia", "Stock", "Acciones"],
     "/ventas": ["#", "Cliente", "No. Documento", "Categoria", "SubCategoria", "Producto", "Cantidad", "Precio Unitario", "Tipo de Pago", "Total", "Ganancias"],
     "/apartados": ["#", "Fecha del Apartado", "Cliente", "No. Documento", "Cantridad", "Precio Unitario", "Tipo de Pago", "Fecha de Abono", "Total", "Restante", "Opciones"],
     "/garantia": ["ColumnaA", "ColumnaB", "ColumnaC"],

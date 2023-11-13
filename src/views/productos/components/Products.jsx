@@ -1,19 +1,32 @@
-import { Route, Routes, useResolvedPath } from "react-router-dom";
+import { Route, Routes, useLocation, useResolvedPath } from "react-router-dom";
 import { AddProduct } from "./AddProduct";
 import { PaginationProvider } from "../../../context/PaginationProvider";
 import { SubMenu } from "./SubMenu";
 import useProducts from "../../../hooks/useProducts";
-import ProductsList from "./ProductsList";
+import { TableList } from "../../../components/TableList/TableList";
+import useDashborad from "../../../hooks/useDashborad";
+import { obtenerTitulosPorRuta } from "../../../helpers/OptionsSidebar";
+import { useEffect } from "react";
 
 export const Products = () => {
 
-  const {products} = useProducts();
+  const {products, productsModificar} = useProducts();
+  const {setTableHeaders} = useDashborad();
 
   const url = useResolvedPath("").pathname;
   console.log({url});
 
+  const location = useLocation();
+  console.log(location.pathname);
+  const isListarProductos = location.pathname === "/productos";
+
+  useEffect(() => {
+    const tableHeaders = obtenerTitulosPorRuta(url);
+    setTableHeaders(tableHeaders);
+}, [])
+
   return (
-    <PaginationProvider data={products}>
+    <PaginationProvider data={isListarProductos ? products : productsModificar}>
         <div className="container-fluid px-4 mt-5">
 
             <div className="header__submenu">
@@ -22,10 +35,11 @@ export const Products = () => {
             </div>
 
             <Routes>
-                <Route exact ={true} index element={<ProductsList />} />
+                <Route exact ={true} index element={<TableList />} />
+                <Route exact ={true} path="/modificar" element={<TableList />} />
                 <Route exact ={true} path="/agregar" element={<AddProduct />} />
             </Routes>
-            
+
         </div>
     </PaginationProvider>
 
