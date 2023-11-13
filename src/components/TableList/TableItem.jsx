@@ -5,7 +5,6 @@ import TableItemCotizaciones from "./components/TableItemCotizaciones";
 
 export const TableItem = ({info}) => {
     const url = useResolvedPath("").pathname;
-    console.log({url});
     
     return (
         <tr>

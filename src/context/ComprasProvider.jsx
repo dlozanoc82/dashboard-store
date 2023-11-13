@@ -37,6 +37,10 @@ const ComprasProvider = ({children}) => {
     useEffect(() => {
       getProveedores();
     }, [])
+
+    useEffect(() => {
+        filterByNameProduct();
+    }, [inputSearch])
   
     useEffect(() => {
         getSubCategorias(idSubCategoria);
@@ -52,7 +56,23 @@ const ComprasProvider = ({children}) => {
     
 
     //FILTROS
-    
+    const filterByNameProduct = () => {
+        const searchValue = inputSearch.toLowerCase();
+
+        // Si no hay texto en el campo de búsqueda y el estado está vacío, mostramos todos los pagos
+        if (searchValue.trim() === "") {
+            setFilteredCompras(compras);
+            return;
+        }
+
+        let filteredData = compras;
+
+        filteredData = filteredData.filter((compra) =>
+            compra.nombre.toLowerCase().includes(searchValue)
+        );
+
+        setFilteredCompras(filteredData);
+    }
 
     // CRUD VISTA COMPRAS 
     const getCompras = async () => {        
@@ -61,6 +81,7 @@ const ComprasProvider = ({children}) => {
             const { data } = await axios(url);
             console.log(data);
             setCompras(data);
+            setFilteredCompras(data);
         } catch (error) {
             console.log(error);
         }
@@ -250,7 +271,8 @@ const ComprasProvider = ({children}) => {
                 comprasByDates,
                 setComprasByDates,
                 inputSearch,
-                setInputSearch
+                setInputSearch,
+                filteredCompras
             }}
         >
             {children}

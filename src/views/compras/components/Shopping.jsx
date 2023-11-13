@@ -11,7 +11,7 @@ import { SubMenu } from "./SubMenu"
 
 export const Shopping = () => {
 
-    const {compras} = useCompras();
+    const {filteredCompras} = useCompras();
     const {setTableHeaders} = useDashborad();
 
     const url = useResolvedPath("").pathname;
@@ -22,7 +22,7 @@ export const Shopping = () => {
     }, [])
 
   return (
-    <PaginationProvider data={compras} >
+    <PaginationProvider data={filteredCompras} >
         <div className="container-fluid px-4 mt-5">
 
             <div className="header__submenu">

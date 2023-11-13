@@ -23,24 +23,6 @@ const ClientsPrivider = ({children}) => {
 
 
     // FILTRO
-    const filterByName = () => {
-        const searchValue = inputSearch.toLowerCase();
-
-        // Si no hay texto en el campo de búsqueda y el estado está vacío, mostramos todos los pagos
-        if (searchValue.trim() === "") {
-            setFilteredClients(clients);
-            return;
-        }
-
-        let filteredData = clients;
-
-        filteredData = filteredData.filter((client) =>
-            client.nombres.toLowerCase().includes(searchValue)
-        );
-
-        setFilteredClients(filteredData);
-    }
-
     const filterByDocumentNumber = () => {
         const searchValue = inputSearch; // No es necesario convertirlo a minúsculas si es un número
     
