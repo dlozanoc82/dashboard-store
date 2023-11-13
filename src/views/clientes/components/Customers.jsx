@@ -13,7 +13,7 @@ import SearchClient from "./SearchClient";
 export const Customers = () => {
 
 
-    const {clients} = useClients();
+    const {clients, filteredClients} = useClients();
     const {setTableHeaders} = useDashborad();
 
     const url = useResolvedPath("").pathname;
@@ -25,7 +25,7 @@ export const Customers = () => {
     }, [])
 
     return (
-        <PaginationProvider data={clients}>
+        <PaginationProvider data={filteredClients}>
             <div className="container-fluid px-4 mt-5">
                 <div className="header__submenu">
                     <h3 className="fs-4">Modulo de Clientes</h3>

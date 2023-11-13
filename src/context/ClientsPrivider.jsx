@@ -9,11 +9,38 @@ const ClientsPrivider = ({children}) => {
     const [clients, setClients] = useState([]);
     const [cliente, setCliente] = useState({});
     const [clientesByDates, setClientesByDates] = useState([])
+    const [inputSearch, setInputSearch] = useState("");
+    const [filteredClients, setFilteredClients] = useState([]);
+    
 
     useEffect(() => {
         getClients();
     }, [])
 
+    useEffect(() => {
+        filterByName();
+    }, [inputSearch])
+
+
+    // FILTRO
+    const filterByName = () => {
+        const searchValue = inputSearch.toLowerCase();
+
+        // Si no hay texto en el campo de búsqueda y el estado está vacío, mostramos todos los pagos
+        if (searchValue.trim() === "") {
+            setFilteredClients(clients);
+            return;
+        }
+
+        let filteredData = clients;
+
+        filteredData = filteredData.filter((client) =>
+            client.nombres.toLowerCase().includes(searchValue)
+        );
+
+        setFilteredClients(filteredData);
+
+    }
     
     //CRUD CLIENTES
     const getClients = async () => {        
@@ -22,6 +49,7 @@ const ClientsPrivider = ({children}) => {
             const { data } = await axios(url);
             console.log(data);
             setClients(data);
+            setFilteredClients(data);
             setCliente({});
         } catch (error) {
             console.log(error);
@@ -135,7 +163,10 @@ const ClientsPrivider = ({children}) => {
                 setCliente,
                 clientesByDates,
                 getClientsByDates,
-                setClientesByDates
+                setClientesByDates,
+                setInputSearch,
+                inputSearch,
+                filteredClients
             }}
         >
             {children}
