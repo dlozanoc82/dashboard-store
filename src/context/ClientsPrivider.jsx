@@ -18,7 +18,7 @@ const ClientsPrivider = ({children}) => {
     }, [])
 
     useEffect(() => {
-        filterByName();
+        filterByDocumentNumber();
     }, [inputSearch])
 
 
@@ -39,8 +39,25 @@ const ClientsPrivider = ({children}) => {
         );
 
         setFilteredClients(filteredData);
-
     }
+
+    const filterByDocumentNumber = () => {
+        const searchValue = inputSearch; // No es necesario convertirlo a minúsculas si es un número
+    
+        // Si no hay texto en el campo de búsqueda y el estado está vacío, mostramos todos los pagos
+        if (!searchValue) {
+            setFilteredClients(clients);
+            return;
+        }
+    
+        let filteredData = clients;
+    
+        filteredData = filteredData.filter((client) =>
+            client.documento.toString().startsWith(searchValue.toString())
+        );
+    
+        setFilteredClients(filteredData);
+    };
     
     //CRUD CLIENTES
     const getClients = async () => {        

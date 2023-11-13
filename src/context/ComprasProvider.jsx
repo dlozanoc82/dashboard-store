@@ -20,6 +20,10 @@ const ComprasProvider = ({children}) => {
   const [idProducto, setIdProducto] = useState();
   const [productosInStock, setProductosInStock] = useState('');
 
+  const [inputSearch, setInputSearch] = useState("");
+  const [filteredCompras, setFilteredCompras] = useState([]);
+
+
     //SE ENCARGA DE EJECUTAR LAS FUNCIONES CADA VEZ QUE DETECTA UN CAMBIO
 
     useEffect(() => {
@@ -47,6 +51,8 @@ const ComprasProvider = ({children}) => {
     }, [idProducto])
     
 
+    //FILTROS
+    
 
     // CRUD VISTA COMPRAS 
     const getCompras = async () => {        
@@ -242,7 +248,9 @@ const ComprasProvider = ({children}) => {
                 setProductosInStock,
                 getComprasByDates,
                 comprasByDates,
-                setComprasByDates
+                setComprasByDates,
+                inputSearch,
+                setInputSearch
             }}
         >
             {children}

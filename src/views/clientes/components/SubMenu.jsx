@@ -16,7 +16,7 @@ export const SubMenu = ({url}) => {
     <ul className="submenu__list">
 
         <li className="submenu__item">
-            <input value={inputSearch} onChange={(e) => setInputSearch(e.target.value)} placeholder="BUSCAR POR NOMBRE" />
+            <input type="number" value={inputSearch} onChange={(e) => setInputSearch(e.target.value)} placeholder="BUSCAR POR DOCUMENTO" />
         </li>
 
         <li className="submenu__item">

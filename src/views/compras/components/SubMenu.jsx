@@ -4,7 +4,7 @@ import useCompras from "../../../hooks/useCompras";
 
 
 export const SubMenu = ({url}) => {
-    const {setCompra, setComprasByDates} = useCompras();
+    const {setCompra, setComprasByDates, inputSearch, setInputSearch} = useCompras();
 
     const handleResetVariables = () => {
         setCompra({});
@@ -13,6 +13,11 @@ export const SubMenu = ({url}) => {
 
   return (
     <ul className="submenu__list">
+
+        <li className="submenu__item">
+            <input type="text" value={inputSearch} onChange={(e) => setInputSearch(e.target.value)} placeholder="BUSCAR POR NOMBRE DE PRODUCTO" />
+        </li>
+
         <li className="submenu__item">
             <Link onClick={() => handleResetVariables()} className="submenu__link btn-danger" to={`${url}`}>
                 Listar Compras
