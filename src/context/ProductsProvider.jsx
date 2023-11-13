@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 
 const ProductsContext = createContext();
@@ -52,6 +53,42 @@ const ProductsProvider = ({children}) => {
         }
     };
 
+    const handleDeleteProductos = async (cod_pro) => {
+        let confirmado = await Swal.fire({
+            title: "¿Esta seguro de eliminar este producto?",
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: "Si",
+            denyButtonText: `No`
+          });
+
+        try {
+            
+            if(confirmado.isConfirmed){
+            const respuesta = await axios.delete(`http://localhost/invensoft/productos?cod_pro=${cod_pro}`);
+            
+            Swal.fire({
+                icon: 'success',
+                title: 'Registro Eliminado Correctamente',
+                showConfirmButton: false,
+                timer: 2000
+            })
+        }else{
+            Swal.fire("Operación detenida", "", "info");
+        }
+
+            getProductos();
+            getProductosByModificar();
+        } catch (error) {
+            console.log(error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '¡Algo salió mal!',
+            })
+        }
+    }
+
     //OBTENER CATEGORIAS Y SUBCATEGORIAS
     const getCategorias = async () => {        
         try {
@@ -83,7 +120,8 @@ const ProductsProvider = ({children}) => {
                 subcategorias,
                 products, 
                 setIdSubcategoria,
-                productsModificar
+                productsModificar,
+                handleDeleteProductos
             }}
         >
             {children}

@@ -2,11 +2,14 @@ import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom';
+import useProducts from '../../../hooks/useProducts';
 
 const TableItemProductos = ({info}) => {
  
     const {cod_pro, nom_cat, nom_sub, nombre, descripcion, estado, img, garantia, duracion_garantia, stock} = info;
     
+    const {handleDeleteProductos} = useProducts();
+
     const location = useLocation();
     console.log(location.pathname);
     const isListarProductos = location.pathname === "/productos";
@@ -28,7 +31,7 @@ const TableItemProductos = ({info}) => {
               <Link className="btn btn-secondary btn-padding">
                   <FontAwesomeIcon icon={faPencil} />
               </Link>
-              <button className="btn btn-danger btn-padding">
+              <button onClick={() => handleDeleteProductos(cod_pro)} className="btn btn-danger btn-padding">
                   <FontAwesomeIcon icon={faTrash} />
               </button>
           </div>
