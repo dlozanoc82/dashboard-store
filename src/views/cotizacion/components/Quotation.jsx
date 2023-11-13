@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 
 const Quotation = () => {
 
-    const {cotizaciones} = useCotizaciones();
+    const {cotizaciones, filteredCotizaciones} = useCotizaciones();
     const {setTableHeaders} = useDashborad();
     const url = useResolvedPath("").pathname;
 
@@ -20,7 +20,7 @@ const Quotation = () => {
     }, [])
 
   return (
-    <PaginationProvider data={cotizaciones}>
+    <PaginationProvider data={filteredCotizaciones}>
         <div className="container-fluid px-4 mt-5">
 
             <div className="header__submenu">

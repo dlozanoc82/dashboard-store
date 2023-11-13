@@ -4,7 +4,8 @@ import useCotizaciones from "../../../hooks/useCotizaciones";
 
 export const SubMenu = ({url}) => {
 
-    const {setCotizacionesByDates} = useCotizaciones();
+    const {setCotizacionesByDates, inputSearch,
+        setInputSearch} = useCotizaciones();
 
     const handleResetVariables = () => {
         setCotizacionesByDates([]);
@@ -21,6 +22,9 @@ export const SubMenu = ({url}) => {
             <Link onClick={() => handleResetVariables()} className="submenu__link btn-danger" to={`${url}/consultar`}>
                 Consultar Cotizaciones
             </Link>
+        </li>
+        <li className="submenu__item">
+            <input className="search_input" type="number" value={inputSearch} onChange={(e) => setInputSearch(e.target.value)} placeholder="BUSCAR POR DOCUMENTO" />
         </li>
     </ul>
   )
