@@ -14,11 +14,6 @@ export const SubMenu = ({url}) => {
 
   return (
     <ul className="submenu__list">
-
-        <li className="submenu__item">
-            <input type="number" value={inputSearch} onChange={(e) => setInputSearch(e.target.value)} placeholder="BUSCAR POR DOCUMENTO" />
-        </li>
-
         <li className="submenu__item">
             <Link onClick={() => handleResetVariables()} className="submenu__link btn-danger" to={`${url}`}>
                 Listar Clientes
@@ -33,6 +28,9 @@ export const SubMenu = ({url}) => {
             <Link onClick={() => handleResetVariables()} className="submenu__link btn-danger" to={`${url}/consultar`}>
                 Consultar Clientes
             </Link>
+        </li>
+        <li className="submenu__item">
+            <input className="search_input" type="number" value={inputSearch} onChange={(e) => setInputSearch(e.target.value)} placeholder="BUSCAR POR DOCUMENTO" />
         </li>
     </ul>
   )
