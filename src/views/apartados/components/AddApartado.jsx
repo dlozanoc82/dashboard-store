@@ -9,7 +9,7 @@ const AddApartado = () => {
 
   return (
     <div className="formulario bg-white rounded shadow-sm mb-5">
-      <h2 className="form__title">Agregar Apartado</h2>
+      <h2 className="form__title">Añadir Apartado</h2>
 
       <div>
           <div className="form__header">
@@ -76,7 +76,7 @@ const AddApartado = () => {
                   </div>
 
                   <div className="col-md-4 mb-md-4">
-                      <label className="form-label">Proovedor *</label>
+                      <label className="form-label">Proveedor *</label>
                       <select className="form-select" value={selectedValue} onChange={handleChange}>
                           <option value="">Seleccione una opción</option>
                           <option value="opcion1">Opción 1</option>

@@ -239,6 +239,7 @@ const ComprasProvider = ({children}) => {
                 upadateCompra,
                 setIdProducto,
                 productosInStock,
+                setProductosInStock,
                 getComprasByDates,
                 comprasByDates,
                 setComprasByDates

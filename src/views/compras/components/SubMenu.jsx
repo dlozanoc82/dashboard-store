@@ -20,7 +20,7 @@ export const SubMenu = ({url}) => {
         </li>
         <li>
             <Link onClick={() => handleResetVariables()} className="submenu__link btn-danger" to={`${url}/agregar`}>
-                Añadir Compras
+                Añadir Compra
             </Link>
         </li>
         <li>

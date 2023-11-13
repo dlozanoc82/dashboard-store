@@ -64,7 +64,7 @@ export const AddClient = () => {
   return (
     <>
       <div className="formulario bg-white rounded shadow-sm">
-          <h2 className="form__title">Agregar Cliente</h2>
+          <h2 className="form__title">Añadir Cliente</h2>
           
           <div>
               <div className="form__header">

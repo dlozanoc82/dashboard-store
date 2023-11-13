@@ -1,7 +1,10 @@
 import { useState } from "react";
 import useCompras from "../../../hooks/useCompras";
+import { useNavigate } from "react-router-dom";
 
 export const UpdateShop = ({compra}) => {
+
+    const navigate = useNavigate();
 
     const { 
         categorias,
@@ -12,7 +15,8 @@ export const UpdateShop = ({compra}) => {
         setIdProductsSubcategory,
         upadateCompra,
         setIdProducto,
-        productosInStock
+        productosInStock,
+        setProductosInStock
     } = useCompras();    
     
     const [selectCategory, setSelectCategory] = useState(compra.cod_cat); // Estado para mantener el valor seleccionado
@@ -43,11 +47,30 @@ export const UpdateShop = ({compra}) => {
     }
 
     const handleChangeCantidad = (event) => {
-        setCantidad(event.target.value)
+        const cantidad = event.target.value;
+        setCantidad(cantidad);
+
+        // Calcular PrecioCompra después de que PrecioUnitario se haya actualizado
+        setPrecioCompra((prevPrecioCompra) => {
+            // Utilizar el nuevo valor de PrecioUnitario para el cálculo
+        return precioUnitario * cantidad;
+        });
     }
 
+    //const handleChangePrecioUnitario = (event) => {
+    //  setPrecioUnitario(event.target.value)
+    //setPrecioCompra(precioUnitario*cantidad)
+    //}
+
     const handleChangePrecioUnitario = (event) => {
-        setPrecioUnitario(event.target.value)
+        const nuevoPrecioUnitario = event.target.value;
+        setPrecioUnitario(nuevoPrecioUnitario);
+
+        // Calcular PrecioCompra después de que PrecioUnitario se haya actualizado
+        setPrecioCompra((prevPrecioCompra) => {
+            // Utilizar el nuevo valor de PrecioUnitario para el cálculo
+            return nuevoPrecioUnitario * cantidad;
+        });
     }
 
     const handleChangePrecioCompra = (event) => {
@@ -55,14 +78,14 @@ export const UpdateShop = ({compra}) => {
     }
 
     const clearInputs = () => {
-        selectCategory('');
+        setSelectCategory('');
         setSelectSubCategory('');
         setNombreProducto('');
         setNombreProveedor('');
         setCantidad('');
         setPrecioUnitario('');
         setPrecioCompra('');
-        setProductoStock('');
+        setProductosInStock('');
     }
 
     const handleSubmit = async (e) => {

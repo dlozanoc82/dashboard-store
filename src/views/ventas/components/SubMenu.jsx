@@ -11,7 +11,7 @@ export const SubMenu = ({url}) => {
         </li>
         <li>
             <Link className="submenu__link btn-danger" to={`${url}/agregar`}>
-                Agregar Venta
+                Añadir Venta
             </Link>
         </li>
         <li>

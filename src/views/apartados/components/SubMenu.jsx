@@ -6,12 +6,12 @@ export const SubMenu = ({url}) => {
     <ul className="submenu__list">
         <li className="submenu__item">
             <Link className="submenu__link btn-danger" to={`${url}`}>
-                Listado de Apartados
+                Listar Apartados
             </Link>
         </li>
         <li>
             <Link className="submenu__link btn-danger" to={`${url}/agregar`}>
-                Agregar Apartado
+                Añadir Apartado
             </Link>
         </li>
     </ul>

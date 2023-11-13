@@ -10,7 +10,7 @@ const AddSale = () => {
 
   return (
     <div className="formulario bg-white rounded shadow-sm mb-5">
-      <h2 className="form__title">Agregar Venta</h2>
+      <h2 className="form__title">Añadir Venta</h2>
       <div>
           <div className="form__header">
               <h3 className="form__subtitle<">Información del Cliente</h3>

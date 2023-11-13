@@ -14,6 +14,11 @@ a{
     right: 60px!important;
   }
 
+  .custom-focus {
+    border-color: red; /* Cambia el color del borde */
+    box-shadow: 0 0 5px red; /* Cambia el color de la sombra */
+  }
+
 .logo-empresa{
     width:  90px;
     height: 90px;
