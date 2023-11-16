@@ -6,16 +6,16 @@ const TableItemCotizaciones = ({info}) => {
     
   return (
     <>
-        <td>{id}</td>
-        <td>{formatDateAndTime(fecha_cotiz)}</td>
-        <td>{documento}</td>
-        <td>{nombres}</td>
-        <td>{apellidos}</td>
-        <td>{correo}</td>
-        <td>{nombre}</td>
-        <td>{cantidad}</td>
-        <td>{formatearCantidad(valor_unit)}</td>
-        <td>{formatearCantidad(total)}</td>
+        <td><center>{id}</center></td>
+        <td><center>{formatDateAndTime(fecha_cotiz)}</center></td>
+        <td><center>{documento}</center></td>
+        <td><center>{nombres}</center></td>
+        <td><center>{apellidos}</center></td>
+        <td><center>{correo}</center></td>
+        <td><center>{nombre}</center></td>
+        <td><center>{cantidad}</center></td>
+        <td><center>{formatearCantidad(valor_unit)}</center></td>
+        <td><center>{formatearCantidad(total)}</center></td>
     </>
   )
 }

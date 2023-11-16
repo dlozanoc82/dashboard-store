@@ -13,14 +13,14 @@ const TableItemClients = ({info}) => {
     
   return (
     <>
-        <td>{id}</td>
-        <td>{formatDateAndTime(fecha_reg)}</td>
-        <td>{nombres}</td>
-        <td>{apellidos}</td>
-        <th>{documento}</th>
-        <td>{correo}</td>
-        <td>{celular}</td>
-        <td>{estado}</td>
+        <td><center>{id}</center></td>
+        <td><center>{formatDateAndTime(fecha_reg)}</center></td>
+        <td><center>{nombres}</center></td>
+        <td><center>{apellidos}</center></td>
+        <th><center>{documento}</center></th>
+        <td><center>{correo}</center></td>
+        <td><center>{celular}</center></td>
+        <td><center>{estado}</center></td>
         <td>
         <div className="btn__actions">
             <Link onClick={() => setCliente({cod_usu, nombres, apellidos, correo, documento, celular, direccion, estado})} to={`/clientes/editar/${cod_usu}`} className="btn btn-secondary btn-padding">

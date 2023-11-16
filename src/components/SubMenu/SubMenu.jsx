@@ -6,7 +6,7 @@ export const SubMenu = ({url}) => {
     const {setCompra} = useComprasseCompras();
   return (
     <ul className="submenu__list">
-        <li className="submenu__item">
+        <li className="submenu__item ">
             <Link onClick={() => setCompra({})} className="submenu__link btn-danger" to={`${url}`}>
                 Listar Compras
             </Link>

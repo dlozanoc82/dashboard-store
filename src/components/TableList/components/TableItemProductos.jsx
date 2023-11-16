@@ -16,16 +16,16 @@ const TableItemProductos = ({info}) => {
   
     return (
       <>
-          <td>{cod_pro}</td>
-          <td>{img}</td>
-          <td>{nom_cat}</td>
-          <td>{nom_sub}</td>
-          <td>{nombre}</td>
-          <td>{descripcion}</td>
-          <td>{estado === 1 ? 'ACTIVO' : 'INACTIVO'}</td>
-          <td>{garantia}</td>
-          <td>{duracion_garantia}</td>
-          <td>{stock}</td>
+          <td><center>{cod_pro}</center></td>
+          <td><center>{img}</center></td>
+          <td><center>{nom_cat}</center></td>
+          <td><center>{nom_sub}</center></td>
+          <td><center>{nombre}</center></td>
+          <td><center>{descripcion}</center></td>
+          <td><center>{estado === 1 ? 'ACTIVO' : 'INACTIVO'}</center></td>
+          <td><center>{garantia}</center></td>
+          <td><center>{duracion_garantia}</center></td>
+          <td><center>{stock}</center></td>
           <td>
           <div className="btn__actions">
               <Link className="btn btn-secondary btn-padding">

@@ -1,7 +1,10 @@
 import usePagination from "../../hooks/usePagination";
+import useDashborad from "../../hooks/useDashborad";
 
-
+ 
 export const Pagination = () => {
+    const {titleUrl} = useDashborad();
+
     const {
         currentPage, 
         numbers, 
@@ -17,7 +20,7 @@ export const Pagination = () => {
             <div className="pagination">
                 <div className="mb-2">
                     <span>
-                        Compras del {firstIndex +1} al {lastIndex} de un total de {ndata}
+                        {titleUrl} del {firstIndex +1} al {lastIndex} de un total de {ndata}
                     </span>
                 </div>
                 <nav aria-label="Page navigation example">

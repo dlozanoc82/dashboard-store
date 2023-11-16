@@ -13,15 +13,15 @@ const TableItemCompras = ({info}) => {
 
   return (
     <>
-        <td>{id}</td>
-        <td>{formatDateAndTime(fecha_compra)}</td>
-        <td>{nom_cat}</td>
-        <td>{nom_sub}</td>
-        <th>{nombre}</th>
-        <td>{cantidad_compra}</td>
-        <td>{nom_prov}</td>
-        <td>{formatearCantidad(valor_total)}</td>
-        <td>{formatearCantidad(valor_unit_prov)}</td>
+        <td><center>{id}</center></td>
+        <td><center>{formatDateAndTime(fecha_compra)}</center></td>
+        <td><center>{nom_cat}</center></td>
+        <td><center>{nom_sub}</center></td>
+        <th><center>{nombre}</center></th>
+        <td><center>{cantidad_compra}</center></td>
+        <td><center>{nom_prov}</center></td>
+        <td><center>{formatearCantidad(valor_total)}</center></td>
+        <td><center>{formatearCantidad(valor_unit_prov)}</center></td>
         <td>
         <div className="btn__actions">
             <Link onClick={() => setCompra({cod_compra, cod_cat, cod_sub, cod_pro, cod_prov, cantidad_compra, valor_unit_prov, valor_total} )} to={`/compras/editar/${cod_compra}`} className="btn btn-secondary btn-padding">

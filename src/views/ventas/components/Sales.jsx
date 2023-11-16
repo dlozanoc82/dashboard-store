@@ -27,7 +27,7 @@ const Sales = () => {
         <div className="container-fluid px-4 mt-5">
 
             <div className="header__submenu">
-                <h3 className="fs-4">Modulo Ventas</h3>
+                <h3 className="fs-4"></h3>
                 <SubMenu url={url}/>
             </div>
 
