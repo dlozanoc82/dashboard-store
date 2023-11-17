@@ -96,6 +96,13 @@ export const AddProduct = () => {
                                     <input type="text" value={nombreProducto} onChange={handleChangeNombre} className="form-control" required />
                                 </div>
 
+                                <div className="col-12 d-flex justify-content-center gap-3 mb-3">
+                                <p className="text-center">¿DESEA AGREGAR UNA COMPRA? 
+                                    {' '}
+                                    <a href="/compras/agregar"><strong>DA CLICK AQUI</strong></a>
+                                </p>
+                            </div>
+
                             </div>
 
                             <div className="col-12 d-flex justify-content-center gap-3">

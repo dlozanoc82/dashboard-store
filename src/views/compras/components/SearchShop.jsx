@@ -3,6 +3,7 @@ import { TableList } from "../../../components/TableList/TableList"
 import { formatDateToYearMonthDay } from "../../../helpers/GeneralFunctions";
 import useCompras from "../../../hooks/useCompras";
 import { PaginationProvider } from "../../../context/PaginationProvider";
+import Swal from 'sweetalert2';
 
 export const SearchShop = () => {
 
@@ -13,9 +14,16 @@ export const SearchShop = () => {
 
     const handleSearchByDates = async (e) => {
         e.preventDefault();
+        if(fechaInicial>fechaFinal){
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'La fecha inicial no puede ser mayor a la fecha final',
+            })
+        }
         getComprasByDates(fechaInicial, fechaFinal);
-        setFechaInicial('');
-        setFechaFinal('');
+        //setFechaInicial('');
+        //setFechaFinal('');
     }
 
   return (
