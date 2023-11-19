@@ -1,9 +1,15 @@
 import usePagination from "../../hooks/usePagination";
 import useDashborad from "../../hooks/useDashborad";
+import { useResolvedPath } from "react-router-dom";
+import ClientsPDF from "./components/ClientsPDF";
 
  
 export const Pagination = () => {
     const {titleUrl} = useDashborad();
+    const url = useResolvedPath("").pathname;
+
+
+    const generarPDF = () => {console.log('Generar PDF')}
 
     const {
         currentPage, 
@@ -44,7 +50,8 @@ export const Pagination = () => {
                 </nav>
             </div>
             <div>
-                <a className="submenu__link btn-danger mb-4">GENERAR PDF</a>
+                {url === '/clientes' ?  <ClientsPDF /> : <></> }
+                {url === '/clientes/consultar' ?  <ClientsPDF /> : <></> }
             </div>
         </>
     )

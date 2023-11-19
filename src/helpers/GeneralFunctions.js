@@ -13,14 +13,15 @@ export const formatDateToYearMonthDay = (date) => {
 }
 
 export const formatDateAndTime = (fecha) => {
-    // Asegúrate de que 'fecha' sea un objeto dayjs
-
-  
     // Formatea la fecha y hora
     const resultado = dayjs(fecha).format('DD/MM/YYYY h:mm A');
-  
     return resultado;
-  };
+};
+
+export const formatTime12Hours = (timeString) => {
+    const formattedTime = dayjs(timeString, 'HH:mm:ss').format('h:mm A');
+    return formattedTime;
+};
 
 export const formatearCantidad = (cantidad) =>{
     const amount = Number(cantidad);
