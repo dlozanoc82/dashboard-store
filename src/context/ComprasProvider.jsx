@@ -1,6 +1,9 @@
 import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react'
 import Swal from 'sweetalert2';
+import { formatDateToYearMonthDay, formatTime12Hours, formatearCantidad } from '../helpers/GeneralFunctions';
+import jsPDF from 'jspdf';
+import autoTable from "jspdf-autotable";
 
 const ComprasContext = createContext();
 
@@ -248,6 +251,109 @@ const ComprasProvider = ({children}) => {
         }
     }
  
+    //GENERAR PDF
+    const generarPDFCompras = () => {
+        const doc = new jsPDF();
+
+        // Logo
+        const logoUrl = '/logo-circular.png'; // Replace with the path to your logo image
+        doc.addImage(logoUrl, 'PNG', 10, 10, 30, 30); // Adjust the coordinates and dimensions as needed
+
+        // Title
+        const title = 'LISTADO DE COMPRAS';
+        doc.text(title, doc.internal.pageSize.width / 2, 28, 'center');
+    
+        // Date and Time
+        const currentDate = new Date();
+        const formattedDate = currentDate.toLocaleDateString();
+        const formattedTime = formatTime12Hours(currentDate);
+        const dateTimeText = `Generado el ${formattedDate} a las ${formattedTime}`;
+        doc.setFontSize(11);
+        doc.setFont('arial','italic', 'normal');
+        doc.text(dateTimeText, doc.internal.pageSize.width - 15, 43, 'right');
+        doc.setFont('normal');
+
+        // Table
+        const columns = ["#", "Fecha de Compra", "Categoria", "SubCategoria", "Nombre del Producto", "Cantidad", "Proveedor", "Precio de la Compra", "Precio Unitario"];
+
+        // Data
+        const data = [];
+        compras.forEach((compra, index) => {
+            data.push([
+                index + 1, // Index + 1 to start the numbering from 1
+                formatDateToYearMonthDay(compra.fecha_compra),
+                compra.nom_cat,
+                compra.nom_sub,
+                compra.nombre,
+                compra.cantidad_compra,
+                compra.nom_prov,
+                formatearCantidad(compra.valor_total),
+                formatearCantidad(compra.valor_unit_prov)
+            ]);
+        });
+
+        
+        // Generate table
+        doc.autoTable({
+            head: [columns],
+            body: data,
+            startY: 45 // Adjust startY based on your needs
+        });
+
+        // Save the PDF
+        doc.save('compras_list.pdf');
+    }
+
+    const generarPDFComprasByDates = () => {
+        const doc = new jsPDF();
+
+        // Logo
+        const logoUrl = '/logo-circular.png'; // Replace with the path to your logo image
+        doc.addImage(logoUrl, 'PNG', 10, 10, 30, 30); // Adjust the coordinates and dimensions as needed
+
+        // Title
+        const title = 'LISTADO DE COMPRAS';
+        doc.text(title, doc.internal.pageSize.width / 2, 28, 'center');
+        
+        // Date and Time
+        const currentDate = new Date();
+        const formattedDate = currentDate.toLocaleDateString();
+        const formattedTime = formatTime12Hours(currentDate);
+        const dateTimeText = `Generado el ${formattedDate} a las ${formattedTime}`;
+        doc.setFontSize(11);
+        doc.setFont('arial','italic', 'normal');
+        doc.text(dateTimeText, doc.internal.pageSize.width - 15, 43, 'right');
+        doc.setFont('normal');
+
+        // Table
+        const columns = ["#", "Fecha de Compra", "Categoria", "SubCategoria", "Nombre del Producto", "Cantidad", "Proveedor", "Precio de la Compra", "Precio Unitario"];
+
+        // Data
+        const data = [];
+        comprasByDates.forEach((compra, index) => {
+            data.push([
+                index + 1, // Index + 1 to start the numbering from 1
+                formatDateToYearMonthDay(compra.fecha_compra),
+                compra.nom_cat,
+                compra.nom_sub,
+                compra.nombre,
+                compra.cantidad_compra,
+                compra.nom_prov,
+                formatearCantidad(compra.valor_total),
+                formatearCantidad(compra.valor_unit_prov)
+            ]);
+        });
+
+        // Generate table
+        doc.autoTable({
+            head: [columns],
+            body: data,
+            startY: 45 // Adjust startY based on your needs
+        });
+
+        // Save the PDF
+        doc.save('compras_list_byDates.pdf');
+    }
 
     return (
         <ComprasContext.Provider
@@ -272,7 +378,9 @@ const ComprasProvider = ({children}) => {
                 setComprasByDates,
                 inputSearch,
                 setInputSearch,
-                filteredCompras
+                filteredCompras,
+                generarPDFCompras,
+                generarPDFComprasByDates
             }}
         >
             {children}

@@ -5,16 +5,12 @@ import useClients from '../../../hooks/useClients';
 const ClientsPDF = () => {
 
     const url = useResolvedPath("").pathname;
-    console.log(url)
-    const {generarPDFClientes} = useClients();
-    const generarPDF = () => {
-        console.log('GENERAR PDF CONSULTAR')
-    }
+    const {generarPDFClientes, generarPDFClientesByDates} = useClients();
 
   return (
     <div>
         {url === '/clientes' ?  <a onClick={() => generarPDFClientes()} className="submenu__link btn-danger mb-4">GENERAR PDF</a> : <></> }
-        {url === '/clientes/consultar' ?  <a onClick={() => generarPDF()} className="submenu__link btn-danger mb-4">GENERAR PDF</a> : <></> }  
+        {url === '/clientes/consultar' ?  <a onClick={() => generarPDFClientesByDates()} className="submenu__link btn-danger mb-4">GENERAR PDF</a> : <></> }  
     </div>
   )
 }
