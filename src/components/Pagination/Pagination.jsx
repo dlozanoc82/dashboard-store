@@ -3,6 +3,7 @@ import useDashborad from "../../hooks/useDashborad";
 import { useResolvedPath } from "react-router-dom";
 import ClientsPDF from "./components/ClientsPDF";
 import ComprasPDF from "./components/ComprasPDF";
+import CotizacionesPDF from "./components/CotizacionesPDF";
 
  
 export const Pagination = () => {
@@ -56,6 +57,9 @@ export const Pagination = () => {
                 
                 {url === '/compras' ?  <ComprasPDF /> : <></> }
                 {url === '/compras/consultar' ?  <ComprasPDF /> : <></> }
+
+                {url === '/cotizacion' ?  <CotizacionesPDF /> : <></> }
+                {url === '/cotizacion/consultar' ?  <CotizacionesPDF /> : <></> }
 
             </div>
         </>

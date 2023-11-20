@@ -6,10 +6,10 @@ const ComprasPDF = () => {
     const url = useResolvedPath("").pathname;
     const {generarPDFCompras, generarPDFComprasByDates} = useCompras();
   return (
-    <div>
+    <>
       {url === '/compras' ?  <a onClick={() => generarPDFCompras()} className="submenu__link btn-danger mb-4">GENERAR PDF</a> : <></> }
       {url === '/compras/consultar' ?  <a onClick={() => generarPDFComprasByDates()} className="submenu__link btn-danger mb-4">GENERAR PDF</a> : <></> }  
-    </div>
+    </>
   )
 }
 

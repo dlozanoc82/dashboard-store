@@ -1,5 +1,8 @@
 import axios from 'axios';
+import jsPDF from 'jspdf';
+import autoTable from "jspdf-autotable";
 import { createContext, useEffect, useState } from 'react'
+import { formatDateToYearMonthDay, formatTime12Hours, formatearCantidad } from '../helpers/GeneralFunctions';
 
 const CotizacionesContext = createContext();
 
@@ -59,6 +62,114 @@ const CotizacionesProvider = ({children}) => {
     }
   };
 
+  // GENERAR PDF
+  const generarPDFCotizaciones = () => {
+    const doc = new jsPDF();
+
+    // Logo
+    const logoUrl = '/logo-circular.png'; // Replace with the path to your logo image
+    doc.addImage(logoUrl, 'PNG', 10, 10, 30, 30); // Adjust the coordinates and dimensions as needed
+
+    // Title
+    const title = 'LISTADO DE COMPRAS';
+    doc.text(title, doc.internal.pageSize.width / 2, 28, 'center');
+
+    // Date and Time
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleDateString();
+    const formattedTime = formatTime12Hours(currentDate);
+    const dateTimeText = `Generado el ${formattedDate} a las ${formattedTime}`;
+    doc.setFontSize(11);
+    doc.setFont('arial','italic', 'normal');
+    doc.text(dateTimeText, doc.internal.pageSize.width - 15, 43, 'right');
+    doc.setFont('normal');
+
+    // Table
+    const columns = ["#", "Fecha de Cotizacion", "No. Documento", "Nombre del Cliente", "Apellidos del Cliente", "Correo", "Productos", "Cantidad", "Precio Unitario", "Total"];
+
+    // Data
+    const data = [];
+    cotizaciones.forEach((cotizacion, index) => {
+        data.push([
+            index + 1, // Index + 1 to start the numbering from 1
+            formatDateToYearMonthDay(cotizacion.fecha_cotiz),
+            cotizacion.documento,
+            cotizacion.nombres,
+            cotizacion.apellidos,
+            cotizacion.correo,
+            cotizacion.nombre,
+            cotizacion.cantidad,
+            formatearCantidad(cotizacion.valor_unit),
+            formatearCantidad(cotizacion.total)
+        ]);
+    });
+
+    
+    // Generate table
+    doc.autoTable({
+        head: [columns],
+        body: data,
+        startY: 45 // Adjust startY based on your needs
+    });
+
+    // Save the PDF
+    doc.save('lista_cotizaciones.pdf');
+  }
+
+  const generarPDFCotizacionesByDates = () => {
+    const doc = new jsPDF();
+
+    // Logo
+    const logoUrl = '/logo-circular.png'; // Replace with the path to your logo image
+    doc.addImage(logoUrl, 'PNG', 10, 10, 30, 30); // Adjust the coordinates and dimensions as needed
+
+    // Title
+    const title = 'LISTADO DE COMPRAS';
+    doc.text(title, doc.internal.pageSize.width / 2, 28, 'center');
+
+    // Date and Time
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleDateString();
+    const formattedTime = formatTime12Hours(currentDate);
+    const dateTimeText = `Generado el ${formattedDate} a las ${formattedTime}`;
+    doc.setFontSize(11);
+    doc.setFont('arial','italic', 'normal');
+    doc.text(dateTimeText, doc.internal.pageSize.width - 15, 43, 'right');
+    doc.setFont('normal');
+
+    // Table
+    const columns = ["#", "Fecha de Cotizacion", "No. Documento", "Nombre del Cliente", "Apellidos del Cliente", "Correo", "Productos", "Cantidad", "Precio Unitario", "Total"];
+
+    // Data
+    const data = [];
+    cotizacionesByDates.forEach((cotizacion, index) => {
+        data.push([
+            index + 1, // Index + 1 to start the numbering from 1
+            formatDateToYearMonthDay(cotizacion.fecha_cotiz),
+            cotizacion.documento,
+            cotizacion.nombres,
+            cotizacion.apellidos,
+            cotizacion.correo,
+            cotizacion.nombre,
+            cotizacion.cantidad,
+            formatearCantidad(cotizacion.valor_unit),
+            formatearCantidad(cotizacion.total)
+        ]);
+    });
+
+    
+    // Generate table
+    doc.autoTable({
+        head: [columns],
+        body: data,
+        startY: 45 // Adjust startY based on your needs
+    });
+
+    // Save the PDF
+    doc.save('lista_cotizaciones_PorFechas.pdf');
+  }
+
+
 
   return (
     <CotizacionesContext.Provider
@@ -69,7 +180,9 @@ const CotizacionesProvider = ({children}) => {
             setCotizacionesByDates,
             inputSearch,
             setInputSearch,
-            filteredCotizaciones
+            filteredCotizaciones,
+            generarPDFCotizaciones,
+            generarPDFCotizacionesByDates
         }}
     >
         {children}

@@ -8,10 +8,10 @@ const ClientsPDF = () => {
     const {generarPDFClientes, generarPDFClientesByDates} = useClients();
 
   return (
-    <div>
+    <>
         {url === '/clientes' ?  <a onClick={() => generarPDFClientes()} className="submenu__link btn-danger mb-4">GENERAR PDF</a> : <></> }
         {url === '/clientes/consultar' ?  <a onClick={() => generarPDFClientesByDates()} className="submenu__link btn-danger mb-4">GENERAR PDF</a> : <></> }  
-    </div>
+    </>
   )
 }
 
