@@ -7,13 +7,40 @@ const VentasProvider = ({children}) => {
 
   const [ventas, setVentas] = useState([]);
   const [filteredVentas, setFilteredVentas] = useState([]);
-  const [ventasByDates, setVentasByDates] = useState([])
+  const [ventasByDates, setVentasByDates] = useState([]);
+
+  const [inputSearch, setInputSearch] = useState("");
+
+  const [productosVendidos, setProductosVendidos] = useState([]);
 
 
   useEffect(() => {
     getVentas();
   }, [])
+
+  useEffect(() => {
+    getProductosMasVendidos();
+  }, [])
   
+  //FILTROS
+  const filterByNameProduct = () => {
+    const searchValue = inputSearch.toLowerCase();
+
+    // Si no hay texto en el campo de búsqueda y el estado está vacío, mostramos todos los pagos
+    if (searchValue.trim() === "") {
+        setFilteredCompras(compras);
+        return;
+    }
+
+    let filteredData = compras;
+
+    filteredData = filteredData.filter((compra) =>
+        compra.nombre.toLowerCase().includes(searchValue)
+    );
+
+    setFilteredCompras(filteredData);
+  }
+
 
   const getVentas = async () => {        
     try {
@@ -39,12 +66,30 @@ const VentasProvider = ({children}) => {
     }
   };
 
+
+  const getProductosMasVendidos = async () => {        
+    try {
+        const url = "http://localhost/invensoft/ventas?vendidos";
+        const { data } = await axios(url);
+        console.log(data);
+        setProductosVendidos(data);
+    } catch (error) {
+        console.log(error);
+    }
+  };
+
+  
+
   return (
     <VentasContext.Provider
         value={{
             ventas,
             getVentasByDates,
-            ventasByDates
+            setVentasByDates,
+            ventasByDates,
+            inputSearch,
+            setInputSearch,
+            productosVendidos
         }}
     >
         {children}
