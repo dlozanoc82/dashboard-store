@@ -63,7 +63,7 @@ const columnasPorRuta = {
     "/compras": ["#", "Fecha de Compra", "Categoria", "SubCategoria", "Nombre del Producto", "Cantidad", "Proveedor", "Precio de la Compra", "Precio Unitario", "Acciones"],
     "/clientes": ["#", "Fecha de Registro", "Nombre Completo", "Apellido Completo", "Numero de Documento", "Correo", "Telefono", "Estado", "Acciones"],
     "/productos": ["Codigo","Imagen", "Categoria", "Subcategoria", "Producto", "Descripcion", "Estado", "Garantia", "Duracion Garantia", "Stock", "Acciones"],
-    "/ventas": ["#", "Cliente", "No. Documento", "Categoria", "SubCategoria", "Producto", "Cantidad", "Precio Unitario", "Tipo de Pago", "Total", "Ganancias"],
+    "/ventas": ["#", "Fecha de Venta","Cliente", "No. Documento", "Producto", "Cantidad", "Precio Unitario", "Tipo de Pago", "Total", "Ganancias"],
     "/apartados": ["#", "Fecha del Apartado", "Cliente", "No. Documento", "Cantridad", "Precio Unitario", "Tipo de Pago", "Fecha de Abono", "Total", "Restante", "Opciones"],
     "/garantia": ["ColumnaA", "ColumnaB", "ColumnaC"],
     "/cotizacion": ["#", "Fecha de Cotizacion", "No. Documento", "Nombre del Cliente", "Apellidos del Cliente", "Correo", "Productos", "Cantidad", "Precio Unitario", "Total"],

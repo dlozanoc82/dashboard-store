@@ -3,6 +3,7 @@ import TableItemClients from "./components/TableItemClients";
 import TableItemCompras from "./components/TableItemCompras";
 import TableItemCotizaciones from "./components/TableItemCotizaciones";
 import TableItemProductos from "./components/TableItemProductos";
+import TableItemVentas from "./components/TableItemVentas";
 
 export const TableItem = ({info}) => {
     const url = useResolvedPath("").pathname;
@@ -18,8 +19,13 @@ export const TableItem = ({info}) => {
             {url === '/productos' ? <TableItemProductos info={info}  /> : <></> }
             {url === '/productos/modificar' ? <TableItemProductos info={info}  /> : <></> }
 
+            {url === '/ventas' ? <TableItemVentas info={info} /> : <></> }
+            {url === '/ventas/consultar' ? <TableItemVentas info={info} /> : <></> }
+
             {url === '/cotizacion' ? <TableItemCotizaciones info={info} /> : <></> }
             {url === '/cotizacion/consultar' ? <TableItemCotizaciones info={info} /> : <></> }
+
+
         </tr>
     )
 }
