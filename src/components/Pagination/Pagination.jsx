@@ -4,6 +4,7 @@ import { useResolvedPath } from "react-router-dom";
 import ClientsPDF from "./components/ClientsPDF";
 import ComprasPDF from "./components/ComprasPDF";
 import CotizacionesPDF from "./components/CotizacionesPDF";
+import VentasPDF from "./components/VentasPDF";
 
  
 export const Pagination = () => {
@@ -57,6 +58,9 @@ export const Pagination = () => {
                 
                 {url === '/compras' ?  <ComprasPDF /> : <></> }
                 {url === '/compras/consultar' ?  <ComprasPDF /> : <></> }
+
+                {url === '/ventas' ?  <VentasPDF /> : <></> }
+                {url === '/ventas/consultar' ?  <VentasPDF /> : <></> }
 
                 {url === '/cotizacion' ?  <CotizacionesPDF /> : <></> }
                 {url === '/cotizacion/consultar' ?  <CotizacionesPDF /> : <></> }
