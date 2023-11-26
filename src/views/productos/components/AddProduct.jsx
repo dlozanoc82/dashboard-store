@@ -10,6 +10,10 @@ export const AddProduct = () => {
     const [selectCategory, setSelectCategory] = useState(''); // Estado para mantener el valor seleccionado
     const [selectSubCategory, setSelectSubCategory] = useState(''); // Estado para mantener el valor seleccionado
     const [nombreProducto, setNombreProducto] = useState('');
+    const [descripcion, setDescripcion] = useState('');
+    const [garantia, setGarantia] = useState('');
+    const [duracionGarantia, setDuracionGarantia] = useState('');
+    const [img, setImage] = useState(null);
 
     const handleChangeCategory = (event) => {
         setSelectCategory(event.target.value);
@@ -24,6 +28,24 @@ export const AddProduct = () => {
         setNombreProducto(event.target.value); // Actualiza el estado cuando se selecciona un nuevo valor
     };
 
+    const handleChangeDescripcion = (event) => {
+        setDescripcion(event.target.value);
+    };
+
+    const handleChangeGarantia = (event) => {
+        setGarantia(event.target.value);
+    };
+
+    const handleChangeDuracionGarantia = (event) => {
+        setDuracionGarantia(event.target.value);
+    };
+
+    const handleImagenChange = (e) => {
+        const file = e.target.files[0];
+        setImage(file);
+      };
+    
+
     const clearInputs = () => {
         setSelectCategory('');
         setSelectSubCategory('');
@@ -32,18 +54,32 @@ export const AddProduct = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        //Crear el producto en la API
+    
+        // Crear el producto en la API
         try {
-            const subcategoria = selectSubCategory;
-            const nom_pro = nombreProducto;
-            const respuesta = await axios.post('http://localhost/invensoft/productos', {subcategoria, nom_pro});
+            const formData = new FormData();
+            formData.append('imagen', img);
+            formData.append('subcategoria', selectSubCategory);
+            formData.append('nom_pro', nombreProducto);
+            formData.append('descripcion', descripcion);
+            formData.append('garantia', garantia);
+            formData.append('duracion_garantia', duracionGarantia);
+
+            console.log(formData)
+    
+            const respuesta = await axios.post('http://localhost/invensoft/productos', formData,{
+                headers: {
+                  'Content-Type': 'multipart/form-data',
+                },
+              });
+
             Swal.fire({
                 icon: 'success',
                 title: 'Producto creado correctamente',
                 showConfirmButton: false,
                 timer: 2000
-            })
+            });
+    
             console.log(respuesta);
             clearInputs();
         } catch (error) {
@@ -52,10 +88,9 @@ export const AddProduct = () => {
                 icon: 'error',
                 title: 'Oops...',
                 text: '¡Algo salió mal!',
-            })
+            });
         }
-        
-    }
+    };
 
     return (
         <>
@@ -95,6 +130,27 @@ export const AddProduct = () => {
                                     <label className="form-label">Nombre del Producto *</label>
                                     <input type="text" value={nombreProducto} onChange={handleChangeNombre} className="form-control" required />
                                 </div>
+
+                                <div className="col-md-4 mb-md-4">
+                                    <label className="form-label">Descripcion del Producto</label>
+                                    <input value={descripcion} onChange={handleChangeDescripcion} type="text" className="form-control" />
+                                </div>
+
+                                <div className="col-md-4 mb-md-4">
+                                    <label className="form-label">Garantia</label>
+                                    <input value={garantia} onChange={handleChangeGarantia} type="text" className="form-control"  />
+                                </div>
+
+                                <div className="col-md-4 mb-md-4">
+                                    <label className="form-label">Duracion de la Garantia</label>
+                                    <input value={duracionGarantia} onChange={handleChangeDuracionGarantia} type="text" className="form-control"  />
+                                </div>
+
+                                <div className="col-md-4 mb-md-4">
+                                    <label className="form-label">Imagen</label>
+                                    <input onChange={handleImagenChange} type="file" accept="image/*" className="form-control" />
+                                </div>
+
 
                                 <div className="col-12 d-flex justify-content-center gap-3 mb-3">
                                 <p className="text-center">¿DESEA AGREGAR UNA COMPRA? 

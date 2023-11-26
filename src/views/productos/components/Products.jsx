@@ -26,7 +26,7 @@ export const Products = () => {
 }, [])
 
   return (
-    <PaginationProvider data={isListarProductos ? products : productsModificar}>
+    <PaginationProvider data={productsModificar}>
         <div className="container-fluid px-4 mt-5">
 
             <div className="header__submenu">
@@ -36,7 +36,6 @@ export const Products = () => {
 
             <Routes>
                 <Route exact ={true} index element={<TableList />} />
-                <Route exact ={true} path="/modificar" element={<TableList />} />
                 <Route exact ={true} path="/agregar" element={<AddProduct />} />
             </Routes>
 

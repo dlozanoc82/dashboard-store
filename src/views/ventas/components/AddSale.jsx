@@ -1,27 +1,47 @@
 import { useState } from 'react'
+import useVentas from '../../../hooks/useVentas';
 
 const AddSale = () => {
 
-  const [selectedValue, setSelectedValue] = useState(''); // Estado para mantener el valor seleccionado
+    const {getCliente, cliente} = useVentas();
 
-  const handleChange = (event) => {
-    setSelectedValue(event.target.value); // Actualiza el estado cuando se selecciona un nuevo valor
-  };
+    const [documento, setDocumento] = useState('');
+
+  
+    const [selectedValue, setSelectedValue] = useState(''); // Estado para mantener el valor seleccionado
+    const handleChange = (event) => {
+        setSelectedValue(event.target.value); // Actualiza el estado cuando se selecciona un nuevo valor
+    };
+
+    const handleDocumento = (event) => {
+        setDocumento(event.target.value);
+    }
+
+    const handleSubmitCliente = (e) => {
+        e.preventDefault();
+        getCliente(documento)
+    }
 
   return (
     <div className="formulario bg-white rounded shadow-sm mb-5">
       <h2 className="form__title">Añadir Venta</h2>
       <div>
+
+          {/* INFORMACION */}
           <div className="form__header">
               <h3 className="form__subtitle<">Información del Cliente</h3>
           </div>
 
           <div>
-              <form className="mt-3">
+              <form onSubmit={handleSubmitCliente} className="mt-3">
                   <div className="row p-2 mb-3">
                     <div className="col-md-4 mb-md-4">
                         <label className="form-label">Numero de Documento *</label>
-                        <input type="number" className="form-control" required />
+                        <input value={documento} onChange={handleDocumento} type="number" className="form-control" required />
+                    </div>
+                    <div className="col-md-4 mb-md-4">
+                        <label className="form-label">Cliente</label>
+                        <input  value={cliente.length === 0 ? '' : cliente[0].nombres + ' ' + cliente[0].apellidos} disabled type="text" className="form-control" required />
                     </div>
                     <div className="col-md-4 d-flex justify-content-start align-items-center mt-2">
                       <button className="btn btn-primary" type="submit">Consultar</button>

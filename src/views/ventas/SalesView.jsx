@@ -1,10 +1,13 @@
+import { ComprasProvider } from "../../context/ComprasProvider"
 import { VentasProvider } from "../../context/VentasProvider"
 import Sales from "./components/Sales"
 
 export const SalesView = () => {
   return (
-    <VentasProvider>
-      <Sales />
-    </VentasProvider>
+    <ComprasProvider>
+      <VentasProvider>
+        <Sales />
+      </VentasProvider>
+    </ComprasProvider>
   )
 }

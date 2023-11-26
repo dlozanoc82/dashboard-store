@@ -14,8 +14,9 @@ const VentasProvider = ({children}) => {
   const [ventasByDates, setVentasByDates] = useState([]);
 
   const [inputSearch, setInputSearch] = useState("");
-
   const [productosVendidos, setProductosVendidos] = useState([]);
+
+  const [cliente, setCliente] = useState([]);
 
 
   useEffect(() => {
@@ -46,6 +47,7 @@ const VentasProvider = ({children}) => {
   }
 
 
+  //CRUD
   const getVentas = async () => {        
     try {
         const url = "http://localhost/invensoft/ventas?ventas";
@@ -82,6 +84,17 @@ const VentasProvider = ({children}) => {
     }
   };
 
+  //AÑADIR VENTAS
+  const getCliente = async (documento) => {        
+    try {
+        const url = `http://localhost/invensoft/ventas?doc=${documento}`;
+        const { data } = await axios(url);
+        console.log(data);
+        setCliente(data);
+    } catch (error) {
+        console.log(error);
+    }
+  };
 
   //GENERAR PDF
   const generarPDFVentas = () => {
@@ -191,6 +204,9 @@ const VentasProvider = ({children}) => {
       doc.save('ventas_list_byDates.pdf');
   }
 
+
+  
+
   
 
   return (
@@ -204,7 +220,8 @@ const VentasProvider = ({children}) => {
             setInputSearch,
             productosVendidos,
             generarPDFVentas,
-            generarPDFComprasByDates
+            getCliente,
+            cliente
         }}
     >
         {children}

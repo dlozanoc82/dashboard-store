@@ -94,7 +94,7 @@ const ClientsPrivider = ({children}) => {
     }
 
     const updateClients = async (cod_usu, documento,nombres,apellidos,celular,direccion,correo,contrasena,status) => {
-        //Crear el producto en la API
+        
         try {
             const estado = status === 'INACTIVO' ? 0 : 1;
             console.log({estado, status});

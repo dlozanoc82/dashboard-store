@@ -6,9 +6,9 @@ import useProducts from '../../../hooks/useProducts';
 
 const TableItemProductos = ({info}) => {
  
-    const {cod_pro, nom_cat, nom_sub, nombre, descripcion, estado, img, garantia, duracion_garantia, stock} = info;
+    const {cod_cat, cod_sub, cod_pro, nom_cat, nom_sub, nombre, descripcion, estado, img, garantia, duracion_garantia, stock} = info;
     
-    const {handleDeleteProductos} = useProducts();
+    const {handleDeleteProductos, setProduct} = useProducts();
 
     const location = useLocation();
     console.log(location.pathname);

@@ -9,6 +9,8 @@ const ProductsProvider = ({children}) => {
 
     const [idSubCategoria, setIdSubcategoria] = useState();
     const [products, setProducts] = useState([]);
+    const [product, setProduct] = useState({});
+
     const [productsModificar, setProductsModificar] = useState([]);
     const [categorias, setCategorias] = useState([]);
     const [subcategorias, setSubCategorias] = useState([]);
@@ -19,10 +21,6 @@ const ProductsProvider = ({children}) => {
 
     useEffect(() => {
         getProductosByModificar();
-    }, [])
-
-    useEffect(() => {
-        getProductos();
     }, [])
 
     useEffect(() => {
@@ -37,17 +35,6 @@ const ProductsProvider = ({children}) => {
             const { data } = await axios(url);
             console.log(data);
             setProductsModificar(data);
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    const getProductos = async () => {        
-        try {
-            const url = "http://localhost/invensoft/productos?lista_productos";
-            const { data } = await axios(url);
-            console.log(data);
-            setProducts(data);
         } catch (error) {
             console.log(error);
         }
@@ -89,12 +76,36 @@ const ProductsProvider = ({children}) => {
         }
     }
 
+    const updateProducts = async (cod_pro) => {
+        try {
+            const estado = status === 'INACTIVO' ? 0 : 1;
+            console.log({estado, status});
+            const respuesta = await axios.put(`http://localhost/invensoft/productos?cod_pro=${cod_pro}`, {cod_sub,nom_pro,descripcion,estado,img,garantia,duracion_garantia});
+            
+            Swal.fire({
+                icon: 'success',
+                title: 'Información Actualizada Correctamente',
+                showConfirmButton: false,
+                timer: 2000
+            })
+
+
+        } catch (error) {
+            console.log(error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '¡Algo salió mal!',
+            })
+        }
+    }
+
+
     //OBTENER CATEGORIAS Y SUBCATEGORIAS
     const getCategorias = async () => {        
         try {
             const url = "http://localhost/invensoft/categorias";
             const { data } = await axios(url);
-            console.log(data);
             setCategorias(data);
         } catch (error) {
             console.log(error);
@@ -105,7 +116,6 @@ const ProductsProvider = ({children}) => {
         try {
             const url = `http://localhost/invensoft/subcategorias?categoria=${id}`;
             const { data } = await axios(url);
-            console.log(data);
             setSubCategorias(data);
         } catch (error) {
             console.log(error);
@@ -120,8 +130,10 @@ const ProductsProvider = ({children}) => {
                 subcategorias,
                 products, 
                 setIdSubcategoria,
+                setProduct,
                 productsModificar,
-                handleDeleteProductos
+                handleDeleteProductos,
+                updateProducts
             }}
         >
             {children}
