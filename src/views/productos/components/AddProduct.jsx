@@ -55,19 +55,29 @@ export const AddProduct = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
     
+
+    //Otro metodo para cargar imagen al servidor con base64:
+    const reader = new FileReader();
+    reader.readAsDataURL(img);
+
+    reader.onloadend = async () => {
+      const base64data = reader.result;
+
+      try {
+        console.log('Respuesta de la API:', base64data);
+      } catch (error) {
+        console.error('Error al enviar la imagen:', error);
+      }
+    };
+
+
         // Crear el producto en la API
         try {
-            const formData = new FormData();
-            formData.append('imagen', img);
-            formData.append('subcategoria', selectSubCategory);
-            formData.append('nom_pro', nombreProducto);
-            formData.append('descripcion', descripcion);
-            formData.append('garantia', garantia);
-            formData.append('duracion_garantia', duracionGarantia);
-
-            console.log(formData)
+            const subcategoria = selectSubCategory;
+            const nom_pro = nombreProducto;
+            const duracion_garantia = duracionGarantia;
     
-            const respuesta = await axios.post('http://localhost/invensoft/productos', formData,{
+            const respuesta = await axios.post('http://localhost/invensoft/productos', {subcategoria, nom_pro, descripcion, img, garantia, duracion_garantia},{
                 headers: {
                   'Content-Type': 'multipart/form-data',
                 },
