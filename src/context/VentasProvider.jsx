@@ -17,6 +17,10 @@ const VentasProvider = ({children}) => {
   const [productosVendidos, setProductosVendidos] = useState([]);
 
   const [cliente, setCliente] = useState([]);
+  const [producto, setProducto] = useState([]);
+
+  const [clienteId, setClienteId] = useState('');
+
 
 
   useEffect(() => {
@@ -72,7 +76,6 @@ const VentasProvider = ({children}) => {
     }
   };
 
-
   const getProductosMasVendidos = async () => {        
     try {
         const url = "http://localhost/invensoft/ventas?vendidos";
@@ -84,6 +87,18 @@ const VentasProvider = ({children}) => {
     }
   };
 
+  const getProductAdd = async (cod_pro) => {        
+    try {
+        const url = `http://localhost/invensoft/ventas?productos=${cod_pro}`;
+        const { data } = await axios(url);
+        console.log(data);
+        setProducto(data);
+    } catch (error) {
+        console.log(error);
+    }
+  };
+
+
   //AÑADIR VENTAS
   const getCliente = async (documento) => {        
     try {
@@ -91,6 +106,7 @@ const VentasProvider = ({children}) => {
         const { data } = await axios(url);
         console.log(data);
         setCliente(data);
+        setClienteId(data[0].cod_usu)
     } catch (error) {
         console.log(error);
     }
@@ -205,9 +221,7 @@ const VentasProvider = ({children}) => {
   }
 
 
-  
 
-  
 
   return (
     <VentasContext.Provider
@@ -221,7 +235,14 @@ const VentasProvider = ({children}) => {
             productosVendidos,
             generarPDFVentas,
             getCliente,
-            cliente
+            cliente,
+            getProductAdd,
+            producto,
+            getProductAdd,
+            clienteId,
+            getVentas,
+            setProducto,
+            setCliente
         }}
     >
         {children}
