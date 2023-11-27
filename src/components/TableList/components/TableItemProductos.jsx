@@ -15,9 +15,10 @@ const TableItemProductos = ({info}) => {
     const isListarProductos = location.pathname === "/productos";
   
     return (
+        
       <>
           <td><center>{cod_pro}</center></td>
-          <td><center>{img}</center></td>
+          <td><center><img src={img} /></center></td>
           <td><center>{nom_cat}</center></td>
           <td><center>{nom_sub}</center></td>
           <td><center>{nombre}</center></td>

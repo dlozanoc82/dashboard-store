@@ -30,25 +30,30 @@ const VentasProvider = ({children}) => {
   useEffect(() => {
     getProductosMasVendidos();
   }, [])
+
+  useEffect(() => {
+    filterByDocumentNumber();
+}, [inputSearch])
   
   //FILTROS
-  const filterByNameProduct = () => {
-    const searchValue = inputSearch.toLowerCase();
-
-    // Si no hay texto en el campo de búsqueda y el estado está vacío, mostramos todos los pagos
-    if (searchValue.trim() === "") {
-        setFilteredCompras(compras);
-        return;
-    }
-
-    let filteredData = compras;
-
-    filteredData = filteredData.filter((compra) =>
-        compra.nombre.toLowerCase().includes(searchValue)
-    );
-
-    setFilteredCompras(filteredData);
-  }
+      // FILTRO
+      const filterByDocumentNumber = () => {
+        const searchValue = inputSearch; // No es necesario convertirlo a minúsculas si es un número
+    
+        // Si no hay texto en el campo de búsqueda y el estado está vacío, mostramos todos los pagos
+        if (!searchValue) {
+            setFilteredVentas(ventas);
+            return;
+        }
+    
+        let filteredData = ventas;
+    
+        filteredData = filteredData.filter((venta) =>
+            venta.documento.toString().startsWith(searchValue.toString())
+        );
+    
+        setFilteredVentas(filteredData);
+    };
 
 
   //CRUD
@@ -242,7 +247,8 @@ const VentasProvider = ({children}) => {
             clienteId,
             getVentas,
             setProducto,
-            setCliente
+            setCliente,
+            filteredVentas
         }}
     >
         {children}

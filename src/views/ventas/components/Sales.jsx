@@ -13,7 +13,7 @@ import { useEffect } from "react";
 
 const Sales = () => {
 
-    const {ventas} = useVentas();
+    const {ventas,filteredVentas} = useVentas();
     const {setTableHeaders} = useDashborad();
     const url = useResolvedPath("").pathname;
 
@@ -23,7 +23,7 @@ const Sales = () => {
     }, [])
 
   return (
-    <PaginationProvider data={ventas}>
+    <PaginationProvider data={filteredVentas}>
         <div className="container-fluid px-4 mt-5">
 
             <div className="header__submenu">

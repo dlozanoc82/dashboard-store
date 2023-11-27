@@ -55,20 +55,19 @@ export const AddProduct = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
     
+        //Otro metodo para cargar imagen al servidor con base64:
+        const reader = new FileReader();
+        reader.readAsDataURL(img);
 
-    //Otro metodo para cargar imagen al servidor con base64:
-    const reader = new FileReader();
-    reader.readAsDataURL(img);
+        reader.onloadend = async () => {
+        const base64data = reader.result;
 
-    reader.onloadend = async () => {
-      const base64data = reader.result;
-
-      try {
-        console.log('Respuesta de la API:', base64data);
-      } catch (error) {
-        console.error('Error al enviar la imagen:', error);
-      }
-    };
+        try {
+            console.log('Respuesta de la API:', base64data);
+        } catch (error) {
+            console.error('Error al enviar la imagen:', error);
+        }
+        };
 
 
         // Crear el producto en la API
