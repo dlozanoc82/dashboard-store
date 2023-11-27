@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 
 export const AddProduct = () => {
 
-    const {categorias, setIdSubcategoria, subcategorias} = useProducts();
+    const { categorias, setIdSubcategoria, subcategorias } = useProducts();
 
     const [selectCategory, setSelectCategory] = useState(''); // Estado para mantener el valor seleccionado
     const [selectSubCategory, setSelectSubCategory] = useState(''); // Estado para mantener el valor seleccionado
@@ -13,6 +13,7 @@ export const AddProduct = () => {
     const [descripcion, setDescripcion] = useState('');
     const [garantia, setGarantia] = useState('');
     const [duracionGarantia, setDuracionGarantia] = useState('');
+    const [img2, setImage2] = useState(null);
     const [img, setImage] = useState(null);
 
     const handleChangeCategory = (event) => {
@@ -40,34 +41,51 @@ export const AddProduct = () => {
         setDuracionGarantia(event.target.value);
     };
 
+    //const handleImagenChange = (e) => {
+    //  const file = e.target.files[0];
+    //setImage2(file);
+    //};
+
     const handleImagenChange = (e) => {
         const file = e.target.files[0];
-        setImage(file);
-      };
-    
+
+        setImage2(file);
+
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        reader.onloadend = () => {
+            const base64data = reader.result;
+            setImage(base64data);
+        };
+
+    };
 
     const clearInputs = () => {
         setSelectCategory('');
         setSelectSubCategory('');
         setNombreProducto('');
+        setImage(null);
+        setImage2(null);
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         //Otro metodo para cargar imagen al servidor con base64:
-        const reader = new FileReader();
-        reader.readAsDataURL(img);
+        //const reader = new FileReader();
+        //reader.readAsDataURL(img2);
 
-        reader.onloadend = async () => {
-        const base64data = reader.result;
+        //reader.onloadend = () => {
+        //const base64data = reader.result;
+        //setImage(base64data);
 
-        try {
-            console.log('Respuesta de la API:', base64data);
-        } catch (error) {
-            console.error('Error al enviar la imagen:', error);
-        }
-        };
+        //try {
+        //  console.log('Respuesta de la API:', img);
+        //} catch (error) {
+        //console.error('Error al enviar la imagen:', error);
+        //}
+        //};
 
 
         // Crear el producto en la API
@@ -75,12 +93,11 @@ export const AddProduct = () => {
             const subcategoria = selectSubCategory;
             const nom_pro = nombreProducto;
             const duracion_garantia = duracionGarantia;
-    
-            const respuesta = await axios.post('http://localhost/invensoft/productos', {subcategoria, nom_pro, descripcion, img, garantia, duracion_garantia},{
-                headers: {
-                  'Content-Type': 'multipart/form-data',
-                },
-              });
+            console.log(img);
+
+            const respuesta = await axios.post('http://localhost/invensoft/productos', { subcategoria, nom_pro, descripcion, img, garantia, duracion_garantia }, {
+
+            });
 
             Swal.fire({
                 icon: 'success',
@@ -88,15 +105,15 @@ export const AddProduct = () => {
                 showConfirmButton: false,
                 timer: 2000
             });
-    
-            console.log(respuesta);
+
+            //console.log(respuesta);
             clearInputs();
         } catch (error) {
-            console.log(error.response);
+            //console.log(error.response);
             Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
-                text: '¡Algo salió mal!',
+                title: 'Archivo incorrecto',
+                text: 'Solo se permite imagenes',
             });
         }
     };
@@ -105,7 +122,7 @@ export const AddProduct = () => {
         <>
             <div className="formulario bg-white rounded shadow-sm">
                 <h2 className="form__title">Agregar Producto</h2>
-                
+
                 <div>
                     <div className="form__header">
                         <h3 className="form__subtitle">Proveedor y Categoria</h3>
@@ -119,7 +136,7 @@ export const AddProduct = () => {
                                     <label className="form-label">Categoria *</label>
                                     <select className="form-select" value={selectCategory} onChange={handleChangeCategory}>
                                         <option value='0'>Seleccione una opción</option>
-                                        {categorias.map((categoria) => 
+                                        {categorias.map((categoria) =>
                                             <option key={categoria.cod_cat} value={categoria.cod_cat}>{categoria.nom_cat}</option>)
                                         }
                                     </select>
@@ -129,7 +146,7 @@ export const AddProduct = () => {
                                     <label className="form-label">Subcategoria *</label>
                                     <select className="form-select" value={selectSubCategory} onChange={handleChangeSubCategory}>
                                         <option value=''>Seleccione una opción</option>
-                                        {subcategorias.map((subcategoria) => 
+                                        {subcategorias.map((subcategoria) =>
                                             <option key={subcategoria.cod_sub} value={subcategoria.cod_sub}>{subcategoria.nom_sub}</option>)
                                         }
                                     </select>
@@ -147,12 +164,12 @@ export const AddProduct = () => {
 
                                 <div className="col-md-4 mb-md-4">
                                     <label className="form-label">Garantia</label>
-                                    <input value={garantia} onChange={handleChangeGarantia} type="text" className="form-control"  />
+                                    <input value={garantia} onChange={handleChangeGarantia} type="text" className="form-control" />
                                 </div>
 
                                 <div className="col-md-4 mb-md-4">
                                     <label className="form-label">Duracion de la Garantia</label>
-                                    <input value={duracionGarantia} onChange={handleChangeDuracionGarantia} type="text" className="form-control"  />
+                                    <input value={duracionGarantia} onChange={handleChangeDuracionGarantia} type="text" className="form-control" />
                                 </div>
 
                                 <div className="col-md-4 mb-md-4">
@@ -162,11 +179,11 @@ export const AddProduct = () => {
 
 
                                 <div className="col-12 d-flex justify-content-center gap-3 mb-3">
-                                <p className="text-center">¿DESEA AGREGAR UNA COMPRA? 
-                                    {' '}
-                                    <a href="/compras/agregar"><strong>DA CLICK AQUI</strong></a>
-                                </p>
-                            </div>
+                                    <p className="text-center">¿DESEA AGREGAR UNA COMPRA?
+                                        {' '}
+                                        <a href="/compras/agregar"><strong>DA CLICK AQUI</strong></a>
+                                    </p>
+                                </div>
 
                             </div>
 

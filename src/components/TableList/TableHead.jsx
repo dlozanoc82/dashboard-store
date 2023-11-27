@@ -7,7 +7,7 @@ export const TableHead = () => {
   return (
     <thead>
         <tr>
-          {tableHeaders.length === 0 ? 
+          {tableHeaders.length == 0 ? 
             <>
               <th scope="col" width="50"><center>Documento</center></th>
               <th scope="col"><center>Nombres</center></th>

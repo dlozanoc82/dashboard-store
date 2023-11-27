@@ -26,7 +26,7 @@ const TableItemClients = ({info}) => {
             <Link onClick={() => setCliente({cod_usu, nombres, apellidos, correo, documento, celular, direccion, estado})} to={`/clientes/editar/${cod_usu}`} className="btn btn-secondary btn-padding">
                 <FontAwesomeIcon icon={faPencil} />
             </Link>
-            <button disabled={estado==='INACTIVO'} onClick={() => handleDeleteCliente(cod_usu)} className="btn btn-danger btn-padding">
+            <button disabled={estado=='INACTIVO'} onClick={() => handleDeleteCliente(cod_usu)} className="btn btn-danger btn-padding">
                 <FontAwesomeIcon icon={faTrash} />
             </button>
         </div>

@@ -64,7 +64,7 @@ const ProductsProvider = ({children}) => {
             Swal.fire("Operación detenida", "", "info");
         }
 
-            getProductos();
+            //getProductos();
             getProductosByModificar();
         } catch (error) {
             console.log(error);
@@ -133,7 +133,8 @@ const ProductsProvider = ({children}) => {
                 setProduct,
                 productsModificar,
                 handleDeleteProductos,
-                updateProducts
+                updateProducts,
+                getProductosByModificar
             }}
         >
             {children}

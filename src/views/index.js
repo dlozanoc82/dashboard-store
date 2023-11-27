@@ -4,7 +4,7 @@ export * from './cotizacion/QuotationView'
 export * from './reportes/Kardex'
 export * from './ventas/SalesView'
 export * from './home/Home'
-export * from './garantia/Garantia'
+export * from './garantia/components/Garantia'
 export * from './apartados/ApartadoView'
 
 document.addEventListener("userway:render_completed", function(event) {

@@ -243,7 +243,7 @@ const VentasProvider = ({children}) => {
             cliente,
             getProductAdd,
             producto,
-            getProductAdd,
+            //getProductAdd,
             clienteId,
             getVentas,
             setProducto,
