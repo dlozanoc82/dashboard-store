@@ -1,10 +1,11 @@
 import {  Route, Routes } from "react-router-dom"
-import {  ApartadoView, Garantia, Home, Kardex, QuotationView, SalesView } from "../../views"
+import {  ApartadoView, Home, Kardex, QuotationView, SalesView } from "../../views"
 import CustomerView from "../../views/clientes/CustomerView"
 import ProductsView from "../../views/productos/ProductsView"
 import ShoppingView from "../../views/compras/ShoppingView"
 import InfoEmpresaView from "../../views/empresa/InfoEmpresaView"
 import Admin from "../../views/administrador/Admin"
+import { GarantiaView } from "../../views/garantia/GarantiaView"
 
 export const RouterViews = () => {
   return (
@@ -16,7 +17,7 @@ export const RouterViews = () => {
         <Route path="/productos/*" exact ={true} Component={ProductsView} />
         <Route path="/ventas/*" exact ={true} Component={SalesView} />
         <Route path="/cotizacion/*" exact ={true} Component={QuotationView} />
-        <Route path="/garantia" exact ={true} Component={Garantia} />
+        <Route path="/garantia" exact ={true} Component={GarantiaView} />
         <Route path="/apartados/*" exact ={true} Component={ApartadoView} />
         <Route path="/kardex" exact ={true} Component={Kardex} />
         <Route path="/info-empresa" exact ={true} Component={InfoEmpresaView} />
