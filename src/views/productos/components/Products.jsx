@@ -7,10 +7,11 @@ import { TableList } from "../../../components/TableList/TableList";
 import useDashborad from "../../../hooks/useDashborad";
 import { obtenerTitulosPorRuta } from "../../../helpers/OptionsSidebar";
 import { useEffect } from "react";
+import FormProducto from "./FormProducto";
 
 export const Products = () => {
 
-  const {products, productsModificar} = useProducts();
+  const {filteredProducto} = useProducts();
   const {setTableHeaders} = useDashborad();
 
   const url = useResolvedPath("").pathname;
@@ -26,7 +27,7 @@ export const Products = () => {
 }, [])
 
   return (
-    <PaginationProvider data={productsModificar}>
+    <PaginationProvider data={filteredProducto}>
         <div className="container-fluid px-4 mt-5">
 
             <div className="header__submenu">
@@ -36,7 +37,8 @@ export const Products = () => {
 
             <Routes>
                 <Route exact ={true} index element={<TableList />} />
-                <Route exact ={true} path="/agregar" element={<AddProduct />} />
+                <Route exact ={true} path="/agregar" element={<FormProducto />} />
+                <Route exact ={true} path="/editar/:id" element={<FormProducto />} />
             </Routes>
 
         </div>

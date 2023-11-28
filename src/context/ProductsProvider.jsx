@@ -1,6 +1,8 @@
 import axios from "axios";
+import jsPDF from "jspdf";
 import { createContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import { formatTime12Hours } from "../helpers/GeneralFunctions";
 
 
 const ProductsContext = createContext();
@@ -8,12 +10,14 @@ const ProductsContext = createContext();
 const ProductsProvider = ({children}) => {
 
     const [idSubCategoria, setIdSubcategoria] = useState();
-    const [products, setProducts] = useState([]);
     const [product, setProduct] = useState({});
 
     const [productsModificar, setProductsModificar] = useState([]);
     const [categorias, setCategorias] = useState([]);
     const [subcategorias, setSubCategorias] = useState([]);
+
+    const [inputSearch, setInputSearch] = useState("");
+    const [filteredProducto, setFilteredProducto] = useState([]);
 
     useEffect(() => {
         getCategorias();
@@ -27,6 +31,31 @@ const ProductsProvider = ({children}) => {
         getSubCategorias(idSubCategoria);
     }, [idSubCategoria])
    
+    useEffect(() => {
+        filterByNameProduct();
+    }, [inputSearch])
+    
+
+
+    // FILTROS
+    const filterByNameProduct = () => {
+        const searchValue = inputSearch.toLowerCase();
+
+        // Si no hay texto en el campo de búsqueda y el estado está vacío, mostramos todos los pagos
+        if (searchValue.trim() === "") {
+            setFilteredProducto(productsModificar);
+            return;
+        }
+
+        let filteredData = productsModificar;
+
+        filteredData = filteredData.filter((producto) =>
+            producto.nombre.toLowerCase().includes(searchValue)
+        );
+
+        setFilteredProducto(filteredData);
+    }
+
 
     //CRUD PRODUCTOS
     const getProductosByModificar = async () => {        
@@ -35,6 +64,7 @@ const ProductsProvider = ({children}) => {
             const { data } = await axios(url);
             console.log(data);
             setProductsModificar(data);
+            setFilteredProducto(data);
         } catch (error) {
             console.log(error);
         }
@@ -123,18 +153,88 @@ const ProductsProvider = ({children}) => {
     };
 
 
+    //GENERAR PDF
+    const generarPDFProductos = () => {
+        const doc = new jsPDF();
+    
+        // Logo
+        const logoUrl = '/logo-circular.png'; // Reemplaza con la ruta de tu imagen de logo
+        doc.addImage(logoUrl, 'PNG', 10, 10, 30, 30); // Ajusta las coordenadas y dimensiones según sea necesario
+    
+        // Título
+        const title = 'LISTADO DE PRODUCTOS';
+        doc.text(title, doc.internal.pageSize.width / 2, 28, 'center');
+    
+        // Fecha y Hora
+        const currentDate = new Date();
+        const formattedDate = currentDate.toLocaleDateString();
+        const formattedTime = formatTime12Hours(currentDate);
+        const dateTimeText = `Generado el ${formattedDate} a las ${formattedTime}`;
+        doc.setFontSize(11);
+        doc.setFont('arial', 'italic', 'normal');
+        doc.text(dateTimeText, doc.internal.pageSize.width - 15, 43, 'right');
+        doc.setFont('normal');
+    
+        // Tabla
+        const columns = ["Codigo", "Imagen", "Categoria", "Subcategoria", "Producto", "Descripcion", "Estado", "Garantia", "Duracion Garantia", "Stock"];
+    
+        // Datos
+        const data = [];
+        productsModificar.forEach((product, index) => {
+            // Suponiendo que product.imagen de la API ya está en formato base64
+            data.push([
+                index + 1, // Índice + 1 para comenzar la numeración desde 1
+                {
+                    image: product.base64Image, // Suponiendo que product.imagen de la API ya está en formato base64
+                    width: 30, // Ajusta el ancho según sea necesario
+                    height: 30 // Ajusta la altura según sea necesario
+                },
+                product.nom_cat,
+                product.nom_sub,
+                product.nombre,
+                product.descripcion,
+                product.estado === 1 ? 'ACTIVO' : 'INACTIVO',
+                product.garantia,
+                product.duracion_garantia,
+                product.stock
+            ]);
+        });
+    
+        // Generar tabla
+        doc.autoTable({
+            head: [columns],
+            body: data,
+            startY: 45, // Ajusta startY según sea necesario
+            columnStyles: {
+                1: { // Suponiendo que "Imagen" está en la segunda columna (índice 1)
+                    cellWidth: 30, // Ajusta el ancho según sea necesario
+                    cellPadding: 1 // Ajusta el relleno según sea necesario
+                }
+            }
+        });
+    
+        // Guardar el PDF
+        doc.save('lista_de_productos.pdf');
+    }
+    
+
     return (
         <ProductsContext.Provider
             value={{
                 categorias,
                 subcategorias,
-                products, 
                 setIdSubcategoria,
                 setProduct,
                 productsModificar,
                 handleDeleteProductos,
                 updateProducts,
-                getProductosByModificar
+                getProductosByModificar,
+                product,
+                getSubCategorias, 
+                inputSearch, 
+                setInputSearch,
+                filteredProducto,
+                generarPDFProductos
             }}
         >
             {children}

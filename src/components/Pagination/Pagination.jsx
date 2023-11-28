@@ -5,6 +5,7 @@ import ClientsPDF from "./components/ClientsPDF";
 import ComprasPDF from "./components/ComprasPDF";
 import CotizacionesPDF from "./components/CotizacionesPDF";
 import VentasPDF from "./components/VentasPDF";
+import ProductosPDF from "./components/ProductosPDF";
 
  
 export const Pagination = () => {
@@ -64,6 +65,8 @@ export const Pagination = () => {
 
                 {url === '/cotizacion' ?  <CotizacionesPDF /> : <></> }
                 {url === '/cotizacion/consultar' ?  <CotizacionesPDF /> : <></> }
+
+                {url === '/productos' ?  <ProductosPDF /> : <></> }
 
             </div>
         </>

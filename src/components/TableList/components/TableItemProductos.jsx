@@ -9,6 +9,7 @@ const TableItemProductos = ({info}) => {
     const {cod_cat, cod_sub, cod_pro, nom_cat, nom_sub, nombre, descripcion, estado, img, garantia, duracion_garantia, stock, base64Image} = info;
     
     const {handleDeleteProductos, setProduct} = useProducts();
+    
 
     const location = useLocation();
     console.log(location.pathname);
@@ -37,7 +38,7 @@ const TableItemProductos = ({info}) => {
           <td><center>{stock}</center></td>
           <td>
           <div className="btn__actions">
-              <Link className="btn btn-secondary btn-padding">
+              <Link onClick={() => setProduct({cod_cat, cod_sub, nombre, descripcion, garantia, duracion_garantia})} to={`/productos/editar/${cod_pro}`}  className="btn btn-secondary btn-padding">
                   <FontAwesomeIcon icon={faPencil} />
               </Link>
               <button onClick={() => handleDeleteProductos(cod_pro)} className="btn btn-danger btn-padding">
