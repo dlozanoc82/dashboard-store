@@ -67,7 +67,7 @@ const columnasPorRuta = {
     "/apartados": ["#", "Fecha del Apartado", "Cliente", "No. Documento", "Cantridad", "Precio Unitario", "Tipo de Pago", "Fecha de Abono", "Total", "Restante", "Opciones"],
     "/garantia": ["ColumnaA", "ColumnaB", "ColumnaC"],
     "/cotizacion": ["#", "Fecha de Cotizacion", "No. Documento", "Nombre del Cliente", "Apellidos del Cliente", "Correo", "Productos", "Cantidad", "Precio Unitario", "Total"],
-    "/kardex": ["ColumnaA", "ColumnaB", "ColumnaC"],
+    "/kardex/libro-diario": ["#", "Fecha y Hora", "Movimientos(Entrada/Salida)", "Producto", "Valor Unitario", "Cantidad", "Total"],
 };
 
 
