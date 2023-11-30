@@ -102,10 +102,10 @@ const ComprasProvider = ({children}) => {
         }
     };
 
-    const createCompras = async (cod_subcategoria,cod_producto,cod_proveedor,cantidad,precio_unit,precio_compra) => {
+    const createCompras = async (cod_subcategoria,cod_producto,cod_proveedor,cantidad,precio_unit,precio_venta,precio_compra) => {
         //Crear el producto en la API
         try {
-            const respuesta = await axios.post('http://localhost/invensoft/compras', {cod_subcategoria,cod_producto,cod_proveedor,cantidad,precio_unit,precio_compra});
+            const respuesta = await axios.post('http://localhost/invensoft/compras', {cod_subcategoria,cod_producto,cod_proveedor,cantidad,precio_unit,precio_venta,precio_compra});
             
             Swal.fire({
                 icon: 'success',
@@ -126,10 +126,10 @@ const ComprasProvider = ({children}) => {
         }
     }
 
-    const upadateCompra = async (cod_compra, cod_producto, cod_proveedor, cantidad, precio_unit, precio_compra) => {
+    const upadateCompra = async (cod_compra, cod_producto, cod_proveedor, cantidad, precio_unit, precio_venta, precio_compra) => {
         //Crear el producto en la API
         try {
-            const respuesta = await axios.put(`http://localhost/invensoft/compras?cod_compra=${cod_compra}`, {cod_compra, cod_producto, cod_proveedor, cantidad, precio_unit, precio_compra});
+            const respuesta = await axios.put(`http://localhost/invensoft/compras?cod_compra=${cod_compra}`, {cod_compra, cod_producto, cod_proveedor, cantidad, precio_unit, precio_venta, precio_compra});
             
             Swal.fire({
                 icon: 'success',
@@ -253,7 +253,7 @@ const ComprasProvider = ({children}) => {
  
     //GENERAR PDF
     const generarPDFCompras = () => {
-        const doc = new jsPDF();
+        const doc = new jsPDF({ orientation: 'landscape' });
 
         // Logo
         const logoUrl = '/logo-circular.png'; // Replace with the path to your logo image
@@ -274,7 +274,7 @@ const ComprasProvider = ({children}) => {
         doc.setFont('normal');
 
         // Table
-        const columns = ["#", "Fecha de Compra", "Categoria", "SubCategoria", "Nombre del Producto", "Cantidad", "Proveedor", "Precio de la Compra", "Precio Unitario"];
+        const columns = ["#", "Fecha de Compra", "Categoria", "SubCategoria", "Nombre del Producto", "Cantidad", "Proveedor", "Precio de la Compra", "Precio Unitario", "Valor Venta"];
 
         // Data
         const data = [];
@@ -288,7 +288,8 @@ const ComprasProvider = ({children}) => {
                 compra.cantidad_compra,
                 compra.nom_prov,
                 formatearCantidad(compra.valor_total),
-                formatearCantidad(compra.valor_unit_prov)
+                formatearCantidad(compra.valor_unit_prov),
+                formatearCantidad(compra.valor_venta)
             ]);
         });
 
@@ -305,7 +306,7 @@ const ComprasProvider = ({children}) => {
     }
 
     const generarPDFComprasByDates = () => {
-        const doc = new jsPDF();
+        const doc = new jsPDF({ orientation: 'landscape' });
 
         // Logo
         const logoUrl = '/logo-circular.png'; // Replace with the path to your logo image
@@ -326,7 +327,7 @@ const ComprasProvider = ({children}) => {
         doc.setFont('normal');
 
         // Table
-        const columns = ["#", "Fecha de Compra", "Categoria", "SubCategoria", "Nombre del Producto", "Cantidad", "Proveedor", "Precio de la Compra", "Precio Unitario"];
+        const columns = ["#", "Fecha de Compra", "Categoria", "SubCategoria", "Nombre del Producto", "Cantidad", "Proveedor", "Precio de la Compra", "Precio Unitario", "Precio Venta"];
 
         // Data
         const data = [];
@@ -340,7 +341,8 @@ const ComprasProvider = ({children}) => {
                 compra.cantidad_compra,
                 compra.nom_prov,
                 formatearCantidad(compra.valor_total),
-                formatearCantidad(compra.valor_unit_prov)
+                formatearCantidad(compra.valor_unit_prov),
+                formatearCantidad(compra.valor_venta)
             ]);
         });
 

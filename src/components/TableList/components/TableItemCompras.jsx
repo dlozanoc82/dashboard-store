@@ -8,7 +8,7 @@ import { formatDateAndTime, formatearCantidad } from '../../../helpers/GeneralFu
 const TableItemCompras = ({info}) => {
   
   const {setCompra, handleDeleteCompra} = useCompras();
-  const {id, cod_compra, fecha_compra, nom_cat, nom_sub, nombre, cantidad_compra, nom_prov, valor_total, valor_unit_prov, cod_cat, cod_sub, cod_pro, cod_prov} = info;
+  const {id, cod_compra,valor_venta, fecha_compra, nom_cat, nom_sub, nombre, cantidad_compra, nom_prov, valor_total, valor_unit_prov, cod_cat, cod_sub, cod_pro, cod_prov} = info;
 
 
   return (
@@ -22,9 +22,10 @@ const TableItemCompras = ({info}) => {
         <td><center>{nom_prov}</center></td>
         <td><center>{formatearCantidad(valor_total)}</center></td>
         <td><center>{formatearCantidad(valor_unit_prov)}</center></td>
+        <td><center>{formatearCantidad(valor_venta)}</center></td>
         <td>
         <div className="btn__actions">
-            <Link onClick={() => setCompra({cod_compra, cod_cat, cod_sub, cod_pro, cod_prov, cantidad_compra, valor_unit_prov, valor_total} )} to={`/compras/editar/${cod_compra}`} className="btn btn-secondary btn-padding">
+            <Link onClick={() => setCompra({cod_compra, cod_cat, cod_sub, cod_pro, cod_prov, cantidad_compra, valor_unit_prov, valor_venta, valor_total} )} to={`/compras/editar/${cod_compra}`} className="btn btn-secondary btn-padding">
                 <FontAwesomeIcon icon={faPencil} />
             </Link>
             <button className="btn btn-danger btn-padding">

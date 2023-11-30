@@ -1,11 +1,14 @@
 import { ApartadoProvider } from "../../context/ApartadoProvider"
+import { VentasProvider } from "../../context/VentasProvider"
 import Apartado from "./components/Apartado"
 
 export const ApartadoView = () => {
   return (
-    <ApartadoProvider>
-      <Apartado />
-    </ApartadoProvider>
+    <VentasProvider>
+      <ApartadoProvider>
+        <Apartado />
+      </ApartadoProvider>
+    </VentasProvider>
   )
 }
 

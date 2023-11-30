@@ -37,6 +37,7 @@ export const AddShop = () => {
     const [nombreProveedor, setNombreProveedor] = useState('');
     const [cantidad, setCantidad] = useState('');
     const [precioUnitario, setPrecioUnitario] = useState('');
+    const [precioVenta, setPrecioVenta] = useState('');
     const [precioCompra, setPrecioCompra] = useState('');
 
     const handleChangeCategory = (event) => {
@@ -94,6 +95,10 @@ export const AddShop = () => {
         setPrecioCompra(event.target.value)
     }
 
+    const handleChangePrecioVenta = (event) => {
+        setPrecioVenta(event.target.value)
+    }
+
     const clearInputs = () => {
         setSelectCategory('');
         setSelectSubCategory('');
@@ -103,6 +108,7 @@ export const AddShop = () => {
         setPrecioUnitario('');
         setPrecioCompra('');
         setProductosInStock('');
+        setPrecioVenta('');
 
     }
 
@@ -356,7 +362,7 @@ export const AddShop = () => {
 
         try {
             if (confirmado.isConfirmed) {
-                createCompras(selectSubCategory, nombreProducto, nombreProveedor, cantidad, precioUnitario, precioCompra);
+                createCompras(selectSubCategory, nombreProducto, nombreProveedor, cantidad, precioUnitario, precioVenta, precioCompra);
                 clearInputs();
                 setTimeout(() => {
                     navigate('/compras');
@@ -479,7 +485,7 @@ export const AddShop = () => {
 
                                 <div className="col-md-4 mb-md-4">
                                     <label className="form-label">Precio de la venta *</label>
-                                    <input type="number" className="form-control" ref={precioCompraVenta} />
+                                    <input type="number" value={precioVenta} onChange={handleChangePrecioVenta} className="form-control" ref={precioCompraVenta} />
                                 </div>
 
                                 <div className="col-md-4 mb-md-4">

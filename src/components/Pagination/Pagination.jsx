@@ -1,3 +1,4 @@
+import React from 'react';
 import usePagination from "../../hooks/usePagination";
 import useDashborad from "../../hooks/useDashborad";
 import { useResolvedPath } from "react-router-dom";
@@ -7,68 +8,85 @@ import CotizacionesPDF from "./components/CotizacionesPDF";
 import VentasPDF from "./components/VentasPDF";
 import ProductosPDF from "./components/ProductosPDF";
 
- 
-export const Pagination = () => {
-    const {titleUrl} = useDashborad();
+const Pagination = () => {
+    const { titleUrl } = useDashborad();
     const url = useResolvedPath("").pathname;
 
+    const { currentPage, numbers, prePage, changePage, nextPage, lastIndex, firstIndex, ndata } = usePagination();
 
-    const generarPDF = () => {console.log('Generar PDF')}
+    // Número máximo de botones de paginación a mostrar
+    const maxButtonsToShow = 5;
 
-    const {
-        currentPage, 
-        numbers, 
-        prePage, 
-        changePage, 
-        nextPage,  
-        lastIndex,   
-        firstIndex,
-        ndata} =usePagination();
+    // Lógica para calcular los números de página que se mostrarán
+    // Lógica para calcular los números de página que se mostrarán
+    const calculateVisibleButtons = () => {
+        const buttonsPerPage = 10;
+        const totalPages = Math.ceil(ndata / buttonsPerPage);
+
+        // Calcular la cantidad mínima de botones a mostrar
+        const minButtonsToShow = Math.min(maxButtonsToShow, totalPages);
+
+        // Mostrar al menos 5 botones o el número calculado
+        const totalButtons = Math.max(minButtonsToShow, Math.min(totalPages, currentPage + 2) - Math.max(1, currentPage - 2) + 1);
+
+        // Calcular el rango de botones para mostrar
+        let startButton = Math.max(1, currentPage - Math.floor(maxButtonsToShow / 2));
+        let endButton = Math.min(totalPages, startButton + totalButtons - 1);
+
+        // Ajustar si el rango se desborda
+        if (endButton - startButton + 1 < totalButtons) {
+            startButton = Math.max(1, endButton - totalButtons + 1);
+        }
+
+        return Array.from({ length: totalButtons }, (_, index) => startButton + index);
+    };
+
+
+    const visibleButtons = calculateVisibleButtons();
 
     return (
         <>
             <div className="pagination">
                 <div className="mb-2">
                     <span>
-                        {titleUrl} del {firstIndex +1} al {lastIndex} de un total de {ndata}
+                        {titleUrl} del {firstIndex + 1} al {lastIndex} de un total de {ndata}
                     </span>
                 </div>
                 <nav aria-label="Page navigation example">
-                <ul className="pagination justify-content-end">
-                    <li className="page-item disabled">
-                        <a className="page-link" onClick={prePage}>Previous</a>
-                    </li>
-                    { numbers.map((n,i) => (
-                        <li className={`page-item ${currentPage === n ? 'active' : ''}`} key={i}>
-                            <a 
-                                className="page-link"
-                                onClick={() => changePage(n)}
-                            >{n}</a>
+                    <ul className="pagination justify-content-end">
+                        <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+                            <a className="page-link" onClick={prePage}>
+                                Previous
+                            </a>
                         </li>
-                    )) }
-
-                    <li className="page-item">
-                        <a className="page-link" onClick={nextPage}>Next</a>
-                    </li>
-                </ul>
+                        {visibleButtons.map((n, i) => (
+                            <li className={`page-item ${currentPage === n ? 'active' : ''}`} key={i}>
+                                <a className="page-link" onClick={() => changePage(n)}>
+                                    {n}
+                                </a>
+                            </li>
+                        ))}
+                        <li className={`page-item ${currentPage === ndata ? 'disabled' : ''}`}>
+                            <a className="page-link" onClick={nextPage}>
+                                Next
+                            </a>
+                        </li>
+                    </ul>
                 </nav>
             </div>
             <div>
-                {url === '/clientes' ?  <ClientsPDF /> : <></> }
-                {url === '/clientes/consultar' ?  <ClientsPDF /> : <></> }
-                
-                {url === '/compras' ?  <ComprasPDF /> : <></> }
-                {url === '/compras/consultar' ?  <ComprasPDF /> : <></> }
+                {url === '/clientes' || url === '/clientes/consultar' ? <ClientsPDF /> : null}
 
-                {url === '/ventas' ?  <VentasPDF /> : <></> }
-                {url === '/ventas/consultar' ?  <VentasPDF /> : <></> }
+                {url === '/compras' || url === '/compras/consultar' ? <ComprasPDF /> : null}
 
-                {url === '/cotizacion' ?  <CotizacionesPDF /> : <></> }
-                {url === '/cotizacion/consultar' ?  <CotizacionesPDF /> : <></> }
+                {url === '/ventas' || url === '/ventas/consultar' ? <VentasPDF /> : null}
 
-                {url === '/productos' ?  <ProductosPDF /> : <></> }
+                {url === '/cotizacion' || url === '/cotizacion/consultar' ? <CotizacionesPDF /> : null}
 
+                {url === '/productos' ? <ProductosPDF /> : null}
             </div>
         </>
-    )
+    );
 }
+
+export default Pagination;
