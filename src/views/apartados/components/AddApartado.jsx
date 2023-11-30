@@ -181,7 +181,7 @@ const AddApartado = () => {
 
   return (
     <div className="formulario bg-white rounded shadow-sm mb-5">
-      <h2 className="form__title">Añadir Venta</h2>
+      <h2 className="form__title">Añadir Apartado</h2>
       
       <div>
 

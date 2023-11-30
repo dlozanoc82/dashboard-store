@@ -1,7 +1,8 @@
 import { TableBody } from "./TableBody"
 import { TableHead } from "./TableHead"
 import usePagination from "../../hooks/usePagination";
-import { Pagination } from "../Pagination/Pagination";
+import Pagination from "../Pagination/Pagination";
+
 
 export const TableList = () => {
 
