@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState } from 'react';
 import usePagination from "../../hooks/usePagination";
 import useDashborad from "../../hooks/useDashborad";
 import { useResolvedPath } from "react-router-dom";
@@ -13,6 +13,16 @@ const Pagination = () => {
     const url = useResolvedPath("").pathname;
 
     const { currentPage, numbers, prePage, changePage, nextPage, lastIndex, firstIndex, ndata } = usePagination();
+    const [pageTitle, setPageTitle] = useState(titleUrl); //useState para recuperar el modulo en el que esta el usuario
+
+  useEffect(() => {
+    const storedTitle = localStorage.getItem("selectedOption");     //Se accede al almacenamiento local para recuperar el modulo en el que estamos
+    if (storedTitle) {
+      setPageTitle(storedTitle);
+    } else {
+      setPageTitle(titleUrl);
+    }
+  }, [titleUrl]);
 
     // Número máximo de botones de paginación a mostrar
     const maxButtonsToShow = 5;
@@ -49,14 +59,14 @@ const Pagination = () => {
             <div className="pagination">
                 <div className="mb-2">
                     <span>
-                        {titleUrl} del {firstIndex + 1} al {lastIndex} de un total de {ndata}
+                        {pageTitle} del {firstIndex + 1} al {lastIndex} de un total de {ndata}
                     </span>
                 </div>
                 <nav aria-label="Page navigation example">
                     <ul className="pagination justify-content-end">
                         <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
                             <a className="page-link" onClick={prePage}>
-                                Previous
+                                Anterior
                             </a>
                         </li>
                         {visibleButtons.map((n, i) => (
@@ -68,7 +78,7 @@ const Pagination = () => {
                         ))}
                         <li className={`page-item ${currentPage === ndata ? 'disabled' : ''}`}>
                             <a className="page-link" onClick={nextPage}>
-                                Next
+                                Siguiente
                             </a>
                         </li>
                     </ul>

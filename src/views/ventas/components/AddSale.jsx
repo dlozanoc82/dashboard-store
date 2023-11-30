@@ -12,10 +12,9 @@ const AddSale = () => {
     const [cantidad, setCantidad] = useState('');
     const [total, setTotal] = useState('');
     const [productosVentas, setProductosVenta] = useState([]);
+    const [clienteNuevo, setclienteNuevo] = useState('');
 
     const [productosVentasMostrar, setProductosVentaMostrar] = useState([]);
-  
-
 
     const handleChangeMethodPay = (event) => {
         setMetodoPago(event.target.value); // Actualiza el estado cuando se selecciona un nuevo valor
@@ -43,6 +42,7 @@ const AddSale = () => {
 
     const handleSubmitCliente = (e) => {
         e.preventDefault();
+        setCliente('');
         getCliente(documento);
     }
 
@@ -200,7 +200,7 @@ const AddSale = () => {
                     </div>
                     <div className="col-md-4 mb-md-4">
                         <label className="form-label">Cliente</label>
-                        <input  value={cliente.length === 0 ? '' : cliente[0].nombres + ' ' + cliente[0].apellidos} disabled type="text" className="form-control" required />
+                        <input  value={cliente.length == 0 ? 'Usuario no registrado' : cliente[0].nombres + ' ' + cliente[0].apellidos} disabled type="text" className="form-control" required />
                     </div>
                     <div className="col-md-4 d-flex justify-content-start align-items-center mt-2">
                       <button className="btn btn-primary" type="submit">Consultar</button>

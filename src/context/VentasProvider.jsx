@@ -110,8 +110,12 @@ const VentasProvider = ({children}) => {
         const url = `http://localhost/invensoft/ventas?doc=${documento}`;
         const { data } = await axios(url);
         console.log(data);
+        if (data && data.length > 0) {
         setCliente(data);
-        setClienteId(data[0].cod_usu)
+        setClienteId(data[0].cod_usu);
+        }else{
+          
+        }
     } catch (error) {
         console.log(error);
     }
@@ -119,7 +123,7 @@ const VentasProvider = ({children}) => {
 
   //GENERAR PDF
   const generarPDFVentas = () => {
-      const doc = new jsPDF();
+      const doc = new jsPDF('landscape');
 
       // Logo
       const logoUrl = '/logo-circular.png'; // Replace with the path to your logo image
@@ -173,7 +177,7 @@ const VentasProvider = ({children}) => {
   }
 
   const generarPDFComprasByDates = () => {
-      const doc = new jsPDF();
+      const doc = new jsPDF('landscape');
 
       // Logo
       const logoUrl = '/logo-circular.png'; // Replace with the path to your logo image

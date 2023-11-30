@@ -1,3 +1,4 @@
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useDashborad from "../../hooks/useDashborad";
 import { MenuToggle } from "./components/MenuToggle";
@@ -9,7 +10,16 @@ export const Navbar = () => {
   const icon = faUser;
   
   const {titleUrl, handleActiveOption} = useDashborad();
+  const [pageTitle, setPageTitle] = useState(titleUrl); //useState para recuperar el modulo en el que esta el usuario
 
+  useEffect(() => {
+    const storedTitle = localStorage.getItem("selectedOption");     //Se accede al almacenamiento local para recuperar el modulo en el que estamos
+    if (storedTitle) {
+      setPageTitle(storedTitle);
+    } else {
+      setPageTitle(titleUrl);
+    }
+  }, [titleUrl]);
  
 
   return (
@@ -40,7 +50,7 @@ export const Navbar = () => {
                 </ul>
             </div>
         </nav>
-        <h3 className="px-4">¡Bienvenido al modulo de {titleUrl} !</h3>
+        <h3 className="px-4">¡Bienvenido al modulo de {pageTitle} !</h3>
     </>        
   )
 }

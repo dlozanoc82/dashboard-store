@@ -156,7 +156,7 @@ const ClientsPrivider = ({children}) => {
 
     //REPORTES
     const generarPDFClientes = () => {
-        const doc = new jsPDF();
+        const doc = new jsPDF('landscape');
 
         // Logo
         const logoUrl = '/logo-circular.png'; // Replace with the path to your logo image
@@ -165,7 +165,7 @@ const ClientsPrivider = ({children}) => {
         // Title
         const title = 'LISTADO DE CLIENTES';
         doc.text(title, doc.internal.pageSize.width / 2, 28, 'center');
-        
+
         // Date and Time
         const currentDate = new Date();
         const formattedDate = currentDate.toLocaleDateString();
@@ -202,11 +202,11 @@ const ClientsPrivider = ({children}) => {
         });
 
         // Save the PDF
-        doc.save('client_list.pdf');
+        doc.save('lista_clientes.pdf');
     }
 
     const generarPDFClientesByDates = () => {
-        const doc = new jsPDF();
+        const doc = new jsPDF('landscape');
 
         // Logo
         const logoUrl = '/logo-circular.png'; // Replace with the path to your logo image
@@ -252,7 +252,7 @@ const ClientsPrivider = ({children}) => {
         });
 
         // Save the PDF
-        doc.save('client_list_byDates.pdf');
+        doc.save('lista_clientes_filtro.pdf');
     }
 
     return (

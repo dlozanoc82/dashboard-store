@@ -155,7 +155,7 @@ const ProductsProvider = ({children}) => {
 
     //GENERAR PDF
     const generarPDFProductos = () => {
-        const doc = new jsPDF();
+        const doc = new jsPDF('landscape');
     
         // Logo
         const logoUrl = '/logo-circular.png'; // Reemplaza con la ruta de tu imagen de logo
@@ -176,7 +176,7 @@ const ProductsProvider = ({children}) => {
         doc.setFont('normal');
     
         // Tabla
-        const columns = ["Codigo", "Imagen", "Categoria", "Subcategoria", "Producto", "Descripcion", "Estado", "Garantia", "Duracion Garantia", "Stock"];
+        const columns = ["Codigo", "Categoria", "Subcategoria", "Producto", "Descripcion", "Estado", "Garantia", "Duracion Garantia", "Stock"];
     
         // Datos
         const data = [];
@@ -184,17 +184,17 @@ const ProductsProvider = ({children}) => {
             // Suponiendo que product.imagen de la API ya está en formato base64
             data.push([
                 index + 1, // Índice + 1 para comenzar la numeración desde 1
-                {
+              /*  {
                     image: product.base64Image, // Suponiendo que product.imagen de la API ya está en formato base64
                     width: 30, // Ajusta el ancho según sea necesario
                     height: 30 // Ajusta la altura según sea necesario
-                },
+                },*/
                 product.nom_cat,
                 product.nom_sub,
                 product.nombre,
                 product.descripcion,
-                product.estado === 1 ? 'ACTIVO' : 'INACTIVO',
-                product.garantia,
+                product.estado == 1 ? 'ACTIVO' : 'INACTIVO',
+                product.garantia == 1 ? 'Si' : 'No',
                 product.duracion_garantia,
                 product.stock
             ]);
@@ -205,12 +205,12 @@ const ProductsProvider = ({children}) => {
             head: [columns],
             body: data,
             startY: 45, // Ajusta startY según sea necesario
-            columnStyles: {
+            /*columnStyles: {
                 1: { // Suponiendo que "Imagen" está en la segunda columna (índice 1)
                     cellWidth: 30, // Ajusta el ancho según sea necesario
                     cellPadding: 1 // Ajusta el relleno según sea necesario
                 }
-            }
+            }*/
         });
     
         // Guardar el PDF

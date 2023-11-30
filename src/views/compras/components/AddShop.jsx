@@ -448,7 +448,7 @@ export const AddShop = () => {
                                         >
                                             <option value="0">Seleccione una opción</option>
                                             {productsBySubCategory.map((product) => (
-                                                <option key={product.cod_pro} value={product.cod_pro}>{product.nombre}</option>
+                                                <option key={product.cod_pro} value={product.cod_pro}>Cod: {product.cod_pro} - {product.nombre}</option>
                                             ))}
                                         </select>
                                     ) : (
@@ -496,9 +496,9 @@ export const AddShop = () => {
                             </div>
 
                             <div className="col-12 d-flex justify-content-center gap-3 mb-3">
-                                <p className="text-center">NOTA: RECUERDA QUE DEBES AÑADIR EL PRODUCTO Y DESPUÉS HACER LA COMPRA
+                                <p className="text-center">NOTA: AÑADE EL PRODUCTO ANTES DE HACER LA COMPRA.
                                     {' '}
-                                    <a href="/productos/agregar"><strong>DA CLICK AQUI</strong></a> SI NO LO HAS AGREGADO
+                                    <a href="/productos/agregar"><strong>DA CLICK AQUI</strong></a> SI ES NUEVO
                                 </p>
                             </div>
 

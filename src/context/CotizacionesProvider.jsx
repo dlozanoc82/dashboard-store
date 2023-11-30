@@ -64,7 +64,7 @@ const CotizacionesProvider = ({children}) => {
 
   // GENERAR PDF
   const generarPDFCotizaciones = () => {
-    const doc = new jsPDF();
+    const doc = new jsPDF('landscape');
 
     // Logo
     const logoUrl = '/logo-circular.png'; // Replace with the path to your logo image
@@ -117,7 +117,7 @@ const CotizacionesProvider = ({children}) => {
   }
 
   const generarPDFCotizacionesByDates = () => {
-    const doc = new jsPDF();
+    const doc = new jsPDF('landscape');
 
     // Logo
     const logoUrl = '/logo-circular.png'; // Replace with the path to your logo image
