@@ -124,7 +124,7 @@ const AddApartado = () => {
                     </tbody>
                 </table>
 
-                <form onSubmit={finalizarVenta}>
+                <form onSubmit={finalizarApartado}>
                     <div className="col-md-4 mb-md-4">
                         <label className="form-label">Tipo de Pago *</label>
                         <select className="form-select" value={metodoPago} onChange={handleChangeMethodPay} required>
@@ -143,23 +143,17 @@ const AddApartado = () => {
     };
 
     
-    const finalizarVenta = async (e) => {
+    const finalizarApartado = async (e) => {
         e.preventDefault();
 
          // Crea el objeto JSON con la información de la venta
         const ventaJson = {
-            ventas: [
-            {
-                cod_pago: metodoPago,
-                precio_total: productosVentas.reduce((total, producto) => total + producto.precio_total, 0),
-            },
-            ],
             items: productosVentas,
         };
 
         try {
             // Realiza la solicitud POST al endpoint con el objeto JSON como datos
-            const respuesta = await axios.post(`http://localhost/invensoft/ventas?cod_usu=${clienteId}`, ventaJson);
+            const respuesta = await axios.post(`http://localhost/invensoft/apartados?cod_usu=${clienteId}`, ventaJson);
             console.log(respuesta);
             // Reinicia los estados después de completar la venta
             Swal.fire({

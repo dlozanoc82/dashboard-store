@@ -8,6 +8,8 @@ const TableItemApartados = ({info}) => {
 
     const {cod_pedido,fecha_abono, nombre, nombres, apellidos, documento, cantidad, valor_unit, cod_pago, total, saldo_restante, valor_abono} = info;
 
+    const tipoPago = cod_pago === 1 ? 'Nequi' : (cod_pago === 2 ? 'Daviplata' : 'Efectivo');
+
   return (
     <>
         <td><center>{cod_pedido}</center></td>
@@ -16,7 +18,7 @@ const TableItemApartados = ({info}) => {
         <td><center>{documento}</center></td>
         <td><center>{cantidad}</center></td>
         <td><center>{formatearCantidad(valor_unit)}</center></td>
-        <td><center>{cod_pago}</center></td>
+        <td><center>{tipoPago}</center></td>
         <td><center>{formatDateAndTime(fecha_abono)}</center></td>
         <td><center>{formatearCantidad(valor_abono)}</center></td>
         <td><center>{formatearCantidad(total)}</center></td>
