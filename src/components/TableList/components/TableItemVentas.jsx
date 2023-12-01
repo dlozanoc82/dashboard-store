@@ -16,6 +16,8 @@ const TableItemVentas = ({info}) => {
         valor_total_producto,
         valor_venta} = info;
 
+    const tipoPago = cod_pago === 1 ? 'Nequi' : (cod_pago === 2 ? 'Daviplata' : 'Efectivo');
+
   return (
     <>
         <td><center>{cod_ven}</center></td>
@@ -25,7 +27,7 @@ const TableItemVentas = ({info}) => {
         <th><center>{nombre}</center></th>
         <td><center>{cantidad}</center></td>
         <td><center>{formatearCantidad(valor_venta)}</center></td>
-        <td><center>{cod_pago}</center></td>
+        <td><center>{tipoPago}</center></td>
         <td><center>{formatearCantidad(valor_total_producto)}</center></td>
         <td><center>{formatearCantidad(ganancias)}</center></td>
     </>

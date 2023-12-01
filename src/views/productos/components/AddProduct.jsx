@@ -2,9 +2,11 @@ import { useState } from "react";
 import useProducts from "../../../hooks/useProducts";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 export const AddProduct = () => {
-    const { categorias, setIdSubcategoria, subcategorias } = useProducts();
+    const { categorias, setIdSubcategoria, subcategorias, getProductosByModificar} = useProducts();
+    const navigate = useNavigate();
 
     const [selectCategory, setSelectCategory] = useState(''); // Estado para mantener el valor seleccionado
     const [selectSubCategory, setSelectSubCategory] = useState(''); // Estado para mantener el valor seleccionado
@@ -106,7 +108,11 @@ export const AddProduct = () => {
             });
 
             //console.log(respuesta);
+            getProductosByModificar();
             clearInputs();
+            setTimeout(() => {
+                navigate('/productos');
+            }, 2000);
         } catch (error) {
             //console.log(error.response);
             Swal.fire({
