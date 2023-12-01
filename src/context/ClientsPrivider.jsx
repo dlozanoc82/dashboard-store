@@ -65,8 +65,16 @@ const ClientsPrivider = ({ children }) => {
             const url = `http://localhost/invensoft/clientes?fecha_ini=${fechaInicial}&fecha_fin=${fechaFinal}`;
             const { data } = await axios(url);
             console.log(data);
+            // Verificar si hay información en 'data'
+        if (data && data.length > 0) {
             setClientesByDates(data);
             setCliente({});
+        }else{
+            Swal.fire({
+                icon: 'info',
+                title: 'No hay datos en ese intervalo de fechas',
+                });
+        }
         } catch (error) {
             console.log(error);
         }
@@ -100,14 +108,14 @@ const ClientsPrivider = ({ children }) => {
         try {
             const estado = status === 'INACTIVO' ? 0 : 1;
             console.log({ estado, status });
-            let confirmado = await Swal.fire({
+        /*    let confirmado = await Swal.fire({
                 title: "¿Esta seguro de actualizar datos?",
                 showDenyButton: true,
                 showCancelButton: false,
                 confirmButtonText: "Si",
                 denyButtonText: `No`
             });
-            if (confirmado.isConfirmed) {
+            if (confirmado.isConfirmed) {*/
                 const respuesta = await axios.put(`http://localhost/invensoft/clientes?cod_usu=${cod_usu}`, { documento, nombres, apellidos, celular, direccion, correo, contrasena, estado });
                 Swal.fire({
                     icon: 'success',
@@ -119,10 +127,9 @@ const ClientsPrivider = ({ children }) => {
                 setTimeout(() => {
                     navigate('/clientes');
                   }, 2000);
-            } else {
-                Swal.fire("Operación detenida", "", "info");
-            }
-
+          //  } else {
+            //    Swal.fire("Operación detenida", "", "info");
+            //}
             
             //setCliente({});
         } catch (error) {

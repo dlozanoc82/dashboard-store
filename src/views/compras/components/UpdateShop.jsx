@@ -30,7 +30,7 @@ export const UpdateShop = ({compra}) => {
     const precioUnitarioRef = useRef(null);
     const precioCompraRef = useRef(null);
     const precioCompraVenta = useRef(null);
-    const buttonAgregar = useRef(null);
+    //const buttonAgregar = useRef(null);
 
     const [selectCategory, setSelectCategory] = useState(compra.cod_cat); // Estado para mantener el valor seleccionado
     const [selectSubCategory, setSelectSubCategory] = useState(compra.cod_sub); // Estado para mantener el valor seleccionado
@@ -48,7 +48,7 @@ export const UpdateShop = ({compra}) => {
         }else{
         setIdSubcategoria(event.target.value); // Se envia el id de la Categoria
         }
-        console.log(event.target.value);
+        //console.log(event.target.value);
 
     };
 
@@ -131,6 +131,7 @@ export const UpdateShop = ({compra}) => {
                 precioUnitarioRef.current.style.borderColor = '';
                 precioCompraRef.current.style.borderColor = '';
                 nombreSubcategoriaRef.current.style.borderColor = '';
+                precioCompraVenta.current.style.borderColor = '';
                 nombreCategoriaRef.current.focus();
                 nombreCategoriaRef.current.style.borderColor = 'red';
                 Swal.fire({
@@ -147,6 +148,7 @@ export const UpdateShop = ({compra}) => {
                 nombreCategoriaRef.current.style.borderColor = '';
                 nombreProductoRef.current.style.borderColor = '';
                 nombreProveedorRef.current.style.borderColor = '';
+                precioCompraVenta.current.style.borderColor = '';
                 cantidadRef.current.style.borderColor = '';
                 precioUnitarioRef.current.style.borderColor = '';
                 precioCompraRef.current.style.borderColor = '';
@@ -166,6 +168,7 @@ export const UpdateShop = ({compra}) => {
                 nombreSubcategoriaRef.current.style.borderColor = '';
                 nombreProveedorRef.current.style.borderColor = '';
                 cantidadRef.current.style.borderColor = '';
+                precioCompraVenta.current.style.borderColor = '';
                 precioUnitarioRef.current.style.borderColor = '';
                 precioCompraRef.current.style.borderColor = '';
                 nombreProductoRef.current.focus();
@@ -183,6 +186,7 @@ export const UpdateShop = ({compra}) => {
                 nombreSubcategoriaRef.current.style.borderColor = '';
                 nombreProveedorRef.current.style.borderColor = '';
                 cantidadRef.current.style.borderColor = '';
+                precioCompraVenta.current.style.borderColor = '';
                 precioUnitarioRef.current.style.borderColor = '';
                 precioCompraRef.current.style.borderColor = '';
                 nombreProductoRef.current.focus();
@@ -200,6 +204,7 @@ export const UpdateShop = ({compra}) => {
                 nombreSubcategoriaRef.current.style.borderColor = '';
                 nombreProductoRef.current.style.borderColor = '';
                 cantidadRef.current.style.borderColor = '';
+                precioCompraVenta.current.style.borderColor = '';
                 precioUnitarioRef.current.style.borderColor = '';
                 precioCompraRef.current.style.borderColor = '';
                 nombreProveedorRef.current.focus();
@@ -218,6 +223,7 @@ export const UpdateShop = ({compra}) => {
                 nombreSubcategoriaRef.current.style.borderColor = '';
                 nombreProductoRef.current.style.borderColor = '';
                 cantidadRef.current.style.borderColor = '';
+                precioCompraVenta.current.style.borderColor = '';
                 precioUnitarioRef.current.style.borderColor = '';
                 precioCompraRef.current.style.borderColor = '';
                 nombreProveedorRef.current.focus();
@@ -237,6 +243,7 @@ export const UpdateShop = ({compra}) => {
                 nombreSubcategoriaRef.current.style.borderColor = '';
                 nombreProductoRef.current.style.borderColor = '';
                 nombreProveedorRef.current.style.borderColor = '';
+                precioCompraVenta.current.style.borderColor = '';
                 precioUnitarioRef.current.style.borderColor = '';
                 precioCompraRef.current.style.borderColor = '';
                 cantidadRef.current.focus();
@@ -255,6 +262,7 @@ export const UpdateShop = ({compra}) => {
                 nombreSubcategoriaRef.current.style.borderColor = '';
                 nombreProductoRef.current.style.borderColor = '';
                 nombreProveedorRef.current.style.borderColor = '';
+                precioCompraVenta.current.style.borderColor = '';
                 precioUnitarioRef.current.style.borderColor = '';
                 precioCompraRef.current.style.borderColor = '';
                 cantidadRef.current.focus();
@@ -274,6 +282,7 @@ export const UpdateShop = ({compra}) => {
                 nombreProductoRef.current.style.borderColor = '';
                 nombreProveedorRef.current.style.borderColor = '';
                 precioCompraRef.current.style.borderColor = '';
+                precioCompraVenta.current.style.borderColor = '';
                 precioUnitarioRef.current.style.borderColor = '';
                 cantidadRef.current.focus();
                 cantidadRef.current.style.borderColor = 'red';
@@ -292,6 +301,7 @@ export const UpdateShop = ({compra}) => {
                 nombreProductoRef.current.style.borderColor = '';
                 nombreProveedorRef.current.style.borderColor = '';
                 cantidadRef.current.style.borderColor = '';
+                precioCompraVenta.current.style.borderColor = '';
                 precioCompraRef.current.style.borderColor = '';
                 precioUnitarioRef.current.focus();
                 precioUnitarioRef.current.style.borderColor = 'red';
@@ -310,6 +320,7 @@ export const UpdateShop = ({compra}) => {
                 nombreProductoRef.current.style.borderColor = '';
                 nombreProveedorRef.current.style.borderColor = '';
                 cantidadRef.current.style.borderColor = '';
+                precioCompraVenta.current.style.borderColor = '';
                 precioCompraRef.current.style.borderColor = '';
                 precioUnitarioRef.current.focus();
                 precioUnitarioRef.current.style.borderColor = 'red';
@@ -328,6 +339,7 @@ export const UpdateShop = ({compra}) => {
                 nombreProductoRef.current.style.borderColor = '';
                 nombreProveedorRef.current.style.borderColor = '';
                 cantidadRef.current.style.borderColor = '';
+                precioCompraVenta.current.style.borderColor = '';
                 precioCompraRef.current.style.borderColor = '';
                 precioUnitarioRef.current.focus();
                 precioUnitarioRef.current.style.borderColor = 'red';
@@ -346,6 +358,7 @@ export const UpdateShop = ({compra}) => {
                 nombreProductoRef.current.style.borderColor = '';
                 nombreProveedorRef.current.style.borderColor = '';
                 cantidadRef.current.style.borderColor = '';
+                precioCompraVenta.current.style.borderColor = '';
                 precioUnitarioRef.current.style.borderColor = '';
                 precioCompraRef.current.focus();
                 precioCompraRef.current.style.borderColor = 'red';
@@ -363,6 +376,7 @@ export const UpdateShop = ({compra}) => {
                 nombreProductoRef.current.style.borderColor = '';
                 nombreProveedorRef.current.style.borderColor = '';
                 cantidadRef.current.style.borderColor = '';
+                precioCompraVenta.current.style.borderColor = '';
                 precioUnitarioRef.current.style.borderColor = '';
                 precioCompraRef.current.focus();
                 precioCompraRef.current.style.borderColor = 'red';
@@ -381,6 +395,7 @@ export const UpdateShop = ({compra}) => {
                 nombreProductoRef.current.style.borderColor = '';
                 nombreProveedorRef.current.style.borderColor = '';
                 cantidadRef.current.style.borderColor = '';
+                precioCompraVenta.current.style.borderColor = '';
                 precioUnitarioRef.current.style.borderColor = '';
                 precioCompraRef.current.focus();
                 precioCompraRef.current.style.borderColor = 'red';
@@ -388,6 +403,42 @@ export const UpdateShop = ({compra}) => {
                     icon: 'error',
                     title: 'Error',
                     text: 'El precio de la compra debe ser un numero entero',
+                });
+                return;
+            }
+            if (!solo_numeros.test(precioCompraVenta) || precioCompraVenta<1000) {
+                nombreCategoriaRef.current.style.borderColor = '';
+                nombreSubcategoriaRef.current.style.borderColor = '';
+                nombreProductoRef.current.style.borderColor = '';
+                nombreProveedorRef.current.style.borderColor = '';
+                cantidadRef.current.style.borderColor = '';
+                precioCompraRef.current.style.borderColor = '';
+                precioUnitarioRef.current.style.borderColor = '';
+                precioCompraVenta.current.focus();
+                precioCompraVenta.current.style.borderColor = 'red';
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'El precio de la compra debe ser un numero entero',
+                });
+                return;
+            }
+
+            //Si el precio de venta es menor al que el usuario hizo la compra
+            if (precioCompraVenta<precioCompra) {
+                nombreCategoriaRef.current.style.borderColor = '';
+                nombreSubcategoriaRef.current.style.borderColor = '';
+                nombreProductoRef.current.style.borderColor = '';
+                nombreProveedorRef.current.style.borderColor = '';
+                cantidadRef.current.style.borderColor = '';
+                precioCompraRef.current.style.borderColor = '';
+                precioUnitarioRef.current.style.borderColor = '';
+                precioCompraVenta.current.focus();
+                precioCompraVenta.current.style.borderColor = 'red';
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'El precio de la venta debe ser mayor al precio de la compra',
                 });
                 return;
             }
@@ -417,6 +468,7 @@ export const UpdateShop = ({compra}) => {
         cantidadRef.current.style.borderColor = '';
         precioUnitarioRef.current.style.borderColor = '';
         precioCompraRef.current.style.borderColor = '';
+        precioCompraVenta.current.style.borderColor = '';
     }
 } catch (error) {
     console.log(error);

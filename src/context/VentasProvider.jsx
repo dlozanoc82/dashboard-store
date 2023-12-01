@@ -97,7 +97,15 @@ const VentasProvider = ({children}) => {
         const url = `http://localhost/invensoft/ventas?productos=${cod_pro}`;
         const { data } = await axios(url);
         console.log(data);
+        if(data && data.length>0){
         setProducto(data);
+        }else{
+          Swal.fire({
+            icon: 'info',
+            title: 'Producto no encontrado',
+            text: 'El producto no se encuentra, código incorrecto o stock agotado',
+            });
+        }
     } catch (error) {
         console.log(error);
     }
@@ -114,6 +122,11 @@ const VentasProvider = ({children}) => {
         setCliente(data);
         setClienteId(data[0].cod_usu);
         }else{
+          Swal.fire({
+            icon: 'info',
+            title: 'Documento no encontrado',
+            text: 'El usuario no se encuentra registrado o el documento es incorrecto',
+            });
           
         }
     } catch (error) {

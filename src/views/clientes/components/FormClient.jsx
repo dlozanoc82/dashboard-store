@@ -7,7 +7,7 @@ const FormClient = () => {
 
   const { cliente } = useClients();
   
-  console.log(cliente.length);
+  //console.log(cliente.length);
 
   return (
     <>

@@ -1,12 +1,21 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import useProducts from "../../../hooks/useProducts";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
 export const AddProduct = () => {
-    const { categorias, setIdSubcategoria, subcategorias, getProductosByModificar} = useProducts();
+    const { categorias, setIdSubcategoria, subcategorias, getProductosByModificar } = useProducts();
     const navigate = useNavigate();
+    const texto_numeros = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüñÑ]+$/;
+
+    const nombreCategoriaRef = useRef(null);
+    const nombreSubcategoriaRef = useRef(null);
+    const nombreProductoRef = useRef(null);
+    const descripcionRef = useRef(null);
+    const garantiaRef = useRef(null);
+    const duracionGarantiaRef = useRef(null);
+    const imagenRef = useRef(null);
 
     const [selectCategory, setSelectCategory] = useState(''); // Estado para mantener el valor seleccionado
     const [selectSubCategory, setSelectSubCategory] = useState(''); // Estado para mantener el valor seleccionado
@@ -50,15 +59,19 @@ export const AddProduct = () => {
     const handleImagenChange = (e) => {
         const file = e.target.files[0];
 
-        setImage2(file);
+        if (file) {
+            setImage2(file);
 
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
 
-        reader.onloadend = () => {
-            const base64data = reader.result;
-            setImage(base64data);
-        };
+            reader.onloadend = () => {
+                const base64data = reader.result;
+                setImage(base64data);
+            };
+        } else {
+            setImage('');
+        }
 
     };
 
@@ -73,28 +86,121 @@ export const AddProduct = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        //Otro metodo para cargar imagen al servidor con base64:
-        //const reader = new FileReader();
-        //reader.readAsDataURL(img2);
+        //Validacion de campos:
+        // Validar que los campos obligatorios no estén vacíos
+        if (!selectCategory || selectCategory === '0') {
 
-        //reader.onloadend = () => {
-        //const base64data = reader.result;
-        //setImage(base64data);
+            nombreSubcategoriaRef.current.style.borderColor = '';
+            nombreProductoRef.current.style.borderColor = '';
+            descripcionRef.current.style.borderColor = '';
+            garantiaRef.current.style.borderColor = '';
+            duracionGarantiaRef.current.style.borderColor = '';
+            imagenRef.current.style.borderColor = '';
+            nombreCategoriaRef.current.focus();
+            nombreCategoriaRef.current.style.borderColor = 'red';
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'No ha seleccionado la Categoría',
+            })
 
-        //try {
-        //  console.log('Respuesta de la API:', img);
-        //} catch (error) {
-        //console.error('Error al enviar la imagen:', error);
-        //}
-        //};
+            return;
+        }
 
+        if (!selectSubCategory || selectSubCategory === '0') {
+
+            nombreCategoriaRef.current.style.borderColor = '';
+            nombreProductoRef.current.style.borderColor = '';
+            descripcionRef.current.style.borderColor = '';
+            garantiaRef.current.style.borderColor = '';
+            duracionGarantiaRef.current.style.borderColor = '';
+            imagenRef.current.style.borderColor = '';
+            nombreSubcategoriaRef.current.focus();
+            nombreSubcategoriaRef.current.style.borderColor = 'red';
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'No ha seleccionado la subcategoría',
+            })
+
+            return;
+        }
+
+        if (!texto_numeros.test(nombreProducto) || nombreProducto.length < 6) {
+            nombreCategoriaRef.current.style.borderColor = '';
+            nombreSubcategoriaRef.current.style.borderColor = '';
+            descripcionRef.current.style.borderColor = '';
+            garantiaRef.current.style.borderColor = '';
+            duracionGarantiaRef.current.style.borderColor = '';
+            imagenRef.current.style.borderColor = '';
+            nombreProductoRef.current.focus();
+            nombreProductoRef.current.style.borderColor = 'red';
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'El nombre del producto es corto y/o tiene caracteres especiales',
+            })
+            return;
+        }
+
+        if (!texto_numeros.test(descripcion)) {
+            nombreCategoriaRef.current.style.borderColor = '';
+            nombreSubcategoriaRef.current.style.borderColor = '';
+            nombreProductoRef.current.style.borderColor = '';
+            garantiaRef.current.style.borderColor = '';
+            duracionGarantiaRef.current.style.borderColor = '';
+            imagenRef.current.style.borderColor = '';
+            descripcionRef.current.focus();
+            descripcionRef.current.style.borderColor = 'red';
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'La descripción esta muy corta o tiene caracteres no válidos',
+            });
+            return;
+        }
+
+        if (!garantia || (garantia !== '0' && garantia !== '1')) {
+            nombreCategoriaRef.current.style.borderColor = '';
+            nombreSubcategoriaRef.current.style.borderColor = '';
+            nombreProductoRef.current.style.borderColor = '';
+            descripcionRef.current.style.borderColor = '';
+            duracionGarantiaRef.current.style.borderColor = '';
+            imagenRef.current.style.borderColor = '';
+            garantiaRef.current.focus();
+            garantiaRef.current.style.borderColor = 'red';
+            //console.log(nombreProducto);
+            //nombreProductoRef.current.classList.add('custom-focus');
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'No ha seleccionado la garantía',
+            });
+            return;
+        }
+        if (!texto_numeros.test(duracionGarantia) && garantia == 1) {
+            nombreCategoriaRef.current.style.borderColor = '';
+            nombreSubcategoriaRef.current.style.borderColor = '';
+            nombreProductoRef.current.style.borderColor = '';
+            garantiaRef.current.style.borderColor = '';
+            descripcionRef.current.style.borderColor = '';
+            imagenRef.current.style.borderColor = '';
+            duracionGarantiaRef.current.focus();
+            duracionGarantiaRef.current.style.borderColor = 'red';
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'La duración de la garantía es muy corta o lleva caracteres especiales',
+            });
+            return;
+        }
 
         // Crear el producto en la API
         try {
             const subcategoria = selectSubCategory;
             const nom_pro = nombreProducto;
             const duracion_garantia = duracionGarantia;
-            console.log(img);
+            //console.log(img);
 
             const respuesta = await axios.post('http://localhost/invensoft/productos', { subcategoria, nom_pro, descripcion, img, garantia, duracion_garantia }, {
 
@@ -115,11 +221,20 @@ export const AddProduct = () => {
             }, 2000);
         } catch (error) {
             //console.log(error.response);
+            nombreCategoriaRef.current.style.borderColor = '';
+            nombreSubcategoriaRef.current.style.borderColor = '';
+            nombreProductoRef.current.style.borderColor = '';
+            garantiaRef.current.style.borderColor = '';
+            descripcionRef.current.style.borderColor = '';
+            duracionGarantiaRef.current.style.borderColor = '';
+            imagenRef.current.focus();
+            imagenRef.current.style.borderColor = 'red';
             Swal.fire({
                 icon: 'error',
                 title: 'Archivo incorrecto',
                 text: 'Solo se permite imagenes',
             });
+
         }
     };
 
@@ -139,7 +254,7 @@ export const AddProduct = () => {
 
                                 <div className="col-md-4 mb-md-4">
                                     <label className="form-label">Categoria *</label>
-                                    <select className="form-select" value={selectCategory} onChange={handleChangeCategory}>
+                                    <select className="form-select" value={selectCategory} onChange={handleChangeCategory} ref={nombreCategoriaRef}>
                                         <option value='0'>Seleccione una opción</option>
                                         {categorias.map((categoria) =>
                                             <option key={categoria.cod_cat} value={categoria.cod_cat}>{categoria.nom_cat}</option>)
@@ -149,7 +264,7 @@ export const AddProduct = () => {
 
                                 <div className="col-md-4 mb-md-4">
                                     <label className="form-label">Subcategoria *</label>
-                                    <select className="form-select" value={selectSubCategory} onChange={handleChangeSubCategory}>
+                                    <select className="form-select" value={selectSubCategory} onChange={handleChangeSubCategory} ref={nombreSubcategoriaRef}>
                                         <option value=''>Seleccione una opción</option>
                                         {subcategorias.map((subcategoria) =>
                                             <option key={subcategoria.cod_sub} value={subcategoria.cod_sub}>{subcategoria.nom_sub}</option>)
@@ -159,31 +274,31 @@ export const AddProduct = () => {
 
                                 <div className="col-md-4 mb-md-4">
                                     <label className="form-label">Nombre del Producto *</label>
-                                    <input type="text" value={nombreProducto} onChange={handleChangeNombre} className="form-control" required />
+                                    <input type="text" value={nombreProducto} onChange={handleChangeNombre} className="form-control" ref={nombreProductoRef} required/>
                                 </div>
 
                                 <div className="col-md-4 mb-md-4">
                                     <label className="form-label">Descripcion del Producto</label>
-                                    <input value={descripcion} onChange={handleChangeDescripcion} type="text" className="form-control" />
+                                    <input value={descripcion} onChange={handleChangeDescripcion} type="text" className="form-control" ref={descripcionRef} />
                                 </div>
 
                                 <div className="col-md-4 mb-md-4">
                                     <label className="form-label">Garantia *</label>
-                                    <select className="form-select" value={garantia} onChange={handleChangeGarantia}>
+                                    <select className="form-select" value={garantia} onChange={handleChangeGarantia} ref={garantiaRef}>
                                         <option value=''>Seleccione una opción</option>
                                         <option value='1'>Si</option>
-                                        <option value='2'>No</option>
+                                        <option value='0'>No</option>
                                     </select>
                                 </div>
 
                                 <div className="col-md-4 mb-md-4">
                                     <label className="form-label">Duracion de la Garantia</label>
-                                    <input value={duracionGarantia} onChange={handleChangeDuracionGarantia} type="text" className="form-control" />
+                                    <input value={duracionGarantia} onChange={handleChangeDuracionGarantia} type="text" className="form-control" ref={duracionGarantiaRef} />
                                 </div>
 
                                 <div className="col-md-4 mb-md-4">
                                     <label className="form-label">Imagen</label>
-                                    <input onChange={handleImagenChange} type="file" accept="image/*" className="form-control" />
+                                    <input onChange={handleImagenChange} type="file" accept="image/*" className="form-control" ref={imagenRef} />
                                 </div>
 
 

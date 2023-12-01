@@ -85,7 +85,7 @@ const AddApartado = () => {
             ]);
 
             Swal.fire({
-                title: "Producto Aregado Correctamente",
+                title: "Producto Agregado Correctamente",
                 icon: "success"
             });
     

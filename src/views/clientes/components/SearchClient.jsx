@@ -14,8 +14,8 @@ const SearchClient = () => {
     const handleSearchByDates = async (e) => {
         e.preventDefault();
         getClientsByDates(fechaInicial, fechaFinal);
-        setFechaInicial('');
-        setFechaFinal('');
+        //setFechaInicial('');
+        //setFechaFinal('');
     }
 
   return (

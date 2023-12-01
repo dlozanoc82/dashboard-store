@@ -1,9 +1,15 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import useVentas from '../../../hooks/useVentas';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
 const AddSale = () => {
+
+    const solo_numeros = /^[0-9]*$/; // Expresión regular para permitir solo números
+
+    const documentoRef = useRef(null);
+    const cod_proRef = useRef(null);
+    const cant_prodRef = useRef(null);
 
     const {getCliente, cliente, getProductAdd, producto, clienteId, getVentas, setProducto, setCliente} = useVentas();
     const [documento, setDocumento] = useState('');
@@ -40,7 +46,23 @@ const AddSale = () => {
     }
 
     const handleSubmitCliente = (e) => {
+        //Este metodo me consulta el usuario
         e.preventDefault();
+
+        if (!solo_numeros.test(documento)) {
+            //documentoRef.current.style.borderColor = '';
+            cod_proRef.current.style.borderColor = '';
+            cant_prodRef.current.style.borderColor = '';
+            documentoRef.current.focus();
+            documentoRef.current.style.borderColor = 'red';
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'El campo documento debe ser númerico',
+              });
+            return;
+      
+          }
         setCliente('');
         getCliente(documento);
     }
@@ -53,14 +75,70 @@ const AddSale = () => {
 
     const handleSubmitProduct = (e) => {
         e.preventDefault();
+        //Validacion de ingresar solo numeros en el campo de consultar productos
+        if (!solo_numeros.test(codProducto)) {
+            //documentoRef.current.style.borderColor = '';
+            documentoRef.current.style.borderColor = '';
+            cant_prodRef.current.style.borderColor = '';
+            cod_proRef.current.focus();
+            cod_proRef.current.style.borderColor = 'red';
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'El campo documento debe ser númerico',
+              });
+            return;
+      
+          }
         getProductAdd(codProducto)
     }
 
     const addItem = async (e) => {
         e.preventDefault();
+        //Agregar item al carrito o a la lista de productos
+        if (!solo_numeros.test(cantidad) || cantidad<0) {
+            //documentoRef.current.style.borderColor = '';
+            documentoRef.current.style.borderColor = '';
+            cod_proRef.current.style.borderColor = '';
+            cant_prodRef.current.focus();
+            cant_prodRef.current.style.borderColor = 'red';
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'El campo cantidad debe ser un número positivo',
+              });
+            return;
+      
+          }
+          if (isNaN(cantidad)) {
+            documentoRef.current.style.borderColor = '';
+            cod_proRef.current.style.borderColor = '';
+            cant_prodRef.current.focus();
+            cant_prodRef.current.style.borderColor = 'red';
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'La cantidad es incorrecta',
+              });
+            return;
+          }
+
+        if(producto[0].stock<cantidad){
+            documentoRef.current.style.borderColor = '';
+            cod_proRef.current.style.borderColor = '';
+            cant_prodRef.current.focus();
+            cant_prodRef.current.style.borderColor = 'red';
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'La cantidad excede el stock disponible',
+              });
+            return;
+        }
 
         // Verifica que haya un producto y una cantidad válida
-        if (cantidad > 0) {
+        if (cantidad > 0 && producto[0].stock<cantidad) {
+            console.log(producto[0]);
     
             // Utiliza el estado anterior para asegurar la actualización correcta
             setProductosVenta(prevProductos => [
@@ -85,7 +163,7 @@ const AddSale = () => {
             ]);
 
             Swal.fire({
-                title: "Producto Aregado Correctamente",
+                title: "Producto Agregado Correctamente",
                 icon: "success"
             });
     
@@ -94,6 +172,14 @@ const AddSale = () => {
             setCantidad('');
             setProducto([]);
             setTotal('');
+        }else{
+            console.log(producto[0].stock);
+            console.log(cantidad);
+            Swal.fire({
+                icon: 'info',
+                title: 'Exceso de Stock',
+                text: 'No hay productos disponibles',
+                });
         }
     }
 
@@ -128,7 +214,7 @@ const AddSale = () => {
                     <div className="col-md-4 mb-md-4">
                         <label className="form-label">Tipo de Pago *</label>
                         <select className="form-select" value={metodoPago} onChange={handleChangeMethodPay} required>
-                            <option value="">Seleccione una opción</option>
+                            <option value="0">Seleccione una opción</option>
                             <option value="1">Nequi</option>
                             <option value="2">DaviPlata</option>
                             <option value="3">Efectivo</option>
@@ -195,7 +281,7 @@ const AddSale = () => {
                   <div className="row p-2 mb-3">
                     <div className="col-md-4 mb-md-4">
                         <label className="form-label">Numero de Documento *</label>
-                        <input value={documento} onChange={handleDocumento} type="number" className="form-control" required />
+                        <input value={documento} onChange={handleDocumento} type="number" className="form-control" ref={documentoRef}  required  />
                     </div>
                     <div className="col-md-4 mb-md-4">
                         <label className="form-label">Cliente</label>
@@ -226,7 +312,7 @@ const AddSale = () => {
                 <div className="row p-2 mb-3">
                 <div className="col-md-4 mb-md-4">
                     <label className="form-label">Codigo del Producto *</label>
-                    <input value={codProducto} onChange={handleCodProducto} type="number" className="form-control" required />
+                    <input value={codProducto} onChange={handleCodProducto} type="number" className="form-control" ref={cod_proRef}  required />
                 </div>
                 {/* <div className="col-md-4 mb-md-4">
                     <label className="form-label">Cliente</label>
@@ -271,7 +357,7 @@ const AddSale = () => {
 
                   <div className="col-md-4 mb-md-4">
                       <label className="form-label">Cantidad de Productos *</label>
-                      <input type="number" value={cantidad} onChange={handleChangeCantidad} className="form-control" min={1} required />
+                      <input type="number" value={cantidad} onChange={handleChangeCantidad} className="form-control" min={1} ref={cant_prodRef}  required />
                   </div>
 
                   <div className="col-md-4 mb-md-4">
