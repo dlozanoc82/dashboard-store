@@ -20,10 +20,11 @@ export const SearchShop = () => {
                 title: 'Error',
                 text: 'La fecha inicial no puede ser mayor a la fecha final',
             })
-        }
+        }else{
         getComprasByDates(fechaInicial, fechaFinal);
         //setFechaInicial('');
         //setFechaFinal('');
+        }
     }
 
   return (

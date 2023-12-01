@@ -97,6 +97,12 @@ const ComprasProvider = ({children}) => {
             console.log('compras por fecha')
             console.log(data);
             setComprasByDates(data);
+            if (data && data.length == 0) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'No hay registros entre esas fechas',
+                })
+            }
         } catch (error) {
             console.log(error);
         }
