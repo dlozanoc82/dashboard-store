@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 import useProducts from '../../../hooks/useProducts';
 import Swal from 'sweetalert2';
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 const UpdateProduct = ({product}) => {
-    const { categorias, setIdSubcategoria, subcategorias, getSubCategorias } = useProducts();
+    const { categorias, setIdSubcategoria, subcategorias, getSubCategorias, getProductosByModificar } = useProducts();
+    const navigate = useNavigate();
 
     const [selectCategory, setSelectCategory] = useState(product.cod_cat); // Estado para mantener el valor seleccionado
     const [selectSubCategory, setSelectSubCategory] = useState(product.cod_sub); // Estado para mantener el valor seleccionado
@@ -81,13 +83,15 @@ const UpdateProduct = ({product}) => {
             const subcategoria = selectSubCategory;
             const nom_pro = nombreProducto;
             const duracion_garantia = duracionGarantia;
+            const estado = '1';
             console.log(img);
+            console.log(product.cod_pro)
 
-            const respuesta = await axios.put(`http://localhost/invensoft/productos?cod_pro=${product.cod_pro}`, {subcategoria, nom_pro, descripcion, img, garantia, duracion_garantia }, {
+            const respuesta = await axios.put(`http://localhost/invensoft/productos?cod_pro=${product.cod_pro}`, {subcategoria, nom_pro, descripcion, estado, img, garantia, duracion_garantia }, {
             
             });
-            console.log(respuesta);
-
+            console.log({respuesta});
+            getProductosByModificar();
             Swal.fire({
                 icon: 'success',
                 title: 'Producto actualizado correctamente',
@@ -98,7 +102,10 @@ const UpdateProduct = ({product}) => {
             //console.log(respuesta);
             
             clearInputs();
-            //getProductosByModificar();
+            
+            setTimeout(() => {
+                navigate('/productos');
+            }, 2000);
         } catch (error) {
             console.log(error.response);
             Swal.fire({
@@ -154,8 +161,12 @@ const UpdateProduct = ({product}) => {
                                 </div>
 
                                 <div className="col-md-4 mb-md-4">
-                                    <label className="form-label">Garantia</label>
-                                    <input value={garantia} onChange={handleChangeGarantia} type="text" className="form-control" />
+                                    <label className="form-label">Garantia *</label>
+                                    <select className="form-select" value={garantia} onChange={handleChangeGarantia}>
+                                        <option value=''>Seleccione una opción</option>
+                                        <option value='1'>Si</option>
+                                        <option value='2'>No</option>
+                                    </select>
                                 </div>
 
                                 <div className="col-md-4 mb-md-4">

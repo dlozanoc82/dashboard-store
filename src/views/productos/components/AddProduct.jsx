@@ -168,8 +168,12 @@ export const AddProduct = () => {
                                 </div>
 
                                 <div className="col-md-4 mb-md-4">
-                                    <label className="form-label">Garantia</label>
-                                    <input value={garantia} onChange={handleChangeGarantia} type="text" className="form-control" />
+                                    <label className="form-label">Garantia *</label>
+                                    <select className="form-select" value={garantia} onChange={handleChangeGarantia}>
+                                        <option value=''>Seleccione una opción</option>
+                                        <option value='1'>Si</option>
+                                        <option value='2'>No</option>
+                                    </select>
                                 </div>
 
                                 <div className="col-md-4 mb-md-4">
