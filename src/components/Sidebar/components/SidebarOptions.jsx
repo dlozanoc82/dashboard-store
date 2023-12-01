@@ -12,7 +12,7 @@ export const SidebarOptions = () => {
 
             {listOptions.map( (option) => <ListOption key={option.id} {...option} />)}
 
-            <a href="#" className="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
+            <a href="http://localhost/invensoft/iniciar_sesion.php" className="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
                 <FontAwesomeIcon icon={faPowerOff} className="me-2" /> Logout
             </a>
 

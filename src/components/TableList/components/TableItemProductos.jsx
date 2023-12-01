@@ -35,7 +35,7 @@ const TableItemProductos = ({info}) => {
           <td><center>{estado == 1 ? 'ACTIVO' : 'INACTIVO'}</center></td>
           <td><center>{garantia == 1 ? 'Si' : 'No'}</center></td>
           <td><center>{duracion_garantia}</center></td>
-          <td><center>{stock === null ? 0 : stock}</center></td>
+          <td><center>{stock}</center></td>
           <td>
           <div className="btn__actions">
               <Link onClick={() => setProduct({cod_cat, cod_sub, nombre, descripcion, garantia, duracion_garantia, cod_pro})} to={`/productos/editar/${cod_pro}`}  className="btn btn-secondary btn-padding">
