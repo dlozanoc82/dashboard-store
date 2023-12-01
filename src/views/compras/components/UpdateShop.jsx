@@ -39,7 +39,7 @@ export const UpdateShop = ({compra}) => {
     const [cantidad, setCantidad] = useState(compra.cantidad_compra);
     const [precioUnitario, setPrecioUnitario] = useState(compra.valor_unit_prov);
     const [precioCompra, setPrecioCompra] = useState(compra.valor_total);
-    const [precioVenta, setPrecioVenta] = useState(compra.valor_venta);
+    const [preventa, setPrecioVenta] = useState(compra.valor_venta);
 
     const handleChangeCategory = (event) => {
         setSelectCategory(event.target.value);
@@ -454,7 +454,8 @@ export const UpdateShop = ({compra}) => {
 
           try {
           if(confirmado.isConfirmed){
-        upadateCompra(compra.cod_compra, nombreProducto, nombreProveedor, cantidad, precioUnitario,precioVenta, precioCompra);
+            console.log(preventa)
+        upadateCompra(compra.cod_compra, nombreProducto, nombreProveedor, cantidad, precioUnitario, preventa, precioCompra);
         clearInputs();
         setTimeout(() => {
             navigate('/compras');
@@ -571,7 +572,7 @@ export const UpdateShop = ({compra}) => {
 
                         <div className="col-md-4 mb-md-4">
                             <label className="form-label">Precio de la venta *</label>
-                            <input type="number" value={precioVenta} onChange={handleChangePrecioVenta} ref={precioCompraVenta} className="form-control" />
+                            <input type="number" value={preventa} onChange={handleChangePrecioVenta} ref={precioCompraVenta} className="form-control" />
                         </div>
 
                         <div className="col-md-4 mb-md-4">
