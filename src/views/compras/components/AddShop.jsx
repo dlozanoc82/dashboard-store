@@ -396,7 +396,7 @@ export const AddShop = () => {
 
         try {
             if (confirmado.isConfirmed) {
-                createCompras(selectSubCategory, nombreProducto, nombreProveedor, cantidad, precioUnitario, precioVenta, precioCompra);
+                createCompras(nombreProducto, nombreProveedor, cantidad, precioUnitario, precioVenta, precioCompra);
                 clearInputs();
                 setTimeout(() => {
                     navigate('/compras');
@@ -520,7 +520,7 @@ export const AddShop = () => {
 
                                 <div className="col-md-4 mb-md-4">
                                     <label className="form-label">Precio de la venta *</label>
-                                    <input type="number" value={precioVenta} onChange={handleChangePrecioVenta} className="form-control" ref={precioCompraVenta} required />
+                                    <input type="number" value={precioVenta} onChange={handleChangePrecioVenta} className="form-control" required />
                                 </div>
 
                                 <div className="col-md-4 mb-md-4">
