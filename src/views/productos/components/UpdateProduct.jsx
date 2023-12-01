@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import useProducts from '../../../hooks/useProducts';
 import Swal from 'sweetalert2';
+import axios from "axios";
 
 const UpdateProduct = ({product}) => {
     const { categorias, setIdSubcategoria, subcategorias, getSubCategorias } = useProducts();
-   
-    
 
     const [selectCategory, setSelectCategory] = useState(product.cod_cat); // Estado para mantener el valor seleccionado
     const [selectSubCategory, setSelectSubCategory] = useState(product.cod_sub); // Estado para mantener el valor seleccionado
@@ -84,21 +83,24 @@ const UpdateProduct = ({product}) => {
             const duracion_garantia = duracionGarantia;
             console.log(img);
 
-            const respuesta = await axios.post(`http://localhost/invensoft/productos?cod_pro=${product.cod_pro}`, { subcategoria, nom_pro, descripcion, img, garantia, duracion_garantia }, {
-
+            const respuesta = await axios.put(`http://localhost/invensoft/productos?cod_pro=${product.cod_pro}`, {subcategoria, nom_pro, descripcion, img, garantia, duracion_garantia }, {
+            
             });
+            console.log(respuesta);
 
             Swal.fire({
                 icon: 'success',
-                title: 'Producto creado correctamente',
+                title: 'Producto actualizado correctamente',
                 showConfirmButton: false,
                 timer: 2000
             });
 
             //console.log(respuesta);
+            
             clearInputs();
+            //getProductosByModificar();
         } catch (error) {
-            //console.log(error.response);
+            console.log(error.response);
             Swal.fire({
                 icon: 'error',
                 title: 'Archivo incorrecto',

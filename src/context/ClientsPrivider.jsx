@@ -4,17 +4,19 @@ import Swal from "sweetalert2";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import { formatDateToYearMonthDay, formatTime12Hours } from "../helpers/GeneralFunctions";
+import { useNavigate } from "react-router-dom";
 
 const ClientsContext = createContext();
 
-const ClientsPrivider = ({children}) => {       
+const ClientsPrivider = ({ children }) => {
 
+    const navigate = useNavigate();
     const [clients, setClients] = useState([]);
     const [cliente, setCliente] = useState({});
     const [clientesByDates, setClientesByDates] = useState([])
     const [inputSearch, setInputSearch] = useState("");
     const [filteredClients, setFilteredClients] = useState([]);
-    
+
 
     useEffect(() => {
         getClients();
@@ -28,24 +30,24 @@ const ClientsPrivider = ({children}) => {
     // FILTRO
     const filterByDocumentNumber = () => {
         const searchValue = inputSearch; // No es necesario convertirlo a minúsculas si es un número
-    
+
         // Si no hay texto en el campo de búsqueda y el estado está vacío, mostramos todos los pagos
         if (!searchValue) {
             setFilteredClients(clients);
             return;
         }
-    
+
         let filteredData = clients;
-    
+
         filteredData = filteredData.filter((client) =>
             client.documento.toString().startsWith(searchValue.toString())
         );
-    
+
         setFilteredClients(filteredData);
     };
-    
+
     //CRUD CLIENTES
-    const getClients = async () => {        
+    const getClients = async () => {
         try {
             const url = "http://localhost/invensoft/clientes?fecha_ini=2023-08-20&fecha_fin=2023-12-31";
             const { data } = await axios(url);
@@ -58,7 +60,7 @@ const ClientsPrivider = ({children}) => {
         }
     };
 
-    const getClientsByDates = async (fechaInicial, fechaFinal) => {        
+    const getClientsByDates = async (fechaInicial, fechaFinal) => {
         try {
             const url = `http://localhost/invensoft/clientes?fecha_ini=${fechaInicial}&fecha_fin=${fechaFinal}`;
             const { data } = await axios(url);
@@ -70,11 +72,11 @@ const ClientsPrivider = ({children}) => {
         }
     };
 
-    const createClients = async (documento,nombres,apellidos,celular,direccion,correo,contrasena) => {
+    const createClients = async (documento, nombres, apellidos, celular, direccion, correo, contrasena) => {
         //Crear el producto en la API
         try {
-            const respuesta = await axios.post('http://localhost/invensoft/clientes', {documento,nombres,apellidos,celular,direccion,correo,contrasena});
-            
+            const respuesta = await axios.post('http://localhost/invensoft/clientes', { documento, nombres, apellidos, celular, direccion, correo, contrasena });
+
             Swal.fire({
                 icon: 'success',
                 title: 'Información Almacenada Correctamente',
@@ -93,22 +95,36 @@ const ClientsPrivider = ({children}) => {
         }
     }
 
-    const updateClients = async (cod_usu, documento,nombres,apellidos,celular,direccion,correo,contrasena,status) => {
-        
+    const updateClients = async (cod_usu, documento, nombres, apellidos, celular, direccion, correo, contrasena, status) => {
+
         try {
             const estado = status === 'INACTIVO' ? 0 : 1;
-            console.log({estado, status});
-            const respuesta = await axios.put(`http://localhost/invensoft/clientes?cod_usu=${cod_usu}`, {documento,nombres,apellidos,celular,direccion,correo,contrasena,estado});
-            
-            Swal.fire({
-                icon: 'success',
-                title: 'Información Actualizada Correctamente',
-                showConfirmButton: false,
-                timer: 2000
-            })
+            console.log({ estado, status });
+            let confirmado = await Swal.fire({
+                title: "¿Esta seguro de actualizar datos?",
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: "Si",
+                denyButtonText: `No`
+            });
+            if (confirmado.isConfirmed) {
+                const respuesta = await axios.put(`http://localhost/invensoft/clientes?cod_usu=${cod_usu}`, { documento, nombres, apellidos, celular, direccion, correo, contrasena, estado });
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Información Actualizada Correctamente',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+                getClients();
+                setTimeout(() => {
+                    navigate('/clientes');
+                  }, 2000);
+            } else {
+                Swal.fire("Operación detenida", "", "info");
+            }
 
-            getClients();
-            setCliente({});
+            
+            //setCliente({});
         } catch (error) {
             console.log(error);
             Swal.fire({
@@ -126,22 +142,22 @@ const ClientsPrivider = ({children}) => {
             showCancelButton: false,
             confirmButtonText: "Si",
             denyButtonText: `No`
-          });
+        });
 
         try {
-            
-              if(confirmado.isConfirmed){
-            const respuesta = await axios.delete(`http://localhost/invensoft/clientes?cod_usu=${cod_usu}`);
-            
-            Swal.fire({
-                icon: 'success',
-                title: 'Registro Eliminado Correctamente',
-                showConfirmButton: false,
-                timer: 2000
-            })
-        }else{
-            Swal.fire("Operación detenida", "", "info");
-        }
+
+            if (confirmado.isConfirmed) {
+                const respuesta = await axios.delete(`http://localhost/invensoft/clientes?cod_usu=${cod_usu}`);
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Registro Eliminado Correctamente',
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+            } else {
+                Swal.fire("Operación detenida", "", "info");
+            }
 
             getClients();
         } catch (error) {
@@ -172,7 +188,7 @@ const ClientsPrivider = ({children}) => {
         const formattedTime = formatTime12Hours(currentDate);
         const dateTimeText = `Generado el ${formattedDate} a las ${formattedTime}`;
         doc.setFontSize(11);
-        doc.setFont('arial','italic', 'normal');
+        doc.setFont('arial', 'italic', 'normal');
         doc.text(dateTimeText, doc.internal.pageSize.width - 15, 43, 'right');
         doc.setFont('normal');
 
@@ -215,14 +231,14 @@ const ClientsPrivider = ({children}) => {
         // Title
         const title = 'LISTADO DE CLIENTES';
         doc.text(title, doc.internal.pageSize.width / 2, 28, 'center');
-        
+
         // Date and Time
         const currentDate = new Date();
         const formattedDate = currentDate.toLocaleDateString();
         const formattedTime = formatTime12Hours(currentDate);
         const dateTimeText = `Generado el ${formattedDate} a las ${formattedTime}`;
         doc.setFontSize(11);
-        doc.setFont('arial','italic', 'normal');
+        doc.setFont('arial', 'italic', 'normal');
         doc.text(dateTimeText, doc.internal.pageSize.width - 15, 43, 'right');
         doc.setFont('normal');
 

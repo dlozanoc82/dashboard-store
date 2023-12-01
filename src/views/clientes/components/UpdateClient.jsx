@@ -59,10 +59,7 @@ const UpdateClient = ({cliente}) => {
       const contrasena = documento;
       const correo = email;
       updateClients(cliente.cod_usu,documento,nombres,apellidos,celular,direccion,correo,contrasena,estado);
-      clearInputs();
-      setTimeout(() => {
-        navigate('/clientes');
-      }, 2000);
+      //clearInputs();
     }
 
   return (

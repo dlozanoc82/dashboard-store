@@ -22,6 +22,7 @@ export const AddShop = () => {
         setProductosInStock
     } = useCompras();
 
+    const nombreCategoriaRef = useRef(null);
     const nombreSubcategoriaRef = useRef(null);
     const nombreProductoRef = useRef(null);
     const nombreProveedorRef = useRef(null);
@@ -53,7 +54,7 @@ export const AddShop = () => {
         setProductosInStock('');
     };
 
-    const handleChangeNombre = (event) => {
+    const handleChangeNombre = (event) => { 
         setNombreProducto(event.target.value);
         setIdProducto(event.target.value); // Actualiza el estado cuando se selecciona un nuevo valor
     };
@@ -116,8 +117,28 @@ export const AddShop = () => {
         e.preventDefault();
 
         // Validar que los campos obligatorios no estén vacíos
+        if (!selectCategory || selectCategory === '0') {
+
+            nombreProductoRef.current.style.borderColor = '';
+            nombreProveedorRef.current.style.borderColor = '';
+            cantidadRef.current.style.borderColor = '';
+            precioUnitarioRef.current.style.borderColor = '';
+            precioCompraRef.current.style.borderColor = '';
+            nombreSubcategoriaRef.current.style.borderColor = '';
+            nombreCategoriaRef.current.focus();
+            nombreCategoriaRef.current.style.borderColor = 'red';
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'No ha seleccionado la Categoría',
+            })
+
+            return;
+        }
+
         if (!selectSubCategory || selectSubCategory === '0') {
 
+            nombreCategoriaRef.current.style.borderColor = '';
             nombreProductoRef.current.style.borderColor = '';
             nombreProveedorRef.current.style.borderColor = '';
             cantidadRef.current.style.borderColor = '';
@@ -135,6 +156,7 @@ export const AddShop = () => {
         }
 
         if (!nombreProducto || nombreProducto === '0') {
+            nombreCategoriaRef.current.style.borderColor = '';
             nombreSubcategoriaRef.current.style.borderColor = '';
             nombreProveedorRef.current.style.borderColor = '';
             cantidadRef.current.style.borderColor = '';
@@ -151,6 +173,7 @@ export const AddShop = () => {
         }
 
         if (!solo_numeros.test(nombreProducto)) {
+            nombreCategoriaRef.current.style.borderColor = '';
             nombreSubcategoriaRef.current.style.borderColor = '';
             nombreProveedorRef.current.style.borderColor = '';
             cantidadRef.current.style.borderColor = '';
@@ -167,6 +190,7 @@ export const AddShop = () => {
         }
 
         if (!nombreProveedor || nombreProveedor === '0') {
+            nombreCategoriaRef.current.style.borderColor = '';
             nombreSubcategoriaRef.current.style.borderColor = '';
             nombreProductoRef.current.style.borderColor = '';
             cantidadRef.current.style.borderColor = '';
@@ -184,6 +208,7 @@ export const AddShop = () => {
             return;
         }
         if (!solo_numeros.test(nombreProveedor)) {
+            nombreCategoriaRef.current.style.borderColor = '';
             nombreSubcategoriaRef.current.style.borderColor = '';
             nombreProductoRef.current.style.borderColor = '';
             cantidadRef.current.style.borderColor = '';
@@ -202,6 +227,7 @@ export const AddShop = () => {
 
         //COmprueba si la cantidad esta vacia, es decir, el usuario no ha ingresado informacion
         if (!cantidad) {
+            nombreCategoriaRef.current.style.borderColor = '';
             nombreSubcategoriaRef.current.style.borderColor = '';
             nombreProductoRef.current.style.borderColor = '';
             nombreProveedorRef.current.style.borderColor = '';
@@ -219,6 +245,7 @@ export const AddShop = () => {
 
         //Compruebo si la cantidad es cero o un numero negativo
         if (cantidad == 0 || cantidad < 1) {
+            nombreCategoriaRef.current.style.borderColor = '';
             nombreSubcategoriaRef.current.style.borderColor = '';
             nombreProductoRef.current.style.borderColor = '';
             nombreProveedorRef.current.style.borderColor = '';
@@ -236,6 +263,7 @@ export const AddShop = () => {
 
         //Compruebo si la informacion ingresada en cantidad tiene texto o caracteres especiales
         if (!solo_numeros.test(cantidad)) {
+            nombreCategoriaRef.current.style.borderColor = '';
             nombreSubcategoriaRef.current.style.borderColor = '';
             nombreProductoRef.current.style.borderColor = '';
             nombreProveedorRef.current.style.borderColor = '';
@@ -253,6 +281,7 @@ export const AddShop = () => {
 
         //Valido si hay informacion en el preciounitario
         if (!precioUnitario) {
+            nombreCategoriaRef.current.style.borderColor = '';
             nombreSubcategoriaRef.current.style.borderColor = '';
             nombreProductoRef.current.style.borderColor = '';
             nombreProveedorRef.current.style.borderColor = '';
@@ -270,6 +299,7 @@ export const AddShop = () => {
 
         //Valido si el precioUnitario es cero o menor a cero
         if (precioUnitario == 0 || precioUnitario < 1) {
+            nombreCategoriaRef.current.style.borderColor = '';
             nombreSubcategoriaRef.current.style.borderColor = '';
             nombreProductoRef.current.style.borderColor = '';
             nombreProveedorRef.current.style.borderColor = '';
@@ -287,6 +317,7 @@ export const AddShop = () => {
 
         //Valido que el precio unitario no tenga texto o caracteres especiales
         if (!solo_numeros.test(precioUnitario)) {
+            nombreCategoriaRef.current.style.borderColor = '';
             nombreSubcategoriaRef.current.style.borderColor = '';
             nombreProductoRef.current.style.borderColor = '';
             nombreProveedorRef.current.style.borderColor = '';
@@ -304,6 +335,7 @@ export const AddShop = () => {
 
         //Valido que el precioCompra no este vacio
         if (!precioCompra || precioCompra == 0) {
+            nombreCategoriaRef.current.style.borderColor = '';
             nombreSubcategoriaRef.current.style.borderColor = '';
             nombreProductoRef.current.style.borderColor = '';
             nombreProveedorRef.current.style.borderColor = '';
@@ -320,6 +352,7 @@ export const AddShop = () => {
         }
         //Valido si el precioCompra es cero o menor a cero
         if (precioCompra == 0 || precioCompra < 1) {
+            nombreCategoriaRef.current.style.borderColor = '';
             nombreSubcategoriaRef.current.style.borderColor = '';
             nombreProductoRef.current.style.borderColor = '';
             nombreProveedorRef.current.style.borderColor = '';
@@ -337,6 +370,7 @@ export const AddShop = () => {
 
         //Valido que el precio compra no tenga texto o caracteres especiales
         if (!solo_numeros.test(precioCompra)) {
+            nombreCategoriaRef.current.style.borderColor = '';
             nombreSubcategoriaRef.current.style.borderColor = '';
             nombreProductoRef.current.style.borderColor = '';
             nombreProveedorRef.current.style.borderColor = '';
@@ -366,9 +400,10 @@ export const AddShop = () => {
                 clearInputs();
                 setTimeout(() => {
                     navigate('/compras');
-                }, 2000);
+                }, 2000); 
             } else {
                 Swal.fire("Operación detenida", "", "info");
+                nombreCategoriaRef.current.style.borderColor = '';
                 nombreSubcategoriaRef.current.style.borderColor = '';
                 nombreProductoRef.current.style.borderColor = '';
                 nombreProveedorRef.current.style.borderColor = '';
@@ -405,7 +440,7 @@ export const AddShop = () => {
 
                                 <div className="col-md-4 mb-md-4">
                                     <label className="form-label">Categoria *</label>
-                                    <select className="form-select" value={selectCategory} onChange={handleChangeCategory}>
+                                    <select className="form-select" value={selectCategory} onChange={handleChangeCategory} ref={nombreCategoriaRef}>
                                         <option value="">Seleccione una opción</option>
                                         {categorias.map((categoria) =>
                                             <option key={categoria.cod_cat} value={categoria.cod_cat}>{categoria.nom_cat}</option>)
@@ -470,22 +505,22 @@ export const AddShop = () => {
 
                                 <div className="col-md-4 mb-md-4">
                                     <label className="form-label">Cantidad *</label>
-                                    <input value={cantidad} onChange={handleChangeCantidad} type="number" pattern="[0-9]*" className="form-control" ref={cantidadRef} />
+                                    <input value={cantidad} onChange={handleChangeCantidad} type="number" pattern="[0-9]*" className="form-control" ref={cantidadRef} required />
                                 </div>
 
                                 <div className="col-md-4 mb-md-4">
                                     <label className="form-label">Precio Unitario *</label>
-                                    <input value={precioUnitario} onChange={handleChangePrecioUnitario} type="number" className="form-control" ref={precioUnitarioRef} />
+                                    <input value={precioUnitario} onChange={handleChangePrecioUnitario} type="number" className="form-control" ref={precioUnitarioRef} required />
                                 </div>
 
                                 <div className="col-md-4 mb-md-4">
                                     <label className="form-label">Precio de la Compra *</label>
-                                    <input value={precioCompra} onChange={handleChangePrecioCompra} type="number" className="form-control" ref={precioCompraRef} />
+                                    <input value={precioCompra} onChange={handleChangePrecioCompra} type="number" className="form-control" ref={precioCompraRef} required />
                                 </div>
 
                                 <div className="col-md-4 mb-md-4">
                                     <label className="form-label">Precio de la venta *</label>
-                                    <input type="number" value={precioVenta} onChange={handleChangePrecioVenta} className="form-control" ref={precioCompraVenta} />
+                                    <input type="number" value={precioVenta} onChange={handleChangePrecioVenta} className="form-control" ref={precioCompraVenta} required />
                                 </div>
 
                                 <div className="col-md-4 mb-md-4">

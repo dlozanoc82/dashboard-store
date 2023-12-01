@@ -4,7 +4,6 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 export const AddProduct = () => {
-
     const { categorias, setIdSubcategoria, subcategorias } = useProducts();
 
     const [selectCategory, setSelectCategory] = useState(''); // Estado para mantener el valor seleccionado

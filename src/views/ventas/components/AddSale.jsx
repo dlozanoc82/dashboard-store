@@ -12,7 +12,6 @@ const AddSale = () => {
     const [cantidad, setCantidad] = useState('');
     const [total, setTotal] = useState('');
     const [productosVentas, setProductosVenta] = useState([]);
-    const [clienteNuevo, setclienteNuevo] = useState('');
 
     const [productosVentasMostrar, setProductosVentaMostrar] = useState([]);
 
@@ -201,6 +200,11 @@ const AddSale = () => {
                     <div className="col-md-4 mb-md-4">
                         <label className="form-label">Cliente</label>
                         <input  value={cliente.length == 0 ? 'Usuario no registrado' : cliente[0].nombres + ' ' + cliente[0].apellidos} disabled type="text" className="form-control" required />
+                        {cliente.length === 0 && (
+                            <a href="/clientes/agregar" className="ms-2">
+                                Registrar Usuario
+                            </a>
+                        )}
                     </div>
                     <div className="col-md-4 d-flex justify-content-start align-items-center mt-2">
                       <button className="btn btn-primary" type="submit">Consultar</button>
