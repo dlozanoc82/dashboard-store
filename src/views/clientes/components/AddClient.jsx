@@ -109,11 +109,13 @@ export const AddClient = () => {
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: 'El campo Email debe ser texto',
+        text: 'El campo Email es incorrecto',
         });
       return;
     }
-    const dominio = /(?:@gmail\.com|@hotmail\.com|@hotmail\.es|@outlook\.com)$/;
+    const dominio = /(?:@gmail\.com|@hotmail\.com|@hotmail\.es|@outlook\.com|@itfip\.edu\.co)$/;
+    //const dominio = /(?:@gmail\.com|@hotmail\.com|@hotmail\.es|@outlook\.com|@itfip\.edu\.co)$/;
+
     if (!dominio.test(email)) {
       apellidosRef.current.style.borderColor = '';
       nombresRef.current.style.borderColor = '';
@@ -130,7 +132,7 @@ export const AddClient = () => {
       return;
     }
 
-    if (!solo_numeros.test(documento) || documento <5000000) {
+    if (!solo_numeros.test(documento) || documento <2000000) {
       apellidosRef.current.style.borderColor = '';
       nombresRef.current.style.borderColor = '';
       emailRef.current.style.borderColor = '';
@@ -141,12 +143,12 @@ export const AddClient = () => {
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: 'El campo documento debe ser un número válido',
+        text: 'El campo documento debe ser un número válido de al menos 7 digitos',
         });
       return;
     }
 
-    if (!solo_numeros.test(celular) || celular <5000000) {
+    if (!solo_numeros.test(celular) || celular <5000000 || celular>352999999) {
       apellidosRef.current.style.borderColor = '';
       nombresRef.current.style.borderColor = '';
       emailRef.current.style.borderColor = '';
@@ -157,12 +159,12 @@ export const AddClient = () => {
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: 'El campo celular debe ser un número válido',
+        text: 'El campo celular debe ser un número válido de al menos 7 y maximo 10 digitos',
         });
       return;
     }
 
-    if (!direccionExpresion.test(direccion) || direccion.length <7) {
+    if (!direccionExpresion.test(direccion) || direccion.length <5) {
       apellidosRef.current.style.borderColor = '';
       nombresRef.current.style.borderColor = '';
       emailRef.current.style.borderColor = '';

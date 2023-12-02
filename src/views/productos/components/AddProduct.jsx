@@ -143,7 +143,7 @@ export const AddProduct = () => {
             return;
         }
 
-        if (!texto_numeros.test(descripcion)) {
+        /*if (!texto_numeros.test(descripcion)) {
             nombreCategoriaRef.current.style.borderColor = '';
             nombreSubcategoriaRef.current.style.borderColor = '';
             nombreProductoRef.current.style.borderColor = '';
@@ -158,7 +158,7 @@ export const AddProduct = () => {
                 text: 'La descripción esta muy corta o tiene caracteres no válidos',
             });
             return;
-        }
+        }*/
 
         if (!garantia || (garantia !== '0' && garantia !== '1')) {
             nombreCategoriaRef.current.style.borderColor = '';
@@ -245,7 +245,7 @@ export const AddProduct = () => {
 
                 <div>
                     <div className="form__header">
-                        <h3 className="form__subtitle">Proveedor y Categoria</h3>
+                        <h3 className="form__subtitle">DETALLES DEL PRODUCTO</h3>
                     </div>
 
                     <div>

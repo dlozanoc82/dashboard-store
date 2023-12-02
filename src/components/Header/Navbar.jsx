@@ -44,7 +44,7 @@ export const Navbar = () => {
                         </a>
                         <ul className="dropdown-menu ms-4" aria-labelledby="navbarDropdown">
                             <li><Link onClick={() => handleActiveOption(title, icon)}  to={'/mi-cuenta'} className="dropdown-item" href="#">Mi cuenta</Link></li>
-                            <li><a className="dropdown-item" href="http://localhost/invensoft/iniciar_sesion.php">Cerrar Sesión</a></li>
+                            <li><a className="dropdown-item" href="http://localhost/invensoft2/cerrar_sesion.php">Cerrar Sesión</a></li>
                         </ul>
                     </li>
                 </ul>

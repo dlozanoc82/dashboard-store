@@ -71,7 +71,7 @@ const UpdateClient = ({cliente}) => {
   
       //Validacion de campos:
     // Validar que los campos obligatorios no estén vacíos y validar entrada de solo texto
-    if (!solo_texto.test(nombres) || nombres.length<3) {
+    if (!solo_texto.test(nombres) || nombres.length<3) {  
       apellidosRef.current.style.borderColor = '';
       emailRef.current.style.borderColor = '';
       documentoRef.current.style.borderColor = '';
@@ -120,7 +120,7 @@ const UpdateClient = ({cliente}) => {
         });
       return;
     }
-    const dominio = /(?:@gmail\.com|@hotmail\.com|@hotmail\.es|@outlook\.com)$/;
+    const dominio = /(?:@gmail\.com|@hotmail\.com|@hotmail\.es|@outlook\.com|@itfip\.edu\.co)$/;
     if (!dominio.test(email)) {
       apellidosRef.current.style.borderColor = '';
       nombresRef.current.style.borderColor = '';
@@ -148,12 +148,12 @@ const UpdateClient = ({cliente}) => {
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: 'El campo documento debe ser numerico',
+        text: 'El campo documento es incorrecto revisa la longitud y que sea un número',
         });
       return;
     }
 
-    if (!solo_numeros.test(celular) || celular <5000000) {
+    if (!solo_numeros.test(celular) || celular <2000000) {
       apellidosRef.current.style.borderColor = '';
       nombresRef.current.style.borderColor = '';
       emailRef.current.style.borderColor = '';
@@ -169,7 +169,7 @@ const UpdateClient = ({cliente}) => {
       return;
     }
 
-    if (!direccionExpresion.test(direccion) || direccion.length <7) {
+    if (!direccionExpresion.test(direccion) || direccion.length <5) {
       apellidosRef.current.style.borderColor = '';
       nombresRef.current.style.borderColor = '';
       emailRef.current.style.borderColor = '';
@@ -185,6 +185,7 @@ const UpdateClient = ({cliente}) => {
       return;
     }
     if (estado!=="INACTIVO" && estado !== "ACTIVO") {
+      console.log(estado);
       apellidosRef.current.style.borderColor = '';
       nombresRef.current.style.borderColor = '';
       emailRef.current.style.borderColor = '';
@@ -279,7 +280,7 @@ const UpdateClient = ({cliente}) => {
                 </div>
 
                 <div className="col-md-4 mb-md-4">
-                    <label className="form-label">Categoria *</label>
+                    <label className="form-label">Estado *</label>
                     <select className="form-select" value={estado} onChange={handleChangeEstado} ref={estadoRef}>
                         <option value="ACTIVO">ACTIVO</option>
                         <option value="INACTIVO">INACTIVO</option>

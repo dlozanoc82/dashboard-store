@@ -406,7 +406,8 @@ export const UpdateShop = ({compra}) => {
                 });
                 return;
             }
-            if (!solo_numeros.test(precioCompraVenta) || precioCompraVenta<1000) {
+            if (!solo_numeros.test(preventa) || preventa<1000) {
+                //console.log(preventa);
                 nombreCategoriaRef.current.style.borderColor = '';
                 nombreSubcategoriaRef.current.style.borderColor = '';
                 nombreProductoRef.current.style.borderColor = '';

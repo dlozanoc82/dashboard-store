@@ -108,11 +108,12 @@ const ComprasProvider = ({children}) => {
         }
     };
 
-    const createCompras = async (cod_producto,cod_proveedor,cantidad,precio_unit,valor_venta,precio_compra) => {
+    const createCompras = async (cod_producto,cod_proveedor,cantidad,precio_unit,precio_venta,precio_compra) => {
         //Crear el producto en la API
         try {
-            const respuesta = await axios.post('http://localhost/invensoft/compras', {cod_producto,cod_proveedor,cantidad,precio_unit,valor_venta,precio_compra});
-            console.log(respuesta)
+            console.log("Valor de la venta: "+precio_venta);
+            const respuesta = await axios.post('http://localhost/invensoft/compras', {cod_producto,cod_proveedor,cantidad,precio_unit,precio_venta,precio_compra});
+            console.log(respuesta);
             Swal.fire({
                 icon: 'success',
                 title: respuesta.data.result.msj,

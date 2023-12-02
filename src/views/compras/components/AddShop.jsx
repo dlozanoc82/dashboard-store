@@ -402,6 +402,7 @@ export const AddShop = () => {
                     navigate('/compras');
                 }, 2000); 
             } else {
+                console.log(precioVenta);
                 Swal.fire("Operación detenida", "", "info");
                 nombreCategoriaRef.current.style.borderColor = '';
                 nombreSubcategoriaRef.current.style.borderColor = '';
