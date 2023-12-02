@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import useDashborad from "../../hooks/useDashborad";
 import { MenuToggle } from "./components/MenuToggle";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
-import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
 //import { useHistory } from 'react-router-dom';
 
 
@@ -12,9 +13,8 @@ export const Navbar = () => {
 
   const title = 'Mi Cuenta';
   const icon = faUser;
-  const navigate = useNavigate();
-  
-  const {titleUrl, handleActiveOption} = useDashborad();
+
+  const { titleUrl, handleActiveOption } = useDashborad();
   const [pageTitle, setPageTitle] = useState(titleUrl); //useState para recuperar el modulo en el que esta el usuario
 
   useEffect(() => {
@@ -27,67 +27,69 @@ export const Navbar = () => {
   }, [titleUrl]);
 
   //Aqui es para eliminar el dato en localStorage y para cerrar sesion desde php
-  const handleCerrarSesion = () => {
-    let confirmado = Swal.fire({
+  const handleCerrarSesion = () => {  //Este se ejecuta si dan clic en cerrar sesion
+    Swal.fire({
       title: "¿Desea cerrar sesión?",
       showDenyButton: true,
       showCancelButton: false,
       confirmButtonText: "Si",
       denyButtonText: `No`
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Verificar si el objeto storeData está vacío
+        const storedData = localStorage.getItem('Usuario');
+
+        // Convertir la cadena JSON de nuevo a un objeto
+        const parsedData = JSON.parse(storedData);
+
+        if (parsedData && Object.keys(parsedData).length > 0) { //Compruebo de que haya informacion en el localstorage
+          //      console.log(Object.keys(parsedData).length);
+          // Redirecciona y limpia el localstorage
+
+          // Eliminar un elemento del localStorage por su clave y redirecciono a cerrar sesion para destruir la sesion en php
+          localStorage.removeItem('Usuario');
+          localStorage.removeItem('selectedOption');
+          window.location.href = 'http://localhost/invensoft2/cerrar_sesion.php';
+        } else {
+          //Si no hay informacion en el localstorage redirecciono a cerrar sesion
+          window.location.href = 'http://localhost/invensoft2/cerrar_sesion.php';
+        }
+      } else {  //Si dan clic en cancelar de la notificacion
+        Swal.fire("Operación detenida", "", "info");
+      }
     });
-
-    if(confirmado.isConfirmed){
-    // Verificar si el objeto userData está vacío
-      const storedData = localStorage.getItem('Usuario');
-
-      // Convertir la cadena JSON de nuevo a un objeto
-      const parsedData = JSON.parse(storedData);
-
-    if (!Object.keys(parsedData).length) {
-      // Redirecciona y limpia el localstorage
-
-      // Eliminar un elemento del localStorage por su clave
-      localStorage.removeItem('userData');
-      navigate('http://localhost/invensoft2/cerrar_sesion');
-    } else {
-      // Aquí puedes realizar otras acciones si userData tiene datos
-      console.log('El objeto userData no está vacío:', userData);
-    }
-  }else{
-    Swal.fire("Operación detenida", "", "info");
-  }
   };
- 
+
 
   return (
     <>
-        <nav className="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
+      <nav className="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
 
-            <MenuToggle />
-            
-            <button className="navbar-toggler me-5" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-            </button>
+        <MenuToggle />
 
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li className="nav-item dropdown">
-                        <a className="nav-link dropdown-toggle second-text fw-bold d-flex align-items-center" href="#" id="navbarDropdown"
-                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i className="fas fa-user me-1"></i>
-                            <span className="me-5">Mireya Carvajal</span>
-                        </a>
-                        <ul className="dropdown-menu ms-4" aria-labelledby="navbarDropdown">
-                            <li><Link onClick={() => handleActiveOption(title, icon)}  to={'/mi-cuenta'} className="dropdown-item" href="#">Mi cuenta</Link></li>
-                            <li><a onClick={handleCerrarSesion} className="dropdown-item" href="http://localhost/invensoft2/cerrar_sesion.php">Cerrar Sesión</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <h3 className="px-4">¡Bienvenido al modulo de {pageTitle} !</h3>
-    </>        
+        <button className="navbar-toggler me-5" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+          aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li className="nav-item dropdown">
+              <a className="nav-link dropdown-toggle second-text fw-bold d-flex align-items-center" href="#" id="navbarDropdown"
+                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i className="fas fa-user me-1"></i>
+                <span className="me-5">Mireya Carvajal</span>
+              </a>
+              <ul className="dropdown-menu ms-4" aria-labelledby="navbarDropdown">
+                <li><Link onClick={() => handleActiveOption(title, icon)} to={'/mi-cuenta'} className="dropdown-item" href="#">Mi cuenta</Link></li>
+                <li><a onClick={handleCerrarSesion} className="dropdown-item">Cerrar Sesión</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <h3 className="px-4">¡Bienvenido al modulo de {pageTitle} !</h3>
+    </>
   )
 }
