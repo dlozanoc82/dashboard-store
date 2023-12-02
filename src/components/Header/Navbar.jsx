@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 import useDashborad from "../../hooks/useDashborad";
 import { MenuToggle } from "./components/MenuToggle";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
+import { useHistory } from 'react-router-dom';
+
 
 export const Navbar = () => {
+  const history = useHistory();
 
   const title = 'Mi Cuenta';
   const icon = faUser;
@@ -20,6 +23,38 @@ export const Navbar = () => {
       setPageTitle(titleUrl);
     }
   }, [titleUrl]);
+
+  //Aqui es para eliminar el dato en localStorage y para cerrar sesion desde php
+  const handleCerrarSesion = () => {
+    let confirmado = Swal.fire({
+      title: "¿Desea cerrar sesión?",
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: "Si",
+      denyButtonText: `No`
+    });
+
+    if(confirmado.isConfirmed){
+    // Verificar si el objeto userData está vacío
+      const storedData = localStorage.getItem('Usuario');
+
+      // Convertir la cadena JSON de nuevo a un objeto
+      const parsedData = JSON.parse(storedData);
+
+    if (!Object.keys(parsedData).length) {
+      // Redirecciona y limpia el localstorage
+
+      // Eliminar un elemento del localStorage por su clave
+      localStorage.removeItem('userData');
+      history.push('http://localhost/invensoft2/cerrar_sesion');
+    } else {
+      // Aquí puedes realizar otras acciones si userData tiene datos
+      console.log('El objeto userData no está vacío:', userData);
+    }
+  }else{
+    Swal.fire("Operación detenida", "", "info");
+  }
+  };
  
 
   return (
@@ -44,7 +79,7 @@ export const Navbar = () => {
                         </a>
                         <ul className="dropdown-menu ms-4" aria-labelledby="navbarDropdown">
                             <li><Link onClick={() => handleActiveOption(title, icon)}  to={'/mi-cuenta'} className="dropdown-item" href="#">Mi cuenta</Link></li>
-                            <li><a className="dropdown-item" href="http://localhost/invensoft2/cerrar_sesion.php">Cerrar Sesión</a></li>
+                            <li><a onClick={handleCerrarSesion} className="dropdown-item" href="http://localhost/invensoft2/cerrar_sesion.php">Cerrar Sesión</a></li>
                         </ul>
                     </li>
                 </ul>
