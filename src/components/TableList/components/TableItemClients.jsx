@@ -30,7 +30,7 @@ const TableItemClients = ({info}) => {
         <th><center>{documento}</center></th>
         <td><center>{correo}</center></td>
         <td><center>{celular}</center></td>
-        <td><center>{estado}</center></td>
+        <td style={getBackgroundColor(estado)}><center>{estado}</center></td>
         <td>
         <div className="btn__actions">
             <Link onClick={() => setCliente({cod_usu, nombres, apellidos, correo, documento, celular, direccion, estado})} to={`/clientes/editar/${cod_usu}`} className="btn btn-secondary btn-padding">
