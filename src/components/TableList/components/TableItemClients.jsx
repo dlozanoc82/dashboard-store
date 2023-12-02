@@ -9,8 +9,18 @@ const TableItemClients = ({info}) => {
     const {apellidos, celular, correo, documento, estado, fecha_reg, nombres, id, cod_usu, direccion} = info;
 
     const {handleDeleteCliente, setCliente} = useClients();
-
+ //let bgcolor = "bgcolor='red'";
     
+    // Define un estilo condicional basado en el estado
+    const getBackgroundColor = (estado) => {
+        if (estado == 'Activo') {
+          return { backgroundColor: '#A1FF9D' }; // Cambia el color a verde para 'activo'
+        } else if (estado == 'Inactivo') {
+          return { backgroundColor: '#FDA586' }; // Cambia el color a rojo para 'inactivo'
+        } else {
+          return { backgroundColor: '#0B0B0A' }; // Otros estados mantienen el color por defecto (negro)
+        }
+      };
   return (
     <>
         <td><center>{id}</center></td>

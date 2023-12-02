@@ -138,7 +138,7 @@ export const AddProduct = () => {
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'El nombre del producto es corto y/o tiene caracteres especiales',
+                text: 'El nombre del producto es corto, tiene números y/o tiene caracteres especiales',
             })
             return;
         }

@@ -4,11 +4,9 @@ import useDashborad from '../../hooks/useDashborad';
 
 
 export const Card = ({option}) => {
-
     const {handleActiveOption} = useDashborad();
 
     const {id, title, url, icon} = option;
-
     return (
         <Link onClick={() => handleActiveOption(title)} to={url} className="cpanel shadow-sm">
             <div className="card-content-part">

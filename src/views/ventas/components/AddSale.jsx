@@ -137,8 +137,9 @@ const AddSale = () => {
         }
 
         // Verifica que haya un producto y una cantidad válida
-        if (cantidad > 0 && producto[0].stock<cantidad) {
-            console.log(producto[0]);
+        console.log(producto[0].stock);
+        if (cantidad > 0 && producto[0].stock>cantidad) {
+            //console.log(producto[0]);
     
             // Utiliza el estado anterior para asegurar la actualización correcta
             setProductosVenta(prevProductos => [
@@ -173,8 +174,8 @@ const AddSale = () => {
             setProducto([]);
             setTotal('');
         }else{
-            console.log(producto[0].stock);
-            console.log(cantidad);
+            //console.log(producto[0].stock);
+            //console.log(cantidad);
             Swal.fire({
                 icon: 'info',
                 title: 'Exceso de Stock',
