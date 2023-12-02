@@ -28,7 +28,6 @@ export const TableItem = ({info}) => {
             {url === '/cotizacion/consultar' ? <TableItemCotizaciones info={info} /> : <></> }
 
             {url === '/apartados' ? <TableItemApartados info={info} /> : <></> }
-            {url === '/cotizacion/consultar' ? <TableItemCotizaciones info={info} /> : <></> }
 
             {url === '/kardex/libro-diario' ? <TableItemKardex info={info} /> : <></> }
 
