@@ -18,13 +18,15 @@ const Sales = () => {
     const url = useResolvedPath("").pathname;
     console.log({ventasOrganizadas})
 
+    console.log({filteredVentas})
+
     useEffect(() => {
         const tableHeaders = obtenerTitulosPorRuta(url);
         setTableHeaders(tableHeaders);
     }, [])
 
   return (
-    <PaginationProvider data={ventasOrganizadas}>
+    <PaginationProvider data={filteredVentas}>
         <div className="container-fluid px-4 mt-5">
 
             <div className="header__submenu">

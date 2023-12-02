@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 
 const SearchSale = () => {
 
-   const { getVentasByDates, ventasByDates } = useVentas();
+   const { getVentasByDates, ventasByDates, ventasOrganizadasDates } = useVentas();
 
    const [fechaInicial, setFechaInicial] = useState('');
    const [fechaFinal, setFechaFinal] = useState('');
@@ -51,7 +51,7 @@ const SearchSale = () => {
                 </form>
             </div>
         </div>
-        <PaginationProvider data={ventasByDates} >
+        <PaginationProvider data={ventasOrganizadasDates} >
             <TableList />
         </PaginationProvider>
         
