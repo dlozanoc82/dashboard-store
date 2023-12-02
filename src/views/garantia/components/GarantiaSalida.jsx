@@ -2,7 +2,7 @@ import React from 'react'
 import useGarantia from '../../../hooks/useGarantia';
 
 const GarantiaSalida = () => {
-    const { garantiasProceso } = useGarantia();
+    const { garantiasProceso, createGarantiaSalida } = useGarantia();
   return (
     <div className='col-md-9 mb-md-4 m-auto pt-2'>
 
@@ -34,7 +34,7 @@ const GarantiaSalida = () => {
                         <td>
                             <center>
                                 {garantias.estado === 1 ? 
-                                    <button className='btn btn-success'>EN PROCESO</button> : 
+                                    <button className='btn btn-success' onClick={() => createGarantiaSalida(garantias.cod_garantia)}>EN PROCESO</button> : 
                                     <button disabled className='btn btn-danger'>TERMINADO</button>}
                             </center>
                         </td>

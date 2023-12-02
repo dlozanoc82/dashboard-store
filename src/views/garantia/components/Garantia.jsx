@@ -5,7 +5,7 @@ import useGarantia from '../../../hooks/useGarantia';
 import { useState } from 'react';
 
 const Garantia = () => {
-  const { nombres, apellidos, getCliente, cliente, getVentas, getGarantiasProceso, setVentas, setNombres, setApellidos, setGarantiasProceso } = useGarantia();
+  const { nombres, apellidos, getCliente, setVentas, setNombres, setApellidos, setGarantiasProceso, createGarantiaEntrada } = useGarantia();
   const [tipoProceso, setTipoProceso] = useState('0');
   const [documento, setDocumento] = useState('');
 
@@ -14,14 +14,6 @@ const Garantia = () => {
   const handleSubmitClient = (e) => {
     e.preventDefault();
     getCliente(documento);
-
-    if (tipoProceso === '1') {
-      getVentas(cliente[0].cod_usu)
-    }
-
-    if (tipoProceso === '2') {
-      getGarantiasProceso(cliente[0].cod_usu)
-    }
 
   };
 

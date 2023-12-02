@@ -349,7 +349,8 @@ const VentasProvider = ({children}) => {
             getVentas,
             setProducto,
             setCliente,
-            filteredVentas
+            filteredVentas,
+            getProductosMasVendidos
         }}
     >
         {children}

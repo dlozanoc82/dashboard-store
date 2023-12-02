@@ -11,7 +11,7 @@ const AddSale = () => {
     const cod_proRef = useRef(null);
     const cant_prodRef = useRef(null);
 
-    const {getCliente, cliente, getProductAdd, producto, clienteId, getVentas, setProducto, setCliente} = useVentas();
+    const {getCliente, cliente, getProductAdd, producto, clienteId, getVentas, setProducto, setCliente, getProductosMasVendidos} = useVentas();
     const [documento, setDocumento] = useState('');
     const [codProducto, setCodProducto] = useState('');
     const [metodoPago, setMetodoPago] = useState(''); // Estado para mantener el valor seleccionado
@@ -20,6 +20,10 @@ const AddSale = () => {
     const [productosVentas, setProductosVenta] = useState([]);
 
     const [productosVentasMostrar, setProductosVentaMostrar] = useState([]);
+
+
+    
+
 
     const handleChangeMethodPay = (event) => {
         setMetodoPago(event.target.value); // Actualiza el estado cuando se selecciona un nuevo valor
@@ -229,7 +233,6 @@ const AddSale = () => {
         );
     };
 
-    
     const finalizarVenta = async (e) => {
         e.preventDefault();
 
@@ -259,11 +262,16 @@ const AddSale = () => {
             getVentas();
             setCliente([])
             setDocumento('');
+            getProductosMasVendidos();
             // Otros estados que necesites reiniciar...
         } catch (error) {
             console.error('Error al enviar la venta:', error);
             // Maneja el error según tus necesidades
         }
+    }
+
+    const clearInputs = () => {
+
     }
 
   return (
