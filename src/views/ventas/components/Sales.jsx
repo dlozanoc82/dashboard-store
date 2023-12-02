@@ -13,9 +13,10 @@ import { useEffect } from "react";
 
 const Sales = () => {
 
-    const {ventas,filteredVentas} = useVentas();
+    const {ventas,filteredVentas, ventasOrganizadas} = useVentas();
     const {setTableHeaders} = useDashborad();
     const url = useResolvedPath("").pathname;
+    console.log({ventasOrganizadas})
 
     useEffect(() => {
         const tableHeaders = obtenerTitulosPorRuta(url);
@@ -23,7 +24,7 @@ const Sales = () => {
     }, [])
 
   return (
-    <PaginationProvider data={filteredVentas}>
+    <PaginationProvider data={ventasOrganizadas}>
         <div className="container-fluid px-4 mt-5">
 
             <div className="header__submenu">

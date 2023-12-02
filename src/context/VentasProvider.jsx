@@ -20,6 +20,7 @@ const VentasProvider = ({children}) => {
   const [producto, setProducto] = useState([]);
 
   const [clienteId, setClienteId] = useState('');
+  const [ventasOrganizadas, setVentasOrganizadas] = useState([]);
 
 
 
@@ -34,26 +35,66 @@ const VentasProvider = ({children}) => {
   useEffect(() => {
     filterByDocumentNumber();
 }, [inputSearch])
+
+  useEffect(() => {
+    organizeVentas();
+  }, [ventas]);
+
   
   //FILTROS
       // FILTRO
-      const filterByDocumentNumber = () => {
-        const searchValue = inputSearch; // No es necesario convertirlo a minúsculas si es un número
-    
-        // Si no hay texto en el campo de búsqueda y el estado está vacío, mostramos todos los pagos
-        if (!searchValue) {
-            setFilteredVentas(ventas);
-            return;
+  const filterByDocumentNumber = () => {
+      const searchValue = inputSearch; // No es necesario convertirlo a minúsculas si es un número
+  
+      // Si no hay texto en el campo de búsqueda y el estado está vacío, mostramos todos los pagos
+      if (!searchValue) {
+          setFilteredVentas(ventas);
+          return;
+      }
+  
+      let filteredData = ventas;
+  
+      filteredData = filteredData.filter((venta) =>
+          venta.documento.toString().startsWith(searchValue.toString())
+      );
+  
+      setFilteredVentas(filteredData);
+  };
+
+  const organizeVentas = () => {
+    setVentasOrganizadas((prevVentas) => {
+      const organizedData = { ...prevVentas };
+
+      ventas.forEach((venta) => {
+        const codVenta = venta.cod_ven;
+
+        if (!organizedData[codVenta]) {
+          organizedData[codVenta] = {
+            cod_venta: codVenta,
+            nombres: venta.nombres,
+            fecha_venta: venta.fecha_venta,
+            documento: venta.documento,
+            apellidos: venta.apellidos,
+            cod_pago: venta.cod_pago,
+            total_venta: 0,
+            productos: [],
+          };
         }
-    
-        let filteredData = ventas;
-    
-        filteredData = filteredData.filter((venta) =>
-            venta.documento.toString().startsWith(searchValue.toString())
-        );
-    
-        setFilteredVentas(filteredData);
-    };
+
+        organizedData[codVenta].productos.push({
+          nombre: venta.nombre,
+          cantidad: venta.cantidad,
+          valor_venta: venta.valor_venta,
+          valor_total_producto: venta.valor_total_producto,
+          ganancias: venta.ganancias,
+        });
+
+        organizedData[codVenta].total_venta += venta.valor_total_producto;
+      });
+
+      return Object.values(organizedData);
+    });
+  };
 
 
   //CRUD
@@ -250,6 +291,7 @@ const VentasProvider = ({children}) => {
         value={{
             ventas,
             getVentasByDates,
+            ventasOrganizadas,
             setVentasByDates,
             ventasByDates,
             inputSearch,
