@@ -14,8 +14,9 @@ export const CardsContainer = () => {
 
         // Convertir la cadena JSON de nuevo a un objeto
         const parsedData = JSON.parse(storedData);
-        console.log("JSON "+Object.keys(parsedData).length);
-        if((Object.keys(parsedData).length)>0){ //Si hay datos en el almacenamiento local
+        console.log(parsedData);
+        //console.log("JSON "+Object.keys(parsedData).length);
+        if(parsedData!=null && (Object.keys(parsedData).length)>0){ //Si hay datos en el almacenamiento local
         try {
             const url = "http://localhost/invensoft/clientes?sesion";
             const response = await axios(url);

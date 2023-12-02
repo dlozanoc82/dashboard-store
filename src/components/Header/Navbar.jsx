@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import useDashborad from "../../hooks/useDashborad";
 import { MenuToggle } from "./components/MenuToggle";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
-import { useHistory } from 'react-router-dom';
+//import { useHistory } from 'react-router-dom';
 
 
 export const Navbar = () => {
-  const history = useHistory();
+  //const history = useHistory();
 
   const title = 'Mi Cuenta';
   const icon = faUser;
@@ -46,7 +46,7 @@ export const Navbar = () => {
 
       // Eliminar un elemento del localStorage por su clave
       localStorage.removeItem('userData');
-      history.push('http://localhost/invensoft2/cerrar_sesion');
+      //history.push('http://localhost/invensoft2/cerrar_sesion');
     } else {
       // Aquí puedes realizar otras acciones si userData tiene datos
       console.log('El objeto userData no está vacío:', userData);
