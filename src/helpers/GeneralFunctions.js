@@ -31,4 +31,9 @@ export const formatearCantidad = (cantidad) =>{
         minimumFractionDigits: 0
     })
 }
-  
+
+
+export const obtenerHoraEnFormatoDoceHoras = (fecha) => {
+    const horaEnFormatoDoceHoras = dayjs(fecha, { format: 'HH:mm:ss' }).format('h:mm A');
+    return horaEnFormatoDoceHoras;
+  }

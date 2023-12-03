@@ -191,6 +191,7 @@ const TableKardex = () => {
             ))}
           </tbody>
         </table> 
+        <a className="submenu__link btn-danger mb-4">GENERAR PDF</a>
       </div>
     </>
   )

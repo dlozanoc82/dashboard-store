@@ -7,6 +7,7 @@ import ComprasPDF from "./components/ComprasPDF";
 import CotizacionesPDF from "./components/CotizacionesPDF";
 import VentasPDF from "./components/VentasPDF";
 import ProductosPDF from "./components/ProductosPDF";
+import KardexPDF from './components/KardexPDF';
 
 const Pagination = () => {
     const { titleUrl } = useDashborad();
@@ -92,6 +93,8 @@ const Pagination = () => {
                 {url === '/ventas' || url === '/ventas/consultar' ? <VentasPDF /> : null}
 
                 {url === '/cotizacion' || url === '/cotizacion/consultar' ? <CotizacionesPDF /> : null}
+
+                {url === '/kardex/libro-diario' ? <KardexPDF /> : null}
 
                 {url === '/productos' ? <ProductosPDF /> : null}
             </div>
