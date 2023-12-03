@@ -199,7 +199,6 @@ ul {
 @media (min-width: 768px) {
     .submenu__list {
         flex-direction: row;
-        flex-wrap: nowrap;
         gap: 2rem;
         margin-right: 1rem;
         margin-bottom: 0;

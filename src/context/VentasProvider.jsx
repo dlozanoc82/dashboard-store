@@ -69,10 +69,10 @@ const VentasProvider = ({children}) => {
   const organizeVentas = (ventasData) => {
     setVentasOrganizadas((prevVentas) => {
       const organizedData = { ...prevVentas };
-
+  
       ventasData.forEach((venta) => {
         const codVenta = venta.cod_ven;
-
+  
         if (!organizedData[codVenta]) {
           organizedData[codVenta] = {
             cod_venta: codVenta,
@@ -85,7 +85,7 @@ const VentasProvider = ({children}) => {
             productos: [],
           };
         }
-
+  
         organizedData[codVenta].productos.push({
           nombre: venta.nombre,
           cantidad: venta.cantidad,
@@ -93,24 +93,28 @@ const VentasProvider = ({children}) => {
           valor_total_producto: venta.valor_total_producto,
           ganancias: venta.ganancias,
         });
-
+  
         organizedData[codVenta].total_venta += venta.valor_total_producto;
       });
-
-      const filteredData = Object.values(organizedData);
-      setFilteredVentas(filteredData);
-
-      return Object.values(organizedData);
+  
+      const sortedData = Object.values(organizedData).sort((a, b) => {
+        // Ordena por fecha_venta de manera descendente
+        return new Date(b.fecha_venta) - new Date(a.fecha_venta);
+      });
+  
+      setFilteredVentas(sortedData);
+  
+      return sortedData;
     });
   };
-
+  
   const organizeVentasByDates = (ventasData) => {
     setVentasOrganizadasDates((prevVentas) => {
       const organizedData = { ...prevVentas };
-
+  
       ventasData.forEach((venta) => {
         const codVenta = venta.cod_ven;
-
+  
         if (!organizedData[codVenta]) {
           organizedData[codVenta] = {
             cod_venta: codVenta,
@@ -123,7 +127,7 @@ const VentasProvider = ({children}) => {
             productos: [],
           };
         }
-
+  
         organizedData[codVenta].productos.push({
           nombre: venta.nombre,
           cantidad: venta.cantidad,
@@ -131,14 +135,19 @@ const VentasProvider = ({children}) => {
           valor_total_producto: parseFloat(venta.valor_total_producto),
           ganancias: venta.ganancias,
         });
-
+  
         organizedData[codVenta].total_venta += parseFloat(venta.valor_total_producto);
       });
-
-      return Object.values(organizedData);
+  
+      const sortedData = Object.values(organizedData).sort((a, b) => {
+        // Ordena por fecha_venta de manera descendente
+        return new Date(b.fecha_venta) - new Date(a.fecha_venta);
+      });
+  
+      return sortedData;
     });
   };
-
+  
 
 
   //CRUD
@@ -338,6 +347,7 @@ const VentasProvider = ({children}) => {
             ventasOrganizadas,
             ventasOrganizadasDates,
             setVentasByDates,
+            setVentasOrganizadasDates,
             ventasByDates,
             inputSearch,
             setInputSearch,

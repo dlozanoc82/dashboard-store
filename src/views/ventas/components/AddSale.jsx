@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import useVentas from '../../../hooks/useVentas';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const AddSale = () => {
   const solo_numeros = /^[0-9]*$/;
@@ -9,6 +10,7 @@ const AddSale = () => {
   const documentoRef = useRef(null);
   const cod_proRef = useRef(null);
   const cant_prodRef = useRef(null);
+  const navigate = useNavigate();
 
   const {
     getCliente,
@@ -302,6 +304,9 @@ const AddSale = () => {
       setCliente([]);
       setDocumento('');
       getProductosMasVendidos();
+      setTimeout(() => {
+        navigate('/ventas');
+      }, 2000);
       // Otros estados que necesites reiniciar...
     } catch (error) {
       console.error('Error al enviar la venta:', error);

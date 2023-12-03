@@ -4,7 +4,7 @@ import useVentas from "../../../hooks/useVentas";
 
 export const SubMenu = ({url}) => {
 
-    const {setVentasByDates, setInputSearch, inputSearch} = useVentas();
+    const {setVentasByDates, setInputSearch, inputSearch, setVentasOrganizadasDates} = useVentas();
 
     const location = useLocation();
     console.log(location.pathname);
@@ -12,6 +12,7 @@ export const SubMenu = ({url}) => {
 
     const handleResetVariables = () => {
         setVentasByDates([]);
+        setVentasOrganizadasDates([]);
     }
 
   return (
