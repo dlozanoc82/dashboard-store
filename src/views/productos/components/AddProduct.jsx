@@ -2,10 +2,13 @@ import { useState, useRef } from "react";
 import useProducts from "../../../hooks/useProducts";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useDashborad from "../../../hooks/useDashborad";
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 
 export const AddProduct = () => {
     const { categorias, setIdSubcategoria, subcategorias, getProductosByModificar } = useProducts();
+    const { handleActiveOption } = useDashborad();
     const navigate = useNavigate();
     const texto_numeros = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüñÑ]+$/;
 
@@ -312,7 +315,7 @@ export const AddProduct = () => {
                                 <div className="col-12 d-flex justify-content-center gap-3 mb-3">
                                     <p className="text-center">¿DESEA AGREGAR UNA COMPRA?
                                         {' '}
-                                        <a href="/compras/agregar"><strong>DA CLICK AQUI</strong></a>
+                                        <Link to="/compras/agregar" onClick={() => handleActiveOption('Compras', faShoppingCart)}><strong>DA CLICK AQUI</strong></Link>
                                     </p>
                                 </div>
 

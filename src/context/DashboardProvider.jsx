@@ -1,6 +1,5 @@
 import { createContext, useState, useEffect } from "react";
 
-
 const DashboardContext = createContext();
 
 const DashboardProvider = ({children}) => {

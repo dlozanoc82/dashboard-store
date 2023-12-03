@@ -15,8 +15,6 @@ const SearchQuotation = () => {
     const handleSearchByDates = async (e) => {
         e.preventDefault();
         getCotizacionesByDates(fechaInicial, fechaFinal);
-        setFechaInicial('');
-        setFechaFinal('');
     }
 
 

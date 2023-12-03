@@ -1,12 +1,15 @@
 import { useState, useRef } from "react";
 import useCompras from "../../../hooks/useCompras";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import '../../../index.css';
+import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
+import useDashborad from "../../../hooks/useDashborad";
 
 export const AddShop = () => {
 
     const navigate = useNavigate();
+    const { handleActiveOption } = useDashborad();
     const solo_numeros = /^[0-9]*$/; // Expresión regular para permitir solo números
 
     const {
@@ -534,7 +537,7 @@ export const AddShop = () => {
                             <div className="col-12 d-flex justify-content-center gap-3 mb-3">
                                 <p className="text-center">NOTA: AÑADE EL PRODUCTO ANTES DE HACER LA COMPRA.
                                     {' '}
-                                    <a href="/productos/agregar"><strong>DA CLICK AQUI</strong></a> SI ES NUEVO
+                                    <Link to="/productos/agregar" onClick={() => handleActiveOption('Productos', faCartPlus)}  ><strong>DA CLICK AQUI</strong></Link> SI ES NUEVO
                                 </p>
                             </div>
 
