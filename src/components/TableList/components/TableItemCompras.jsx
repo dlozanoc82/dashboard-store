@@ -21,7 +21,6 @@ const TableItemCompras = ({info}) => {
         <th><center>{nombre}</center></th>
         <td><center>{cantidad_compra}</center></td>
         <td><center>{nom_prov}</center></td>
-        <td><center>{stock}</center></td>
         <td><center>{formatearCantidad(valor_total)}</center></td>
         <td><center>{formatearCantidad(valor_unit_prov)}</center></td>
         <td><center>{formatearCantidad(valor_venta)}</center></td>

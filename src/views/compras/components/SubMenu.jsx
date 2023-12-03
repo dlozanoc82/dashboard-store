@@ -14,6 +14,7 @@ export const SubMenu = ({url}) => {
     const handleResetVariables = () => {
         setCompra({});
         setComprasByDates([]);
+        setProductosInStock('');
     }
 
   return (

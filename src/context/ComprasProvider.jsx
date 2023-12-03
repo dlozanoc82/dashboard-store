@@ -249,7 +249,7 @@ const ComprasProvider = ({children}) => {
             const { data } = await axios(url);
 
             if(data && data[0] && data[0].stock){
-                console.log('DATA EM GETSTOCK')
+            console.log('DATA EM GETSTOCK')
             console.log(data);
             console.log(data[0].stock);
             setProductosInStock(data[0].stock);
@@ -393,7 +393,8 @@ const ComprasProvider = ({children}) => {
                 setInputSearch,
                 filteredCompras,
                 generarPDFCompras,
-                generarPDFComprasByDates
+                generarPDFComprasByDates,
+                getStock
             }}
         >
             {children}

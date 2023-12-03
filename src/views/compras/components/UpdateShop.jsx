@@ -19,7 +19,8 @@ export const UpdateShop = ({compra}) => {
         upadateCompra,
         setIdProducto,
         productosInStock,
-        setProductosInStock
+        setProductosInStock,
+        getStock
     } = useCompras();    
 
     useEffect(() => {
@@ -48,6 +49,14 @@ export const UpdateShop = ({compra}) => {
     const [precioCompra, setPrecioCompra] = useState(compra.valor_total);
     const [preventa, setPrecioVenta] = useState(compra.valor_venta);
     const [Stock, setStock] = useState(compra.stock)
+
+    useEffect(() => {
+        setIdSubcategoria(compra.cod_cat)
+        setIdProductsSubcategory(compra.cod_sub)
+        setIdProducto(compra.cod_pro)
+        getStock(compra.cod_pro)
+    }, [])
+    
 
     const handleChangeCategory = (event) => {
         setSelectCategory(event.target.value);

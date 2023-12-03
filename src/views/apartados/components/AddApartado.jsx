@@ -152,7 +152,8 @@ const AddApartado = () => {
         };
 
 
-        console.log(productosVentas)
+
+        console.log({ventaJson})
 
         try {
             // Realiza la solicitud POST al endpoint con el objeto JSON como datos
