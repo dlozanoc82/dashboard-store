@@ -34,7 +34,7 @@ const TableItemProductos = ({info}) => {
           <td><center>{descripcion}</center></td>
           <td><center>{estado == 1 ? 'ACTIVO' : 'INACTIVO'}</center></td>
           <td><center>{garantia == 1 ? 'Si' : 'No'}</center></td>
-          <td><center>{duracion_garantia}</center></td>
+          <td><center>{garantia == 1 ? duracion_garantia : 'No Aplica'}</center></td>
           <td><center>{stock}</center></td>
           <td>
           <div className="btn__actions">
