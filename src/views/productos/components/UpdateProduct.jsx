@@ -318,7 +318,7 @@ const UpdateProduct = ({product}) => {
                                 </div>
 
                                 {
-                                    garantia === '1' ? 
+                                    garantia == 1 ? 
                                         <div className="col-md-4 mb-md-4">
                                             <label className="form-label">Duracion de la Garantia</label>
                                             <input value={duracionGarantia} onChange={handleChangeDuracionGarantia} type="text" className="form-control" ref={duracionGarantiaRef} />

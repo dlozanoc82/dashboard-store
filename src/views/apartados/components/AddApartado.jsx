@@ -151,6 +151,9 @@ const AddApartado = () => {
             items: productosVentas,
         };
 
+
+        console.log(productosVentas)
+
         try {
             // Realiza la solicitud POST al endpoint con el objeto JSON como datos
             const respuesta = await axios.post(`http://localhost/invensoft/apartados?cod_usu=${clienteId}`, ventaJson);

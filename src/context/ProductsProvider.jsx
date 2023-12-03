@@ -65,6 +65,7 @@ const ProductsProvider = ({children}) => {
         try {
             const url = "http://localhost/invensoft/productos?productos";
             const { data } = await axios(url);
+            console.log('FUNCION BY MODIFICAR')
             console.log(data);
             setProductsModificar(data);
             setFilteredProducto(data);

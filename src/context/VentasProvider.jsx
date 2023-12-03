@@ -128,11 +128,11 @@ const VentasProvider = ({children}) => {
           nombre: venta.nombre,
           cantidad: venta.cantidad,
           valor_venta: venta.valor_venta,
-          valor_total_producto: venta.valor_total_producto,
+          valor_total_producto: parseFloat(venta.valor_total_producto),
           ganancias: venta.ganancias,
         });
 
-        organizedData[codVenta].total_venta += venta.valor_total_producto;
+        organizedData[codVenta].total_venta += parseFloat(venta.valor_total_producto);
       });
 
       return Object.values(organizedData);
@@ -170,7 +170,7 @@ const VentasProvider = ({children}) => {
     try {
         const url = "http://localhost/invensoft/ventas?vendidos";
         const { data } = await axios(url);
-        console.log(data);
+        console.log({data});
         setProductosVendidos(data);
     } catch (error) {
         console.log(error);

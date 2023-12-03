@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import useCompras from "../../../hooks/useCompras";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -21,6 +21,13 @@ export const UpdateShop = ({compra}) => {
         productosInStock,
         setProductosInStock
     } = useCompras();    
+
+    useEffect(() => {
+        console.log(compra.stock);
+        console.log({cod: compra.cod_pro})
+        setIdProducto(compra.cod_pro);
+    }, [])
+    
     
     const nombreCategoriaRef = useRef(null);
     const nombreSubcategoriaRef = useRef(null);
@@ -40,6 +47,7 @@ export const UpdateShop = ({compra}) => {
     const [precioUnitario, setPrecioUnitario] = useState(compra.valor_unit_prov);
     const [precioCompra, setPrecioCompra] = useState(compra.valor_total);
     const [preventa, setPrecioVenta] = useState(compra.valor_venta);
+    const [Stock, setStock] = useState(compra.stock)
 
     const handleChangeCategory = (event) => {
         setSelectCategory(event.target.value);

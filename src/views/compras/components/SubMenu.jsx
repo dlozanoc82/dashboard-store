@@ -5,7 +5,7 @@ import { useLocation  } from "react-router-dom";
 
 
 export const SubMenu = ({url}) => {
-    const {setCompra, setComprasByDates, inputSearch, setInputSearch} = useCompras();
+    const {setCompra, setComprasByDates, inputSearch, setInputSearch, setProductosInStock} = useCompras();
 
     const location = useLocation();
     console.log(location.pathname);
