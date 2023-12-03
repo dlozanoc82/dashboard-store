@@ -1,10 +1,13 @@
 import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react'
+import { iniciarSesionAdmin } from "../helpers/Validacion_login";
 
 const ApartadoContext = createContext();
 
 const ApartadoProvider = ({children}) => {
 
+  iniciarSesionAdmin();   //Ejecucion de validacion login
+  
   const [apartados, setApartados] = useState([]);
 
 

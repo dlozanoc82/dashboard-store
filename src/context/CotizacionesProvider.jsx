@@ -3,10 +3,12 @@ import jsPDF from 'jspdf';
 import autoTable from "jspdf-autotable";
 import { createContext, useEffect, useState } from 'react'
 import { formatDateToYearMonthDay, formatTime12Hours, formatearCantidad } from '../helpers/GeneralFunctions';
+import { iniciarSesionAdmin } from "../helpers/Validacion_login";
 
 const CotizacionesContext = createContext();
 
 const CotizacionesProvider = ({children}) => {
+  iniciarSesionAdmin();   //Ejecucion de validacion login
 
   const [cotizaciones, setCotizaciones] = useState([]);
   const [cotizacionesByDates, setCotizacionesByDates] = useState([]);

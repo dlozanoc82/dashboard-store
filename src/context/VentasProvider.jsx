@@ -4,10 +4,13 @@ import autoTable from "jspdf-autotable";
 import { formatDateToYearMonthDay, formatTime12Hours, formatearCantidad } from '../helpers/GeneralFunctions';
 import Swal from 'sweetalert2';
 import React, { createContext, useEffect, useState } from 'react'
+import { iniciarSesionAdmin } from "../helpers/Validacion_login";
 
 const VentasContext = createContext();
 
 const VentasProvider = ({children}) => {
+
+  iniciarSesionAdmin();   //Ejecucion de validacion login
 
   const [ventas, setVentas] = useState([]);
   const [filteredVentas, setFilteredVentas] = useState([]);

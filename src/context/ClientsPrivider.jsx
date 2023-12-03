@@ -5,11 +5,14 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import { formatDateToYearMonthDay, formatTime12Hours } from "../helpers/GeneralFunctions";
 import { useNavigate } from "react-router-dom";
+import { iniciarSesionAdmin } from "../helpers/Validacion_login";
 
 const ClientsContext = createContext();
 
 const ClientsPrivider = ({ children }) => {
 
+    iniciarSesionAdmin();   //Ejecucion de validacion login
+    
     const navigate = useNavigate();
     const [clients, setClients] = useState([]);
     const [cliente, setCliente] = useState({});

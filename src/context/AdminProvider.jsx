@@ -1,11 +1,14 @@
 import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react'
 import Swal from 'sweetalert2';
+import { iniciarSesionAdmin } from "../helpers/Validacion_login";
 
 const AdminContext = createContext();
 
 const AdminProvider = ({children}) => {
 
+    iniciarSesionAdmin();   //Ejecucion de validacion login
+    
     const [user, setUser] = useState({});
     const [nombres, setNombres] = useState('');
     const [apellidos, setApellidos] = useState('');
@@ -17,7 +20,7 @@ const AdminProvider = ({children}) => {
     
     const getUser = async () => {        
         try {
-            const url = "http://localhost/invensoft/micuenta?cod_usu=4";
+            const url = "http://localhost/invensoft/micuenta?cod_usu=7";
             const { data } = await axios(url);
             console.log(data[0]);
             setUser(data[0]);
