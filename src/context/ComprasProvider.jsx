@@ -4,10 +4,13 @@ import Swal from 'sweetalert2';
 import { formatDateToYearMonthDay, formatTime12Hours, formatearCantidad } from '../helpers/GeneralFunctions';
 import jsPDF from 'jspdf';
 import autoTable from "jspdf-autotable";
+import { iniciarSesionAdmin } from "../helpers/Validacion_login";
 
 const ComprasContext = createContext();
 
 const ComprasProvider = ({children}) => {
+    
+    iniciarSesionAdmin();   //Ejecucion de validacion login
 
   const [compras, setCompras] = useState([]);
   const [comprasByDates, setComprasByDates] = useState([])

@@ -3,11 +3,14 @@ import jsPDF from "jspdf";
 import { createContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { formatTime12Hours } from "../helpers/GeneralFunctions";
+import { iniciarSesionAdmin } from "../helpers/Validacion_login";
 
 
 const ProductsContext = createContext();
 
 const ProductsProvider = ({children}) => {
+
+    iniciarSesionAdmin();   //Ejecucion de validacion login
 
     const [idSubCategoria, setIdSubcategoria] = useState();
     const [product, setProduct] = useState({});
