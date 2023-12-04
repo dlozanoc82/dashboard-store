@@ -27,11 +27,17 @@ const VentasProvider = ({children}) => {
   const [ventasOrganizadasDates, setVentasOrganizadasDates] = useState([]);
 
   const [cod_detalle, setCod_detalle] = useState('')
+  const [allProducts, setAllProducts] = useState([]);
 
 
   useEffect(() => {
     getVentas();
   }, [])
+
+  useEffect(() => {
+    getProductosDataList();
+  }, [])
+
 
   useEffect(() => {
     getProductosMasVendidos();
@@ -339,6 +345,16 @@ const VentasProvider = ({children}) => {
   }
 
 
+  const getProductosDataList = async() => {
+    try {
+      const url = "http://localhost/invensoft/ventas?products";
+      const { data } = await axios(url);
+      console.log(data);
+      setAllProducts(data);
+    } catch (error) {
+        console.log(error);
+    }
+  }
 
 
   return (
@@ -367,7 +383,8 @@ const VentasProvider = ({children}) => {
             filteredVentas,
             getProductosMasVendidos,
             generarPDFComprasByDates, 
-            cod_detalle
+            cod_detalle,
+            allProducts
         }}
     >
         {children}

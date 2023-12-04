@@ -2,11 +2,13 @@ import { useState, useRef } from 'react';
 import useVentas from '../../../hooks/useVentas';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
+import useDashborad from '../../../hooks/useDashborad';
 
 const AddSale = () => {
   const solo_numeros = /^[0-9]*$/;
-
+  const { handleActiveOption } = useDashborad();
   const documentoRef = useRef(null);
   const cod_proRef = useRef(null);
   const cant_prodRef = useRef(null);
@@ -353,9 +355,9 @@ const AddSale = () => {
                 required
               />
               {cliente.length === 0 && (
-                <a href="/clientes/agregar" className="ms-2">
+                <Link to="/clientes/agregar" onClick={() => handleActiveOption('Clientes', faUser)} className="ms-2">
                   Registrar Usuario
-                </a>
+                </Link>
               )}
             </div>
             <div className="col-md-4 d-flex justify-content-start align-items-center mt-2">
