@@ -14,7 +14,7 @@ const TableKardex = () => {
       setIdProductsSubcategory,
     } = useCompras();
 
-    const {getKardexByProducto, infoKardex, minimo, maximo} = useKardex()
+    const {getKardexByProducto, infoKardex, minimo, maximo, stock} = useKardex()
 
     const [selectCategory, setSelectCategory] = useState(''); // Estado para mantener el valor seleccionado
     const [selectSubCategory, setSelectSubCategory] = useState(''); // Estado para mantener el valor seleccionado
@@ -129,7 +129,7 @@ const TableKardex = () => {
 
                       <div className="col-md-4 mb-md-4">
                           <label className="form-label">Stock</label>
-                          <input disabled value={minimo} type="number" className="form-control" />
+                          <input disabled value={stock} type="number" className="form-control" />
                       </div>
 
                       <div className="col-md-4 mb-md-4">

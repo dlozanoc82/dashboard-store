@@ -15,6 +15,7 @@ const KardexProvider = ({children}) => {
   const [infoKardex, setInfoKardex] = useState([]);
   const [minimo, setMinimo] = useState('');
   const [maximo, setMaximo] = useState('');
+  const [stock, setStock] = useState('');
 
   const getKardexByProducto = async (fecha_ini, fecha_fin, cod_pro) => {        
     try {
@@ -32,6 +33,7 @@ const KardexProvider = ({children}) => {
 
         setMaximo(data[0].stock_max);
         setMinimo(data[0].stock_min);
+        setStock(data[0].stock);
     } catch (error) {
         console.log(error);
     }
@@ -120,6 +122,7 @@ const KardexProvider = ({children}) => {
           infoKardex,
           minimo,
           maximo,
+          stock,
           handleResetVariables,
           generarPDFLibroDiario
         }}
