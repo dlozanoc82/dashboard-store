@@ -148,7 +148,7 @@ export const AddClient = () => {
       return;
     }
 
-    if (!solo_numeros.test(celular) || celular <5000000 || celular>352999999) {
+    if (!solo_numeros.test(celular) || celular <5000000 || celular>3529999999) {
       apellidosRef.current.style.borderColor = '';
       nombresRef.current.style.borderColor = '';
       emailRef.current.style.borderColor = '';
