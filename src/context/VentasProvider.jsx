@@ -26,6 +26,7 @@ const VentasProvider = ({children}) => {
   const [ventasOrganizadas, setVentasOrganizadas] = useState([]);
   const [ventasOrganizadasDates, setVentasOrganizadasDates] = useState([]);
 
+  const [cod_detalle, setCod_detalle] = useState('')
 
 
   useEffect(() => {
@@ -191,6 +192,7 @@ const VentasProvider = ({children}) => {
         const url = `http://localhost/invensoft/ventas?productos=${cod_pro}`;
         const { data } = await axios(url);
         console.log(data);
+        setCod_detalle(data[0].cod_detalle);
         if(data && data.length>0){
         setProducto(data);
         }else{
@@ -363,7 +365,9 @@ const VentasProvider = ({children}) => {
             setProducto,
             setCliente,
             filteredVentas,
-            getProductosMasVendidos
+            getProductosMasVendidos,
+            generarPDFComprasByDates, 
+            cod_detalle
         }}
     >
         {children}

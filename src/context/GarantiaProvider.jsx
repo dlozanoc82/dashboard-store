@@ -62,9 +62,7 @@ const GarantiaProvider = ({children}) => {
     const createGarantiaEntrada = async (cod_venta, descripcion) => {
         //Crear el producto en la API
         try {
-            const respuesta = await axios.post(`http://localhost/invensoft/garantias?cod_venta=${cod_venta}`, {
-                descripcion: descripcion
-            });
+            const respuesta = await axios.post(`http://localhost/invensoft/garantias?cod_venta=${cod_venta}`, {descripcion});
             
             Swal.fire({
                 icon: 'success',

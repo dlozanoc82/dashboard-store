@@ -25,7 +25,7 @@ const VentasModal = ({ productos, onHide }) => {
                 <td>{producto.valor_venta}</td>
                 <td>{producto.cantidad}</td>
                 <td>{producto.valor_total_producto}</td>
-                <td>{producto.ganancias}</td>
+                <td>{producto.ganancias < 0 ? producto.ganancias*-1 : producto.ganancias}</td>
               </tr>
             ))}
           </tbody>

@@ -6,7 +6,7 @@ import useKardex from "../../../hooks/useKardex";
 export const SubMenu = ({url}) => {
 
     const {getLibroDiario, handleResetVariables} = useKardex();
-    // const fechaActual = new Date();
+    const fechaActual = new Date();
 
 
   return (
@@ -17,7 +17,7 @@ export const SubMenu = ({url}) => {
             </Link>
         </li>
         <li>
-            <Link onClick={() => getLibroDiario("2023-11-19")} className="submenu__link btn-danger" to={`${url}/libro-diario`}>
+            <Link onClick={() => getLibroDiario(formatDateToYearMonthDay(fechaActual))} className="submenu__link btn-danger" to={`${url}/libro-diario`}>
                 Libro Diario
             </Link>
         </li>

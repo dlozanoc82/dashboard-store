@@ -304,6 +304,7 @@ const AddSale = () => {
       setCliente([]);
       setDocumento('');
       getProductosMasVendidos();
+      getApartados();
       setTimeout(() => {
         navigate('/ventas');
       }, 2000);

@@ -1,5 +1,6 @@
 import React from 'react'
 import useGarantia from '../../../hooks/useGarantia';
+import { formatDateAndTime } from '../../../helpers/GeneralFunctions';
 
 const GarantiaSalida = () => {
     const { garantiasProceso, createGarantiaSalida } = useGarantia();
@@ -29,8 +30,8 @@ const GarantiaSalida = () => {
                         <td><center>{garantias.celular}</center></td>
                         <td><center>{garantias.nombre}</center></td>
                         <td><center>{garantias.descripcion}</center></td>
-                        <td><center>{garantias.fecha_entrada}</center></td>
-                        <td><center>{garantias.fecha_salida}</center></td>
+                        <td><center>{formatDateAndTime(garantias.fecha_entrada)}</center></td>
+                        <td><center>{ garantias.fecha_salida==='0000-00-00 00:00:00' ? 'NO APLICA' : formatDateAndTime(garantias.fecha_salida)}</center></td>
                         <td>
                             <center>
                                 {garantias.estado === 1 ? 
