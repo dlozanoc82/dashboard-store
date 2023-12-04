@@ -103,7 +103,7 @@ const ApartadoProvider = ({children}) => {
       }
   
       // Sumar el abono actual al total abonado
-      result[cod_cot].total_abonado += formatearCantidad(apartado.valor_abono);
+      result[cod_cot].total_abonado += parseInt(apartado.valor_abono);
   
       result[cod_cot].tipo_pago = apartado.cod_pago;
       result[cod_cot].fecha_limite_pago = apartado.fecha_abono;
