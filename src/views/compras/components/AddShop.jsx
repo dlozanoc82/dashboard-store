@@ -118,6 +118,13 @@ export const AddShop = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        nombreCategoriaRef.current.style.borderColor = '';
+        nombreSubcategoriaRef.current.style.borderColor = '';
+        nombreProductoRef.current.style.borderColor = '';
+        nombreProveedorRef.current.style.borderColor = '';
+        cantidadRef.current.style.borderColor = '';
+        precioUnitarioRef.current.style.borderColor = '';
+        precioCompraRef.current.style.borderColor = '';
 
         // Validar que los campos obligatorios no estén vacíos
         if (!selectCategory || selectCategory === '0') {
@@ -396,6 +403,13 @@ export const AddShop = () => {
             confirmButtonText: "Si",
             denyButtonText: `No`
         });
+        nombreCategoriaRef.current.style.borderColor = '';
+        nombreSubcategoriaRef.current.style.borderColor = '';
+        nombreProductoRef.current.style.borderColor = '';
+        nombreProveedorRef.current.style.borderColor = '';
+        cantidadRef.current.style.borderColor = '';
+        precioUnitarioRef.current.style.borderColor = '';
+        precioCompraRef.current.style.borderColor = '';
 
         try {
             if (confirmado.isConfirmed) {

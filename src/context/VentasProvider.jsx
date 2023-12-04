@@ -102,7 +102,7 @@ const VentasProvider = ({children}) => {
           ganancias: venta.ganancias,
         });
   
-        organizedData[codVenta].total_venta += venta.valor_total_producto;
+        organizedData[codVenta].total_venta += parseFloat(venta.valor_total_producto);
       });
   
       const sortedData = Object.values(organizedData).sort((a, b) => {
@@ -198,9 +198,9 @@ const VentasProvider = ({children}) => {
     try {
         const url = `http://localhost/invensoft/ventas?productos=${cod_pro}`;
         const { data } = await axios(url);
-        console.log(data);
-        setCod_detalle(data[0].cod_detalle);
+        //console.log('prueba');
         if(data && data.length>0){
+        setCod_detalle(data[0].cod_detalle);
         setProducto(data);
         }else{
           Swal.fire({

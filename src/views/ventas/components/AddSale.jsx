@@ -166,6 +166,7 @@ const AddSale = () => {
         title: 'Producto Agregado Correctamente',
         icon: 'success',
       });
+      
     
       setCodProducto('');
       setCantidad('');

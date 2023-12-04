@@ -18,7 +18,7 @@ const TableItemVentas = ({ info }) => {
   } = info;
 
 
-  const tipoPago = cod_pago === 1 ? 'Nequi' : cod_pago === 2 ? 'Daviplata' : 'Efectivo';
+  const tipoPago = cod_pago == 1 ? 'Nequi' : cod_pago == 2 ? 'Daviplata' : 'Efectivo';
 
   const [showModal, setShowModal] = useState(false);
 

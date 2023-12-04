@@ -116,7 +116,7 @@ const UpdateClient = ({cliente}) => {
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: 'El campo Email debe ser texto',
+        text: 'El campo Email es incorrecto.',
         });
       return;
     }
@@ -184,7 +184,7 @@ const UpdateClient = ({cliente}) => {
         });
       return;
     }
-    if (estado!=="INACTIVO" && estado !== "ACTIVO") {
+   /* if (estado!=="INACTIVO" && estado !== "ACTIVO") {
       console.log(estado);
       apellidosRef.current.style.borderColor = '';
       nombresRef.current.style.borderColor = '';
@@ -202,6 +202,7 @@ const UpdateClient = ({cliente}) => {
         console.log(estado);
       return;
     }
+    */
 
     let confirmado = await Swal.fire({
       title: "¿Esta seguro de actualizar este Usuario?",

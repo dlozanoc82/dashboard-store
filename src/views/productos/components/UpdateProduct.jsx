@@ -101,7 +101,7 @@ const UpdateProduct = ({product}) => {
             nombreProductoRef.current.style.borderColor = '';
             descripcionRef.current.style.borderColor = '';
             garantiaRef.current.style.borderColor = '';
-            duracionGarantiaRef.current.style.borderColor = '';
+            //duracionGarantiaRef.current.style.borderColor = '';
             imagenRef.current.style.borderColor = '';
             nombreCategoriaRef.current.focus();
             nombreCategoriaRef.current.style.borderColor = 'red';
@@ -120,7 +120,7 @@ const UpdateProduct = ({product}) => {
             nombreProductoRef.current.style.borderColor = '';
             descripcionRef.current.style.borderColor = '';
             garantiaRef.current.style.borderColor = '';
-            duracionGarantiaRef.current.style.borderColor = '';
+            //duracionGarantiaRef.current.style.borderColor = '';
             imagenRef.current.style.borderColor = '';
             nombreSubcategoriaRef.current.focus();
             nombreSubcategoriaRef.current.style.borderColor = 'red';
@@ -138,7 +138,7 @@ const UpdateProduct = ({product}) => {
             nombreSubcategoriaRef.current.style.borderColor = '';
             descripcionRef.current.style.borderColor = '';
             garantiaRef.current.style.borderColor = '';
-            duracionGarantiaRef.current.style.borderColor = '';
+            //duracionGarantiaRef.current.style.borderColor = '';
             imagenRef.current.style.borderColor = '';
             nombreProductoRef.current.focus();
             nombreProductoRef.current.style.borderColor = 'red';
@@ -150,12 +150,12 @@ const UpdateProduct = ({product}) => {
             return;
         }
 
-        if (!texto_numeros.test(descripcion) || descripcion.length < 8) {
+        if (descripcion.length < 8) {
             nombreCategoriaRef.current.style.borderColor = '';
             nombreSubcategoriaRef.current.style.borderColor = '';
             nombreProductoRef.current.style.borderColor = '';
             garantiaRef.current.style.borderColor = '';
-            duracionGarantiaRef.current.style.borderColor = '';
+            //duracionGarantiaRef.current.style.borderColor = '';
             imagenRef.current.style.borderColor = '';
             descripcionRef.current.focus();
             descripcionRef.current.style.borderColor = 'red';
@@ -172,7 +172,7 @@ const UpdateProduct = ({product}) => {
             nombreSubcategoriaRef.current.style.borderColor = '';
             nombreProductoRef.current.style.borderColor = '';
             descripcionRef.current.style.borderColor = '';
-            duracionGarantiaRef.current.style.borderColor = '';
+            //duracionGarantiaRef.current.style.borderColor = '';
             imagenRef.current.style.borderColor = '';
             garantiaRef.current.focus();
             garantiaRef.current.style.borderColor = 'red';
@@ -253,7 +253,7 @@ const UpdateProduct = ({product}) => {
             nombreProductoRef.current.style.borderColor = '';
             garantiaRef.current.style.borderColor = '';
             descripcionRef.current.style.borderColor = '';
-            duracionGarantiaRef.current.style.borderColor = '';
+            //duracionGarantiaRef.current.style.borderColor = '';
             imagenRef.current.focus();
             imagenRef.current.style.borderColor = 'red';
             Swal.fire({

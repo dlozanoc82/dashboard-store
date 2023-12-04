@@ -25,7 +25,7 @@ const TableItemApartados = ({info}) => {
 
     const {handleDeleteApartado, getHistorial, setHistorialAbonosModal} = useApartado();
 
-    const tipoPago = tipo_pago === 1 ? 'Nequi' : (tipo_pago === 2 ? 'Daviplata' : 'Efectivo');
+    const tipoPago = tipo_pago == 1 ? 'Nequi' : (tipo_pago == 2 ? 'Daviplata' : 'Efectivo');
     
     const [showModal, setShowModal] = useState(false);
     const [showModalAbonos, setShowModalAbonos] = useState(false);

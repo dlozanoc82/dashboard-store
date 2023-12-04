@@ -38,7 +38,7 @@ export const SubMenu = ({url}) => {
             </Link>
         </li>
         <li className="submenu__item">
-            <input hidden={isSearchDisabled} className="search_input" type="text" value={inputSearch} onChange={(e) => setInputSearch(e.target.value)} placeholder="BUSCAR POR CODIGO DE VENTA" />
+            <input hidden={isSearchDisabled} className="search_input" type="text" value={inputSearch} onChange={(e) => setInputSearch(e.target.value)} placeholder="BUSCAR POR DOCUMENTO" />
         </li>
     </ul>
   )

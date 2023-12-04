@@ -1,11 +1,12 @@
 import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react'
 import { iniciarSesionAdmin } from "../helpers/Validacion_login";
+import { formatDateToYearMonthDay, formatTime12Hours, formatearCantidad } from '../helpers/GeneralFunctions';
 import Swal from 'sweetalert2';
 
 const ApartadoContext = createContext();
 
-const ApartadoProvider = ({children}) => {
+const ApartadoProvider = ({children}) => { 
 
   iniciarSesionAdmin();   //Ejecucion de validacion login
   
@@ -29,8 +30,15 @@ const ApartadoProvider = ({children}) => {
     try {
         const url = "http://localhost/invensoft/apartados?apartados";
         const { data } = await axios(url);
-        console.log(data);
-        setApartados(data);
+        if (data && data.length > 0) {
+          setApartados(data);
+        }else{
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'No hay datos para mostrar',
+          });
+        }
     } catch (error) {
         console.log(error);
     }
@@ -95,7 +103,7 @@ const ApartadoProvider = ({children}) => {
       }
   
       // Sumar el abono actual al total abonado
-      result[cod_cot].total_abonado += apartado.valor_abono;
+      result[cod_cot].total_abonado += formatearCantidad(apartado.valor_abono);
   
       result[cod_cot].tipo_pago = apartado.cod_pago;
       result[cod_cot].fecha_limite_pago = apartado.fecha_abono;

@@ -175,20 +175,65 @@ const TableKardex = () => {
             </tr>
           </thead>
           <tbody>
-            {infoKardex.map((info, index) =>(
+            {infoKardex.map((info, index) =>{
+              console.log (info.entra_sale);
+              let stock_anterior = 0;
+              let valor_total_anterior = 0;
+
+              //if(index==0){ //Si entra_sale es 1, el primer registro es una compra realizada
+                if(info.entra_sale==1){
+                  //Si es una venta imprimo la informacion sin hacer nada mas
+                  return (
+                    <tr key={index}>
+                      <td><center> {info.fecha_transaccion} </center></td>
+                      <td><center> {info.entra_sale == 1 ? `Compra # ${info.cod_transaccion}` : `Venta # ${info.cod_transaccion}`} </center></td>
+                      <td><center> {info.entra_sale == 1 ? info.valor_pro : info.valor_venta /*Valor unitario de venta*/} </center></td>
+                      <td><center> {info.entra_sale == 1 ? info.cantidad : '' /*Cantidad en columna entrada*/} </center></td>
+                      <td><center> {info.entra_sale == 1 ? info.cantidad * info.valor_pro : '' /*Valor en columna entrada*/} </center></td>
+                      <td><center> {info.entra_sale == 2 ? info.cantidad : '' /*Cantidad en columna salida*/} </center></td>
+                      <td><center> {info.entra_sale == 2 ? info.cantidad * info.valor_venta : '' /*Valor en columna salida*/} </center></td>
+                      <td><center> {info.stock /*Cantidad en columna saldo stock restante*/} </center></td>
+                      <td><center> {info.valor_venta * info.stock /*Valor en columna saldo*/} </center></td>
+                      <td><center> {0 /*columna Ganancias*/} </center></td>
+                    </tr>
+                    );
+                  
+                }else{
+                  //stock_anterior = info.stock;    //Capturo el stock actual del registro
+                  //valor_total_anterior = info.valor_venta * info.stock; //Capturo el saldo de la columna valor en saldo
+                  //Si es una compra capturo el valor y pego lo que valio la compra
+                  return (
+                    <tr key={index}>
+                      <td><center> {info.fecha_transaccion} </center></td>
+                      <td><center> {info.entra_sale == 1 ? `Compra # ${info.cod_transaccion}` : `Venta # ${info.cod_transaccion}`} </center></td>
+                      <td><center> {info.entra_sale == 1 ? info.valor_pro : info.valor_pro /*Valor unitario de venta*/} </center></td>
+                      <td><center> {info.entra_sale == 1 ? info.cantidad : '' /*Cantidad en columna entrada*/} </center></td>
+                      <td><center> {info.entra_sale == 1 ? info.cantidad * info.valor_pro : '' /*Valor en columna entrada*/} </center></td>
+                      <td><center> {info.entra_sale == 2 ? info.cantidad : '' /*Cantidad en columna salida*/} </center></td>
+                      <td><center> {info.entra_sale == 2 ? info.cantidad * info.valor_venta : '' /*Valor en columna salida*/} </center></td>
+                      <td><center> {info.stock /*Cantidad en columna saldo stock restante*/} </center></td>
+                      <td><center> {info.valor_venta * info.stock /*Valor en columna saldo*/} </center></td>
+                      <td><center> {info.valor_venta*info.cantidad - info.valor_pro*info.cantidad /*columna Ganancias*/} </center></td>
+                    </tr>
+                    );
+
+                }
+                //Imprimo la informacion en la fila normal sin hacer calculos pero capturo la respectiva informacion para despues hacer calculos
+              return (
               <tr key={index}>
                 <td><center> {info.fecha_transaccion} </center></td>
-                <td><center> {info.nombre} </center></td>
-                <td><center> {info.entra_sale === 1 ? info.valor_pro : info.valor_venta} </center></td>
-                <td><center> {info.entra_sale === 1 ? info.cantidad : ''} </center></td>
-                <td><center> {info.entra_sale === 1 ? info.cantidad * info.valor_pro : ''} </center></td>
-                <td><center> {info.entra_sale === 2 ? info.cantidad : ''} </center></td>
-                <td><center> {info.entra_sale === 2 ? info.cantidad * info.valor_venta : ''} </center></td>
-                <td><center> {''} </center></td>
-                <td><center> {''} </center></td>
-                <td><center> {info.ganancias} </center></td>
+                <td><center> {info.entra_sale == 1 ? `Compra # ${info.cod_transaccion}` : `Venta # ${info.cod_transaccion}`} </center></td>
+                <td><center> {info.entra_sale == 1 ? info.valor_pro : info.valor_venta /*Valor unitario de venta*/} </center></td>
+                <td><center> {info.entra_sale == 1 ? info.cantidad : '' /*Cantidad en columna entrada*/} </center></td>
+                <td><center> {info.entra_sale == 1 ? info.cantidad * info.valor_pro : '' /*Valor en columna entrada*/} </center></td>
+                <td><center> {info.entra_sale == 2 ? info.cantidad : '' /*Cantidad en columna salida*/} </center></td>
+                <td><center> {info.entra_sale == 2 ? info.cantidad * info.valor_venta : '' /*Valor en columna salida*/} </center></td>
+                <td><center> {info.stock /*Cantidad en columna saldo stock restante*/} </center></td>
+                <td><center> {info.valor_pro * info.stock /*Valor en columna saldo*/} </center></td>
+                <td><center> {info.ganancias /*columna Ganancias*/} </center></td>
               </tr>
-            ))}
+              );
+              })}
           </tbody>
         </table> 
         <a className="submenu__link btn-danger mb-4">GENERAR PDF</a>

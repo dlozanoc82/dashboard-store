@@ -179,6 +179,7 @@ const AddApartado = () => {
       title: 'Producto Agregado Correctamente',
       icon: 'success',
     });
+    
 
     clearInputs();
   };
