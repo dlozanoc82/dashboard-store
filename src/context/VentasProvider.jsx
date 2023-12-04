@@ -65,9 +65,10 @@ const VentasProvider = ({children}) => {
       }
   
       let filteredData = ventasOrganizadas;
+      console.log({filteredData})
   
       filteredData = filteredData.filter((venta) =>
-          venta.cod_venta.toString().startsWith(searchValue.toString())
+          venta.documento.toString().startsWith(searchValue.toString())
       );
   
       setFilteredVentas(filteredData);

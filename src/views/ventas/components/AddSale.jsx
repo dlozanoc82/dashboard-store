@@ -42,7 +42,7 @@ const AddSale = () => {
     setCodProducto(e.target.value)
   }
 
-  const clearInputs = () => {}
+
 
   const handleChangeCantidad = (e) => {
     const nuevaCantidad = e.target.value;
@@ -487,9 +487,6 @@ const AddSale = () => {
             </div>
 
             <div className="col-12 d-flex justify-content-center gap-3 pb-5">
-              <button className="btn btn-secondary" type="button" onClick={clearInputs}>
-                Limpiar
-              </button>
               <button className="btn btn-primary" type="submit">
                 Agregar
               </button>
