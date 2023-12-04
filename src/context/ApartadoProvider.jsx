@@ -11,6 +11,7 @@ const ApartadoProvider = ({children}) => {
   
   const [apartados, setApartados] = useState([]);
   const [organizarApartados, setOrganizarApartados] = useState([]);
+  const [historialAbonosModal, setHistorialAbonosModal] = useState([]);
 
 
   useEffect(() => {
@@ -121,7 +122,18 @@ const ApartadoProvider = ({children}) => {
   
     return transformedData;
   };
-  
+
+
+  const getHistorial = async (cod_coti) => {
+    try {
+        const url = `http://localhost/invensoft/apartados?cod_coti=${cod_coti}`;
+        const { data } = await axios(url);
+        console.log({data});
+        setHistorialAbonosModal(data);
+    } catch (error) {
+        console.log(error);
+    }
+  };
   
   // Llamar a la función con la variable 'apartados'
   const apartadosTransformados = transformarApartados(apartados);
@@ -135,7 +147,10 @@ const ApartadoProvider = ({children}) => {
           apartados,
           organizarApartados,
           handleDeleteApartado,
-          getApartados
+          getApartados,
+          getHistorial,
+          historialAbonosModal,
+          setHistorialAbonosModal
         }}
     >
         {children}

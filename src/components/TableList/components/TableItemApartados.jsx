@@ -7,6 +7,7 @@ import { faEye } from '@fortawesome/free-solid-svg-icons';
 import ApartadosModal from './ApartadosModal';
 import useApartado from '../../../hooks/useApartado';
 import AbonosModal from './AbonosModal';
+import HistorialAbonosModal from './HistorialAbonosModal';
 
 const TableItemApartados = ({info}) => {
 
@@ -22,18 +23,27 @@ const TableItemApartados = ({info}) => {
         documento,
         items} = info;
 
-    const {handleDeleteApartado} = useApartado();
+    const {handleDeleteApartado, getHistorial, setHistorialAbonosModal} = useApartado();
 
     const tipoPago = tipo_pago === 1 ? 'Nequi' : (tipo_pago === 2 ? 'Daviplata' : 'Efectivo');
     
     const [showModal, setShowModal] = useState(false);
     const [showModalAbonos, setShowModalAbonos] = useState(false);
+    const [showHModalAbonos, setShowHModalAbonos] = useState(false);
 
     const handleShowModal = () => setShowModal(true);
     const handleCloseModal = () => setShowModal(false);
 
     const handleShowModalAbonos = () => setShowModalAbonos(true);
     const handleCloseModalAbonos = () => setShowModalAbonos(false);
+
+    const handleShowModalHAbonos = () => {
+        getHistorial(cod_cot);
+        setShowHModalAbonos(true);
+    }
+    const handleCloseModalHAbonos = () => {
+        setShowHModalAbonos(false)
+    };
 
   return (
     <>
@@ -51,7 +61,7 @@ const TableItemApartados = ({info}) => {
                 <Link onClick={handleShowModalAbonos} className="btn btn-danger btn-padding">
                     Abonos
                 </Link>
-                <button className="btn btn-danger btn-padding">
+                <button onClick={handleShowModalHAbonos} className="btn btn-danger btn-padding">
                     Historial Abonos
                 </button>
             </div></center>
@@ -74,6 +84,11 @@ const TableItemApartados = ({info}) => {
         {showModalAbonos && (
             <AbonosModal cod_cot={cod_cot} saldo_restante={saldo_restante} onHide={handleCloseModalAbonos} />
         )}
+
+        {showHModalAbonos && (
+            <HistorialAbonosModal  onHide={handleCloseModalHAbonos} />
+        )}
+
 
     </>
   )
