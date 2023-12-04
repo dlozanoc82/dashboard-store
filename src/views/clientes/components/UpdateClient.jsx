@@ -153,7 +153,7 @@ const UpdateClient = ({cliente}) => {
       return;
     }
 
-    if (!solo_numeros.test(celular) || celular <2000000) {
+    if (!solo_numeros.test(celular) || celular <5000000 || celular>3529999999) {
       apellidosRef.current.style.borderColor = '';
       nombresRef.current.style.borderColor = '';
       emailRef.current.style.borderColor = '';
