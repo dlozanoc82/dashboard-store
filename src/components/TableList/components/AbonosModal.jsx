@@ -49,7 +49,7 @@ const AbonosModal = ({ cod_cot, saldo_restante, onHide }) => {
             denyButtonText: `No`
         }).then(async(result) => {
           try {
-            const total = valorAbono / 2;
+            const total = valorAbono;
 
             if (result.isConfirmed) {
               const respuesta = await axios(`http://localhost/invensoft/apartados?cod_cot=${cod_cot}&abono=${total}&cod_pago=${tipoPago}`);
