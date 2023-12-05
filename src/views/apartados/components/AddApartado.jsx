@@ -284,6 +284,9 @@ const AddApartado = () => {
     // Consolidar productosVentas antes de enviar la venta
     const consolidatedProductosVentas = [];
 
+    console.log({productosVentas})
+    console.log(productosVentas.length)
+
     productosVentas.forEach((producto) => {
       const existingProductIndex = consolidatedProductosVentas.findIndex(
         (p) => p.cod_pro === producto.cod_pro
@@ -310,7 +313,7 @@ const AddApartado = () => {
     // Crea el objeto JSON con la información consolidada de la venta
     const ventaJson = {
       apartado: {
-        abono_general: parseFloat(abono / 2),
+        abono_general: parseFloat(abono / productosVentas.length),
         tipo_pago: parseInt(metodoPago),
         fecha_limite_pago: fechaLimitePago,
         total_a_pagar: productosVentas.reduce(

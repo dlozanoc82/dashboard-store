@@ -14,6 +14,8 @@ const ApartadoProvider = ({children}) => {
   const [organizarApartados, setOrganizarApartados] = useState([]);
   const [historialAbonosModal, setHistorialAbonosModal] = useState([]);
 
+  const [historyLength, setHistoryLength] = useState('');
+
 
   useEffect(() => {
     getApartados();
@@ -182,7 +184,9 @@ const ApartadoProvider = ({children}) => {
           getApartados,
           getHistorial,
           historialAbonosModal,
-          setHistorialAbonosModal
+          setHistorialAbonosModal,
+          historyLength, 
+          setHistoryLength
         }}
     >
         {children}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { formatDateAndTime, formatearCantidad } from '../../../helpers/GeneralFunctions';
+import { aproximarPrecio, formatDateAndTime, formatearCantidad } from '../../../helpers/GeneralFunctions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
@@ -56,9 +56,9 @@ const TableItemApartados = ({info}) => {
         <td><center>{nombres} {apellidos}</center></td>
         <td><center>{documento}</center></td>
         <td><center>{tipoPago}</center></td>
-        <td><center>{formatearCantidad (total_abonado)}</center></td>
-        <td><center>{formatearCantidad (saldo_restante)}</center></td>
-        <td><center>{formatearCantidad (total_a_pagar)}</center></td>
+        <td><center>{formatearCantidad(aproximarPrecio(total_abonado))}</center></td>
+        <td><center>{formatearCantidad(aproximarPrecio(saldo_restante))}</center></td>
+        <td><center>{formatearCantidad(aproximarPrecio(total_a_pagar))}</center></td>
  
         <td><center>
             <div className="btn__actions">
@@ -90,7 +90,7 @@ const TableItemApartados = ({info}) => {
         )}
 
         {showHModalAbonos && (
-            <HistorialAbonosModal  onHide={handleCloseModalHAbonos} />
+            <HistorialAbonosModal items={items} onHide={handleCloseModalHAbonos} />
         )}
 
 

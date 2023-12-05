@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, Button, Table } from 'react-bootstrap';
 import { formatearCantidad } from '../../../helpers/GeneralFunctions';
+import useApartado from '../../../hooks/useApartado';
 
 const ApartadosModal = ({ items, onHide }) => {
 
   const [productos, setProductos] = useState([]);
 
+  const {historyLength, setHistoryLength} = useApartado();
+
   useEffect(() => {
     const data = eliminarDuplicados(items);
+    setHistoryLength(data.length);
     setProductos(data);
   }, [])
   

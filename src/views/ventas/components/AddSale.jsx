@@ -24,6 +24,7 @@ const AddSale = () => {
     setProducto,
     setCliente,
     getProductosMasVendidos,
+    allProducts
   } = useVentas();
 
   const [documento, setDocumento] = useState('');
@@ -386,7 +387,22 @@ const AddSale = () => {
       <div>
         <form onSubmit={handleSubmitProduct} className="mt-3">
           <div className="row p-2 mb-3">
-            <div className="col-md-4 mb-md-4">
+          <div className="col-md-4 mb-md-4">
+                <label className="form-label">Seleccione el Producto *</label>
+                <select
+                      className="form-select"
+                      value={codProducto}
+                      onChange={handleCodProducto}
+                  >
+                      <option value="0">Seleccione una opción</option>
+                      {allProducts.map((product) => (
+                         product.stock !== 0 ? 
+                          <option key={product.cod_pro} value={product.cod_pro}>Cod: {product.cod_pro} - {product.nombre}</option>
+                          : <></>
+                      ))}
+                  </select>
+              </div>
+            <div hidden className="col-md-4 mb-md-4">
               <label className="form-label">Codigo del Producto *</label>
               <input
                 value={codProducto}

@@ -3,12 +3,37 @@ import { Modal, Button, Table } from 'react-bootstrap';
 import { formatearCantidad } from '../../../helpers/GeneralFunctions';
 import useApartado from '../../../hooks/useApartado';
 
-const HistorialAbonosModal = ({ cod_cot, onHide }) => {
+const HistorialAbonosModal = ({ items, cod_cot, onHide }) => {
 
     const {historialAbonosModal} = useApartado();
     const [historial, setHistorial] = useState([]);
 
+    const [nproductos, setNProductos] = useState('');
 
+
+  
+    useEffect(() => {
+      const data = eliminarDuplicados(items);
+      setNProductos(data.length);
+    }, [])
+    
+  
+    const eliminarDuplicados = (arr) => {
+      const uniqueItems = [];
+    
+      arr.forEach((item) => {
+        const existe = uniqueItems.some(
+          (uniqueItem) =>
+            uniqueItem.nombre === item.nombre && uniqueItem.valor_unit === item.valor_unit
+        );
+    
+        if (!existe) {
+          uniqueItems.push(item);
+        }
+      });
+    
+      return uniqueItems;
+    };
 
     useEffect(() => {
         const nuevoArreglo = historialAbonosModal.reduce((resultado, item) => {
@@ -57,9 +82,9 @@ const HistorialAbonosModal = ({ cod_cot, onHide }) => {
             {historial.map((item, index) => (
               
               <tr key={index}>
-                <td>{index + 1}</td>
+                <td>{index}</td>
                 <td>{item.fecha_abono}</td>
-                <td>{ index === 0 ? formatearCantidad(item.valor_abono*2) : formatearCantidad(item.valor_abono)}</td>
+                <td>{ index === 0 ? formatearCantidad(aproximarPrecio(parseInt(item.valor_abono) * parseInt(nproductos))) : formatearCantidad(item.valor_abono)}</td>
                 <td>{item.cod_pago == 1 ? 'Nequi' : item.cod_pago == 2 ? 'Daviplata' : 'Efectivo'}</td>
               </tr>
             ))}

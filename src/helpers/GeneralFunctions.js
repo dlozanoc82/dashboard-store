@@ -32,6 +32,10 @@ export const formatearCantidad = (cantidad) =>{
     })
 }
 
+export function aproximarPrecio(precio) {
+    return Math.floor(precio / 100) * 100;
+}
+
 
 export const obtenerHoraEnFormatoDoceHoras = (fecha) => {
     const horaEnFormatoDoceHoras = dayjs(fecha, { format: 'HH:mm:ss' }).format('h:mm A');
