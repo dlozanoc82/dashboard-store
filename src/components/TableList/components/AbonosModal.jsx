@@ -30,6 +30,15 @@ const AbonosModal = ({ cod_cot, saldo_restante, onHide }) => {
       return;
     }
 
+    if (valorAbono<0 || valorAbono == 0) {
+      Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "El valor NO puede ser negativo o cero",
+        });
+    return;
+  }
+
     if (valorAbono == saldo_restante) {
         
         let confirmado = Swal.fire({
@@ -38,12 +47,12 @@ const AbonosModal = ({ cod_cot, saldo_restante, onHide }) => {
             showCancelButton: false,
             confirmButtonText: "Si",
             denyButtonText: `No`
-        });
+        }).then(async(result) => {
+          try {
+            const total = valorAbono / 2;
 
-        try {
-
-            if (confirmado.isConfirmed) {
-                const respuesta = await axios(`http://localhost/invensoft/apartados?cod_cot=83&abono=20000&cod_pago=1`);
+            if (result.isConfirmed) {
+              const respuesta = await axios(`http://localhost/invensoft/apartados?cod_cot=${cod_cot}&abono=${total}&cod_pago=${tipoPago}`);
 
                 Swal.fire({
                     icon: 'success',
@@ -55,7 +64,7 @@ const AbonosModal = ({ cod_cot, saldo_restante, onHide }) => {
                 Swal.fire("Operación detenida", "", "info");
             }
 
-            getClients();
+            //getClients();
         } catch (error) {
             console.log(error);
             Swal.fire({
@@ -64,8 +73,7 @@ const AbonosModal = ({ cod_cot, saldo_restante, onHide }) => {
                 text: '¡Algo salió mal!',
             })
         }
-
-
+     });
       return;
     }
 

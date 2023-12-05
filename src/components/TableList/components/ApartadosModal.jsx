@@ -41,7 +41,7 @@ const ApartadosModal = ({ items, onHide }) => {
               <th>Nombre</th>
               <th>Cantidad</th>
               <th>Valor Unitario</th>
-              <th>Subtotal</th>
+              <th>Total</th>
             </tr>
           </thead>
           <tbody>

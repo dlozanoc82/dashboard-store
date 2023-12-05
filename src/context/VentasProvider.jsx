@@ -198,7 +198,8 @@ const VentasProvider = ({children}) => {
     try {
         const url = `http://localhost/invensoft/ventas?productos=${cod_pro}`;
         const { data } = await axios(url);
-        //console.log('prueba');
+        console.log('prueba');
+        console.log(data);
         if(data && data.length>0){
         setCod_detalle(data[0].cod_detalle);
         setProducto(data);

@@ -51,12 +51,48 @@ const GarantiaProvider = ({children}) => {
         try {
             const url = `http://localhost/invensoft/garantias?gar_usu=${documento}`;
             const { data } = await axios(url);
+            console.log("GARANTIAS ");
             console.log(data);
             setGarantiasProceso(data); 
         } catch (error) {
             console.log(error);
         }
     };
+
+    const handleTerminarGarantia = async (garantia_terminar) => {
+        let confirmado = await Swal.fire({
+            title: "¿Está seguro de terminar esta garantia?",
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: "Si",
+            denyButtonText: `No`
+          });
+    
+        try {
+    
+            if(confirmado.isConfirmed){
+            const respuesta = await axios.get(` http://localhost/invensoft/garantias?terminar=${garantia_terminar}`);
+              console.log(respuesta)
+            Swal.fire({
+                icon: 'success',
+                title: 'Garantia terminada',
+                showConfirmButton: false,
+                timer: 2000
+            })
+            getGarantiasProceso();
+        }else{
+            Swal.fire("Operación detenida", "", "info");
+        }
+    
+        } catch (error) {
+            console.log(error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '¡Algo salió mal!',
+            })
+        }
+      }
 
 
     const createGarantiaEntrada = async (cod_venta, descripcion) => {
@@ -125,6 +161,7 @@ const GarantiaProvider = ({children}) => {
             setGarantiasProceso,
             createGarantiaEntrada,
             createGarantiaSalida,
+            handleTerminarGarantia,
             idUsuario
         }}
     >

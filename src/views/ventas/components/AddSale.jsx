@@ -114,7 +114,9 @@ const AddSale = () => {
       return;
     }
   
-    if (producto[0].stock < cantidad) {
+/*    if (producto[0].stock < cantidad) {
+      console.log("stock"+producto[0].stock);
+      console.log("cantidad "+cantidad);
       cant_prodRef.current.focus();
       cant_prodRef.current.style.borderColor = 'red';
       Swal.fire({
@@ -124,7 +126,7 @@ const AddSale = () => {
       });
       return;
     }
-  
+  */
     const existingProductIndex = productosVentasMostrar.findIndex(
         (p) => p.cod_pro === producto[0].cod_pro
       );
@@ -167,7 +169,7 @@ const AddSale = () => {
         icon: 'success',
       });
       
-    
+      producto[0].stock = 0;
       setCodProducto('');
       setCantidad('');
       setProducto([]);

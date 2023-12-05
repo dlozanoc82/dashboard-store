@@ -17,7 +17,7 @@ const HistorialAbonosModal = ({ cod_cot, onHide }) => {
           const existente = resultado.find(
             (el) =>
               el.cod_pago === cod_pago &&
-              el.valor_abono === valor_abono &&
+              el.valor_abono == valor_abono &&
               el.fecha_abono === fecha_abono
           );
     
@@ -49,7 +49,7 @@ const HistorialAbonosModal = ({ cod_cot, onHide }) => {
             <tr>
               <th>Nombre</th>
               <th>Cantidad</th>
-              <th>Valor Unitario</th>
+              <th>Metodo Pago</th>
             </tr>
           </thead>
           <tbody>
@@ -57,7 +57,7 @@ const HistorialAbonosModal = ({ cod_cot, onHide }) => {
               <tr key={index}>
                 <td>{item.fecha_abono}</td>
                 <td>{formatearCantidad(item.valor_abono*2)}</td>
-                <td>{item.cod_pago === 1 ? 'Nequi' : item.cod_pago === 2 ? 'Daviplata' : 'Efectivo'}</td>
+                <td>{item.cod_pago == 1 ? 'Nequi' : item.cod_pago == 2 ? 'Daviplata' : 'Efectivo'}</td>
               </tr>
             ))}
           </tbody>
