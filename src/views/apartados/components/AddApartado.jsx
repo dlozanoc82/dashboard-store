@@ -126,7 +126,7 @@ const AddApartado = () => {
       return;
     }
 
-   /* if (producto[0].stock < cantidad) {
+    if (parseInt(producto[0].stock) < parseInt(cantidad)) {
       console.log("stock"+producto[0].stock);
       console.log("cantidad "+cantidad);
       cant_prodRef.current.focus();
@@ -138,7 +138,7 @@ const AddApartado = () => {
       });
       return;
     }
-    */
+    
 
     const existingProductIndex = productosVentasMostrar.findIndex(
       (p) => p.cod_pro === producto[0].cod_pro

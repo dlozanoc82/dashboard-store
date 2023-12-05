@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
-import ApartadosModal from './ApartadosModal';
+import ApartadosModal from './ApartadosModal'; 
 import useApartado from '../../../hooks/useApartado';
 import AbonosModal from './AbonosModal';
 import HistorialAbonosModal from './HistorialAbonosModal';
