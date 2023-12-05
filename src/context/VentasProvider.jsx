@@ -5,12 +5,14 @@ import { formatDateToYearMonthDay, formatTime12Hours, formatearCantidad } from '
 import Swal from 'sweetalert2';
 import React, { createContext, useEffect, useState } from 'react'
 import { iniciarSesionAdmin } from "../helpers/Validacion_login";
+import { botonAcessibilidad } from "../helpers/Acessibilidad";
 
 const VentasContext = createContext();
 
 const VentasProvider = ({children}) => {
 
   iniciarSesionAdmin();   //Ejecucion de validacion login
+  botonAcessibilidad();
 
   const [ventas, setVentas] = useState([]);
   const [filteredVentas, setFilteredVentas] = useState([]);

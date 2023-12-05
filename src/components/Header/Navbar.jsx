@@ -16,11 +16,19 @@ export const Navbar = () => {
 
   const { titleUrl, handleActiveOption } = useDashborad();
   const [pageTitle, setPageTitle] = useState(titleUrl); //useState para recuperar el modulo en el que esta el usuario
+  const [userName, setUserName] = useState(''); // Estado para almacenar el nombre del usuario
 
   useEffect(() => {
     const storedTitle = localStorage.getItem("selectedOption");     //Se accede al almacenamiento local para recuperar el modulo en el que estamos
+    const usuario_sesion = localStorage.getItem("Usuario");
+    const parsedData = JSON.parse(usuario_sesion);
+    if (parsedData && parsedData.nombre) {
+      setUserName(parsedData.nombre);
+    }
+
     if (storedTitle) {
       setPageTitle(storedTitle);
+      
     } else {
       setPageTitle(titleUrl);
     }
@@ -49,10 +57,10 @@ export const Navbar = () => {
           // Eliminar un elemento del localStorage por su clave y redirecciono a cerrar sesion para destruir la sesion en php
           localStorage.removeItem('Usuario');
           localStorage.removeItem('selectedOption');
-          window.location.href = 'http://localhost/invensoft2/cerrar_sesion.php';
+          window.location.href = 'http://localhost/invensoft/cerrar_sesion.php';
         } else {
           //Si no hay informacion en el localstorage redirecciono a cerrar sesion
-          window.location.href = 'http://localhost/invensoft2/cerrar_sesion.php';
+          window.location.href = 'http://localhost/invensoft/cerrar_sesion.php';
         }
       } else {  //Si dan clic en cancelar de la notificacion
         Swal.fire("Operación detenida", "", "info");
@@ -79,7 +87,7 @@ export const Navbar = () => {
               <a className="nav-link dropdown-toggle second-text fw-bold d-flex align-items-center" href="#" id="navbarDropdown"
                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i className="fas fa-user me-1"></i>
-                <span className="me-5">Mireya Carvajal</span>
+                <span className="me-5">{userName}</span>
               </a>
               <ul className="dropdown-menu ms-4" aria-labelledby="navbarDropdown">
                 <li><Link onClick={() => handleActiveOption(title, icon)} to={'/mi-cuenta'} className="dropdown-item" href="#">Mi cuenta</Link></li>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, Button, Table } from 'react-bootstrap';
-import { formatearCantidad } from '../../../helpers/GeneralFunctions';
+import { formatearCantidad, aproximarPrecio } from '../../../helpers/GeneralFunctions';
 import useApartado from '../../../hooks/useApartado';
 
 const HistorialAbonosModal = ({ items, cod_cot, onHide }) => {

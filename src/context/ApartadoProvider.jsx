@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react'
 import { iniciarSesionAdmin } from "../helpers/Validacion_login";
+import { botonAcessibilidad } from "../helpers/Acessibilidad";
 import { formatDateToYearMonthDay, formatTime12Hours, formatearCantidad } from '../helpers/GeneralFunctions';
 import Swal from 'sweetalert2';
 
@@ -8,6 +9,7 @@ const ApartadoContext = createContext();
 
 const ApartadoProvider = ({children}) => { 
 
+  botonAcessibilidad();
   iniciarSesionAdmin();   //Ejecucion de validacion login
   
   const [apartados, setApartados] = useState([]);

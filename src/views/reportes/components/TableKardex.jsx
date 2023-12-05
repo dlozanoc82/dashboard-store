@@ -92,15 +92,16 @@ const TableKardex = () => {
 
     const data = infoKardex.map(info => [
       formatDateToYearMonthDay(info.fecha_transaccion),
-      info.entra_sale === 1 ? `Compra # ${info.cod_transaccion}` : `Venta # ${info.cod_transaccion}`,
-      info.entra_sale === 1 ? info.valor_pro : info.valor_venta,
-      info.entra_sale === 1 ? info.cantidad : '',
-      info.entra_sale === 1 ? info.cantidad * info.valor_pro : '',
-      info.entra_sale === 2 ? info.cantidad : '',
-      info.entra_sale === 2 ? info.cantidad * info.valor_venta : '',
-      info.stock,
-      info.valor_pro * info.stock,
-      info.ganancias,
+      info.entra_sale == 1 ? `Compra # ${info.cod_transaccion}` : `Venta # ${info.cod_transaccion}`,
+      info.entra_sale == 1 ? info.valor_pro : info.valor_pro,
+      info.entra_sale == 1 ? info.cantidad : '',
+      info.entra_sale == 1 ? info.cantidad * info.valor_pro : '',
+      info.entra_sale == 2 ? info.cantidad : '',
+      info.entra_sale == 2 ? info.cantidad * info.valor_venta : '',
+      info.entra_sale == 2 ? info.cantidad * info.valor_venta : info.stock,
+      info.entra_sale == 2 ? info.stock * info.valor_venta : info.stock * info.valor_venta,
+      info.entra_sale == 2 ? info.ganancias : '0',
+      
     ]);
 
     pdf.autoTable({

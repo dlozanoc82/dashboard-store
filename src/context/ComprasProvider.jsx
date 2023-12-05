@@ -5,12 +5,14 @@ import { formatDateToYearMonthDay, formatTime12Hours, formatearCantidad } from '
 import jsPDF from 'jspdf';
 import autoTable from "jspdf-autotable";
 import { iniciarSesionAdmin } from "../helpers/Validacion_login";
+import { botonAcessibilidad } from "../helpers/Acessibilidad";
 
 const ComprasContext = createContext();
 
 const ComprasProvider = ({children}) => {
     
     iniciarSesionAdmin();   //Ejecucion de validacion login
+    botonAcessibilidad();
 
   const [compras, setCompras] = useState([]);
   const [comprasByDates, setComprasByDates] = useState([])

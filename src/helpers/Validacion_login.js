@@ -30,7 +30,7 @@ const [sesionIniciada, setSesionIniciada] = useState(false);
                 //icon: 'info',
                 //title: 'Debe iniciar sesion',
             //})
-                window.location.href = 'http://localhost/invensoft2/cerrar_sesion.php';
+                window.location.href = 'http://localhost/invensoft/cerrar_sesion.php';
           }
         };
 

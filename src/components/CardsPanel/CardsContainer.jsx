@@ -34,10 +34,10 @@ export const CardsContainer = () => {
                     icon: 'info',
                     title: 'Debe iniciar sesion',
                 }).then((result) => {
-                     window.location.href = 'http://localhost/invensoft2/cerrar_sesion.php';
+                     window.location.href = 'http://localhost/invensoft/cerrar_sesion.php';
                 })
                 setTimeout(() => {
-                    window.location.href = 'http://localhost/invensoft2/cerrar_sesion.php';
+                    window.location.href = 'http://localhost/invensoft/cerrar_sesion.php';
                 }, 2000);
             }
         } catch (error) {

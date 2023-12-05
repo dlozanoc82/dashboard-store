@@ -2,12 +2,14 @@ import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react'
 import Swal from 'sweetalert2';
 import { iniciarSesionAdmin } from "../helpers/Validacion_login";
+import { botonAcessibilidad } from "../helpers/Acessibilidad";
 
 const GarantiaContext = createContext();
 
 const GarantiaProvider = ({children}) => {
 
     iniciarSesionAdmin();   //Ejecucion de validacion login
+    botonAcessibilidad();
 
   const [garantias, setGarantias] = useState([]);
   const [garantiasProceso, setGarantiasProceso] = useState([]);

@@ -271,7 +271,7 @@ const AddApartado = () => {
         </div>
         <div className="col-12 d-flex justify-content-center gap-3">
           <button className="btn btn-primary" type="submit">
-            Terminar Venta
+            Terminar Apartado
           </button>
         </div>
       </form>

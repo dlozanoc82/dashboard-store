@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react'
 import Swal from 'sweetalert2';
 import { iniciarSesionAdmin } from "../helpers/Validacion_login";
+import { botonAcessibilidad } from "../helpers/Acessibilidad";
 import jsPDF from 'jspdf';
 import { formatDateToYearMonthDay, formatTime12Hours, obtenerHoraEnFormatoDoceHoras } from '../helpers/GeneralFunctions';
 
@@ -10,6 +11,7 @@ const KardexContext = createContext();
 const KardexProvider = ({children}) => {
 
   iniciarSesionAdmin();   //Ejecucion de validacion login
+  botonAcessibilidad();
 
   const [libroDiario, setLibroDiario] = useState([])
   const [infoKardex, setInfoKardex] = useState([]);

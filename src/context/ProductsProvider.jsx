@@ -4,6 +4,7 @@ import { createContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { formatTime12Hours } from "../helpers/GeneralFunctions";
 import { iniciarSesionAdmin } from "../helpers/Validacion_login";
+import { botonAcessibilidad } from "../helpers/Acessibilidad";
 
 
 const ProductsContext = createContext();
@@ -11,6 +12,7 @@ const ProductsContext = createContext();
 const ProductsProvider = ({children}) => {
 
     iniciarSesionAdmin();   //Ejecucion de validacion login
+    botonAcessibilidad();
 
     const [idSubCategoria, setIdSubcategoria] = useState();
     const [product, setProduct] = useState({});

@@ -6,12 +6,14 @@ import autoTable from "jspdf-autotable";
 import { formatDateToYearMonthDay, formatTime12Hours } from "../helpers/GeneralFunctions";
 import { useNavigate } from "react-router-dom";
 import { iniciarSesionAdmin } from "../helpers/Validacion_login";
+import { botonAcessibilidad } from "../helpers/Acessibilidad";
 
 const ClientsContext = createContext();
 
 const ClientsPrivider = ({ children }) => {
 
     iniciarSesionAdmin();   //Ejecucion de validacion login
+    botonAcessibilidad();
     
     const navigate = useNavigate();
     const [clients, setClients] = useState([]);
@@ -66,7 +68,7 @@ const ClientsPrivider = ({ children }) => {
     //CRUD CLIENTES
     const getClients = async () => {
         try {
-            const url = "http://localhost/invensoft/clientes?fecha_ini=2023-08-20&fecha_fin=2023-12-31";
+            const url = "http://localhost/invensoft/clientes.php?fecha_ini=2023-08-20&fecha_fin=2023-12-31";
             const { data } = await axios(url);
             console.log(data);
             setClients(data);
@@ -79,6 +81,7 @@ const ClientsPrivider = ({ children }) => {
 
     const getClientsByDates = async (fechaInicial, fechaFinal) => {
         try {
+            //http://localhost/invensoft/
             const url = `http://localhost/invensoft/clientes?fecha_ini=${fechaInicial}&fecha_fin=${fechaFinal}`;
             const { data } = await axios(url);
             console.log(data);
