@@ -309,7 +309,7 @@ const AddApartado = () => {
     // Crea el objeto JSON con la información consolidada de la venta
     const ventaJson = {
       apartado: {
-        abono_general: parseFloat(abono),
+        abono_general: parseFloat(abono / 2),
         tipo_pago: parseInt(metodoPago),
         fecha_limite_pago: fechaLimitePago,
         total_a_pagar: productosVentas.reduce(
@@ -345,6 +345,7 @@ const AddApartado = () => {
       setCliente([]);
       setDocumento('');
       getProductosMasVendidos();
+      getApartados();
       setTimeout(() => {
         navigate('/apartados');
       }, 2000);

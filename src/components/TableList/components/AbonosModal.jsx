@@ -60,6 +60,8 @@ const AbonosModal = ({ cod_cot, saldo_restante, onHide }) => {
                     showConfirmButton: false,
                     timer: 2000
                 })
+                onHide();
+                getApartados();
             } else {
                 Swal.fire("Operación detenida", "", "info");
             }
@@ -79,7 +81,7 @@ const AbonosModal = ({ cod_cot, saldo_restante, onHide }) => {
 
     // Enviar los datos del abono al componente padre
     try {
-        const total = valorAbono / 2;
+        const total = valorAbono;
         const respuesta = await axios(`http://localhost/invensoft/apartados?cod_cot=${cod_cot}&abono=${total}&cod_pago=${tipoPago}`);
         
         getApartados();

@@ -533,12 +533,12 @@ export const AddShop = () => {
 
                                 <div className="col-md-4 mb-md-4">
                                     <label className="form-label">Precio de la Compra *</label>
-                                    <input value={precioCompra} onChange={handleChangePrecioCompra} type="number" className="form-control" ref={precioCompraRef} required />
+                                    <input value={precioCompra} disabled onChange={handleChangePrecioCompra} type="number" className="form-control" ref={precioCompraRef} required />
                                 </div>
 
                                 <div className="col-md-4 mb-md-4">
                                     <label className="form-label">Precio de la venta *</label>
-                                    <input type="number" value={precioVenta} onChange={handleChangePrecioVenta} className="form-control" required />
+                                    <input type="number" value={precioVenta} onChange={handleChangePrecioVenta} className="form-control" required/>
                                 </div>
 
                                 <div className="col-md-4 mb-md-4">

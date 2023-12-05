@@ -30,7 +30,9 @@ const ApartadoProvider = ({children}) => {
     try {
         const url = "http://localhost/invensoft/apartados?apartados";
         const { data } = await axios(url);
+        console.log({data})
         if (data && data.length > 0) {
+          console.log({data})
           setApartados(data);
         }else{
         Swal.fire({
@@ -81,9 +83,8 @@ const ApartadoProvider = ({children}) => {
 
 
   const transformarApartados = (apartados) => {
-    // Agrupar por el valor de 'cod_pedido'
     const groupedByPedido = apartados.reduce((result, apartado) => {
-      const { cod_cot, nombres, apellidos, documento, celular } = apartado;
+      const { cod_cot, nombres, apellidos, documento, nombre, cantidad, valor_unit, valor_abono, cod_abono } = apartado;
   
       if (!result[cod_cot]) {
         result[cod_cot] = {
@@ -96,41 +97,64 @@ const ApartadoProvider = ({children}) => {
           apellidos,
           documento,
           saldo_restante: 0,
-          total_abonado: 0, // Nuevo campo para almacenar el total abonado
-          total_venta: 0,   // Nuevo campo para almacenar el total de la venta
+          total_abonado: 0,
+          total_venta: 0,
           items: [],
+          abonosRegistrados: {},
         };
       }
   
-      // Sumar el abono actual al total abonado
-      result[cod_cot].total_abonado += parseInt(apartado.valor_abono);
+      // Validar si el cod_abono y valor_abono son iguales, y agregar al total_abonado solo una vez
+      const abonoKey = `${cod_abono}_${valor_abono}`;
+      if (!result[cod_cot].abonosRegistrados[abonoKey]) {
+        result[cod_cot].abonosRegistrados[abonoKey] = true;
+        result[cod_cot].total_abonado += parseInt(valor_abono);
+      }
   
       result[cod_cot].tipo_pago = apartado.cod_pago;
       result[cod_cot].fecha_limite_pago = apartado.fecha_abono;
       result[cod_cot].total_a_pagar = apartado.total;
-      
+  
       // Calcular el saldo restante restando el total abonado del total a pagar
       result[cod_cot].saldo_restante = apartado.total - result[cod_cot].total_abonado;
   
       // Agregar el total de la venta actual al total de la venta
       result[cod_cot].total_venta += apartado.total;
   
-      result[cod_cot].items.push({
-        cod_detalle: apartado.cod_cot,
-        nombre: apartado.nombre,
-        cantidad: apartado.cantidad,
-        valor_unit: apartado.valor_unit,
-      });
+      const existingProductIndex = result[cod_cot].items.findIndex(
+        (item) =>
+          item.nombre === apartado.nombre &&
+          item.cantidad === apartado.cantidad &&
+          item.valor_unit === apartado.valor_unit
+      );
+  
+      if (existingProductIndex === -1) {
+        // Si el producto no existe, agregar un nuevo elemento al array items
+        result[cod_cot].items.push({
+          cod_detalle: apartado.cod_cot,
+          nombre: apartado.nombre,
+          cantidad: apartado.cantidad,
+          valor_unit: apartado.valor_unit,
+        });
+      }
   
       return result;
     }, {});
+  
+    // Calcular total_venta después de procesar todos los items
+    Object.values(groupedByPedido).forEach((pedido) => {
+      pedido.total_venta = pedido.items.reduce(
+        (total, item) => total + item.valor_unit * item.cantidad,
+        0
+      );
+    });
   
     // Convertir el objeto en un array de objetos
     const transformedData = Object.values(groupedByPedido);
   
     return transformedData;
   };
-
+  
 
   const getHistorial = async (cod_coti) => {
     try {

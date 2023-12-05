@@ -56,7 +56,7 @@ const HistorialAbonosModal = ({ cod_cot, onHide }) => {
             {historial.map((item, index) => (
               <tr key={index}>
                 <td>{item.fecha_abono}</td>
-                <td>{formatearCantidad(item.valor_abono*2)}</td>
+                <td>{ index !== 1 ? formatearCantidad(item.valor_abono*2) : formatearCantidad(item.valor_abono)}</td>
                 <td>{item.cod_pago == 1 ? 'Nequi' : item.cod_pago == 2 ? 'Daviplata' : 'Efectivo'}</td>
               </tr>
             ))}

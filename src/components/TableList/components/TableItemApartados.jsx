@@ -26,6 +26,10 @@ const TableItemApartados = ({info}) => {
     const {handleDeleteApartado, getHistorial, setHistorialAbonosModal} = useApartado();
 
     const tipoPago = tipo_pago == 1 ? 'Nequi' : (tipo_pago == 2 ? 'Daviplata' : 'Efectivo');
+
+    console.log({saldo_restante})
+    console.log(saldo_restante === 0)
+    const isDisabled = saldo_restante === 0 ? true : false;
     
     const [showModal, setShowModal] = useState(false);
     const [showModalAbonos, setShowModalAbonos] = useState(false);
@@ -58,9 +62,9 @@ const TableItemApartados = ({info}) => {
  
         <td><center>
             <div className="btn__actions">
-                <Link onClick={handleShowModalAbonos} className="btn btn-danger btn-padding">
+                <button disabled={isDisabled} onClick={handleShowModalAbonos} className="btn btn-danger btn-padding">
                     Abonos
-                </Link>
+                </button>
                 <button onClick={handleShowModalHAbonos} className="btn btn-danger btn-padding">
                     Historial Abonos
                 </button>
