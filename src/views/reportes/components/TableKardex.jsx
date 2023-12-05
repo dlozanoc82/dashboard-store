@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import useCompras from '../../../hooks/useCompras';
-import { formatDateToYearMonthDay } from '../../../helpers/GeneralFunctions';
+import { formatDateToYearMonthDay, formatTime12Hours, obtenerHoraEnFormatoDoceHoras } from '../../../helpers/GeneralFunctions';
 import Swal from 'sweetalert2';
 import useKardex from '../../../hooks/useKardex';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 const TableKardex = () => {
 
@@ -52,6 +54,63 @@ const TableKardex = () => {
       //setFechaInicial('');
       //setFechaFinal('');
     }
+
+
+  const generarPDF = () => {
+    const pdf = new jsPDF('landscape');
+
+    const logoUrl = '/logo-circular.png'; // Replace with the path to your logo image
+    pdf.addImage(logoUrl, 'PNG', 10, 10, 30, 30); // Adjust the coordinates and dimensions as needed
+
+        // Title
+    const title = `KARDEX DEL PRODUCTO: ${infoKardex[0].nombre.toUpperCase()}`;
+    pdf.text(title, pdf.internal.pageSize.width / 2, 28, 'center');
+
+    // Date and Time
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleDateString();
+    const formattedTime = formatTime12Hours(currentDate);
+    const dateTimeText = `Generado el ${formattedDate} a las ${formattedTime}`;
+    pdf.setFontSize(11);
+    pdf.setFont('arial', 'italic', 'normal');
+    pdf.text(dateTimeText, pdf.internal.pageSize.width - 15, 43, 'right');
+    pdf.setFont('normal');
+
+    const headers = [
+      'Fecha',
+      'Detalles',
+      'Valor Unitario',
+      'Entradas (Cantidad)',
+      'Entradas (Valor)',
+      'Salidas (Cantidad)',
+      'Salidas (Valor)',
+      'Saldo (Cantidad)',
+      'Saldo (Valor)',
+      'Ganancias',
+    ];
+    
+
+    const data = infoKardex.map(info => [
+      formatDateToYearMonthDay(info.fecha_transaccion),
+      info.entra_sale === 1 ? `Compra # ${info.cod_transaccion}` : `Venta # ${info.cod_transaccion}`,
+      info.entra_sale === 1 ? info.valor_pro : info.valor_venta,
+      info.entra_sale === 1 ? info.cantidad : '',
+      info.entra_sale === 1 ? info.cantidad * info.valor_pro : '',
+      info.entra_sale === 2 ? info.cantidad : '',
+      info.entra_sale === 2 ? info.cantidad * info.valor_venta : '',
+      info.stock,
+      info.valor_pro * info.stock,
+      info.ganancias,
+    ]);
+
+    pdf.autoTable({
+      head: [headers],
+      body: data,
+      startY: 45 // Adjust startY based on your needs
+    });
+
+    pdf.save(`kardex_${formatDateToYearMonthDay(currentDate)}_hora_${obtenerHoraEnFormatoDoceHoras(currentDate)}.pdf`);
+  };
 
   return (
     <>
@@ -236,7 +295,7 @@ const TableKardex = () => {
               })}
           </tbody>
         </table> 
-        <a className="submenu__link btn-danger mb-4">GENERAR PDF</a>
+        <button disabled={infoKardex.length === 0} className="submenu__link btn btn-danger mb-4" onClick={() => generarPDF()}>GENERAR PDF</button>
       </div>
     </>
   )
