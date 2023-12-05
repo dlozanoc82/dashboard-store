@@ -114,7 +114,12 @@ const AddSale = () => {
       return;
     }
   
-/*    if (producto[0].stock < cantidad) {
+    console.log(parseInt(producto[0].stock) < parseInt(cantidad));
+    console.log(producto[0].stock < cantidad);
+    console.log("stock ant "+producto[0].stock);
+    console.log("cantidad ant "+cantidad);
+
+   if (parseInt(producto[0].stock) < parseInt(cantidad)) {
       console.log("stock"+producto[0].stock);
       console.log("cantidad "+cantidad);
       cant_prodRef.current.focus();
@@ -126,7 +131,8 @@ const AddSale = () => {
       });
       return;
     }
-  */
+  
+    cant_prodRef.current.style.borderColor = '';
     const existingProductIndex = productosVentasMostrar.findIndex(
         (p) => p.cod_pro === producto[0].cod_pro
       );
