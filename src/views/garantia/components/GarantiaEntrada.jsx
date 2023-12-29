@@ -21,26 +21,28 @@ const GarantiaEntrada = () => {
                 <h3 className="form__subtitle mb-3">Información de la Garantía</h3>
             </div>
 
-            <table className="table border">
-                <thead>
-                    <tr>
-                        <th><center>Seleccionar</center></th>
-                        <th><center>Fecha de la Compra</center></th>
-                        <th><center>Nombre del Producto</center></th>
-                        <th><center>Fecha Límite de la Garantía</center></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {ventas.map((venta, index) => (
-                        <tr key={index}>
-                            <td><center><input type="checkbox" onChange={() => handleCheckboxChange(venta.cod_detalle)} checked={venta.cod_detalle === selectedProducto} /></center></td>
-                            <td><center>{venta.fecha_venta}</center></td>
-                            <td><center>{venta.nombre}</center></td>
-                            <td><center>{venta.duracion_garantia}</center></td>
+            <div className='table__scroll mb-4'>
+                <table className="table border">
+                    <thead>
+                        <tr>
+                            <th><center>Seleccionar</center></th>
+                            <th><center>Fecha de la Compra</center></th>
+                            <th><center>Nombre del Producto</center></th>
+                            <th><center>Fecha Límite de la Garantía</center></th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {ventas.map((venta, index) => (
+                            <tr key={index}>
+                                <td><center><input type="checkbox" onChange={() => handleCheckboxChange(venta.cod_detalle)} checked={venta.cod_detalle === selectedProducto} /></center></td>
+                                <td><center>{venta.fecha_venta}</center></td>
+                                <td><center>{venta.nombre}</center></td>
+                                <td><center>{venta.duracion_garantia}</center></td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
 
             
             <div className="col-md-4 pt-3">
