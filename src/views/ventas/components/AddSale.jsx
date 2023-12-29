@@ -200,43 +200,45 @@ const precioTotal = productosVentasMostrar.reduce((total, producto) => {
 }, 0);
 
   const renderProductos = () => (
-    <div className="col-md-8 mb-md-4 m-auto pt-5 table__scroll">
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Código Detalle</th>
-            <th>Nombre del Producto</th>
-            <th>Cantidad</th>
-            <th>Precio Unitario</th>
-            <th>Precio Total</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {productosVentasMostrar.map((producto, index) => (
-            <tr key={index}>
-              <td>{producto.cod_pro}</td>
-              <td>{producto.nombre}</td>
-              <td>{producto.cantidad}</td>
-              <td>{producto.precio_unitario}</td>
-              <td>{producto.precio_total}</td>
-              <td>
-                <button
-                  className="btn btn-danger btn-sm"
-                  onClick={() => handleEliminarItem(index)}
-                >
-                  Eliminar
-                </button>
-              </td>
+    <div className="col-md-8 mb-md-4 m-auto pt-5">
+      <div className='table__scroll mb-4'>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Código Detalle</th>
+              <th>Nombre del Producto</th>
+              <th>Cantidad</th>
+              <th>Precio Unitario</th>
+              <th>Precio Total</th>
+              <th>Acciones</th>
             </tr>
-          ))}
-          <tr>
-        <td colSpan="4"></td>
-        <td>Total Venta:</td> 
-        <td>{precioTotal}</td>
-      </tr>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {productosVentasMostrar.map((producto, index) => (
+              <tr key={index}>
+                <td>{producto.cod_pro}</td>
+                <td>{producto.nombre}</td>
+                <td>{producto.cantidad}</td>
+                <td>{producto.precio_unitario}</td>
+                <td>{producto.precio_total}</td>
+                <td>
+                  <button
+                    className="btn btn-danger btn-sm"
+                    onClick={() => handleEliminarItem(index)}
+                  >
+                    Eliminar
+                  </button>
+                </td>
+              </tr>
+            ))}
+            <tr>
+          <td colSpan="4"></td>
+          <td>Total Venta:</td> 
+          <td>{precioTotal}</td>
+        </tr>
+          </tbody>
+        </table>
+      </div>
 
       <form onSubmit={finalizarVenta}>
         <div className="col-md-4 mb-md-4">

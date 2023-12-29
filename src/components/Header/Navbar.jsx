@@ -52,15 +52,15 @@ export const Navbar = () => {
 
             } else {
                 //Si no se retorna ningun valor desde la api entonces no ha iniciado sesion el usuario
-                Swal.fire({
-                    icon: 'info',
-                    title: 'Debe iniciar sesion',
-                }).then((result) => {
-                    window.location.href = 'https://invensoftvargas.com/iniciar_sesion.php';
-                })
-                setTimeout(() => {
-                    window.location.href = 'https://invensoftvargas.com/iniciar_sesion.php';
-                }, 2000);
+                // Swal.fire({
+                //     icon: 'info',
+                //     title: 'Debe iniciar sesion',
+                // }).then((result) => {
+                //     window.location.href = 'https://invensoftvargas.com/iniciar_sesion.php';
+                // })
+                // setTimeout(() => {
+                //     window.location.href = 'https://invensoftvargas.com/iniciar_sesion.php';
+                // }, 2000);
             }
         } catch (error) {
         }
