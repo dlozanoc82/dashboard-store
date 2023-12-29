@@ -11,6 +11,7 @@ const GarantiaSalida = () => {
                 <h3 className="form__subtitle mb-3">Garantias Realizada</h3>
           </div>
 
+        <div className='table__scroll'>
           <table className="table border">
               <thead>
                   <tr>
@@ -43,6 +44,7 @@ const GarantiaSalida = () => {
                 ))}
               </tbody>
           </table>
+        </div>
     </div>
   )
 }
