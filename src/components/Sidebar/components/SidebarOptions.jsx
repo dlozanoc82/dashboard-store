@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPowerOff } from "@fortawesome/free-solid-svg-icons"
 import Swal from "sweetalert2";
 
+//Este archivo me coloca los items del menu del lado izquierdo
 export const SidebarOptions = () => {
 
   //Aqui es para eliminar el dato en localStorage y para cerrar sesion desde php
@@ -29,10 +30,10 @@ export const SidebarOptions = () => {
           // Eliminar un elemento del localStorage por su clave y redirecciono a cerrar sesion para destruir la sesion en php
           localStorage.removeItem('Usuario');
           localStorage.removeItem('selectedOption');
-          window.location.href = 'http://localhost/invensoft/cerrar_sesion.php';
+          window.location.href = 'https://invensoftvargas.com/cerrar_sesion.php';
         } else {
           //Si no hay informacion en el localstorage redirecciono a cerrar sesion
-          window.location.href = 'http://localhost/invensoft/cerrar_sesion.php';
+          window.location.href = 'https://invensoftvargas.com/cerrar_sesion.php';
         }
       } else {  //Si dan clic en cancelar de la notificacion
         Swal.fire("Operación detenida", "", "info");

@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom"
 import useCompras from "../../hooks/useCompras";
 
-
 export const SubMenu = ({url}) => {
     const {setCompra} = useComprasseCompras();
   return (

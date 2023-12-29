@@ -24,7 +24,7 @@ const GarantiaProvider = ({children}) => {
 
     const getCliente = async (documento) => {        
         try {
-            const url = `http://localhost/invensoft/ventas?doc=${documento}`;
+            const url = `https://invensoftvargas.com/invensoft/ventas?doc=${documento}`;
             const { data } = await axios(url);
             console.log(data);
             setApellidos(data[0].apellidos);
@@ -40,7 +40,7 @@ const GarantiaProvider = ({children}) => {
 
     const getVentas = async (documento) => {        
         try {
-            const url = `http://localhost/invensoft/garantias?cod_usu=${documento}`;
+            const url = `https://invensoftvargas.com/invensoft/garantias?cod_usu=${documento}`;
             const { data } = await axios(url);
             console.log(data);
             setVentas(data); 
@@ -51,7 +51,7 @@ const GarantiaProvider = ({children}) => {
 
     const getGarantiasProceso = async (documento) => {        
         try {
-            const url = `http://localhost/invensoft/garantias?gar_usu=${documento}`;
+            const url = `https://invensoftvargas.com/invensoft/garantias?gar_usu=${documento}`;
             const { data } = await axios(url);
             console.log("GARANTIAS ");
             console.log(data);
@@ -73,7 +73,7 @@ const GarantiaProvider = ({children}) => {
         try {
     
             if(confirmado.isConfirmed){
-            const respuesta = await axios.get(` http://localhost/invensoft/garantias?terminar=${garantia_terminar}`);
+            const respuesta = await axios.get(` https://invensoftvargas.com/invensoft/garantias?terminar=${garantia_terminar}`);
               console.log(respuesta)
             Swal.fire({
                 icon: 'success',
@@ -100,7 +100,7 @@ const GarantiaProvider = ({children}) => {
     const createGarantiaEntrada = async (cod_venta, descripcion) => {
         //Crear el producto en la API
         try {
-            const respuesta = await axios.post(`http://localhost/invensoft/garantias?cod_venta=${cod_venta}`, {descripcion});
+            const respuesta = await axios.post(`https://invensoftvargas.com/invensoft/garantias?cod_venta=${cod_venta}`, {descripcion});
             
             Swal.fire({
                 icon: 'success',
@@ -122,7 +122,7 @@ const GarantiaProvider = ({children}) => {
     const createGarantiaSalida = async (cod_garantia) => {
         //Crear el producto en la API
         try {
-            const respuesta = await axios.post(`http://localhost/invensoft/garantias?cod_garantia=${cod_garantia}`);
+            const respuesta = await axios.post(`https://invensoftvargas.com/invensoft/garantias?cod_garantia=${cod_garantia}`);
             
             Swal.fire({
                 icon: 'success',

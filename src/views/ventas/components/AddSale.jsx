@@ -194,6 +194,11 @@ const AddSale = () => {
     setProductosVentaMostrar(nuevosProductosMostrar);
   };
 
+  // Calcula el precio total sumando los valores de producto.precio_total
+const precioTotal = productosVentasMostrar.reduce((total, producto) => {
+  return total + producto.precio_total;
+}, 0);
+
   const renderProductos = () => (
     <div className="col-md-8 mb-md-4 m-auto pt-5">
       <table className="table">
@@ -225,6 +230,11 @@ const AddSale = () => {
               </td>
             </tr>
           ))}
+          <tr>
+        <td colSpan="4"></td>
+        <td>Total Venta:</td> 
+        <td>{precioTotal}</td>
+      </tr>
         </tbody>
       </table>
 
@@ -237,10 +247,9 @@ const AddSale = () => {
             onChange={handleChangeMethodPay}
             required
           >
-            <option value="0">Seleccione una opción</option>
+            <option value="3">Efectivo</option>
             <option value="1">Nequi</option>
             <option value="2">DaviPlata</option>
-            <option value="3">Efectivo</option>
           </select>
         </div>
         <div className="col-12 d-flex justify-content-center gap-3">
@@ -279,8 +288,8 @@ const AddSale = () => {
       }
     });
   
-    console.log({consolidatedProductosVentas})
-    console.log({productosVentasMostrar})
+    //console.log({consolidatedProductosVentas})
+    //console.log({productosVentasMostrar})
     // Crea el objeto JSON con la información consolidada de la venta
     const ventaJson = {
       ventas: [
@@ -300,7 +309,7 @@ const AddSale = () => {
     try {
       // Realiza la solicitud POST al endpoint con el objeto JSON como datos
       const respuesta = await axios.post(
-        `http://localhost/invensoft/ventas?cod_usu=${clienteId}`,
+        `https://invensoftvargas.com/invensoft/ventas?cod_usu=${clienteId}`,
         ventaJson
       );
       console.log(respuesta);

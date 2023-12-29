@@ -150,7 +150,7 @@ const UpdateProduct = ({product}) => {
             return;
         }
 
-        if (descripcion.length < 8) {
+      /*  if (descripcion.length < 8) {
             nombreCategoriaRef.current.style.borderColor = '';
             nombreSubcategoriaRef.current.style.borderColor = '';
             nombreProductoRef.current.style.borderColor = '';
@@ -165,7 +165,7 @@ const UpdateProduct = ({product}) => {
                 text: 'La descripción esta muy corta o tiene caracteres no válidos',
             });
             return;
-        }
+        }*/
 
         if (!garantia || (garantia !== '0' && garantia !== '1')) {
             nombreCategoriaRef.current.style.borderColor = '';
@@ -220,7 +220,7 @@ const UpdateProduct = ({product}) => {
               });
     
               if(confirmado.isConfirmed){
-            const respuesta = await axios.put(`http://localhost/invensoft/productos?cod_pro=${product.cod_pro}`, {subcategoria, nom_pro, descripcion, estado, img, garantia, duracion_garantia }, {
+            const respuesta = await axios.put(`https://invensoftvargas.com/invensoft/productos?cod_pro=${product.cod_pro}`, {subcategoria, nom_pro, descripcion, estado, img, garantia, duracion_garantia }, {
             });
             //console.log({respuesta});
             getProductosByModificar();
@@ -290,11 +290,24 @@ const UpdateProduct = ({product}) => {
 
                                 <div className="col-md-4 mb-md-4">
                                     <label className="form-label">Subcategoria *</label>
-                                    <select className="form-select" value={selectSubCategory} onChange={handleChangeSubCategory} ref={nombreSubcategoriaRef}>
-                                        <option value=''>Seleccione una opción</option>
-                                        {subcategorias.map((subcategoria) =>
-                                            <option key={subcategoria.cod_sub} value={subcategoria.cod_sub}>{subcategoria.nom_sub}</option>)
-                                        }
+                                    <select 
+                                        className="form-select"
+                                        value={selectSubCategory}
+                                        onChange={handleChangeSubCategory}
+                                        ref={nombreSubcategoriaRef}
+                                    >
+                                        {selectCategory ? (
+                                            <>
+                                                <option value='0'>Seleccione una opción</option>
+                                                {subcategorias.map((subcategoria) => (
+                                                    <option key={subcategoria.cod_sub} value={subcategoria.cod_sub}>
+                                                        {subcategoria.nom_sub}
+                                                    </option>
+                                                ))}
+                                            </>
+                                        ) : (
+                                            <option value='0'>Seleccione una opción</option>
+                                        )}
                                     </select>
                                 </div>
 
@@ -311,9 +324,8 @@ const UpdateProduct = ({product}) => {
                                 <div className="col-md-4 mb-md-4">
                                     <label className="form-label">Garantia *</label>
                                     <select className="form-select" value={garantia} onChange={handleChangeGarantia} ref={garantiaRef}>
-                                        <option value=''>Seleccione una opción</option>
-                                        <option value='1'>Si</option>
                                         <option value='0'>No</option>
+                                        <option value='1'>Si</option>
                                     </select>
                                 </div>
 

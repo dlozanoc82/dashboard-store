@@ -32,7 +32,7 @@ export const AddShop = () => {
     const cantidadRef = useRef(null);
     const precioUnitarioRef = useRef(null);
     const precioCompraRef = useRef(null);
-    const precioCompraVenta = useRef(null);
+    const precioVentaRef = useRef(null); //Precio en que se vendera el producto adquirido
     const buttonAgregar = useRef(null);
 
     const [selectCategory, setSelectCategory] = useState(''); // Estado para mantener el valor seleccionado
@@ -395,6 +395,40 @@ export const AddShop = () => {
             });
             return;
         }
+        if (!solo_numeros.test(precioVenta)) {
+            nombreCategoriaRef.current.style.borderColor = '';
+            nombreSubcategoriaRef.current.style.borderColor = '';
+            nombreProductoRef.current.style.borderColor = '';
+            nombreProveedorRef.current.style.borderColor = '';
+            cantidadRef.current.style.borderColor = '';
+            precioUnitarioRef.current.style.borderColor = '';
+            precioCompraRef.current.style.borderColor = '';
+            precioVentaRef.current.focus();
+            precioVentaRef.current.style.borderColor = 'red';
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'El precio de la venta debe ser un numero entero',
+            });
+            return;
+        }
+            if (precioUnitario>precioVenta) {
+            nombreCategoriaRef.current.style.borderColor = '';
+            nombreSubcategoriaRef.current.style.borderColor = '';
+            nombreProductoRef.current.style.borderColor = '';
+            nombreProveedorRef.current.style.borderColor = '';
+            cantidadRef.current.style.borderColor = '';
+            precioUnitarioRef.current.style.borderColor = '';
+            precioCompraRef.current.style.borderColor = '';
+            precioVentaRef.current.focus();
+            precioVentaRef.current.style.borderColor = 'red';
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'El precio de la venta no puede ser menor al precio de compra, porque no obtendría ganancias',
+            });
+            return;
+        }
 
         let confirmado = await Swal.fire({
             title: "¿Esta seguro de agregar esta compra?",
@@ -538,7 +572,7 @@ export const AddShop = () => {
 
                                 <div className="col-md-4 mb-md-4">
                                     <label className="form-label">Precio de la venta *</label>
-                                    <input type="number" value={precioVenta} onChange={handleChangePrecioVenta} className="form-control" required/>
+                                    <input type="number" value={precioVenta} onChange={handleChangePrecioVenta} className="form-control" ref={precioVentaRef} required/>
                                 </div>
 
                                 <div className="col-md-4 mb-md-4">

@@ -205,7 +205,7 @@ export const AddProduct = () => {
             const duracion_garantia = duracionGarantia;
             //console.log(img);
 
-            const respuesta = await axios.post('http://localhost/invensoft/productos', { subcategoria, nom_pro, descripcion, img, garantia, duracion_garantia }, {
+            const respuesta = await axios.post('https://invensoftvargas.com/invensoft/productos', { subcategoria, nom_pro, descripcion, img, garantia, duracion_garantia }, {
 
             });
 
@@ -267,11 +267,24 @@ export const AddProduct = () => {
 
                                 <div className="col-md-4 mb-md-4">
                                     <label className="form-label">Subcategoria *</label>
-                                    <select className="form-select" value={selectSubCategory} onChange={handleChangeSubCategory} ref={nombreSubcategoriaRef}>
-                                        <option value=''>Seleccione una opción</option>
-                                        {subcategorias.map((subcategoria) =>
-                                            <option key={subcategoria.cod_sub} value={subcategoria.cod_sub}>{subcategoria.nom_sub}</option>)
-                                        }
+                                    <select 
+                                        className="form-select"
+                                        value={selectSubCategory}
+                                        onChange={handleChangeSubCategory}
+                                        ref={nombreSubcategoriaRef}
+                                    >
+                                        {selectCategory ? (
+                                            <>
+                                                <option value='0'>Seleccione una opción</option>
+                                                {subcategorias.map((subcategoria) => (
+                                                    <option key={subcategoria.cod_sub} value={subcategoria.cod_sub}>
+                                                        {subcategoria.nom_sub}
+                                                    </option>
+                                                ))}
+                                            </>
+                                        ) : (
+                                            <option value='0'>Seleccione una opción</option>
+                                        )}
                                     </select>
                                 </div>
 
@@ -288,9 +301,8 @@ export const AddProduct = () => {
                                 <div className="col-md-4 mb-md-4">
                                     <label className="form-label">Garantia *</label>
                                     <select className="form-select" value={garantia} onChange={handleChangeGarantia} ref={garantiaRef}>
-                                        <option value=''>Seleccione una opción</option>
-                                        <option value='1'>Si</option>
                                         <option value='0'>No</option>
+                                        <option value='1'>Si</option>
                                     </select>
                                 </div>
 

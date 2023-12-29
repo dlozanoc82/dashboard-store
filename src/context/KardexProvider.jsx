@@ -21,7 +21,7 @@ const KardexProvider = ({children}) => {
 
   const getKardexByProducto = async (fecha_ini, fecha_fin, cod_pro) => {        
     try {
-        const url = `http://localhost/invensoft/kardex?fecha_ini=${fecha_ini}&fecha_fin=${fecha_fin}&cod_pro=${cod_pro}`;
+        const url = `https://invensoftvargas.com/invensoft/kardex?fecha_ini=${fecha_ini}&fecha_fin=${fecha_fin}&cod_pro=${cod_pro}`;
         const { data } = await axios(url);
         console.log(data);
         setInfoKardex(data);
@@ -43,7 +43,7 @@ const KardexProvider = ({children}) => {
 
   const getLibroDiario = async (fecha_diaria) => {        
     try {
-        const url = `http://localhost/invensoft/kardex?fecha=${fecha_diaria}`;
+        const url = `https://invensoftvargas.com/invensoft/kardex?fecha=${fecha_diaria}`;
         const { data } = await axios(url);
         console.log(data);
         setLibroDiario(data);

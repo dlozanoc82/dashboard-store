@@ -443,7 +443,7 @@ export const UpdateShop = ({compra}) => {
             }
 
             //Si el precio de venta es menor al que el usuario hizo la compra
-            if (precioCompraVenta<precioCompra) {
+            if (precioUnitario>preventa) {
                 nombreCategoriaRef.current.style.borderColor = '';
                 nombreSubcategoriaRef.current.style.borderColor = '';
                 nombreProductoRef.current.style.borderColor = '';
@@ -472,7 +472,7 @@ export const UpdateShop = ({compra}) => {
 
           try {
           if(confirmado.isConfirmed){
-            console.log(preventa)
+            //console.log(preventa)
         upadateCompra(compra.cod_compra, nombreProducto, nombreProveedor, cantidad, precioUnitario, preventa, precioCompra);
         clearInputs();
         setTimeout(() => {

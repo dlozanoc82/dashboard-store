@@ -21,21 +21,26 @@ const [sesionIniciada, setSesionIniciada] = useState(false);
             // Si hay informacion, entonces accede al dashboard
                 }else{
                     //Si es otro rol se redirecciona al login
+                    Swal.fire({
+                      icon: 'info',
+                      title: 'No tiene permisos para este apartado',
+                  })
+                      window.location.href = 'https://invensoftvargas.com/inicio';
                 }
       
            
           } else {
             //Si no hay informacion en el json se redirecciona al login
-            //Swal.fire({
-                //icon: 'info',
-                //title: 'Debe iniciar sesion',
-            //})
-                window.location.href = 'http://localhost/invensoft/cerrar_sesion.php';
+            Swal.fire({
+                icon: 'info',
+                title: 'Debe iniciar sesion',
+            })
+                window.location.href = 'https://invensoftvargas.com/iniciar_sesion.php';
           }
         };
 
         useEffect(() => {
-            console.log(sesionIniciada);
+            //console.log(sesionIniciada);
             if (!sesionIniciada) {
                 iniciarSesion(); // Llama a la función de inicio de sesión automáticamente al montar el componente
             }

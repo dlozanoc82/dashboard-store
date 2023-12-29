@@ -3,6 +3,8 @@ import GarantiaEntrada from './GarantiaEntrada';
 import GarantiaSalida from './GarantiaSalida';
 import useGarantia from '../../../hooks/useGarantia';
 import { useState } from 'react';
+import { useLocation } from "react-router-dom"
+import { useEffect } from "react"; // Asegúrate de importar useEffect desde react
 
 const Garantia = () => {
   const { nombres, apellidos, getCliente, setVentas, setNombres, setApellidos, setGarantiasProceso, createGarantiaEntrada } = useGarantia();
@@ -25,6 +27,14 @@ const Garantia = () => {
     setApellidos('');
     setGarantiasProceso([]);
   };
+
+  const location = useLocation();
+    console.log(location.pathname);
+
+    // Almacena la ruta actual en el localStorage
+  useEffect(() => {
+    localStorage.setItem("ruta", location.pathname);
+  }, [location.pathname]);
 
   return (
     <div className="container-fluid px-4 mt-5">
