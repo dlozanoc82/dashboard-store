@@ -200,7 +200,7 @@ const precioTotal = productosVentasMostrar.reduce((total, producto) => {
 }, 0);
 
   const renderProductos = () => (
-    <div className="col-md-8 mb-md-4 m-auto pt-5">
+    <div className="col-md-8 mb-md-4 m-auto pt-5 table__scroll">
       <table className="table">
         <thead>
           <tr>
