@@ -27,9 +27,8 @@ const ApartadoProvider = ({children}) => {
     const datosOrganizados = transformarApartados(apartados);
     setOrganizarApartados(datosOrganizados);
   }, [apartados])
- 
-  
 
+  
   const getApartados = async () => {
     try {
         const url = "http://localhost/invensoft/apartados?apartados";

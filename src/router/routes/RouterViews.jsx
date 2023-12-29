@@ -10,17 +10,17 @@ export const RouterViews = () => {
   return (
     
     <Routes>
-        <Route path="/" exact ={true} Component={Home} />
-        <Route path="/compras/*" exact ={true} Component={ShoppingView} />
-        <Route path="/clientes/*" exact ={true} Component={CustomerView} />
-        <Route path="/productos/*" exact ={true} Component={ProductsView} />
-        <Route path="/ventas/*" exact ={true} Component={SalesView} />
-        <Route path="/cotizacion/*" exact ={true} Component={QuotationView} />
-        <Route path="/garantia" exact ={true} Component={GarantiaView} />
-        <Route path="/apartados/*" exact ={true} Component={ApartadoView} />
-        <Route path="/kardex/*" exact ={true} Component={KardexView} />
-        <Route path="/mi-cuenta" exact ={true} Component={Admin} />
-        <Route path="*" Component={Home} />
+        <Route path="/" exact ={true} element={<Home />} />
+        <Route path="/compras/*" exact ={true} element={<ShoppingView />} />
+        <Route path="/clientes/*" exact ={true} element={<CustomerView />} />
+        <Route path="/productos/*" exact ={true} element={<ProductsView />} />
+        <Route path="/ventas/*" exact ={true} element={<SalesView />} />
+        <Route path="/cotizacion/*" exact ={true} element={<QuotationView />} />
+        <Route path="/garantia" exact ={true} element={<GarantiaView />} />
+        <Route path="/apartados/*" exact ={true} element={<ApartadoView />} />
+        <Route path="/kardex/*" exact ={true} element={<KardexView />} />
+        <Route path="/mi-cuenta" exact ={true} element={<Admin />} />
+        <Route path="*" element={<Home />} />
     </Routes>
 
   )
