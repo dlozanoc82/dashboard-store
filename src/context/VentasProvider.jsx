@@ -163,7 +163,7 @@ const VentasProvider = ({children}) => {
   //CRUD
   const getVentas = async () => {        
     try {
-        const url = "http://localhost/invensoft/ventas?ventas";
+        const url = "https://invensoftvargas.com/invensoft/ventas?ventas";
         const { data } = await axios(url);
         console.log(data);
         setVentas(data);
@@ -174,7 +174,7 @@ const VentasProvider = ({children}) => {
 
   const getVentasByDates = async (fechaInicial, fechaFinal) => {        
     try {
-        const url = `http://localhost/invensoft/ventas?fecha_ini=${fechaInicial}&fecha_fin=${fechaFinal}`;
+        const url = `https://invensoftvargas.com/invensoft/ventas?fecha_ini=${fechaInicial}&fecha_fin=${fechaFinal}`;
         const { data } = await axios(url);
         console.log('ventas por fecha')
         console.log(data);
@@ -187,7 +187,7 @@ const VentasProvider = ({children}) => {
 
   const getProductosMasVendidos = async () => {        
     try {
-        const url = "http://localhost/invensoft/ventas?vendidos";
+        const url = "https://invensoftvargas.com/invensoft/ventas?vendidos";
         const { data } = await axios(url);
         console.log({data});
         setProductosVendidos(data);
@@ -198,7 +198,7 @@ const VentasProvider = ({children}) => {
 
   const getProductAdd = async (cod_pro) => {        
     try {
-        const url = `http://localhost/invensoft/ventas?productos=${cod_pro}`;
+        const url = `https://invensoftvargas.com/invensoft/ventas?productos=${cod_pro}`;
         const { data } = await axios(url);
         console.log('prueba');
         console.log(data);
@@ -221,7 +221,7 @@ const VentasProvider = ({children}) => {
   //AÑADIR VENTAS
   const getCliente = async (documento) => {        
     try {
-        const url = `http://localhost/invensoft/ventas?doc=${documento}`;
+        const url = `https://invensoftvargas.com/invensoft/ventas?doc=${documento}`;
         const { data } = await axios(url);
         console.log(data);
         if (data && data.length > 0) {
@@ -351,7 +351,7 @@ const VentasProvider = ({children}) => {
 
   const getProductosDataList = async() => {
     try {
-      const url = "http://localhost/invensoft/ventas?products";
+      const url = "https://invensoftvargas.com/invensoft/ventas?products";
       const { data } = await axios(url);
       console.log(data);
       setAllProducts(data);

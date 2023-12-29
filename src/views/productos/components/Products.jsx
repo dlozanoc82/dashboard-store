@@ -21,6 +21,11 @@ export const Products = () => {
   console.log(location.pathname);
   const isListarProductos = location.pathname === "/productos";
 
+  // Almacena la ruta actual en el localStorage
+  useEffect(() => {
+    localStorage.setItem("ruta", location.pathname);
+  }, [location.pathname]);
+
   useEffect(() => {
     const tableHeaders = obtenerTitulosPorRuta(url);
     setTableHeaders(tableHeaders);

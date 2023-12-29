@@ -1,12 +1,20 @@
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import { formatDateToYearMonthDay } from "../../../helpers/GeneralFunctions";
 import useKardex from "../../../hooks/useKardex";
-
+import { useEffect } from "react"; // Asegúrate de importar useEffect desde react
 
 export const SubMenu = ({url}) => {
 
     const {getLibroDiario, handleResetVariables} = useKardex();
     const fechaActual = new Date();
+
+    const location = useLocation();
+    console.log(location.pathname);
+
+    // Almacena la ruta actual en el localStorage
+  useEffect(() => {
+    localStorage.setItem("ruta", location.pathname);
+  }, [location.pathname]);
 
 
   return (

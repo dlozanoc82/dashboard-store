@@ -85,7 +85,7 @@ const ComprasProvider = ({children}) => {
     // CRUD VISTA COMPRAS 
     const getCompras = async () => {        
         try {
-            const url = "http://localhost/invensoft/compras?compras";
+            const url = "https://invensoftvargas.com/invensoft/compras?compras";
             const { data } = await axios(url);
             console.log(data);
             setCompras(data);
@@ -97,7 +97,7 @@ const ComprasProvider = ({children}) => {
 
     const getComprasByDates = async (fechaInicial, fechaFinal) => {        
         try {
-            const url = `http://localhost/invensoft/compras?fecha_ini=${fechaInicial}&fecha_fin=${fechaFinal}`;
+            const url = `https://invensoftvargas.com/invensoft/compras?fecha_ini=${fechaInicial}&fecha_fin=${fechaFinal}`;
             const { data } = await axios(url);
             console.log('compras por fecha')
             console.log(data);
@@ -117,7 +117,7 @@ const ComprasProvider = ({children}) => {
         //Crear el producto en la API
         try {
             console.log("Valor de la venta: "+precio_venta);
-            const respuesta = await axios.post('http://localhost/invensoft/compras', {cod_producto,cod_proveedor,cantidad,precio_unit,precio_venta,precio_compra});
+            const respuesta = await axios.post('https://invensoftvargas.com/invensoft/compras', {cod_producto,cod_proveedor,cantidad,precio_unit,precio_venta,precio_compra});
             console.log(respuesta);
             Swal.fire({
                 icon: 'success',
@@ -141,7 +141,7 @@ const ComprasProvider = ({children}) => {
     const upadateCompra = async (cod_compra, cod_producto, cod_proveedor, cantidad, precio_unit, precio_venta, precio_compra) => {
         console.log(cod_compra, cod_producto, cod_proveedor, cantidad, precio_unit, precio_venta, precio_compra)
         try {
-            const respuesta = await axios.put(`http://localhost/invensoft/compras?cod_compra=${cod_compra}`, {cod_producto, cod_proveedor, cantidad, precio_unit, precio_venta, precio_compra});
+            const respuesta = await axios.put(`https://invensoftvargas.com/invensoft/compras?cod_compra=${cod_compra}`, {cod_producto, cod_proveedor, cantidad, precio_unit, precio_venta, precio_compra});
             console.log({respuesta})
             Swal.fire({
                 icon: 'success',
@@ -175,7 +175,7 @@ const ComprasProvider = ({children}) => {
             
               if(confirmado.isConfirmed){
                 console.log({cod_compra});
-                const respuesta = await axios.delete(`http://localhost/invensoft/compras?cod_compra=${cod_compra}`);
+                const respuesta = await axios.delete(`https://invensoftvargas.com/invensoft/compras?cod_compra=${cod_compra}`);
                 
                 Swal.fire({
                     icon: 'success',
@@ -202,7 +202,7 @@ const ComprasProvider = ({children}) => {
     // FUNCIONES PARA OBTENER CATEGORIAS, SUBCATEGORIAS, PRODUCTOS Y PROVEEDORES
     const getCategorias = async () => {        
         try {
-            const url = "http://localhost/invensoft/categorias";
+            const url = "https://invensoftvargas.com/invensoft/categorias";
             const { data } = await axios(url);
             console.log(data);
             setCategorias(data);
@@ -213,7 +213,7 @@ const ComprasProvider = ({children}) => {
 
     const getSubCategorias = async (id = 1) => {        
         try {
-            const url = `http://localhost/invensoft/subcategorias?categoria=${id}`;
+            const url = `https://invensoftvargas.com/invensoft/subcategorias?categoria=${id}`;
             const { data } = await axios(url);
             console.log(data);
             setSubCategorias(data);
@@ -225,7 +225,7 @@ const ComprasProvider = ({children}) => {
     const getProductsBySubCategory = async (id = 1) => {        
         console.log(id);
         try {
-            const url = `http://localhost/invensoft/compras?subcategoria=${id}`;
+            const url = `https://invensoftvargas.com/invensoft/compras?subcategoria=${id}`;
             const { data } = await axios(url);
             console.log(data);
             setProductsBySubCategory(data);
@@ -236,7 +236,7 @@ const ComprasProvider = ({children}) => {
 
     const getProveedores = async () => {
         try {
-            const url = "http://localhost/invensoft/proveedores";
+            const url = "https://invensoftvargas.com/invensoft/proveedores";
             const { data } = await axios(url);
             console.log(data);
             setProovedores(data);
@@ -247,7 +247,7 @@ const ComprasProvider = ({children}) => {
 
     const getStock = async (id = 1) => {
         try {
-            const url = `http://localhost/invensoft/compras?producto=${id}`;
+            const url = `https://invensoftvargas.com/invensoft/compras?producto=${id}`;
             const { data } = await axios(url);
 
             if(data && data[0] && data[0].stock){

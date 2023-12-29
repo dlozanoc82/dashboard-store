@@ -45,7 +45,7 @@ const CotizacionesProvider = ({children}) => {
 
   const getCotizaciones = async () => {        
     try {
-        const url = "http://localhost/invensoft/cotizacion?cotizacion";
+        const url = "https://invensoftvargas.com/invensoft/cotizacion?cotizacion";
         const { data } = await axios(url);
         console.log({data});
         setCotizaciones(data);
@@ -57,7 +57,7 @@ const CotizacionesProvider = ({children}) => {
 
   const getCotizacionesByDates = async (fechaInicial, fechaFinal) => {        
     try {
-        const url = `http://localhost/invensoft/cotizacion?fecha_ini=${fechaInicial}&fecha_fin=${fechaFinal}`;
+        const url = `https://invensoftvargas.com/invensoft/cotizacion?fecha_ini=${fechaInicial}&fecha_fin=${fechaFinal}`;
         const { data } = await axios(url);
         console.log({data});
         setCotizacionesByDates(data);

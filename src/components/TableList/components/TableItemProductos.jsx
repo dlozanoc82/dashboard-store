@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom';
 import useProducts from '../../../hooks/useProducts';
+import { useEffect } from "react"; // Asegúrate de importar useEffect desde react
+
 
 const TableItemProductos = ({info}) => {
  
@@ -15,19 +17,24 @@ const TableItemProductos = ({info}) => {
     console.log(location.pathname);
     const isListarProductos = location.pathname === "/productos";
 
+    // Almacena la ruta actual en el localStorage
+  useEffect(() => {
+    localStorage.setItem("ruta", location.pathname);
+  }, [location.pathname]);
+
     // Obtener el nombre del archivo con la extensión
     const parts = img.split('/');
     const filenameWithExtension = parts.pop(); // Obtener el último segmento de la URL
 
     // Obtener solo la extensión del archivo
     const extension = filenameWithExtension.split('.').pop(); // Obtener la última parte después del último punto
-    console.log(extension); // Esto mostrará 'jpeg' en la consola
+    //console.log(extension); // Esto mostrará 'jpeg' en la consola
   
     return (
         
       <>
           <td><center>{cod_pro}</center></td>
-          <td><center><img src={`data:image/${extension};base64,${base64Image}`} alt={descripcion} width="50px" height="60px"/></center></td>
+          <td><center><img src={`data:image/${extension};base64,${base64Image}`} alt={nombre} width="50px" height="60px"/></center></td>
           <td><center>{nom_cat}</center></td>
           <td><center>{nom_sub}</center></td>
           <td><center>{nombre}</center></td>

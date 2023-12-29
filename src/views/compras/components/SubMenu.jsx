@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import useCompras from "../../../hooks/useCompras";
 import { useLocation  } from "react-router-dom";
-
+import { useEffect } from "react"; // Asegúrate de importar useEffect desde react
 
 
 export const SubMenu = ({url}) => {
@@ -10,6 +10,11 @@ export const SubMenu = ({url}) => {
     const location = useLocation();
     console.log(location.pathname);
     const isSearchDisabled = location.pathname !== "/compras";
+
+      // Almacena la ruta actual en el localStorage
+  useEffect(() => {
+    localStorage.setItem("ruta", location.pathname);
+  }, [location.pathname]);
 
     const handleResetVariables = () => {
         setCompra({});

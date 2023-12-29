@@ -15,7 +15,7 @@ const Producto = ({product}) => {
           <div className="product_info">
             <p className='product_name' > {  product.nombre_producto.toUpperCase() } </p>
           </div>
-          <img className='product_img' src={`data:image/${extension};base64,${product.base64Image}`} alt="Imagen" />
+          <img className='product_img' src={`data:image/${extension};base64,${product.base64Image}`} alt={product.nombre_producto} />
           <div>
             <label className="form-label">Descripcion</label>
             <input type="text" value={product.descripcion} disabled className="form-control product_desc" required />
