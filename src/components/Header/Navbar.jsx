@@ -12,6 +12,7 @@ export const Navbar = () => {
 
   const title = 'Mi Cuenta';
   const icon = faUser;
+  const ubicacion = localStorage.getItem('selectedOption');
 
   const { titleUrl, handleActiveOption } = useDashborad();
   const [pageTitle, setPageTitle] = useState(titleUrl); //useState para recuperar el modulo en el que esta el usuario
@@ -25,6 +26,7 @@ export const Navbar = () => {
     const iniciarSesion = async () => {
         // Obtener la cadena del localStorage
         const storedData = localStorage.getItem('Usuario');
+        
 
         try {
 
@@ -155,7 +157,7 @@ export const Navbar = () => {
           </ul>
         </div>
       </nav>
-      <h3 className="px-4">¡Bienvenido al modulo de {titleUrl} !</h3>
+      <h3 className="px-4">¡Bienvenido al modulo de {ubicacion} !</h3>
     </>
   )
 }

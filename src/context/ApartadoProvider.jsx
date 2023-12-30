@@ -16,18 +16,45 @@ const ApartadoProvider = ({children}) => {
   const [organizarApartados, setOrganizarApartados] = useState([]);
   const [historialAbonosModal, setHistorialAbonosModal] = useState([]);
 
+  const [inputSearch, setInputSearch] = useState("");
+  const [filteredApartados, setFilteredApartados] = useState([]);
   const [historyLength, setHistoryLength] = useState('');
 
 
   useEffect(() => {
     getApartados();
   }, [])
+
+  useEffect(() => {
+    filterByDocumentNumber();
+}, [inputSearch])
   
   useEffect(() => {
     const datosOrganizados = transformarApartados(apartados);
     setOrganizarApartados(datosOrganizados);
   }, [apartados])
 
+      // FILTRO PARA BUSCAR UN APARTADO POR DOCUMENTO
+      const filterByDocumentNumber = () => {
+        //Esta función se encarga de filtrar una lista de clientes basándose en un número de documento proporcionado a través de inputSearch.
+
+        const searchValue = inputSearch; // No es necesario convertirlo a minúsculas si es un número
+
+        // Si no hay texto en el campo de búsqueda y el estado está vacío, mostramos todos los clientes
+        if (!searchValue) {
+          setFilteredApartados(apartados);
+            return;
+        }
+
+        let filteredData = apartados;
+
+        filteredData = filteredData.filter((apartado) =>
+          apartado.documento.toString().startsWith(searchValue.toString())
+        );
+        
+        setFilteredApartados(filteredData);
+        //Después de filtrar los datos, se actualiza el estado filteredClients con la lista filtrada obtenida anteriormente.
+    };
   
   const getApartados = async () => {
     try {
@@ -37,6 +64,7 @@ const ApartadoProvider = ({children}) => {
         if (data && data.length > 0) {
           console.log({data})
           setApartados(data);
+          setFilteredApartados(data);
         }else{
         Swal.fire({
           icon: 'error',
@@ -187,6 +215,9 @@ const ApartadoProvider = ({children}) => {
           historialAbonosModal,
           setHistorialAbonosModal,
           historyLength, 
+          setInputSearch,
+          inputSearch,
+          filteredApartados,
           setHistoryLength
         }}
     >

@@ -46,7 +46,7 @@ const ProductsProvider = ({children}) => {
     const filterByNameProduct = () => {
         const searchValue = inputSearch.toLowerCase();
 
-        // Si no hay texto en el campo de búsqueda y el estado está vacío, mostramos todos los pagos
+        // Si no hay texto en el campo de búsqueda y el estado está vacío, mostramos todos los productos
         if (searchValue.trim() === "") {
             setFilteredProducto(productsModificar);
             return;
