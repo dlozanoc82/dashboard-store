@@ -350,7 +350,7 @@ const AddApartado = () => {
       console.log(respuesta);
       // Reinicia los estados después de completar la venta
       Swal.fire({
-        title: 'Venta Registrada',
+        title: 'Apartado Registrado',
         icon: 'success',
       });
       setProductosVentaMostrar([]);
