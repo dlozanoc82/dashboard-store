@@ -93,6 +93,7 @@ const VentasProvider = ({children}) => {
             cod_pago: venta.cod_pago,
             total_venta: 0,
             productos: [],
+            ganancias_tabla: 0,
           };
         }
   
@@ -105,6 +106,8 @@ const VentasProvider = ({children}) => {
         });
   
         organizedData[codVenta].total_venta += parseFloat(venta.valor_total_producto);
+        //console.log(parseFloat(venta.ganancias));
+        organizedData[codVenta].ganancias_tabla += parseFloat(venta.ganancias);
       });
   
       const sortedData = Object.values(organizedData).sort((a, b) => {
@@ -123,7 +126,9 @@ const VentasProvider = ({children}) => {
       const organizedData = { ...prevVentas };
   
       ventasData.forEach((venta) => {
+        //Se recorre la informacion de ventasData y se renombra a venta
         const codVenta = venta.cod_ven;
+        //Capturo el codigo de la venta
   
         if (!organizedData[codVenta]) {
           organizedData[codVenta] = {
@@ -135,6 +140,7 @@ const VentasProvider = ({children}) => {
             cod_pago: venta.cod_pago,
             total_venta: 0,
             productos: [],
+            ganancias_tabla: 0,
           };
         }
   
@@ -147,6 +153,7 @@ const VentasProvider = ({children}) => {
         });
   
         organizedData[codVenta].total_venta += parseFloat(venta.valor_total_producto);
+        organizedData[codVenta].ganancias_tabla += parseFloat(venta.ganancias);
       });
   
       const sortedData = Object.values(organizedData).sort((a, b) => {

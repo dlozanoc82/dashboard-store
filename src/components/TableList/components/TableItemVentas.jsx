@@ -14,6 +14,7 @@ const TableItemVentas = ({ info }) => {
     documento,
     cod_pago,
     productos,
+    ganancias_tabla,
     total_venta
   } = info;
 
@@ -49,6 +50,9 @@ const TableItemVentas = ({ info }) => {
       </td>
       <td>
         <center>{formatearCantidad(total_venta)}</center>
+      </td>
+      <td>
+        <center>{formatearCantidad(ganancias_tabla)}</center>
       </td>
       <td>
         <center>

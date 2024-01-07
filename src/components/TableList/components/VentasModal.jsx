@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { formatDateAndTime, formatearCantidad } from '../../../helpers/GeneralFunctions';
 import { Modal, Table } from 'react-bootstrap'; // Asumiendo que estás utilizando react-bootstrap para los modales y tablas
 
 const VentasModal = ({ productos, onHide }) => {
@@ -25,9 +26,9 @@ const VentasModal = ({ productos, onHide }) => {
                 <td>{index+1}</td>
                 <td>{producto.nombre}</td>
                 <td>{producto.cantidad}</td>
-                <td>{producto.valor_venta}</td>
-                <td>{producto.valor_total_producto}</td>
-                <td>{producto.ganancias}</td>
+                <td>{formatearCantidad(producto.valor_venta)}</td>
+                <td>{formatearCantidad(producto.valor_total_producto)}</td>
+                <td>{formatearCantidad(producto.ganancias)}</td>
               </tr>
             ))}
           </tbody>
