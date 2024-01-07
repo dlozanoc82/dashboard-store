@@ -9,7 +9,7 @@ import { obtenerTitulosPorRuta } from "../../../helpers/OptionsSidebar";
 import { useEffect } from "react";
 
 const Apartado = () => {
-    const {apartados, organizarApartados} = useApartado();
+    const {apartados, organizarApartados, filteredApartados} = useApartado();
     const {setTableHeaders} = useDashborad();
     const url = useResolvedPath("").pathname;
 
@@ -20,7 +20,7 @@ const Apartado = () => {
 
 
   return (
-    <PaginationProvider data={organizarApartados}>
+    <PaginationProvider data={filteredApartados}>
         <div className="container-fluid px-4 mt-5">
 
             <div className="header__submenu">

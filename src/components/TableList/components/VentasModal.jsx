@@ -16,6 +16,7 @@ const VentasModal = ({ productos, onHide }) => {
               <th>Cantidad</th>
               <th>Precio Unitario</th>
               <th>SubTotal</th>
+              <th>Ganancias</th>
             </tr>
           </thead>
           <tbody>
@@ -26,6 +27,7 @@ const VentasModal = ({ productos, onHide }) => {
                 <td>{producto.cantidad}</td>
                 <td>{producto.valor_venta}</td>
                 <td>{producto.valor_total_producto}</td>
+                <td>{producto.ganancias}</td>
               </tr>
             ))}
           </tbody>

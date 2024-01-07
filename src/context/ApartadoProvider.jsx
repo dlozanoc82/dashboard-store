@@ -42,7 +42,7 @@ const ApartadoProvider = ({children}) => {
 
         // Si no hay texto en el campo de búsqueda y el estado está vacío, mostramos todos los clientes
         if (!searchValue) {
-          setFilteredApartados(apartados);
+          setFilteredApartados(transformarApartados(apartados));
             return;
         }
 
@@ -52,7 +52,9 @@ const ApartadoProvider = ({children}) => {
           apartado.documento.toString().startsWith(searchValue.toString())
         );
         
-        setFilteredApartados(filteredData);
+        const datosOrganizado = transformarApartados(filteredData);
+
+        setFilteredApartados(datosOrganizado);
         //Después de filtrar los datos, se actualiza el estado filteredClients con la lista filtrada obtenida anteriormente.
     };
   
@@ -64,7 +66,7 @@ const ApartadoProvider = ({children}) => {
         if (data && data.length > 0) {
           console.log({data})
           setApartados(data);
-          setFilteredApartados(data);
+          setFilteredApartados(transformarApartados(data));
         }else{
         Swal.fire({
           icon: 'error',
