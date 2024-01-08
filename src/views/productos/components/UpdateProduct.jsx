@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import useDashborad from '../../../hooks/useDashborad';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
-const UpdateProduct = ({product}) => {
+const UpdateProduct = ({ product }) => {
     const { categorias, setIdSubcategoria, subcategorias, getSubCategorias, getProductosByModificar } = useProducts();
     const navigate = useNavigate();
     const { handleActiveOption } = useDashborad();
@@ -19,6 +19,7 @@ const UpdateProduct = ({product}) => {
     const garantiaRef = useRef(null);
     const duracionGarantiaRef = useRef(null);
     const imagenRef = useRef(null);
+    let archivo_erroneo = false;
 
     const [selectCategory, setSelectCategory] = useState(product.cod_cat); // Estado para mantener el valor seleccionado
     const [selectSubCategory, setSelectSubCategory] = useState(product.cod_sub); // Estado para mantener el valor seleccionado
@@ -32,7 +33,7 @@ const UpdateProduct = ({product}) => {
     useEffect(() => {
         getSubCategorias(product.cod_cat)
     }, [])
-    
+
 
     const handleChangeCategory = (event) => {
         setSelectCategory(event.target.value);
@@ -66,20 +67,40 @@ const UpdateProduct = ({product}) => {
 
     const handleImagenChange = (e) => {
         const file = e.target.files[0];
+        const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/tiff', 'image/webp'];
 
         if (file) { //Si el usuario ha cargado una imagen se procede a convertirse a base64
-        setImage2(file);
+            if (allowedMimeTypes.includes(file.type)) {
+                setImage2(file);
 
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
 
-        reader.onloadend = () => {
-            const base64data = reader.result;
-            setImage(base64data);
-        };
-    } else {    //Si el usuario no ha cargado imagenes se envia una cadena vacia
-        setImage('');
-    }
+                reader.onloadend = () => {
+                    const base64data = reader.result;
+                    setImage(base64data);
+                };
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Error el archivo seleccionado no es una imagen',
+                });
+                nombreCategoriaRef.current.style.borderColor = '';
+                nombreSubcategoriaRef.current.style.borderColor = '';
+                nombreProductoRef.current.style.borderColor = '';
+                garantiaRef.current.style.borderColor = '';
+                descripcionRef.current.style.borderColor = '';
+                //duracionGarantiaRef.current.style.borderColor = '';
+                imagenRef.current.focus();
+                imagenRef.current.style.borderColor = 'red';
+                archivo_erroneo = true;
+                setImage(null);
+                setImage2(null);
+            }
+        } else {    //Si el usuario no ha cargado imagenes se envia una cadena vacia
+            setImage('');
+        }
     };
 
     const clearInputs = () => {
@@ -150,42 +171,43 @@ const UpdateProduct = ({product}) => {
             return;
         }
 
-      /*  if (descripcion.length < 8) {
-            nombreCategoriaRef.current.style.borderColor = '';
-            nombreSubcategoriaRef.current.style.borderColor = '';
-            nombreProductoRef.current.style.borderColor = '';
-            garantiaRef.current.style.borderColor = '';
-            //duracionGarantiaRef.current.style.borderColor = '';
-            imagenRef.current.style.borderColor = '';
-            descripcionRef.current.focus();
-            descripcionRef.current.style.borderColor = 'red';
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'La descripción esta muy corta o tiene caracteres no válidos',
-            });
-            return;
-        }*/
-
-        if (!garantia || (garantia !== '0' && garantia !== '1')) {
-            nombreCategoriaRef.current.style.borderColor = '';
-            nombreSubcategoriaRef.current.style.borderColor = '';
-            nombreProductoRef.current.style.borderColor = '';
-            descripcionRef.current.style.borderColor = '';
-            //duracionGarantiaRef.current.style.borderColor = '';
-            imagenRef.current.style.borderColor = '';
-            garantiaRef.current.focus();
-            garantiaRef.current.style.borderColor = 'red';
-            //console.log(nombreProducto);
-            //nombreProductoRef.current.classList.add('custom-focus');
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'No ha seleccionado la garantía',
-            });
-            return;
-        }
-        if ((!texto_numeros.test(duracionGarantia) && garantia == 1 && duracionGarantia.length<3)) {
+        /*  if (descripcion.length < 8) {
+              nombreCategoriaRef.current.style.borderColor = '';
+              nombreSubcategoriaRef.current.style.borderColor = '';
+              nombreProductoRef.current.style.borderColor = '';
+              garantiaRef.current.style.borderColor = '';
+              //duracionGarantiaRef.current.style.borderColor = '';
+              imagenRef.current.style.borderColor = '';
+              descripcionRef.current.focus();
+              descripcionRef.current.style.borderColor = 'red';
+              Swal.fire({
+                  icon: 'error',
+                  title: 'Error',
+                  text: 'La descripción esta muy corta o tiene caracteres no válidos',
+              });
+              return;
+          }*/
+        /*
+                if (!garantia) {
+                    nombreCategoriaRef.current.style.borderColor = '';
+                    nombreSubcategoriaRef.current.style.borderColor = '';
+                    nombreProductoRef.current.style.borderColor = '';
+                    descripcionRef.current.style.borderColor = '';
+                    //duracionGarantiaRef.current.style.borderColor = '';
+                    imagenRef.current.style.borderColor = '';
+                    garantiaRef.current.focus();
+                    garantiaRef.current.style.borderColor = 'red';
+                    //console.log(nombreProducto);
+                    //nombreProductoRef.current.classList.add('custom-focus');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'No ha seleccionado la garantía',
+                    });
+                    return;
+                }
+                */
+        if ((!texto_numeros.test(duracionGarantia) && garantia == 1 && duracionGarantia.length < 3)) {
             nombreCategoriaRef.current.style.borderColor = '';
             nombreSubcategoriaRef.current.style.borderColor = '';
             nombreProductoRef.current.style.borderColor = '';
@@ -211,43 +233,78 @@ const UpdateProduct = ({product}) => {
             //console.log(img);
             //console.log(product.cod_pro)
 
-            let confirmado = await Swal.fire({
-                title: "¿Esta seguro de actualizar esta compra?",
-                showDenyButton: true,
-                showCancelButton: false,
-                confirmButtonText: "Si",
-                denyButtonText: `No`
-              });
-    
-              if(confirmado.isConfirmed){
-            const respuesta = await axios.put(`https://invensoftvargas.com/invensoft/productos?cod_pro=${product.cod_pro}`, {subcategoria, nom_pro, descripcion, estado, img, garantia, duracion_garantia }, {
-            });
-            //console.log({respuesta});
-            getProductosByModificar();
-            Swal.fire({
-                icon: 'success',
-                title: 'Producto actualizado correctamente',
-                showConfirmButton: false,
-                timer: 2000
-            });
-            //console.log(respuesta);
-            clearInputs();
-            setTimeout(() => {
-                navigate('/productos');
-            }, 2000);
-        }else{
-            Swal.fire("Operación detenida", "", "info");
-            nombreCategoriaRef.current.style.borderColor = '';
-            nombreSubcategoriaRef.current.style.borderColor = '';
-            nombreProductoRef.current.style.borderColor = '';
-            nombreProveedorRef.current.style.borderColor = '';
-            cantidadRef.current.style.borderColor = '';
-            precioUnitarioRef.current.style.borderColor = '';
-            precioCompraRef.current.style.borderColor = '';
-            precioCompraVenta.current.style.borderColor = '';
-        }
+            if (archivo_erroneo == false) {
+                let confirmado = await Swal.fire({
+                    title: "¿Esta seguro de actualizar este producto?",
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: "Si",
+                    denyButtonText: `No`
+                });
+
+                if (confirmado.isConfirmed) {
+                    const respuesta = await axios.put(`https://invensoftvargas.com/invensoft/productos?cod_pro=${product.cod_pro}`, { subcategoria, nom_pro, descripcion, estado, img, garantia, duracion_garantia }, {
+                    });
+                    getProductosByModificar();
+                    console.log({ respuesta });
+                    //Ventana emergente para cargar imagen al servidor
+                    let timerInterval;
+                    Swal.fire({
+                        title: "Guardando información",
+                        timer: 5000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading();
+                            const timer = Swal.getPopup().querySelector("b");
+                            timerInterval = setInterval(() => {
+                                timer.textContent = `${Swal.getTimerLeft()}`;
+                            }, 100);
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval);
+                        }
+
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+                            console.log("I was closed by the timer");
+                        }
+                    });
+                    //console.log(respuesta);
+                    //getProductosByModificar();
+                    clearInputs();
+                    setTimeout(() => {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'El Producto fue actualizado correctamente',
+                            showConfirmButton: false,
+                            timer: 5000
+                        });
+                        navigate('/productos');
+                    }, 6500);
+                } else {
+                    Swal.fire("Operación detenida", "", "info");
+                    nombreCategoriaRef.current.style.borderColor = '';
+                    nombreSubcategoriaRef.current.style.borderColor = '';
+                    nombreProductoRef.current.style.borderColor = '';
+                    garantiaRef.current.style.borderColor = '';
+                    descripcionRef.current.style.borderColor = '';
+                    imagenRef.current.style.borderColor = '';
+                    //nombreProveedorRef.current.style.borderColor = '';
+                    //cantidadRef.current.style.borderColor = '';
+                    //precioUnitarioRef.current.style.borderColor = '';
+                    //precioCompraRef.current.style.borderColor = '';
+                    //precioCompraVenta.current.style.borderColor = '';
+                }
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Archivo incorrecto',
+                    text: 'Solo se permite imagenes',
+                });
+            }
         } catch (error) {
-            //console.log(error.response);
+            console.log(error);
             nombreCategoriaRef.current.style.borderColor = '';
             nombreSubcategoriaRef.current.style.borderColor = '';
             nombreProductoRef.current.style.borderColor = '';
@@ -290,7 +347,7 @@ const UpdateProduct = ({product}) => {
 
                                 <div className="col-md-4 mb-md-4">
                                     <label className="form-label">Subcategoria *</label>
-                                    <select 
+                                    <select
                                         className="form-select"
                                         value={selectSubCategory}
                                         onChange={handleChangeSubCategory}
@@ -330,14 +387,14 @@ const UpdateProduct = ({product}) => {
                                 </div>
 
                                 {
-                                    garantia == 1 ? 
+                                    garantia == 1 ?
                                         <div className="col-md-4 mb-md-4">
                                             <label className="form-label">Duracion de la Garantia</label>
                                             <input value={duracionGarantia} onChange={handleChangeDuracionGarantia} type="text" className="form-control" ref={duracionGarantiaRef} />
                                         </div>
-                                    : <></>
+                                        : <></>
                                 }
-                                
+
 
                                 <div className="col-md-4 mb-md-4">
                                     <label className="form-label">Imagen</label>
