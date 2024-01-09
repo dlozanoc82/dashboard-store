@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import { iniciarSesionAdmin } from "../helpers/Validacion_login";
 import { botonAcessibilidad } from "../helpers/Acessibilidad";
 import jsPDF from 'jspdf';
-import { formatDateToYearMonthDay, formatTime12Hours, obtenerHoraEnFormatoDoceHoras } from '../helpers/GeneralFunctions';
+import { formatDateToYearMonthDay, formatTime12Hours, obtenerHoraEnFormatoDoceHoras, formatearCantidad } from '../helpers/GeneralFunctions';
 
 const KardexContext = createContext();
 
@@ -96,11 +96,11 @@ const KardexProvider = ({children}) => {
         data.push([
             index + 1, // Index + 1 to start the numbering from 1
             formatDateToYearMonthDay(info.fecha_transaccion),
-            info.entra_sale === 1 ? 'ENTRADA' : 'SALIDA',
+            info.entra_sale == 1 ? `ENTRADA # ${info.cod_transaccion}` : info.entra_sale == 2 ? `SALIDA # ${info.cod_transaccion}`: info.entra_sale == 3 ? `APARTADO # ${info.cod_transaccion}` : `SALIDA (APARTADO) # ${info.cod_transaccion}`,
             info.nombre,
-            info.precio_venta,
+            formatearCantidad(info.valor_pro),
             info.cantidad,
-            info.cantidad * info.precio_venta,
+            formatearCantidad(info.cantidad * info.valor_pro),
         ]);
     });
 
