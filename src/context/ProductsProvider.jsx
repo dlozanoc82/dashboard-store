@@ -65,12 +65,37 @@ const ProductsProvider = ({children}) => {
     //CRUD PRODUCTOS
     const getProductosByModificar = async () => {        
         try {
+            let timerInterval;
+                    Swal.fire({
+                        title: "Buscando productos...",
+                        timer: 6000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading();
+                            const timer = Swal.getPopup().querySelector("b");
+                            timerInterval = setInterval(() => {
+                                //timer.textContent = `${Swal.getTimerLeft()}`;
+                            }, 100);
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval);
+                        }
+
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+                            //console.log("I was closed by the timer");
+                        }
+                    });
+                    
             const url = "https://invensoftvargas.com/invensoft/productos?productos";
             const { data } = await axios(url);
-            console.log('FUNCION BY MODIFICAR')
-            console.log(data);
+            //console.log('FUNCION BY MODIFICAR')
+            
             setProductsModificar(data);
             setFilteredProducto(data);
+            console.log(data);
+
         } catch (error) {
             console.log(error);
         }
@@ -89,19 +114,44 @@ const ProductsProvider = ({children}) => {
             
             if(confirmado.isConfirmed){
             const respuesta = await axios.delete(`https://invensoftvargas.com/invensoft/productos?cod_pro=${cod_pro}`);
-            
+            getProductosByModificar();
+            let timerInterval;
+                    Swal.fire({
+                        title: "Actualizando información...",
+                        timer: 6000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading();
+                            const timer = Swal.getPopup().querySelector("b");
+                            timerInterval = setInterval(() => {
+                                //timer.textContent = `${Swal.getTimerLeft()}`;
+                            }, 100);
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval);
+                        }
+
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+                            //console.log("I was closed by the timer");
+                        }
+                    });
+
+        setTimeout(() => {
             Swal.fire({
                 icon: 'success',
                 title: 'Registro Eliminado Correctamente',
                 showConfirmButton: false,
-                timer: 2000
+                timer: 5000
             })
+        }, 6000);
         }else{
             Swal.fire("Operación detenida", "", "info");
         }
 
             //getProductos();
-            getProductosByModificar();
+            //getProductosByModificar();
         } catch (error) {
             console.log(error);
             Swal.fire({

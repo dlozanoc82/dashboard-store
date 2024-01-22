@@ -75,7 +75,7 @@ const TableItemApartados = ({info}) => {
                 <Link onClick={handleShowModal} className="btn btn-secondary btn-padding">
                     <FontAwesomeIcon icon={faEye} />
                 </Link>
-                <button onClick={() => handleDeleteApartado(cod_cot)} className="btn btn-danger btn-padding">
+                <button disabled={isDisabled} onClick={() => handleDeleteApartado(cod_cot)} className="btn btn-danger btn-padding">
                     <FontAwesomeIcon icon={faTrash} />
                 </button>
             </div></center>

@@ -93,14 +93,14 @@ const TableKardex = () => {
 
     const data = infoKardex.map(info => [
       formatDateToYearMonthDay(info.fecha_transaccion),
-      info.entra_sale == 1 ? `Compra # ${info.cod_transaccion}` : info.entra_sale == 2 ? `Venta # ${info.cod_transaccion}`: info.entra_sale == 3 ? `Apartado # ${info.cod_transaccion}` : `Venta (Apartado) # ${info.cod_transaccion}`,
+      info.entra_sale == 1 ? `Compra # ${info.cod_transaccion}` : info.entra_sale == 2 ? `Venta # ${info.cod_transaccion}`: info.entra_sale == 3 ? `Apartado # ${info.cod_transaccion}` : info.entra_sale == 30 ? `Apartado eliminado # ${info.cod_transaccion}`: info.entra_sale == 31 ? `Agregar stock (Apartado eliminado) # ${info.cod_transaccion}`: `Venta (apartado) # ${info.cod_transaccion}`,
       info.entra_sale == 1 ? formatearCantidad(info.valor_pro) : formatearCantidad(info.valor_venta),
       info.entra_sale == 1 ? info.cantidad : '',
       info.entra_sale == 1 ? formatearCantidad(info.cantidad * info.valor_pro) : '',
-      info.entra_sale == 2 ? info.cantidad : info.entra_sale > 2 ? info.cantidad : '', /*Cantidad en columna salida*/
+      info.entra_sale == 2 ? info.cantidad : info.entra_sale >=30 ? '' : info.entra_sale > 2 ? info.cantidad : '', /*Cantidad en columna salida*/
       //info.entra_sale == 2 ? info.cantidad : '',
       //info.entra_sale == 2 ? info.cantidad * info.valor_venta : '',
-      info.entra_sale == 2 ? formatearCantidad(info.cantidad * info.valor_venta) : info.entra_sale > 2 ? formatearCantidad(info.valor_venta*info.cantidad) : '', /*Valor en columna salida*/
+      info.entra_sale == 2 ? formatearCantidad(info.cantidad * info.valor_venta) : info.entra_sale >=30 ? '' : info.entra_sale > 2 ? formatearCantidad(info.valor_venta*info.cantidad) : '', /*Valor en columna salida*/
       info.entra_sale == 2 ? formatearCantidad(info.cantidad * info.valor_venta) : info.stock,
       info.entra_sale == 2 ? formatearCantidad(info.stock * info.valor_venta) : formatearCantidad(info.stock * info.valor_venta),
       //info.entra_sale == 2 ? info.ganancias : '0',
@@ -250,12 +250,12 @@ const TableKardex = () => {
                   return (
                     <tr key={index}>
                       <td><center> {info.fecha_transaccion} </center></td>
-                      <td><center> {info.entra_sale == 1 ? `Compra # ${info.cod_transaccion}` : info.entra_sale == 2 ? `Venta # ${info.cod_transaccion}`: info.entra_sale == 3 ? `Apartado # ${info.cod_transaccion}` : `Venta (Apartado) # ${info.cod_transaccion}`} </center></td>
+                      <td><center> {info.entra_sale == 1 ? `Compra # ${info.cod_transaccion}` : info.entra_sale == 2 ? `Venta # ${info.cod_transaccion}`: info.entra_sale == 3 ? `Apartado # ${info.cod_transaccion}` : info.entra_sale == 30 ? `Apartado eliminado # ${info.cod_transaccion}`: info.entra_sale == 31 ? `Agregar stock (Apartado eliminado) # ${info.cod_transaccion}`: `Venta (apartado) # ${info.cod_transaccion}`} </center></td>
                       <td><center> {info.entra_sale == 1 ? formatearCantidad(info.valor_pro) : formatearCantidad(info.valor_venta) /*Valor unitario de venta*/} </center></td>
                       <td><center> {info.entra_sale == 1 ? info.cantidad : '' /*Cantidad en columna entrada*/} </center></td>
                       <td><center> {info.entra_sale == 1 ? formatearCantidad(info.cantidad * info.valor_pro) : '' /*Valor en columna entrada*/} </center></td>
-                      <td><center> {info.entra_sale == 2 ? info.cantidad : info.entra_sale > 2 ? info.cantidad : '' /*Cantidad en columna salida*/} </center></td>
-                      <td><center> {info.entra_sale == 2 ? formatearCantidad(info.cantidad * info.valor_venta) : info.entra_sale > 2 ? formatearCantidad(info.valor_venta*info.cantidad) : '' /*Valor en columna salida*/} </center></td>
+                      <td><center> {info.entra_sale == 2 ? info.cantidad : info.entra_sale >=30 ? '' : info.entra_sale > 2 ? info.cantidad : '' /*Cantidad en columna salida*/} </center></td>
+                      <td><center> {info.entra_sale == 2 ? formatearCantidad(info.cantidad * info.valor_venta) : info.entra_sale >=30 ? '' : info.entra_sale > 2 ? formatearCantidad(info.valor_venta*info.cantidad) : '' /*Valor en columna salida*/} </center></td>
                       <td><center> {info.stock /*Cantidad en columna saldo stock restante*/} </center></td>
                       <td><center> {formatearCantidad(info.valor_venta * info.stock) /*Valor en columna saldo*/} </center></td>
                       <td><center> {'$0' /*columna Ganancias*/} </center></td>
@@ -269,15 +269,15 @@ const TableKardex = () => {
                   return (
                     <tr key={index}>
                       <td><center> {info.fecha_transaccion} </center></td>
-                      <td><center> {info.entra_sale == 1 ? `Compra # ${info.cod_transaccion}` : info.entra_sale == 2 ? `Venta # ${info.cod_transaccion}`: info.entra_sale == 3 ? `Apartado # ${info.cod_transaccion}` : `Venta (Apartado) # ${info.cod_transaccion}`} </center></td>
+                      <td><center> {info.entra_sale == 1 ? `Compra # ${info.cod_transaccion}` : info.entra_sale == 2 ? `Venta # ${info.cod_transaccion}`: info.entra_sale == 3 ? `Apartado # ${info.cod_transaccion}` : info.entra_sale == 30 ? `Apartado eliminado # ${info.cod_transaccion}`: info.entra_sale == 31 ? `Agregar stock (Apartado eliminado) # ${info.cod_transaccion}`: `Venta (apartado) # ${info.cod_transaccion}`} </center></td>
                       <td><center> {info.entra_sale == 1 ? formatearCantidad(info.valor_pro) : formatearCantidad(info.valor_venta) /*Valor unitario de venta*/} </center></td>
                       <td><center> {info.entra_sale == 1 ? info.cantidad : '' /*Cantidad en columna entrada*/} </center></td>
                       <td><center> {info.entra_sale == 1 ? formatearCantidad(info.cantidad * info.valor_pro) : '' /*Valor en columna entrada*/} </center></td>
-                      <td><center> {info.entra_sale == 2 ? info.cantidad : info.entra_sale > 2 ? info.cantidad : '' /*Cantidad en columna salida*/} </center></td>
-                      <td><center> {info.entra_sale == 2 ? formatearCantidad(info.cantidad * info.valor_venta) : info.entra_sale > 2 ? formatearCantidad(info.valor_venta*info.cantidad) : '' /*Valor en columna salida*/} </center></td>
+                      <td><center> {info.entra_sale == 2 ? info.cantidad : info.entra_sale >=30 ? '' : info.entra_sale > 2 ? info.cantidad : '' /*Cantidad en columna salida*/} </center></td>
+                      <td><center> {info.entra_sale == 2 ? formatearCantidad(info.cantidad * info.valor_venta) : info.entra_sale >=30 ? '' : info.entra_sale > 2 ? formatearCantidad(info.valor_venta*info.cantidad) : ''  /*Valor en columna salida*/} </center></td>
                       <td><center> {info.stock /*Cantidad en columna saldo stock restante*/} </center></td>
                       <td><center> {formatearCantidad(info.valor_venta * info.stock) /*Valor en columna saldo*/} </center></td>
-                      <td><center> {info.entra_sale == 3 ? '$0' : formatearCantidad(info.valor_venta*info.cantidad-info.valor_pro*info.cantidad) /*columna Ganancias*/} </center></td>
+                      <td><center> {info.entra_sale == 3 ? '$0' : info.entra_sale == 30 ? '$0' : info.entra_sale == 31 ? '$0' : formatearCantidad(info.valor_venta*info.cantidad-info.valor_pro*info.cantidad) /*columna Ganancias*/} </center></td>
                     </tr>
                     );
 

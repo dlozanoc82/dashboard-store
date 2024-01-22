@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap'; // Ajusta según tus dependencias y estilos
 import Swal from 'sweetalert2';
 import useApartado from '../../../hooks/useApartado';
+import { formatearCantidad } from '../../../helpers/GeneralFunctions';
 
 const AbonosModal = ({ cod_cot, saldo_restante, onHide }) => {
   const [valorAbono, setValorAbono] = useState('');
@@ -56,7 +57,7 @@ const AbonosModal = ({ cod_cot, saldo_restante, onHide }) => {
 
                 Swal.fire({
                     icon: 'success',
-                    title: 'Venta Finalizada Corectamente',
+                    title: 'Abono realizado corectamente',
                     showConfirmButton: false,
                     timer: 2000
                 })
@@ -87,7 +88,7 @@ const AbonosModal = ({ cod_cot, saldo_restante, onHide }) => {
         getApartados();
         Swal.fire({
             icon: 'success',
-            title: 'Venta Finalizada Corectamente',
+            title: 'Abono realizado corectamente',
             showConfirmButton: false,
             timer: 2000
         })
@@ -131,7 +132,7 @@ const AbonosModal = ({ cod_cot, saldo_restante, onHide }) => {
             <Form.Control
               type="text"
               readOnly
-              value={`$ ${saldo_restante.toFixed(2)}`}
+              value={`${formatearCantidad(saldo_restante)}`}
             />
           </Form.Group>
           <Form.Group controlId="formValorAbono" style={{ marginBottom: '15px' }}>

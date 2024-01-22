@@ -8,7 +8,7 @@ const TableItemKardex = ({info}) => {
     <>
         <td><center>{id}</center></td>
         <td><center>{formatDateAndTime(fecha_transaccion)}</center></td>
-        <td><center>{entra_sale == 1 ? `Entrada # ${cod_transaccion}` : entra_sale == 2 ? `Salida # ${cod_transaccion}`: entra_sale == 3 ? `Apartado # ${info.cod_transaccion}` : `Salida (apartado) # ${info.cod_transaccion}`}</center></td>
+        <td><center>{entra_sale == 1 ? `Entrada # ${cod_transaccion}` : entra_sale == 2 ? `Salida # ${cod_transaccion}`: entra_sale == 3 ? `Apartado # ${cod_transaccion}` : entra_sale == 30 ? `Apartado eliminado # ${cod_transaccion}`: entra_sale == 31 ? `Devolución (Apartado) # ${cod_transaccion}`: `Salida (apartado) # ${cod_transaccion}`}</center></td>
         <td><center>{nombre}</center></td>
         <td><center>{entra_sale == 1 ? formatearCantidad(precio_venta) : formatearCantidad(valor_pro)}</center></td>
         <td><center>{cantidad}</center></td>

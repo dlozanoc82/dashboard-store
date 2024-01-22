@@ -19,6 +19,7 @@ export const AddProduct = () => {
     const garantiaRef = useRef(null);
     const duracionGarantiaRef = useRef(null);
     const imagenRef = useRef(null);
+    let archivo_erroneo = false;
 
     const [selectCategory, setSelectCategory] = useState(''); // Estado para mantener el valor seleccionado
     const [selectSubCategory, setSelectSubCategory] = useState(''); // Estado para mantener el valor seleccionado
@@ -61,17 +62,37 @@ export const AddProduct = () => {
 
     const handleImagenChange = (e) => {
         const file = e.target.files[0];
+        const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/tiff', 'image/webp'];
 
         if (file) {
-            setImage2(file);
+            if (allowedMimeTypes.includes(file.type)) {
+                setImage2(file);
 
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
 
-            reader.onloadend = () => {
-                const base64data = reader.result;
-                setImage(base64data);
-            };
+                reader.onloadend = () => {
+                    const base64data = reader.result;
+                    setImage(base64data);
+                };
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Error el archivo seleccionado no es una imagen',
+                });
+                nombreCategoriaRef.current.style.borderColor = '';
+                nombreSubcategoriaRef.current.style.borderColor = '';
+                nombreProductoRef.current.style.borderColor = '';
+                garantiaRef.current.style.borderColor = '';
+                descripcionRef.current.style.borderColor = '';
+                //duracionGarantiaRef.current.style.borderColor = '';
+                imagenRef.current.focus();
+                imagenRef.current.style.borderColor = 'red';
+                archivo_erroneo = true;
+                setImage(null);
+                setImage2(null);
+            }
         } else {
             setImage('');
         }
@@ -163,7 +184,7 @@ export const AddProduct = () => {
             return;
         }*/
 
-        if (!garantia || (garantia !== '0' && garantia !== '1')) {
+        /*if (!garantia || (garantia !== '0' && garantia !== '1')) {
             nombreCategoriaRef.current.style.borderColor = '';
             nombreSubcategoriaRef.current.style.borderColor = '';
             nombreProductoRef.current.style.borderColor = '';
@@ -180,7 +201,7 @@ export const AddProduct = () => {
                 text: 'No ha seleccionado la garantía',
             });
             return;
-        }
+        }*/
         if (!texto_numeros.test(duracionGarantia) && garantia == 1) {
             nombreCategoriaRef.current.style.borderColor = '';
             nombreSubcategoriaRef.current.style.borderColor = '';
@@ -205,23 +226,65 @@ export const AddProduct = () => {
             const duracion_garantia = duracionGarantia;
             //console.log(img);
 
+            if (archivo_erroneo == false) {
             const respuesta = await axios.post('https://invensoftvargas.com/invensoft/productos', { subcategoria, nom_pro, descripcion, img, garantia, duracion_garantia }, {
 
             });
+            getProductosByModificar();
 
-            Swal.fire({
+            let timerInterval;
+                    Swal.fire({
+                        title: "Guardando información",
+                        timer: 5000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading();
+                            const timer = Swal.getPopup().querySelector("b");
+                            timerInterval = setInterval(() => {
+                                //timer.textContent = `${Swal.getTimerLeft()}`;
+                            }, 100);
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval);
+                        }
+
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+                            //console.log("I was closed by the timer");
+                        }
+                    });
+                    clearInputs();
+                    setTimeout(() => {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'El Producto fue creado correctamente',
+                            showConfirmButton: false,
+                            timer: 5000
+                        });
+                        navigate('/productos');
+                    }, 6500);
+            /*Swal.fire({
                 icon: 'success',
                 title: 'Producto creado correctamente',
                 showConfirmButton: false,
                 timer: 2000
-            });
+            });*/
+            }else{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Archivo incorrecto',
+                    text: 'Solo se permite imagenes',
+                });
+            }
 
             //console.log(respuesta);
-            getProductosByModificar();
-            clearInputs();
-            setTimeout(() => {
+           // getProductosByModificar();
+            //clearInputs();
+            /*setTimeout(() => {
                 navigate('/productos');
             }, 2000);
+            */
         } catch (error) {
             //console.log(error.response);
             nombreCategoriaRef.current.style.borderColor = '';
@@ -267,7 +330,7 @@ export const AddProduct = () => {
 
                                 <div className="col-md-4 mb-md-4">
                                     <label className="form-label">Subcategoria *</label>
-                                    <select 
+                                    <select
                                         className="form-select"
                                         value={selectSubCategory}
                                         onChange={handleChangeSubCategory}
@@ -290,7 +353,7 @@ export const AddProduct = () => {
 
                                 <div className="col-md-4 mb-md-4">
                                     <label className="form-label">Nombre del Producto *</label>
-                                    <input type="text" value={nombreProducto} onChange={handleChangeNombre} className="form-control" ref={nombreProductoRef} required/>
+                                    <input type="text" value={nombreProducto} onChange={handleChangeNombre} className="form-control" ref={nombreProductoRef} required />
                                 </div>
 
                                 <div className="col-md-4 mb-md-4">
@@ -307,16 +370,16 @@ export const AddProduct = () => {
                                 </div>
 
                                 {
-                                    garantia === '1' ? 
+                                    garantia === '1' ?
                                         <div className="col-md-4 mb-md-4">
                                             <label className="form-label">Duracion de la Garantia</label>
                                             <input value={duracionGarantia} onChange={handleChangeDuracionGarantia} type="text" className="form-control" ref={duracionGarantiaRef} />
                                         </div>
-                                    : <></>
+                                        : <></>
                                 }
-                                
 
-                               
+
+
 
                                 <div className="col-md-4 mb-md-4">
                                     <label className="form-label">Imagen</label>

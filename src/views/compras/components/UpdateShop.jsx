@@ -507,7 +507,7 @@ export const UpdateShop = ({compra}) => {
             
             <div>
                 <div className="form__header">
-                    <h3 className="form__subtitle">Informacion de la compra</h3>
+                    <h3 className="form__subtitle">Información de la compra</h3>
                 </div>
 
                 <div>

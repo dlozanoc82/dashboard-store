@@ -96,7 +96,8 @@ const KardexProvider = ({children}) => {
         data.push([
             index + 1, // Index + 1 to start the numbering from 1
             formatDateToYearMonthDay(info.fecha_transaccion),
-            info.entra_sale == 1 ? `ENTRADA # ${info.cod_transaccion}` : info.entra_sale == 2 ? `SALIDA # ${info.cod_transaccion}`: info.entra_sale == 3 ? `APARTADO # ${info.cod_transaccion}` : `SALIDA (APARTADO) # ${info.cod_transaccion}`,
+            info.entra_sale == 1 ? `Entrada # ${info.cod_transaccion}` : info.entra_sale == 2 ? `Salida # ${info.cod_transaccion}`: info.entra_sale == 3 ? `Apartado # ${info.cod_transaccion}` : info.entra_sale == 30 ? `Apartado eliminado # ${info.cod_transaccion}`: info.entra_sale == 31 ? `Agregar stock (Apartado eliminado) # ${info.cod_transaccion}`: `Salida (apartado) # ${info.cod_transaccion}`,
+            //info.entra_sale == 1 ? `ENTRADA # ${info.cod_transaccion}` : info.entra_sale == 2 ? `SALIDA # ${info.cod_transaccion}`: info.entra_sale == 3 ? `APARTADO # ${info.cod_transaccion}` : `SALIDA (APARTADO) # ${info.cod_transaccion}`,
             info.nombre,
             formatearCantidad(info.valor_pro),
             info.cantidad,

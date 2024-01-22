@@ -114,7 +114,7 @@ const ApartadoProvider = ({children}) => {
     }
   }
 
-
+/*
   const transformarApartados = (apartados) => {
     const groupedByPedido = apartados.reduce((result, apartado) => {
       const { cod_cot, nombres, apellidos, documento, nombre, cantidad, valor_unit, valor_abono, cod_abono } = apartado;
@@ -187,13 +187,108 @@ const ApartadoProvider = ({children}) => {
   
     return transformedData;
   };
+  */
+
+  //let fecha_abono_registro_ant = '';
+  const transformarApartados = (apartados) => {
+    const groupedByPedido = apartados.reduce((result, apartado) => {
+      const { cod_cot, nombres, apellidos, documento, nombre, cantidad, valor_unit, valor_abono, cod_abono } = apartado;
+  
+      if (!result[cod_cot]) {
+        result[cod_cot] = {
+          cod_cot,
+          abono_general: 0,
+          tipo_pago: 0,
+          fecha_limite_pago: '',
+          fecha_abono_reg: '',
+          total_a_pagar: 0,
+          nombres,
+          apellidos,
+          documento,
+          saldo_restante: 0,
+          total_abonado: 0,
+          total_venta: 0,
+          items: [],
+          abonosRegistrados: {},
+        };
+      }
+  
+      const abonoKey = `${cod_abono}_${valor_abono}`;
+      if (!result[cod_cot].abonosRegistrados[abonoKey]) {
+        result[cod_cot].abonosRegistrados[abonoKey] = true;
+        result[cod_cot].total_abonado += parseInt(valor_abono);
+        result[cod_cot].fecha_abono_reg = apartado.fecha_abono;
+        //console.log(apartado.fecha_abono);
+      }
+  
+      result[cod_cot].tipo_pago = apartado.cod_pago;
+      result[cod_cot].fecha_limite_pago = apartado.fecha_abono;
+      result[cod_cot].total_a_pagar = apartado.total;
+  
+      result[cod_cot].saldo_restante = apartado.total - result[cod_cot].total_abonado;
+  
+      result[cod_cot].total_venta += apartado.total;
+  
+      const existingProductIndex = result[cod_cot].items.findIndex(
+        (item) =>
+          item.nombre === apartado.nombre &&
+          item.cantidad === apartado.cantidad &&
+          item.valor_unit === apartado.valor_unit
+      );
+  
+      if (existingProductIndex === -1) {
+        result[cod_cot].items.push({
+          cod_detalle: apartado.cod_cot,
+          nombre: apartado.nombre,
+          cantidad: apartado.cantidad,
+          valor_unit: apartado.valor_unit,
+        });
+      }
+  
+      return result;
+    }, {});
+  
+    Object.values(groupedByPedido).forEach((pedido) => {
+      pedido.total_venta = pedido.items.reduce(
+        (total, item) => total + item.valor_unit * item.cantidad,
+        0
+      );
+    });
+  
+    //console.log("Agrupado por pedido")
+    //console.log(groupedByPedido);
+    let fecha_abono_ant = '';
+    Object.values(groupedByPedido).forEach((pedido) => {
+      pedido.total_abonado = 0;
+  
+      Object.keys(pedido.abonosRegistrados).forEach((abonoKey) => {
+        //console.log(pedido.total_abonado+" ABONADO");
+        const [cod_abono, valor_abono] = abonoKey.split('_');
+        if(fecha_abono_ant==''){
+          pedido.total_abonado += parseInt(valor_abono);
+          fecha_abono_ant = pedido.fecha_abono_reg;  
+        }else if(fecha_abono_ant!=pedido.fecha_abono_ant){
+          pedido.total_abonado += parseInt(valor_abono);
+        }
+        //pedido.total_abonado += parseInt(valor_abono);
+        //console.log("FECHAAAA ABONOOO");
+        //console.log(pedido.fecha_abono_reg+" fechaaa");
+      });
+  
+      pedido.saldo_restante = pedido.total_a_pagar - pedido.total_abonado;
+    });
+  
+    const transformedData = Object.values(groupedByPedido);
+  
+    return transformedData;
+  };
   
 
   const getHistorial = async (cod_coti) => {
     try {
         const url = `https://invensoftvargas.com/invensoft/apartados?cod_coti=${cod_coti}`;
         const { data } = await axios(url);
-        console.log({data});
+        //console.log({data});
         setHistorialAbonosModal(data);
     } catch (error) {
         console.log(error);

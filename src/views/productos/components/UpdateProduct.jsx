@@ -246,7 +246,7 @@ const UpdateProduct = ({ product }) => {
                     const respuesta = await axios.put(`https://invensoftvargas.com/invensoft/productos?cod_pro=${product.cod_pro}`, { subcategoria, nom_pro, descripcion, estado, img, garantia, duracion_garantia }, {
                     });
                     getProductosByModificar();
-                    console.log({ respuesta });
+                    //console.log({ respuesta });
                     //Ventana emergente para cargar imagen al servidor
                     let timerInterval;
                     Swal.fire({
@@ -257,7 +257,7 @@ const UpdateProduct = ({ product }) => {
                             Swal.showLoading();
                             const timer = Swal.getPopup().querySelector("b");
                             timerInterval = setInterval(() => {
-                                timer.textContent = `${Swal.getTimerLeft()}`;
+                                //timer.textContent = `${Swal.getTimerLeft()}`;
                             }, 100);
                         },
                         willClose: () => {
@@ -267,7 +267,7 @@ const UpdateProduct = ({ product }) => {
                     }).then((result) => {
                         /* Read more about handling dismissals below */
                         if (result.dismiss === Swal.DismissReason.timer) {
-                            console.log("I was closed by the timer");
+                            //console.log("I was closed by the timer");
                         }
                     });
                     //console.log(respuesta);

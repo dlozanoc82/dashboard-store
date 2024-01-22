@@ -35,7 +35,7 @@ const [sesionIniciada, setSesionIniciada] = useState(false);
                 icon: 'info',
                 title: 'Debe iniciar sesion',
             })
-                // window.location.href = 'https://invensoftvargas.com/iniciar_sesion.php';
+                //window.location.href = 'https://invensoftvargas.com/iniciar_sesion.php';
           }
         };
 

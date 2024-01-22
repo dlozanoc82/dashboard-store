@@ -84,7 +84,7 @@ const HistorialAbonosModal = ({ items, cod_cot, onHide }) => {
               <tr key={index}>
                 <td>{index}</td>
                 <td>{item.fecha_abono}</td>
-                <td>{ index === 0 ? formatearCantidad(aproximarPrecio(parseInt(item.valor_abono) * parseInt(nproductos))) : formatearCantidad(item.valor_abono)}</td>
+                <td>{ index === 0 ? formatearCantidad(aproximarPrecio(parseInt(item.valor_abono)/* * parseInt(nproductos)*/)) : formatearCantidad(item.valor_abono)}</td>
                 <td>{item.cod_pago == 1 ? 'Nequi' : item.cod_pago == 2 ? 'Daviplata' : 'Efectivo'}</td>
               </tr>
             ))}

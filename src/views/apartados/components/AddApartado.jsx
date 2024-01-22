@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import useApartado from '../../../hooks/useApartado';
 import useDashborad from '../../../hooks/useDashborad';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
+import { formatearCantidad } from '../../../helpers/GeneralFunctions';
 
 const AddApartado = () => {
   const solo_numeros = /^[0-9]*$/;
@@ -223,8 +224,8 @@ const AddApartado = () => {
                 <td>{producto.cod_pro}</td>
                 <td>{producto.nombre}</td>
                 <td>{producto.cantidad}</td>
-                <td>{producto.precio_unitario}</td>
-                <td>{producto.precio_total}</td>
+                <td>{formatearCantidad(producto.precio_unitario)}</td>
+                <td>{formatearCantidad(producto.precio_total)}</td>
                 <td>
                   <button
                     className="btn btn-danger btn-sm"
@@ -237,8 +238,8 @@ const AddApartado = () => {
             ))}
             <tr>
           <td colSpan="4"></td>
-          <td>Total Venta:</td> 
-          <td>{precioTotal}</td>
+          <td><b>Total Apartado:</b></td> 
+          <td>{formatearCantidad(precioTotal)}</td>
         </tr>
           </tbody> 
         </table>
@@ -299,8 +300,11 @@ const AddApartado = () => {
     console.log(productosVentas.length)
 
     productosVentas.forEach((producto) => {
+      //Ciclo foreach, se tiene productosVentas y es renombrado a producto
       const existingProductIndex = consolidatedProductosVentas.findIndex(
+        //Se construye una variable y se llama la variable arreglo consolidatedProductosVentas[] y se usa la funcion findIndex para buscar si ya esta agregado en el carrito el producto
         (p) => p.cod_pro === producto.cod_pro
+        //Si este condicional no se cumple retorna un -1
       );
 
       if (existingProductIndex !== -1) {
@@ -324,7 +328,8 @@ const AddApartado = () => {
     // Crea el objeto JSON con la información consolidada de la venta
     const ventaJson = {
       apartado: {
-        abono_general: parseFloat(abono / productosVentas.length),
+        //abono_general: parseFloat(abono / productosVentas.length),
+        abono_general: parseInt(abono),
         tipo_pago: parseInt(metodoPago),
         fecha_limite_pago: fechaLimitePago,
         total_a_pagar: productosVentas.reduce(
@@ -339,6 +344,7 @@ const AddApartado = () => {
       })),
     };
 
+    console.log(`Tu texto aquí: ${ ventaJson }`);
     console.log({ ventaJson });
 
     try {
@@ -376,7 +382,7 @@ const AddApartado = () => {
   
     return (
       <div className="formulario bg-white rounded shadow-sm mb-5">
-        <h2 className="form__title">Añadir Venta</h2>
+        <h2 className="form__title">Añadir Apartado</h2>
   
         {/* INFORMACION */}
         <div className="form__header">
@@ -470,7 +476,7 @@ const AddApartado = () => {
   
         <div>
           <div className="form__header">
-            <h3 className="form__subtitle<">Información de la Venta</h3>
+            <h3 className="form__subtitle<">Información del Apartado</h3>
           </div>
   
           <div>

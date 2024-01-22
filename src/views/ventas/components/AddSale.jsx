@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { Link, useNavigate } from 'react-router-dom';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import useDashborad from '../../../hooks/useDashborad';
+import { formatearCantidad } from '../../../helpers/GeneralFunctions';
 
 const AddSale = () => {
   const solo_numeros = /^[0-9]*$/;
@@ -219,8 +220,8 @@ const precioTotal = productosVentasMostrar.reduce((total, producto) => {
                 <td>{producto.cod_pro}</td>
                 <td>{producto.nombre}</td>
                 <td>{producto.cantidad}</td>
-                <td>{producto.precio_unitario}</td>
-                <td>{producto.precio_total}</td>
+                <td>{formatearCantidad(producto.precio_unitario)}</td>
+                <td>{formatearCantidad(producto.precio_total)}</td>
                 <td>
                   <button
                     className="btn btn-danger btn-sm"
@@ -234,7 +235,7 @@ const precioTotal = productosVentasMostrar.reduce((total, producto) => {
             <tr>
           <td colSpan="4"></td>
           <td>Total Venta:</td> 
-          <td>{precioTotal}</td>
+          <td>{formatearCantidad(precioTotal)}</td>
         </tr>
           </tbody>
         </table>
@@ -435,7 +436,7 @@ const precioTotal = productosVentasMostrar.reduce((total, producto) => {
 
       <div>
         <div className="form__header">
-          <h3 className="form__subtitle<">Información de la Venta</h3>
+          <h3 className="form__subtitle<">Información del Apartado</h3>
         </div>
 
         <div>
