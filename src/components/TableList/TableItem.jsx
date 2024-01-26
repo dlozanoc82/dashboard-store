@@ -7,7 +7,7 @@ import TableItemVentas from "./components/TableItemVentas";
 import TableItemApartados from "./components/TableItemApartados";
 import TableItemKardex from "./components/TableItemKardex";
 
-export const TableItem = ({info}) => {
+export const TableItem = ({info, number}) => {
     const url = useResolvedPath("").pathname;
     
     return (
@@ -27,7 +27,7 @@ export const TableItem = ({info}) => {
             {url === '/cotizacion' ? <TableItemCotizaciones info={info} /> : <></> }
             {url === '/cotizacion/consultar' ? <TableItemCotizaciones info={info} /> : <></> }
 
-            {url === '/apartados' ? <TableItemApartados info={info} /> : <></> }
+            {url === '/apartados' ? <TableItemApartados number={number} info={info} /> : <></> }
 
             {url === '/kardex/libro-diario' ? <TableItemKardex info={info} /> : <></> }
 

@@ -5,7 +5,7 @@ export const TableBody = ({records}) => {
   return (
     <tbody>
       {records.map((info, index) => (
-        <TableItem key={index} info={info} />
+        <TableItem key={index} number={index} info={info} />
       ))}
     </tbody>
   )

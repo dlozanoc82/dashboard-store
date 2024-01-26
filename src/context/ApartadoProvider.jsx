@@ -31,7 +31,7 @@ const ApartadoProvider = ({children}) => {
   
   useEffect(() => {
     const datosOrganizados = transformarApartados(apartados);
-    setOrganizarApartados(datosOrganizados);
+    setOrganizarApartados(ordenarPorFechaLimitePago(datosOrganizados));
   }, [apartados])
 
       // FILTRO PARA BUSCAR UN APARTADO POR DOCUMENTO
@@ -66,7 +66,7 @@ const ApartadoProvider = ({children}) => {
         if (data && data.length > 0) {
           console.log({data})
           setApartados(data);
-          setFilteredApartados(transformarApartados(data));
+          setFilteredApartados(ordenarPorFechaLimitePago(transformarApartados(data)));
         }else{
         Swal.fire({
           icon: 'error',
@@ -284,6 +284,21 @@ const ApartadoProvider = ({children}) => {
   };
   
 
+  function ordenarPorFechaLimitePago(arreglo) {
+    // Utilizamos la función de comparación dentro de sort
+    arreglo.sort(function(a, b) {
+      // Convertimos las fechas a objetos Date para poder compararlas
+      var fechaA = new Date(a.fecha_limite_pago);
+      var fechaB = new Date(b.fecha_limite_pago);
+  
+      // Ordenamos de la fecha más reciente a la más antigua
+      return fechaB - fechaA;
+    });
+  
+    return arreglo;
+  }
+  
+
   const getHistorial = async (cod_coti) => {
     try {
         const url = `https://invensoftvargas.com/invensoft/apartados?cod_coti=${cod_coti}`;
@@ -297,7 +312,9 @@ const ApartadoProvider = ({children}) => {
   
   // Llamar a la función con la variable 'apartados'
   const apartadosTransformados = transformarApartados(apartados);
+  const ordenarApartados = ordenarPorFechaLimitePago(apartadosTransformados);
   console.log({apartadosTransformados});
+  console.log({ordenarApartados});
   
 
 

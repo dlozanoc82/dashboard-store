@@ -9,7 +9,7 @@ import useApartado from '../../../hooks/useApartado';
 import AbonosModal from './AbonosModal';
 import HistorialAbonosModal from './HistorialAbonosModal';
 
-const TableItemApartados = ({info}) => {
+const TableItemApartados = ({info, number}) => {
 
     const {
         cod_cot,
@@ -51,7 +51,7 @@ const TableItemApartados = ({info}) => {
 
   return (
     <>
-        <td><center>{cod_cot}</center></td>
+        <td><center>{number+1}</center></td>
         <td><center>{formatDateAndTime(fecha_limite_pago)}</center></td>
         <td><center>{nombres} {apellidos}</center></td>
         <td><center>{documento}</center></td>
