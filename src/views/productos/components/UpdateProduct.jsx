@@ -243,7 +243,7 @@ const UpdateProduct = ({ product }) => {
                 });
 
                 if (confirmado.isConfirmed) {
-                    const respuesta = await axios.put(`https://invensoftvargas.com/invensoft/productos?cod_pro=${product.cod_pro}`, { subcategoria, nom_pro, descripcion, estado, img, garantia, duracion_garantia }, {
+                    const respuesta = await axios.put(`http://localhost/CODIGO/invensoft/productos?cod_pro=${product.cod_pro}`, { subcategoria, nom_pro, descripcion, estado, img, garantia, duracion_garantia }, {
                     });
                     getProductosByModificar();
                     //console.log({ respuesta });

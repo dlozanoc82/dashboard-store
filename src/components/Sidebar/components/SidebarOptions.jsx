@@ -30,10 +30,10 @@ export const SidebarOptions = () => {
           // Eliminar un elemento del localStorage por su clave y redirecciono a cerrar sesion para destruir la sesion en php
           localStorage.removeItem('Usuario');
           localStorage.removeItem('selectedOption');
-          window.location.href = 'https://invensoftvargas.com/cerrar_sesion.php';
+          window.location.href = 'http://localhost/CODIGO/cerrar_sesion.php';
         } else {
           //Si no hay informacion en el localstorage redirecciono a cerrar sesion
-          window.location.href = 'https://invensoftvargas.com/cerrar_sesion.php';
+          window.location.href = 'http://localhost/CODIGO/cerrar_sesion.php';
         }
       } else {  //Si dan clic en cancelar de la notificacion
         Swal.fire("Operación detenida", "", "info");

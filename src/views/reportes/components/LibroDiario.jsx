@@ -12,7 +12,7 @@ const LibroDiario = () => {
     const {setTableHeaders} = useDashborad();
 
     const url = useResolvedPath("").pathname;
-    console.log({url});
+    //console.log({url});
 
     useEffect(() => {
         const tableHeaders = obtenerTitulosPorRuta(url);

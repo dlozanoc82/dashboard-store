@@ -33,6 +33,7 @@ const Pagination = () => {
     const calculateVisibleButtons = () => {
         const buttonsPerPage = 10;
         const totalPages = Math.ceil(ndata / buttonsPerPage);
+        console.log("DATOS "+ndata);
 
         // Calcular la cantidad mínima de botones a mostrar
         const minButtonsToShow = Math.min(maxButtonsToShow, totalPages);

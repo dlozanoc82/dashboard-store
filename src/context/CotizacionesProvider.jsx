@@ -45,7 +45,7 @@ const CotizacionesProvider = ({children}) => {
 
   const getCotizaciones = async () => {        
     try {
-        const url = "https://invensoftvargas.com/invensoft/cotizacion?cotizacion";
+        const url = "http://localhost/CODIGO/invensoft/cotizacion?cotizacion";
         const { data } = await axios(url);
         console.log({data});
         setCotizaciones(data);
@@ -57,7 +57,7 @@ const CotizacionesProvider = ({children}) => {
 
   const getCotizacionesByDates = async (fechaInicial, fechaFinal) => {        
     try {
-        const url = `https://invensoftvargas.com/invensoft/cotizacion?fecha_ini=${fechaInicial}&fecha_fin=${fechaFinal}`;
+        const url = `http://localhost/CODIGO/invensoft/cotizacion?fecha_ini=${fechaInicial}&fecha_fin=${fechaFinal}`;
         const { data } = await axios(url);
         console.log({data});
         setCotizacionesByDates(data);
@@ -71,7 +71,7 @@ const CotizacionesProvider = ({children}) => {
     const doc = new jsPDF('landscape');
 
     // Logo
-    const logoUrl = '/logo-circular.png'; // Replace with the path to your logo image
+    const logoUrl = '/CODIGO/logo-circular.png'; // Replace with the path to your logo image
     doc.addImage(logoUrl, 'PNG', 10, 10, 30, 30); // Adjust the coordinates and dimensions as needed
 
     // Title
@@ -124,7 +124,7 @@ const CotizacionesProvider = ({children}) => {
     const doc = new jsPDF('landscape');
 
     // Logo
-    const logoUrl = '/logo-circular.png'; // Replace with the path to your logo image
+    const logoUrl = '/CODIGO/logo-circular.png'; // Replace with the path to your logo image
     doc.addImage(logoUrl, 'PNG', 10, 10, 30, 30); // Adjust the coordinates and dimensions as needed
 
     // Title

@@ -6,13 +6,15 @@ const PaginationProvider = ({children, data}) => {
 
     //CODIGO PARA LA PAGINACION
     const [currentPage, setCurrentPage] = useState(1);
+    const ndata = data.length;
     const recordsPerPage = 10;
     const lastIndex = currentPage * recordsPerPage;
     const firstIndex = lastIndex - recordsPerPage;
     const records = data.slice(firstIndex, lastIndex);
     const npage = Math.ceil(data.length / recordsPerPage);
     const numbers = [...Array(npage+1).keys()].slice(1);
-    const ndata = data.length;
+  
+//    console.log(ndata);
 
     const prePage = () => {
         if (currentPage != 1) {

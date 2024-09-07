@@ -60,7 +60,7 @@ const ApartadoProvider = ({children}) => {
   
   const getApartados = async () => {
     try {
-        const url = "https://invensoftvargas.com/invensoft/apartados?apartados";
+        const url = "http://localhost/CODIGO/invensoft/apartados?apartados";
         const { data } = await axios(url);
         console.log({data})
         if (data && data.length > 0) {
@@ -91,7 +91,7 @@ const ApartadoProvider = ({children}) => {
     try {
 
         if(confirmado.isConfirmed){
-        const respuesta = await axios.delete(` https://invensoftvargas.com/invensoft/apartados?cod_apartado=${cod_apartado}`);
+        const respuesta = await axios.delete(` http://localhost/CODIGO/invensoft/apartados?cod_apartado=${cod_apartado}`);
           console.log(respuesta)
         Swal.fire({
             icon: 'success',
@@ -301,7 +301,7 @@ const ApartadoProvider = ({children}) => {
 
   const getHistorial = async (cod_coti) => {
     try {
-        const url = `https://invensoftvargas.com/invensoft/apartados?cod_coti=${cod_coti}`;
+        const url = `http://localhost/CODIGO/invensoft/apartados?cod_coti=${cod_coti}`;
         const { data } = await axios(url);
         //console.log({data});
         setHistorialAbonosModal(data);

@@ -60,7 +60,7 @@ const TableKardex = () => {
   const generarPDF = () => {
     const pdf = new jsPDF('landscape');
 
-    const logoUrl = '/logo-circular.png'; // Replace with the path to your logo image
+    const logoUrl = '/CODIGO/logo-circular.png'; // Replace with the path to your logo image
     pdf.addImage(logoUrl, 'PNG', 10, 10, 30, 30); // Adjust the coordinates and dimensions as needed
 
         // Title

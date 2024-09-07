@@ -53,7 +53,7 @@ const AbonosModal = ({ cod_cot, saldo_restante, onHide }) => {
             const total = valorAbono;
 
             if (result.isConfirmed) {
-              const respuesta = await axios(`https://invensoftvargas.com/invensoft/apartados?cod_cot=${cod_cot}&abono=${total}&cod_pago=${tipoPago}`);
+              const respuesta = await axios(`http://localhost/CODIGO/invensoft/apartados?cod_cot=${cod_cot}&abono=${total}&cod_pago=${tipoPago}`);
 
                 Swal.fire({
                     icon: 'success',
@@ -83,7 +83,7 @@ const AbonosModal = ({ cod_cot, saldo_restante, onHide }) => {
     // Enviar los datos del abono al componente padre
     try {
         const total = valorAbono;
-        const respuesta = await axios(`https://invensoftvargas.com/invensoft/apartados?cod_cot=${cod_cot}&abono=${total}&cod_pago=${tipoPago}`);
+        const respuesta = await axios(`http://localhost/CODIGO/invensoft/apartados?cod_cot=${cod_cot}&abono=${total}&cod_pago=${tipoPago}`);
         
         getApartados();
         Swal.fire({

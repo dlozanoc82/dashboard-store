@@ -312,7 +312,7 @@ const precioTotal = productosVentasMostrar.reduce((total, producto) => {
     try {
       // Realiza la solicitud POST al endpoint con el objeto JSON como datos
       const respuesta = await axios.post(
-        `https://invensoftvargas.com/invensoft/ventas?cod_usu=${clienteId}`,
+        `http://localhost/CODIGO/invensoft/ventas?cod_usu=${clienteId}`,
         ventaJson
       );
       console.log(respuesta);
@@ -436,7 +436,7 @@ const precioTotal = productosVentasMostrar.reduce((total, producto) => {
 
       <div>
         <div className="form__header">
-          <h3 className="form__subtitle<">Información del Apartado</h3>
+          <h3 className="form__subtitle<">Información de la venta</h3>
         </div>
 
         <div>

@@ -88,7 +88,7 @@ const ProductsProvider = ({children}) => {
                         }
                     });
                     
-            const url = "https://invensoftvargas.com/invensoft/productos?productos";
+            const url = "http://localhost/CODIGO/invensoft/productos?productos";
             const { data } = await axios(url);
             //console.log('FUNCION BY MODIFICAR')
             
@@ -113,7 +113,7 @@ const ProductsProvider = ({children}) => {
         try {
             
             if(confirmado.isConfirmed){
-            const respuesta = await axios.delete(`https://invensoftvargas.com/invensoft/productos?cod_pro=${cod_pro}`);
+            const respuesta = await axios.delete(`http://localhost/CODIGO/invensoft/productos?cod_pro=${cod_pro}`);
             getProductosByModificar();
             let timerInterval;
                     Swal.fire({
@@ -166,7 +166,7 @@ const ProductsProvider = ({children}) => {
         try {
             const estado = status === 'INACTIVO' ? 0 : 1;
             console.log({estado, status});
-            const respuesta = await axios.put(`https://invensoftvargas.com/invensoft/productos?cod_pro=${cod_pro}`, {cod_sub,nom_pro,descripcion,estado,img,garantia,duracion_garantia});
+            const respuesta = await axios.put(`http://localhost/CODIGO/invensoft/productos?cod_pro=${cod_pro}`, {cod_sub,nom_pro,descripcion,estado,img,garantia,duracion_garantia});
             
             Swal.fire({
                 icon: 'success',
@@ -190,7 +190,7 @@ const ProductsProvider = ({children}) => {
     //OBTENER CATEGORIAS Y SUBCATEGORIAS
     const getCategorias = async () => {        
         try {
-            const url = "https://invensoftvargas.com/invensoft/categorias";
+            const url = "http://localhost/CODIGO/invensoft/categorias";
             const { data } = await axios(url);
             setCategorias(data);
         } catch (error) {
@@ -200,7 +200,7 @@ const ProductsProvider = ({children}) => {
 
     const getSubCategorias = async (id = 1) => {        
         try {
-            const url = `https://invensoftvargas.com/invensoft/subcategorias?categoria=${id}`;
+            const url = `http://localhost/CODIGO/invensoft/subcategorias?categoria=${id}`;
             const { data } = await axios(url);
             setSubCategorias(data);
         } catch (error) {
@@ -214,7 +214,7 @@ const ProductsProvider = ({children}) => {
         const doc = new jsPDF('landscape');
     
         // Logo
-        const logoUrl = '/logo-circular.png'; // Reemplaza con la ruta de tu imagen de logo
+        const logoUrl = '/CODIGO/logo-circular.png'; // Reemplaza con la ruta de tu imagen de logo
         doc.addImage(logoUrl, 'PNG', 10, 10, 30, 30); // Ajusta las coordenadas y dimensiones según sea necesario
     
         // Título

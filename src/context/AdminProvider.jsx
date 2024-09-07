@@ -24,9 +24,10 @@ const AdminProvider = ({children}) => {
         try {
             const storedData = localStorage.getItem('Usuario');
 
+           
         // Convertir la cadena JSON de nuevo a un objeto
         const parsedData = JSON.parse(storedData);
-            const url = `https://invensoftvargas.com/invensoft/micuenta?cod_usu=${parsedData.cod_usu}`;
+            const url = `http://localhost/CODIGO/invensoft/micuenta?cod_usu=${parsedData.cod_usu}`;
             const { data } = await axios(url);
             console.log(data[0]);
             setUser(data[0]);
@@ -46,7 +47,7 @@ const AdminProvider = ({children}) => {
         // Convertir la cadena JSON de nuevo a un objeto
         const parsedData = JSON.parse(storedData);
 
-            const respuesta = await axios.put(`https://invensoftvargas.com/invensoft/micuenta?cod_usu=${parsedData.cod_usu}`, {pass_actual, pass_nueva, pass_bbdd});
+            const respuesta = await axios.put(`http://localhost/CODIGO/invensoft/micuenta?cod_usu=${parsedData.cod_usu}`, {pass_actual, pass_nueva, pass_bbdd});
             
             Swal.fire({
                 icon: 'success',

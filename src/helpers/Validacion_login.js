@@ -25,7 +25,7 @@ const [sesionIniciada, setSesionIniciada] = useState(false);
                       icon: 'info',
                       title: 'No tiene permisos para este apartado',
                   })
-                      window.location.href = 'https://invensoftvargas.com/inicio';
+                      window.location.href = 'https://localhost/CODIGO/inicio';
                 }
       
            
@@ -35,7 +35,7 @@ const [sesionIniciada, setSesionIniciada] = useState(false);
                 icon: 'info',
                 title: 'Debe iniciar sesion',
             })
-                //window.location.href = 'https://invensoftvargas.com/iniciar_sesion.php';
+                window.location.href = 'http://localhost/CODIGO/iniciar_sesion.php';
           }
         };
 

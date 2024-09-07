@@ -12,7 +12,18 @@ export const Navbar = () => {
 
   const title = 'Mi Cuenta';
   const icon = faUser;
-  const ubicacion = localStorage.getItem('selectedOption');
+  const [ubicacion, setUbicacion] = useState(localStorage.getItem('selectedOption') || ''); // Estado para almacenar la ubicación y actualizarla
+
+  useEffect(() => {
+    // Aquí actualizamos la ubicación cuando cambie en el localStorage
+    const ubicacionGuardada = localStorage.getItem('selectedOption');
+    setUbicacion(ubicacionGuardada || '');
+  }, [ubicacion]); // Este efecto se ejecutará solo una vez al montar el componente
+
+
+  //const ubicacion = localStorage.getItem('selectedOption');
+  //console.log("iMPRESION");
+  //console.log("ruta "+ubicacion);
 
   const { titleUrl, handleActiveOption } = useDashborad();
   const [pageTitle, setPageTitle] = useState(titleUrl); //useState para recuperar el modulo en el que esta el usuario
@@ -30,10 +41,10 @@ export const Navbar = () => {
 
         try {
 
-            const url = "https://invensoftvargas.com/invensoft/clientes?sesion";
+            const url = "http://localhost/CODIGO/invensoft/clientes?sesion";
             const response = await axios(url);
             setSesionIniciada(true);    //Doy valor al state para que me ejecute una sola vez la consulta
-            //console.log(response.data);
+            console.log(response.data);
 
             if (response && Object.keys(response.data).length > 0) {    //Compruebo si el json que devuelve la api tiene datos
                 //console.log("HAY DATOS Y SESION");
@@ -43,7 +54,7 @@ export const Navbar = () => {
                     icon: 'info',
                     title: 'No tiene permisos para este apartado',
                 })
-                    window.location.href = 'https://invensoftvargas.com/inicio';
+                    window.location.href = 'http://localhost/CODIGO/inicio';
                 }
                 const jsonDataString = JSON.stringify(response.data);
 
@@ -58,10 +69,10 @@ export const Navbar = () => {
                      icon: 'info',
                      title: 'Debe iniciar sesion',
                  }).then((result) => {
-                     //window.location.href = 'https://invensoftvargas.com/iniciar_sesion.php';
+                    window.location.href = 'http://localhost/CODIGO/iniciar_sesion.php';
                  })
                  setTimeout(() => {
-                     //window.location.href = 'https://invensoftvargas.com/iniciar_sesion.php';
+                    window.location.href = 'http://localhost/CODIGO/iniciar_sesion.php';
                  }, 2000);
             }
         } catch (error) {
@@ -118,10 +129,10 @@ export const Navbar = () => {
           localStorage.removeItem('Usuario');
           localStorage.removeItem('selectedOption');
           localStorage.removeItem('ruta');
-          window.location.href = 'https://invensoftvargas.com/cerrar_sesion.php';
+          window.location.href = 'http://localhost/CODIGO/cerrar_sesion.php';
         } else {
           //Si no hay informacion en el localstorage redirecciono a cerrar sesion
-          window.location.href = 'https://invensoftvargas.com/cerrar_sesion.php';
+          window.location.href = 'http://localhost/CODIGO/cerrar_sesion.php';
         }
       } else {  //Si dan clic en cancelar de la notificacion
         Swal.fire("Operación detenida", "", "info");
@@ -157,7 +168,7 @@ export const Navbar = () => {
           </ul>
         </div>
       </nav>
-      <h3 className="px-4">¡Bienvenido al modulo de {ubicacion} !</h3>
+      <h3 className="px-4">¡Bienvenido al sistema Invensoft!</h3>
     </>
   )
 }

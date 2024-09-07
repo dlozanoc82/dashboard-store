@@ -70,7 +70,7 @@ const ClientsPrivider = ({ children }) => {
     //CRUD CLIENTES
     const getSesion = async () => {
         try {
-            const url = "https://invensoftvargas.com/invensoft/clientes?sesion";
+            const url = "http://localhost/CODIGO/invensoft/clientes?sesion";
             const { data } = await axios(url);
             console.log(data);
             setClients(data);
@@ -84,7 +84,7 @@ const ClientsPrivider = ({ children }) => {
     //CRUD CLIENTES
     const getClients = async () => {
         try {
-            const url = "https://invensoftvargas.com/invensoft/clientes.php?fecha_ini=2023-08-20&fecha_fin=2123-12-31";
+            const url = "http://localhost/CODIGO/invensoft/clientes.php?fecha_ini=2023-08-20&fecha_fin=2123-12-31";
             const { data } = await axios(url);
             console.log(data);
             setClients(data);
@@ -98,7 +98,7 @@ const ClientsPrivider = ({ children }) => {
     const getClientsByDates = async (fechaInicial, fechaFinal) => {
         try {
             //http://localhost/invensoft/
-            const url = `https://invensoftvargas.com/invensoft/clientes?fecha_ini=${fechaInicial}&fecha_fin=${fechaFinal}`;
+            const url = `http://localhost/CODIGO/invensoft/clientes?fecha_ini=${fechaInicial}&fecha_fin=${fechaFinal}`;
             const { data } = await axios(url);
             console.log(data);
             // Verificar si hay información en 'data'
@@ -119,7 +119,7 @@ const ClientsPrivider = ({ children }) => {
     const createClients = async (documento, nombres, apellidos, celular, direccion, correo, contrasena) => {
         //Crear el producto en la API
         try {
-            const respuesta = await axios.post('https://invensoftvargas.com/invensoft/clientes', { documento, nombres, apellidos, celular, direccion, correo, contrasena });
+            const respuesta = await axios.post('http://localhost/CODIGO/invensoft/clientes', { documento, nombres, apellidos, celular, direccion, correo, contrasena });
 
             Swal.fire({
                 icon: 'success',
@@ -152,7 +152,7 @@ const ClientsPrivider = ({ children }) => {
                 denyButtonText: `No`
             }); 
             if (confirmado.isConfirmed) {*/
-                const respuesta = await axios.put(`https://invensoftvargas.com/invensoft/clientes?cod_usu=${cod_usu}`, { documento, nombres, apellidos, celular, direccion, correo, contrasena, estado });
+                const respuesta = await axios.put(`http://localhost/CODIGO/invensoft/clientes?cod_usu=${cod_usu}`, { documento, nombres, apellidos, celular, direccion, correo, contrasena, estado });
                 Swal.fire({
                     icon: 'success',
                     title: 'Información Actualizada Correctamente',
@@ -190,7 +190,7 @@ const ClientsPrivider = ({ children }) => {
         try {
 
             if (confirmado.isConfirmed) {
-                const respuesta = await axios.delete(`https://invensoftvargas.com/invensoft/clientes?cod_usu=${cod_usu}`);
+                const respuesta = await axios.delete(`http://localhost/CODIGO/invensoft/clientes?cod_usu=${cod_usu}`);
 
                 Swal.fire({
                     icon: 'success',
@@ -218,7 +218,7 @@ const ClientsPrivider = ({ children }) => {
         const doc = new jsPDF('landscape');
 
         // Logo
-        const logoUrl = '/logo-circular.png'; // Replace with the path to your logo image
+        const logoUrl = '/CODIGO/logo-circular.png'; // Replace with the path to your logo image
         doc.addImage(logoUrl, 'PNG', 10, 10, 30, 30); // Adjust the coordinates and dimensions as needed
 
         // Title
@@ -268,7 +268,7 @@ const ClientsPrivider = ({ children }) => {
         const doc = new jsPDF('landscape');
 
         // Logo
-        const logoUrl = '/logo-circular.png'; // Replace with the path to your logo image
+        const logoUrl = '/CODIGO/logo-circular.png'; // Replace with the path to your logo image
         doc.addImage(logoUrl, 'PNG', 10, 10, 30, 30); // Adjust the coordinates and dimensions as needed
 
         // Title

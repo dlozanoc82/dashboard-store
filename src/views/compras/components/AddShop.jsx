@@ -412,7 +412,7 @@ export const AddShop = () => {
             });
             return;
         }
-            if (precioUnitario>precioVenta) {
+            if (parseInt(precioUnitario)>parseInt(precioVenta)) {
             nombreCategoriaRef.current.style.borderColor = '';
             nombreSubcategoriaRef.current.style.borderColor = '';
             nombreProductoRef.current.style.borderColor = '';
@@ -422,6 +422,7 @@ export const AddShop = () => {
             precioCompraRef.current.style.borderColor = '';
             precioVentaRef.current.focus();
             precioVentaRef.current.style.borderColor = 'red';
+            
             Swal.fire({
                 icon: 'error',
                 title: 'Error',

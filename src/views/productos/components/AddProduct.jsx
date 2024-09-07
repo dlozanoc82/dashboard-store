@@ -224,10 +224,11 @@ export const AddProduct = () => {
             const subcategoria = selectSubCategory;
             const nom_pro = nombreProducto;
             const duracion_garantia = duracionGarantia;
-            //console.log(img);
+            console.log("imagen 2");
+            console.log(img);
 
             if (archivo_erroneo == false) {
-            const respuesta = await axios.post('https://invensoftvargas.com/invensoft/productos', { subcategoria, nom_pro, descripcion, img, garantia, duracion_garantia }, {
+            const respuesta = await axios.post('http://localhost/CODIGO/invensoft/productos', { subcategoria, nom_pro, descripcion, img, garantia, duracion_garantia }, {
 
             });
             getProductosByModificar();
